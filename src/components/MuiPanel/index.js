@@ -20,7 +20,7 @@ const MuiPanel = ({
     position: 'relative',
     cursor: 'default'
   }}>
-    test
+    test panel
   </div>
 )
 
