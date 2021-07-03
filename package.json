@@ -1,0 +1,71 @@
+{
+  "name": "material-ui-panel",
+  "version": "0.0.1",
+  "description": "<MuiPanel> component for material-ui",
+  "main": "lib/index.js",
+  "private": false,
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/types": "^7.14.5",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.2.2",
+    "npm-check-updates": "^11.8.1"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "react": "^17.0.2"
+  },
+  "files": [
+    "LICENSE",
+    "*.md",
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "reactjs",
+    "react",
+    "icon",
+    "icons",
+    "material-ui"
+  ],
+  "author": "rand0mC0d3r",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "ncu -u && npm audit fix",
+    "start": "react-scripts start",
+    "build": "babel ./src -d lib --copy-files",
+    "test": "react-scripts test",
+    "serve": "serve -s build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rand0mC0d3r/material-ui-panel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rand0mC0d3r/material-ui-panel/issues"
+  },
+  "homepage": "https://github.com/rand0mC0d3r/material-ui-panel/blob/master/README.md",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
