@@ -105,9 +105,7 @@ const MuiPanel = withTheme(({
                 <Typography {...{ color }} variant="subtitle1">{title}</Typography>
                 <Typography {...{ color }} variant="caption">{subTitle}</Typography>
               </Box>
-              : <>
-              <Typography {...{ color }} variant="h6">{title}</Typography>
-              </>}
+              : <Typography {...{ color }} variant="h6">{title}</Typography>}
           <Box
             display="flex"
             className={classes.toolbox}

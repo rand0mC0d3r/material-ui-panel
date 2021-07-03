@@ -27,6 +27,14 @@ const useStyles = makeStyles(theme => ({
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     padding: theme.spacing(0),
   },
+  panel: {
+    borderRadius: '0px'
+  },
+  activePanel: {
+    // borderTop: `4px solid ${theme.palette.primary.main}`,
+    borderRadius: '0px'
+  }
+
 }));
 
 const MuiPanel = withTheme(({
@@ -45,16 +53,7 @@ const MuiPanel = withTheme(({
     setHeaderList(panels.map((panel, i) => ({ id: i, title: panel.props.title, icon: panel.props.icon })))
   }, [panels]);
 
-  return <Box style={{...getRtl(rtl, theme)}} display="flex" className={classes.root} alignItems="flex-end">
-    <Paper
-      id={`mui-panel-group-controls-${uniqueId}`}
-    >
-        <Box display="flex">
-          {headerList.map(hl => <Button variant="outlined" disableElevation key={hl.id}>
-            {hl.title}
-          </Button>)}
-        </Box>
-    </Paper>
+  return <Box style={{...getRtl(rtl, theme)}} display="flex" flexDirection="column" className={classes.root} alignItems="flex-end">
     <Paper
       id={`mui-panel-group-${uniqueId}`}
       className={classes.panelsContainer}
@@ -63,8 +62,25 @@ const MuiPanel = withTheme(({
       }}
     >
         <div>
-          {panels.filter((panel,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+          {panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
           </div>
+    </Paper>
+    <Paper id={`mui-panel-group-controls-${uniqueId}`}>
+        <Box display="flex">
+        {headerList.map((hl, i) => <Button
+          disableElevation
+          size="small"
+          onClick={() => setActiveIndex(i)}
+          className={i === activeIndex ? classes.activePanel : classes.panel}
+          variant={i === activeIndex ? "contained" : "outlined" }
+          color={i === activeIndex ? "primary" : "default" }
+          disableElevation key={hl.id}>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              {hl.icon}
+              <Typography variant="caption">{hl.title}</Typography>
+            </Box>
+          </Button>)}
+        </Box>
     </Paper>
   </Box>
 })
