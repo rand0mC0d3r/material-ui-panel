@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     bottom: "0px",
+    backgroundColor: 'initial',
     position: "absolute",
   },
   rootEmbedded: {
@@ -45,7 +46,8 @@ const useStyles = makeStyles(theme => ({
     userSelect: "none",
     padding: theme.spacing(1.5, 2),
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    backdropFilter: "blur(4px)",
   },
   headerEmbedded: {
     cursor: "default",
@@ -58,7 +60,12 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[0]
   },
   children: {
+    backgroundColor: theme.palette.background.default,
     padding: theme.spacing(2),
+    filter: "grayscale(0.125)",
+    "&:hover": {
+      filter: "grayscale(0)",
+    }
   }
 }));
 

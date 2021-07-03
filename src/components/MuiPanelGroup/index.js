@@ -44,8 +44,7 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolboxContainer: {
-
-    backgroundColor: 'rgba(255,255,255,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.9)',
     backdropFilter: "blur(4px)",
     padding: theme.spacing(0, 0, 0, 1),
   },
@@ -110,8 +109,7 @@ const MuiPanel = withTheme(({
         </Button>
       </Box>
       <Box display="flex" className={classes.actionsContainer}>
-        {headerList.map((hl, i) => <Tooltip  arrow title={`Switch to ${hl.title}`}>
-        <Button
+        {headerList.map((hl, i) =><Button
           disableElevation
           size="small"
           disabled={isStackable || i === activeIndex}
@@ -123,8 +121,7 @@ const MuiPanel = withTheme(({
             <Box display="flex" flexDirection="column" alignItems="center">
               {cloneElement(hl.icon, {color: isStackable ? 'disabled' : i === activeIndex ? "primary" : "action"})}
             </Box>
-      </Button>
-      </Tooltip>)}
+            </Button>)}
       </Box>
     </Box>
   </Box>
