@@ -21,37 +21,16 @@ const useStyles = makeStyles(theme => ({
   root: {
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     bottom: "0px",
+    padding: theme.spacing(0),
     position: "absolute",
   },
-  toolbox: {
-    position: "absolute",
-    gap: theme.spacing(0.5),
-  },
-  toolboxButton: {
-    padding: "0px",
-    minWidth: 'unset'
-  },
-  headerContainer: {
-    gap: theme.spacing(1),
-  },
-  header: {
-    cursor: "pointer",
-    position: "relative",
-    gap: theme.spacing(1),
-    userSelect: "none",
-    padding: theme.spacing(1, 2),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: theme.palette.divider,
-    boxShadow: theme.shadows[1],
-  },
-  children: {
-    padding: theme.spacing(2),
-  }
 }));
 
 const MuiPanel = withTheme(({
   uniqueId = "generic",
   panels,
+  width = 450,
+  minMaxWidth,
   theme
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -60,12 +39,11 @@ const MuiPanel = withTheme(({
     <Paper
       id={`mui-panel-group-${uniqueId}`}
       className={classes.root}
+        style={{
+          ...getWidth(width, minMaxWidth)
+      }}
     >
-      <div>
-        fff
-        {panels.map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
-        xxx
-      </div>
+      {panels.map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
     </Paper>
   )
 })

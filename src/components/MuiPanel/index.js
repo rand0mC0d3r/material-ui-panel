@@ -23,6 +23,10 @@ const useStyles = makeStyles(theme => ({
     bottom: "0px",
     position: "absolute",
   },
+  rootEmbedded: {
+    border: `1px solid ${theme.palette.augmentColor({ main: theme.palette.divider }).dark}`,
+    borderRadius: '0px'
+  },
   toolbox: {
     position: "absolute",
     gap: theme.spacing(0.5),
@@ -43,6 +47,16 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: theme.palette.divider,
     boxShadow: theme.shadows[1],
+  },
+  headerEmbedded: {
+    cursor: "pointer",
+    position: "relative",
+    gap: theme.spacing(1),
+    userSelect: "none",
+    padding: theme.spacing(1, 2),
+    border: `0px none transparent`,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[0]
   },
   children: {
     padding: theme.spacing(2),
@@ -68,25 +82,23 @@ const MuiPanel = withTheme(({
   return (
     <Paper
       id={`mui-panel-${uniqueId}`}
-      className={classes.root}
+      className={embedded ? classes.rootEmbedded : classes.root}
       style={isExternal ? {
       borderBottom: '0px',
       borderBottomLeftRadius: '0px',
       borderBottomRightRadius: '0px',
-      ...getRtl(rtl, theme),
-      ...getWidth(width, minMaxWidth)
-
+      ...!embedded && getRtl(rtl, theme),
+      ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
     } : {
       height: "100%",
       borderRadius: "0px"
       }}>
-      {embedded ? 'is embedded' : 'not embedded'}
       <Tooltip arrow placement="top" title={`Double-Click to ${isCollapsed ? 'expand' : 'minimize'}`}>
         <Box
           onDoubleClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           alignItems="center"
           display="flex"
-          className={classes.header}>
+          className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
             {icon && <>{icon}</>}
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
