@@ -40,6 +40,7 @@
     "start": "react-scripts start",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
+    "precopy.component": "mkdir -p ./sample/src/components/",
     "copy.component": "copy-and-watch src/components/* sample/src/components/ --watch --clean",
     "serve": "serve -s build"
   },
