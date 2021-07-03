@@ -43,10 +43,9 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(1.5, 2),
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: theme.palette.divider,
-    boxShadow: theme.shadows[1],
+    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
   },
   headerEmbedded: {
     cursor: "default",
@@ -55,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     userSelect: "none",
     padding: theme.spacing(1, 2),
     border: `0px none transparent`,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     boxShadow: theme.shadows[0]
   },
   children: {
@@ -81,6 +80,7 @@ const MuiPanel = withTheme(({
   const classes = useStyles(theme)
   return (
     <Paper
+      elevation={0}
       id={`mui-panel-${uniqueId}`}
       className={embedded ? classes.rootEmbedded : classes.root}
       style={isExternal ? {

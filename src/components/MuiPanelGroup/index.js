@@ -25,14 +25,22 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
   },
   panelsContainer: {
+    boxShadow: 'initial',
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
+    borderBottom: `1px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     padding: theme.spacing(0),
   },
+  toolboxContainer: {
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    backdropFilter: "blur(4px)",
+    padding: theme.spacing(0, 0, 0, 1),
+  },
   panel: {
-    borderRadius: '0px'
+    borderRadius: '0px',
+    padding: theme.spacing(1),
   },
   toolboxButton: {
-    padding: "0px",
+    padding: theme.spacing(0.5),
     minWidth: 'unset'
   },
   activePanel: {
@@ -65,40 +73,39 @@ const MuiPanel = withTheme(({
     className={classes.root}
     alignItems="stretch">
     <Paper
+      disableElevation
       id={`mui-panel-group-${uniqueId}`}
       className={classes.panelsContainer}
       style={{
           ...getWidth(width, minMaxWidth)
       }}
     >
-        <div>
-          {panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
-          </div>
+      {panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
     </Paper>
-    <div>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Box>
-            <Button className={classes.toolboxButton} size="small" variant="outlined">
-              <CalendarViewDayIcon style={{ fontSize }} />
-            </Button>
+    <Box className={classes.toolboxContainer} display="flex" justifyContent="space-between" alignItems="center">
+      <Box>
+        <Button className={classes.toolboxButton} size="small" variant="outlined">
+          <CalendarViewDayIcon style={{ fontSize }} />
+        </Button>
+      </Box>
+      <Box display="flex">
+      {headerList.map((hl, i) => <Tooltip title={`Switch to ${hl.title}`}>
+        <Button
+        disableElevation
+        size="small"
+        onClick={() => setActiveIndex(i)}
+        className={`${classes.panel} ${i === activeIndex && classes.activePanel}`}
+        variant={i === activeIndex ? "contained" : "outlined" }
+        color={i === activeIndex ? "primary" : "default" }
+        disableElevation key={hl.id}>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            {hl.icon}
+            {/* <Typography variant="caption">{hl.title}</Typography> */}
           </Box>
-          <Box display="flex">
-          {headerList.map((hl, i) => <Button
-            disableElevation
-            size="small"
-            onClick={() => setActiveIndex(i)}
-            className={i === activeIndex ? classes.activePanel : classes.panel}
-            variant={i === activeIndex ? "contained" : "outlined" }
-            color={i === activeIndex ? "primary" : "default" }
-            disableElevation key={hl.id}>
-              <Box display="flex" flexDirection="column" alignItems="center">
-                {hl.icon}
-                <Typography variant="caption">{hl.title}</Typography>
-              </Box>
-            </Button>)}
-          </Box>
-        </Box>
-    </div>
+      </Button>
+      </Tooltip>)}
+      </Box>
+    </Box>
   </Box>
 })
 export default MuiPanel;
