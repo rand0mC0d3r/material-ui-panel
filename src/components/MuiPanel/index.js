@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[1],
   },
   headerEmbedded: {
-    cursor: "pointer",
+    cursor: "default",
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
@@ -93,7 +93,7 @@ const MuiPanel = withTheme(({
       height: "100%",
       borderRadius: "0px"
       }}>
-      <Tooltip arrow placement="top" title={`Double-Click to ${isCollapsed ? 'expand' : 'minimize'}`}>
+      <Tooltip arrow placement="top" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
           onDoubleClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           alignItems="center"
@@ -113,23 +113,25 @@ const MuiPanel = withTheme(({
             className={classes.toolbox}
             style={isExternal ? {
               top: theme.spacing(2),
-            right: theme.spacing(2),
+              right: theme.spacing(2),
             } : {}}
           >
-            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
-                {isCollapsed
-                  ? <ArrowDropUpIcon style={{ fontSize }} />
-                  : <ArrowDropDownIcon style={{ fontSize }} />}
-              </Button>
-            </Tooltip>
+            {!embedded &&
+              <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
+                <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
+                  {isCollapsed
+                    ? <ArrowDropUpIcon style={{ fontSize }} />
+                    : <ArrowDropDownIcon style={{ fontSize }} />}
+                </Button>
+              </Tooltip>
+            }
             <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
           </Box>
-          </Box>
+        </Box>
       </Tooltip>
-      {!isCollapsed && <Box className={classes.children}>
+      {(embedded || (!embedded && !isCollapsed)) && <Box className={classes.children}>
         {children}
       </Box>}
     </Paper>

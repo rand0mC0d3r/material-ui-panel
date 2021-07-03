@@ -38,6 +38,7 @@ const MuiPanel = withTheme(({
   theme
 }) => {
   const [headerList, setHeaderList] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const classes = useStyles(theme)
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const MuiPanel = withTheme(({
       }}
     >
         <div>
-          {panels.map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+          {panels.filter((panel,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
           </div>
     </Paper>
   </Box>
