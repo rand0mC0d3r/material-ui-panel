@@ -1,4 +1,4 @@
-import Paper from '@material-ui/core/Paper';
+import { Box, Paper, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -12,12 +12,19 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
   },
   header: {
-    backgroundColor: 'red'
+    gap: theme.spacing(1),
+    padding: theme.spacing(1, 2),
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: theme.palette.background.default,
+  },
+  children: {
+    padding: theme.spacing(2),
   }
 }));
 
 const MuiPanel = withTheme(({
   icon,
+  color = 'textPrimary',
   width = 700,
   minMaxWidth = [300, 500, 800],
   rtl = false,
@@ -32,8 +39,15 @@ const MuiPanel = withTheme(({
       ...getRtl(rtl),
       ...getWidth(width)
     } : {}}>
-      <div className={classes.header}>{icon} {title}</div>
-      {children}
+      <Box
+        alignItems="center"
+        display="flex"
+        className={classes.header}>
+        {icon} <Typography {...{ color }} variant="h6">{title}</Typography>
+      </Box>
+      <Box className={classes.children}>
+        {children}
+      </Box>
     </Paper>
   )
 })
