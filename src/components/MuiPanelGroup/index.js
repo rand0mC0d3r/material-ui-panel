@@ -22,16 +22,17 @@ const useStyles = makeStyles(theme => ({
   root: {
     bottom: "0px",
     padding: theme.spacing(0),
+    border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
+    borderBottom: '0px none',
     position: "absolute",
   },
   panelsContainer: {
     boxShadow: 'initial',
-    border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
-    borderBottom: `1px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
-    borderBottomRightRadius: '0px',
     padding: theme.spacing(0),
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolboxContainer: {
+
     backgroundColor: 'rgba(255,255,255,0.5)',
     backdropFilter: "blur(4px)",
     padding: theme.spacing(0, 0, 0, 1),
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0px'
   },
   actionsContainer: {
-    width: "100%"
+
   }
 }));
 
@@ -62,6 +63,7 @@ const MuiPanel = withTheme(({
 }) => {
   const [headerList, setHeaderList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isStackable, setIsStackable] = useState(false);
   const classes = useStyles(theme)
 
   useEffect(() => {
@@ -81,28 +83,34 @@ const MuiPanel = withTheme(({
           ...getWidth(width, minMaxWidth)
       }}
     >
-      {panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+      {panels.filter(( _ ,i) => isStackable ? true : i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
     </Paper>
     <Box className={classes.toolboxContainer} display="flex" justifyContent="space-between" alignItems="center">
       <Box>
-        <Button className={classes.toolboxButton} size="small" variant="outlined">
+        <Button
+          color={isStackable ? 'primary' : 'default'}
+          className={classes.toolboxButton}
+          size="small"
+          onClick={() => setIsStackable((isStackable) => !isStackable)}
+          variant="outlined"
+        >
           <CalendarViewDayIcon style={{ fontSize }} />
         </Button>
       </Box>
-      <Box display="flex">
-      {headerList.map((hl, i) => <Tooltip arrow title={`Switch to ${hl.title}`}>
+      <Box display="flex" className={classes.actionsContainer}>
+        {headerList.map((hl, i) => <Tooltip  arrow title={`Switch to ${hl.title}`}>
         <Button
-        disableElevation
-        size="small"
-        onClick={() => setActiveIndex(i)}
-        className={`${classes.panel} ${i === activeIndex && classes.activePanel}`}
-        variant={i === activeIndex ? "contained" : "outlined" }
-        color={i === activeIndex ? "primary" : "default" }
-        disableElevation key={hl.id}>
-          <Box display="flex" flexDirection="column" alignItems="center">
-            {hl.icon}
-            {/* <Typography variant="caption">{hl.title}</Typography> */}
-          </Box>
+          disableElevation
+          size="small"
+          disabled={isStackable || i === activeIndex}
+          onClick={() => setActiveIndex(i)}
+          className={`${classes.panel} ${i === activeIndex && classes.activePanel}`}
+          variant={i === activeIndex ? "contained" : "text" }
+          color={i === activeIndex ? "primary" : "default" }
+          disableElevation key={hl.id}>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              {cloneElement(hl.icon, {color: isStackable ? 'disabled' : i === activeIndex ? "primary" : "action"})}
+            </Box>
       </Button>
       </Tooltip>)}
       </Box>
