@@ -117,13 +117,13 @@ const MuiPanel = withTheme(({
             } : {}}
           >
             <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button disableElevation variant="contained" className={classes.toolboxButton} size="small">
+              <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
                 {isCollapsed
                   ? <ArrowDropUpIcon style={{ fontSize }} />
                   : <ArrowDropDownIcon style={{ fontSize }} />}
               </Button>
             </Tooltip>
-            <Button disableElevation variant="contained" className={classes.toolboxButton} size="small">
+            <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
           </Box>

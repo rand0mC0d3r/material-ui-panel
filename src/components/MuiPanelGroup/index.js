@@ -3,7 +3,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { cloneElement, useState } from 'react';
+import React, { cloneElement, Fragment, useEffect, useState } from 'react';
 
 const fontSize = 18;
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -19,32 +19,52 @@ const getWidth = (width, minMaxWidth) => minMaxWidth && Object.keys(minMaxWidth)
 
 const useStyles = makeStyles(theme => ({
   root: {
-    border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     bottom: "0px",
     padding: theme.spacing(0),
     position: "absolute",
+  },
+  panelsContainer: {
+    border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
+    padding: theme.spacing(0),
   },
 }));
 
 const MuiPanel = withTheme(({
   uniqueId = "generic",
   panels,
+  rtl = false,
   width = 450,
   minMaxWidth,
   theme
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [headerList, setHeaderList] = useState([]);
   const classes = useStyles(theme)
-  return (
+
+  useEffect(() => {
+    setHeaderList(panels.map((panel, i) => ({ id: i, title: panel.props.title, icon: panel.props.icon })))
+  }, [panels]);
+
+  return <Box style={{...getRtl(rtl, theme)}} display="flex" className={classes.root} alignItems="flex-end">
+    <Paper
+      id={`mui-panel-group-controls-${uniqueId}`}
+    >
+        <Box display="flex">
+          {headerList.map(hl => <Button variant="outlined" disableElevation key={hl.id}>
+            {hl.title}
+          </Button>)}
+        </Box>
+    </Paper>
     <Paper
       id={`mui-panel-group-${uniqueId}`}
-      className={classes.root}
-        style={{
+      className={classes.panelsContainer}
+      style={{
           ...getWidth(width, minMaxWidth)
       }}
     >
-      {panels.map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+        <div>
+          {panels.map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+          </div>
     </Paper>
-  )
+  </Box>
 })
 export default MuiPanel;
