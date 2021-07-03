@@ -3,7 +3,13 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React from 'react';
 
 const getRtl = (rtl) => rtl ? { right: '64px' } : { left: '64px'};
-const getWidth = (width) => width && { width: `${width}px` };
+const getWidth = (width, minMaxWidth) => minMaxWidth && Object.keys(minMaxWidth).length === 3
+  ? {
+    minWidth: `${minMaxWidth.min}px`,
+    width: `${minMaxWidth.default}px`,
+    maxWidth: `${minMaxWidth.max}px`,
+  }
+  : { width: `${width}px` };
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +32,7 @@ const MuiPanel = withTheme(({
   icon,
   color = 'textPrimary',
   width = 700,
-  minMaxWidth = [300, 500, 800],
+  minMaxWidth,
   rtl = false,
   isExternal = false,
   children,
@@ -37,7 +43,7 @@ const MuiPanel = withTheme(({
   return (
     <Paper className={classes.root} style={isExternal ? {
       ...getRtl(rtl),
-      ...getWidth(width)
+      ...getWidth(width, minMaxWidth)
     } : {}}>
       <Box
         alignItems="center"
