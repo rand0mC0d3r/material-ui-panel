@@ -2,6 +2,7 @@ import { Box, Button, Paper, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, Fragment, useEffect, useState } from 'react';
 
@@ -30,11 +31,16 @@ const useStyles = makeStyles(theme => ({
   panel: {
     borderRadius: '0px'
   },
+  toolboxButton: {
+    padding: "0px",
+    minWidth: 'unset'
+  },
   activePanel: {
-    // borderTop: `4px solid ${theme.palette.primary.main}`,
     borderRadius: '0px'
+  },
+  actionsContainer: {
+    width: "100%"
   }
-
 }));
 
 const MuiPanel = withTheme(({
@@ -53,7 +59,11 @@ const MuiPanel = withTheme(({
     setHeaderList(panels.map((panel, i) => ({ id: i, title: panel.props.title, icon: panel.props.icon })))
   }, [panels]);
 
-  return <Box style={{...getRtl(rtl, theme)}} display="flex" flexDirection="column" className={classes.root} alignItems="flex-end">
+  return <Box style={{ ...getRtl(rtl, theme) }}
+    display="flex"
+    flexDirection="column"
+    className={classes.root}
+    alignItems="stretch">
     <Paper
       id={`mui-panel-group-${uniqueId}`}
       className={classes.panelsContainer}
@@ -65,23 +75,30 @@ const MuiPanel = withTheme(({
           {panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
           </div>
     </Paper>
-    <Paper id={`mui-panel-group-controls-${uniqueId}`}>
-        <Box display="flex">
-        {headerList.map((hl, i) => <Button
-          disableElevation
-          size="small"
-          onClick={() => setActiveIndex(i)}
-          className={i === activeIndex ? classes.activePanel : classes.panel}
-          variant={i === activeIndex ? "contained" : "outlined" }
-          color={i === activeIndex ? "primary" : "default" }
-          disableElevation key={hl.id}>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              {hl.icon}
-              <Typography variant="caption">{hl.title}</Typography>
-            </Box>
-          </Button>)}
+    <div>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box>
+            <Button className={classes.toolboxButton} size="small" variant="outlined">
+              <CalendarViewDayIcon style={{ fontSize }} />
+            </Button>
+          </Box>
+          <Box display="flex">
+          {headerList.map((hl, i) => <Button
+            disableElevation
+            size="small"
+            onClick={() => setActiveIndex(i)}
+            className={i === activeIndex ? classes.activePanel : classes.panel}
+            variant={i === activeIndex ? "contained" : "outlined" }
+            color={i === activeIndex ? "primary" : "default" }
+            disableElevation key={hl.id}>
+              <Box display="flex" flexDirection="column" alignItems="center">
+                {hl.icon}
+                <Typography variant="caption">{hl.title}</Typography>
+              </Box>
+            </Button>)}
+          </Box>
         </Box>
-    </Paper>
+    </div>
   </Box>
 })
 export default MuiPanel;

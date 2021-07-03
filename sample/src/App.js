@@ -1,33 +1,39 @@
+import CameraIcon from '@material-ui/icons/Camera';
+import CastIcon from '@material-ui/icons/Cast';
+import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelGroup from './components/MuiPanelGroup';
-import logo from './logo.svg';
 
 function App() {
   return (
     <>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      </div>
+      <iframe
+        title="sample"
+        style={{ width: "100%", border: '0px none', height: "100%", position:'absolute' }}
+        src="https://material-ui.com/components/material-icons/#material-icons"
+      />
 
       <MuiPanelGroup panels={[
-        <MuiPanel width={400} isExternal icon="" title="Text">
+        <MuiPanel width={400} isExternal icon={<CameraIcon />} title="Text">
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+        </MuiPanel>,
+        <MuiPanel width={400} isExternal icon={<CastIcon />} title="Random Longer text">
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+          <Skeleton animation="wave" height={10} width="80%" />
+          <Skeleton animation="wave" height={10} width="80%" />
+        </MuiPanel>,
+        <MuiPanel width={400} isExternal icon={<ChromeReaderModeIcon />} title="Other Panel">
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+          <Skeleton animation="wave" height={10} width="80%" />
+          <Skeleton animation="wave" height={10} width="80%" />
           <Skeleton animation="wave" height={10} width="80%" />
         </MuiPanel>,
         <MuiPanel
