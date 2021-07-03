@@ -1,8 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import MuiPanel from './components/MuiPanel';
+import logo from './logo.svg';
 
 function App() {
   return (
+    <>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -18,7 +20,9 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+      </div>
+      <MuiPanel icon="" isExternal title="Text" />
+      </>
   );
 }
 
