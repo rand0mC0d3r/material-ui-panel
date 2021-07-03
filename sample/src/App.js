@@ -32,7 +32,9 @@ function App() {
         icon={<InfoOutlinedIcon />}
         isExternal
         rtl
-        title="Text">
+        title="Lorem Ipsum"
+        subTitle="sit amet, consectetur 43"
+      >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
       </MuiPanel>
       </>
