@@ -37,7 +37,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "ncu -u && npm audit fix",
-    "start": "react-scripts start",
+    "start": "cd sample && npx react-scripts start",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
     "precopy.component": "mkdir -p ./sample/src/components/",

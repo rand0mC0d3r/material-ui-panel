@@ -1,3 +1,4 @@
+import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import MuiPanel from './components/MuiPanel';
 import logo from './logo.svg';
@@ -21,7 +22,13 @@ function App() {
         </a>
       </header>
       </div>
-      <MuiPanel icon="" isExternal title="Text" />
+      <MuiPanel icon="" isExternal title="Text">
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+            <Skeleton animation="wave" height={10} width="80%" />
+      </MuiPanel>
+      <MuiPanel icon="" isExternal rtl title="Text">
+        sample content
+      </MuiPanel>
       </>
   );
 }
