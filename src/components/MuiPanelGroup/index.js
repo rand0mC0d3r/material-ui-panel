@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'initial',
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
     borderBottom: `1px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
+    borderBottomRightRadius: '0px',
     padding: theme.spacing(0),
   },
   toolboxContainer: {
@@ -89,7 +90,7 @@ const MuiPanel = withTheme(({
         </Button>
       </Box>
       <Box display="flex">
-      {headerList.map((hl, i) => <Tooltip title={`Switch to ${hl.title}`}>
+      {headerList.map((hl, i) => <Tooltip arrow title={`Switch to ${hl.title}`}>
         <Button
         disableElevation
         size="small"
