@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+sample/src/components
+sample/src/components/MuiPanel
+sample/src/components/MuiPanel/index.js
