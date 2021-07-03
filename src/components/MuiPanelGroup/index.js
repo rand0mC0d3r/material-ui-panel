@@ -23,11 +23,23 @@ const useStyles = makeStyles(theme => ({
     bottom: "0px",
     padding: theme.spacing(0),
     border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
+    borderRadius: theme.shape.borderRadius,
+    borderBottomLeftRadius: "0px",
+    borderBottomRightRadius: "0px",
     borderBottom: '0px none',
     position: "absolute",
   },
+  rootStacked: {
+    borderTop: "0px",
+    borderBottom: "0px",
+    borderRadius: "0px",
+    height: "100%"
+  },
   panelsContainer: {
+    alignSelf: "stretch",
+    flex: '1 1 auto',
     boxShadow: 'initial',
+    borderRadius: '0px',
     padding: theme.spacing(0),
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
@@ -73,7 +85,7 @@ const MuiPanel = withTheme(({
   return <Box style={{ ...getRtl(rtl, theme) }}
     display="flex"
     flexDirection="column"
-    className={classes.root}
+    className={`${classes.root} ${isStackable && classes.rootStacked}`}
     alignItems="stretch">
     <Paper
       disableElevation
