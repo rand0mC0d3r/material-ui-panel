@@ -31,7 +31,11 @@ const useStyles = makeStyles(theme => ({
     padding: "0px",
     minWidth: 'unset'
   },
+  headerContainer: {
+    gap: theme.spacing(1),
+  },
   header: {
+    cursor: "pointer",
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
@@ -47,10 +51,12 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   icon,
+  uniqueId = "generic",
   color = 'textPrimary',
   width = 700,
   minMaxWidth,
   rtl = false,
+  embedded = false,
   isExternal = false,
   children,
   title,
@@ -60,23 +66,30 @@ const MuiPanel = withTheme(({
   const [isCollapsed, setIsCollapsed] = useState(true);
   const classes = useStyles(theme)
   return (
-    <Paper className={classes.root} style={isExternal ? {
+    <Paper
+      id={`mui-panel-${uniqueId}`}
+      className={classes.root}
+      style={isExternal ? {
       borderBottom: '0px',
       borderBottomLeftRadius: '0px',
       borderBottomRightRadius: '0px',
       ...getRtl(rtl, theme),
       ...getWidth(width, minMaxWidth)
 
-    } : {}}>
+    } : {
+      height: "100%",
+      borderRadius: "0px"
+      }}>
+      {embedded ? 'is embedded' : 'not embedded'}
       <Tooltip arrow placement="top" title={`Double-Click to ${isCollapsed ? 'expand' : 'minimize'}`}>
         <Box
           onDoubleClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           alignItems="center"
           display="flex"
           className={classes.header}>
-          {icon}
+            {icon && <>{icon}</>}
             {subTitle
-              ? <Box display="flex" flexDirection="column">
+              ? <Box className={classes.headerContainer} display="flex" alignItems="center">
                 <Typography {...{ color }} variant="subtitle1">{title}</Typography>
                 <Typography {...{ color }} variant="caption">{subTitle}</Typography>
               </Box>
@@ -91,11 +104,13 @@ const MuiPanel = withTheme(({
             right: theme.spacing(2),
             } : {}}
           >
-            <Button disableElevation variant="contained" className={classes.toolboxButton} size="small">
-              {isCollapsed
-                ? <ArrowDropUpIcon style={{ fontSize }} />
-                : <ArrowDropDownIcon style={{ fontSize }} />}
-            </Button>
+            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
+              <Button disableElevation variant="contained" className={classes.toolboxButton} size="small">
+                {isCollapsed
+                  ? <ArrowDropUpIcon style={{ fontSize }} />
+                  : <ArrowDropDownIcon style={{ fontSize }} />}
+              </Button>
+            </Tooltip>
             <Button disableElevation variant="contained" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
