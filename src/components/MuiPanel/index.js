@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0px'
   },
   toolbox: {
-    position: "absolute",
     gap: theme.spacing(0.5),
   },
   toolboxButton: {
@@ -71,10 +70,12 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   icon,
+  handleOnCollapse = () => { },
   uniqueId = "generic",
   color = 'textPrimary',
   width = 700,
   minMaxWidth,
+  forceCollapse=false,
   rtl = false,
   embedded = false,
   isExternal = false,
@@ -102,10 +103,25 @@ const MuiPanel = withTheme(({
       }}>
       <Tooltip arrow placement="top" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
-          onDoubleClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
+          justifyContent="space-between"
+          onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
+          style={isCollapsed ? {
+            gap: theme.spacing(0.5),
+            padding: theme.spacing(1),
+          } : {
+            gap: theme.spacing(1),
+          }}
           className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
+          <Box
+            display="flex"
+            alignItems="center"
+            style={isCollapsed ? {
+              gap: theme.spacing(0.75),
+          } : {
+                gap: theme.spacing(1),
+          }}>
             {icon && <>{icon}</>}
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
@@ -113,15 +129,12 @@ const MuiPanel = withTheme(({
                 <Typography {...{ color }} variant="caption">{subTitle}</Typography>
               </Box>
               : <Typography {...{ color }} variant="h6">{title}</Typography>}
+          </Box>
           <Box
             display="flex"
             className={classes.toolbox}
-            style={isExternal ? {
-              top: theme.spacing(2),
-              right: theme.spacing(2),
-            } : {}}
           >
-            {!embedded &&
+            {/* {!embedded && */}
               <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
                 <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
                   {isCollapsed
@@ -129,14 +142,14 @@ const MuiPanel = withTheme(({
                     : <ArrowDropDownIcon style={{ fontSize }} />}
                 </Button>
               </Tooltip>
-            }
+            {/* } */}
             <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
           </Box>
         </Box>
       </Tooltip>
-      {(embedded || (!embedded && !isCollapsed)) && <Box className={classes.children}>
+      {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
         {children}
       </Box>}
     </Paper>

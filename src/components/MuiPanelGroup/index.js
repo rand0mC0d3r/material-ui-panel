@@ -95,7 +95,9 @@ const MuiPanel = withTheme(({
           ...getWidth(width, minMaxWidth)
       }}
     >
-      {panels.filter(( _ ,i) => isStackable ? true : i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}
+      {isStackable
+        ? <>{panels.map((panel, i) => cloneElement(panel, { key: i, forceCollapse: i !== activeIndex, handleOnCollapse: () => setActiveIndex(i), embedded: true }))}</>
+        : <>{panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}</>}
     </Paper>
     <Box className={classes.toolboxContainer} display="flex" justifyContent="space-between" alignItems="center">
       <Box>
