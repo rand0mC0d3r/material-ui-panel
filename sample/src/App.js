@@ -19,11 +19,11 @@ function App() {
       <MuiPanel title="Funny Panel" icon={<CastIcon />}>2b</MuiPanel>
       <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="right">3</MuiPanel>
       <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="right">3</MuiPanel>
-      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="top">3</MuiPanel>
-      <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="top">3b</MuiPanel>
-      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="bottom">4</MuiPanel>
-      <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="bottom">4c</MuiPanel>
-      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="bottom">4d</MuiPanel>
+      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="right">3</MuiPanel>
+      <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="right">3b</MuiPanel>
+      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
+      <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="left">4c</MuiPanel>
+      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="right">4d</MuiPanel>
         <div>
            <iframe
           title="sample"

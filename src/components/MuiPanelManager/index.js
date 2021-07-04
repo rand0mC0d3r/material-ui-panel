@@ -9,15 +9,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     display: "grid",
     "grid-template-columns": "50px 1fr 3fr 1fr 50px",
-    "grid-template-rows": "50px 1fr 3fr 1.1fr 50px",
+    "grid-template-rows": "1fr",
     "gap": "0px 0px",
     "grid-auto-flow": "row",
     "grid-template-areas":`
-      "left-menu left-panel top-menu right-panel right-menu"
-      "left-menu left-panel top-panel right-panel right-menu"
       "left-menu left-panel main right-panel right-menu"
-      "left-menu left-panel bottom-panel right-panel right-menu"
-      "left-menu left-panel bottom-menu right-panel right-menu";
       `
   },
   leftMenu: { "grid-area": "left-menu" },
@@ -29,6 +25,12 @@ const useStyles = makeStyles(theme => ({
   bottomPanel: { "grid-area": "bottom-panel" },
   bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
+
+  buttonMenu: {
+    border: "1px solid gray",
+    borderRadius: "0px",
+    minWidth: "initial"
+  }
 }));
 
 const MuiPanelManager = withTheme(({
@@ -50,9 +52,15 @@ const MuiPanelManager = withTheme(({
 
     {layout.filter(lo => lo.side === 'left').length > 0 && <div className={classes.leftMenu}>
       {layout.filter(lo => lo.side === 'left').map(layoutObject =>
-        <Button className={classes[`${layoutObject.side}Menu`]}>
-          {/* {layoutObject.icon} */}
-          {layoutObject.title}
+        <Button disableElevation variant="outlined" fullWidth className={classes.buttonMenu} >
+          {layoutObject.icon}
+        </Button>
+      )}
+    </div>}
+    {layout.filter(lo => lo.side === 'right').length > 0 && <div className={classes.rightMenu}>
+      {layout.filter(lo => lo.side === 'right').map(layoutObject =>
+        <Button disableElevation variant="outlined" fullWidth className={classes.buttonMenu} >
+          {layoutObject.icon}
         </Button>
       )}
     </div>}
