@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     width: "100%",
     display: "grid",
-    "grid-template-columns": "50px 1fr 3fr 1fr 50px",
+    "grid-template-columns": "50px auto 1fr auto 50px",
     "grid-template-rows": "1fr",
     "gap": "0px 0px",
     "grid-auto-flow": "row",
@@ -41,7 +41,7 @@ const MuiPanelManager = withTheme(({
   const [layout, setLayout] = useState([])
 
   const handleAnnounceSelf = (index, side, title, icon) => {
-    setLayout((layout) => ([ ...layout, { index, side, title, icon } ]));
+    setLayout((layout) => ([ ...layout, { isVisible: false, index, side, title, icon } ]));
   }
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const MuiPanelManager = withTheme(({
 
     {children.map((child, i) => {
       if (child.props.title) {
-        return cloneElement( child, { key: i, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
+        return cloneElement( child, { key: i, isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
       } else {
         return cloneElement( child, { key: i, className: classes.main})
       }
