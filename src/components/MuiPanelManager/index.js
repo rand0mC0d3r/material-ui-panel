@@ -27,9 +27,7 @@ const MuiPanelManager = withTheme(({
   const [layout, setLayout] = useState([])
 
   const handleAnnounceSelf = (index, side) => {
-    // console.log("index", index, side, [...layout, { index, side } ])
     setLayout((layout) => ([ ...layout, { index, side } ]));
-
   }
 
   useEffect(() => {
@@ -38,7 +36,6 @@ const MuiPanelManager = withTheme(({
 
   return <div className={classes.root}>
     {children.map((child, i) => {
-      console.log(child.props);
       return cloneElement(
         child,
         {

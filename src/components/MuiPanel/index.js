@@ -68,12 +68,13 @@ const useStyles = makeStyles(theme => ({
   },
   left: { "grid-area": "left" },
   right: { "grid-area": "right" },
-  top: { "grid-area": "top" },
+  top: { "grid-area": "top", "display":"flex" },
   bottom: { "grid-area": "bottom" },
 }));
 
 const MuiPanel = withTheme(({
   initialSide = 'left',
+  type = "panel",
   icon,
   handleOnCollapse = () => { },
   uniqueId = "generic",
@@ -82,7 +83,7 @@ const MuiPanel = withTheme(({
   minMaxWidth,
   forceCollapse = false,
   rtl = false,
-  embedded = false,
+  embedded = true,
   isExternal = false,
   children,
   title,
@@ -111,7 +112,7 @@ const MuiPanel = withTheme(({
       ...!embedded && getRtl(rtl, theme),
       ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
     } : {
-      height: "100%",
+      // height: "100%",
       borderRadius: "0px"
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
