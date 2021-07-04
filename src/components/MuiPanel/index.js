@@ -2,8 +2,10 @@ import { Box, Button, Paper, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { useEffect, useState } from 'react';
+import React, { cloneElement, useEffect, useState } from 'react';
 
 const fontSize = 18;
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -25,7 +27,6 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
   },
   rootEmbedded: {
-    border: `1px solid ${theme.palette.augmentColor({ main: theme.palette.divider }).dark}`,
     borderRadius: '0px'
   },
   toolbox: {
@@ -33,7 +34,8 @@ const useStyles = makeStyles(theme => ({
   },
   toolboxButton: {
     padding: "0px",
-    minWidth: 'unset'
+    width: '20px',
+    minWidth: '20px'
   },
   headerContainer: {
     gap: theme.spacing(1),
@@ -53,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(0.5, 1, 0.5, 0),
     border: `0px none transparent`,
     backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     boxShadow: theme.shadows[0]
@@ -76,7 +78,7 @@ const MuiPanel = withTheme(({
   initialSide = 'left',
   type = "panel",
   icon,
-  fullWidth = false,
+  inList = false,
   isVisible = true,
   handleOnCollapse = () => { },
   uniqueId = "generic",
@@ -109,7 +111,7 @@ const MuiPanel = withTheme(({
     { isVisible && <Paper
       elevation={0}
       id={`mui-panel-${uniqueId}`}
-      className={`${classes[side]} ${embedded ? classes.rootEmbedded : classes.root}`}
+      className={`${classes[side]} ${inList ? classes.rootEmbedded : classes.root}`}
       style={isExternal ? {
         borderBottom: '0px',
         borderBottomLeftRadius: '0px',
@@ -118,50 +120,53 @@ const MuiPanel = withTheme(({
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
         // height: "100%",
-        ...fullWidth ? { width: 'auto' } : getWidth(width, minMaxWidth),
+        ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
         borderRadius: "0px"
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
-          justifyContent="flex-start"
+          justifyContent="space-between"
           onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
-          style={isCollapsed ? {
-            gap: theme.spacing(1),
-          } : {
-            gap: theme.spacing(1),
-          }}
           className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
-           <Box
-            display="flex"
-            className={classes.toolbox}
-          >
-            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button disableElevation variant="text" className={classes.toolboxButton} size="small">
-                {isCollapsed
-                  ? <ArrowDropUpIcon style={{ fontSize }} />
-                  : <ArrowDropDownIcon style={{ fontSize }} />}
-              </Button>
-            </Tooltip>
-          </Box>
+
           <Box
             display="flex"
             alignItems="center"
             style={isCollapsed ? {
-              gap: theme.spacing(0.75),
+              gap: theme.spacing(0.5),
             } : {
-              gap: theme.spacing(1),
+              gap: theme.spacing(0.5),
             }}>
-            {icon && <>{icon}</>}
+              <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
+              <Button
+                disableElevation
+                variant="text"
+                className={classes.toolboxButton}
+                onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
+                size="small"
+              >
+                {isCollapsed
+                  ? <ChevronRightIcon style={{ fontSize }} />
+                  : <ExpandMoreIcon style={{ fontSize }} />}
+              </Button>
+            </Tooltip>
+            {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 14}})}</>}
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography {...{ color }} variant="subtitle1">{title}</Typography>
-                <Typography {...{ color }} variant="caption">{subTitle}</Typography>
+                <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="caption">{title}</Typography>
+                <Typography {...{ color }} variant="button">{subTitle}</Typography>
               </Box>
-              : <Typography {...{ color }} variant="h6">{title}</Typography>}
+              : <Typography style={{ fontWeight: 'bold', fontSize: "12px"}} {...{ color }} variant="button">{title}</Typography>}
+        </Box>
+          <Box display="flex" className={classes.toolbox}>
+            {!inList &&
+            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
+              <SwapHorizIcon style={{ fontSize }} />
+            </Button>
+            }
           </Box>
-
         </Box>
       </Tooltip>
       {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>

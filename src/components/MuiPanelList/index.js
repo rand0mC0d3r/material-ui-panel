@@ -152,7 +152,7 @@ const MuiPanel = withTheme(({
       </Tooltip>
       {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
         {children.map((child, i) => {
-        return cloneElement( child, { key: i, fullWidth: "true"})
+        return cloneElement( child, { key: i, inList: "true"})
         })}
       </Box>}
     </Paper>
