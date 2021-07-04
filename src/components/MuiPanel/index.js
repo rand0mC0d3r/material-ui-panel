@@ -66,10 +66,10 @@ const useStyles = makeStyles(theme => ({
       filter: "grayscale(0)",
     }
   },
-  left: { "grid-area": "left" },
-  right: { "grid-area": "right" },
-  top: { "grid-area": "top", "display":"flex" },
-  bottom: { "grid-area": "bottom" },
+  left: { "grid-area": "left-panel" },
+  right: { "grid-area": "right-panel" },
+  top: { "grid-area": "top-panel" },
+  bottom: { "grid-area": "bottom-panel" },
 }));
 
 const MuiPanel = withTheme(({

@@ -8,20 +8,26 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     width: "100%",
     display: "grid",
-    "grid-template-columns": "1fr 3fr 1fr",
-    "grid-template-rows": "1fr 3fr 1fr",
+    "grid-template-columns": "50px 1fr 3fr 1fr 50px",
+    "grid-template-rows": "50px 1fr 3fr 1.1fr 50px",
     "gap": "0px 0px",
     "grid-auto-flow": "row",
     "grid-template-areas":`
-      "left top right"
-      "left main right"
-      "left bottom right"
+      "left-menu left-panel top-menu right-panel right-menu"
+      "left-menu left-panel top-panel right-panel right-menu"
+      "left-menu left-panel . right-panel right-menu"
+      "left-menu left-panel bottom-panel right-panel right-menu"
+      "left-menu left-panel bottom-menu right-panel right-menu";
       `
   },
-  left: { "grid-area": "left" },
-  right: { "grid-area": "right" },
-  top: { "grid-area": "top", "display":"flex" },
-  bottom: { "grid-area": "bottom" },
+  leftMenu: { "grid-area": "left-menu" },
+  leftPanel: { "grid-area": "left-panel" },
+  topMenu: { "grid-area": "top-menu" },
+  topPanel: { "grid-area": "top-panel" },
+  rightPanel: { "grid-area": "right-panel" },
+  rightMenu: { "grid-area": "right-menu" },
+  bottomPanel: { "grid-area": "bottom-panel" },
+  bottomMenu: { "grid-area": "bottom-menu" },
 }));
 
 const MuiPanelManager = withTheme(({
@@ -42,7 +48,7 @@ const MuiPanelManager = withTheme(({
   return <div className={classes.root}>
 
     {layout.length > 0 && layout.map(layoutObject =>
-      <Button className={classes[layoutObject.side]}>
+      <Button className={classes[`${layoutObject.side}Menu`]}>
         {layoutObject.side}
       </Button>
     )}
