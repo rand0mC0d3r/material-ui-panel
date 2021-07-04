@@ -93,19 +93,22 @@ const MuiPanel = withTheme(({
   handleOnAnnouncements = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
+
+
 
   useEffect(() => {
     if (embedded) {
-      handleOnAnnouncements(initialSide, title, icon)
+      handleOnAnnouncements(side, title, icon)
     }
-  }, [embedded]);
+  }, [embedded, side]);
 
   return (<>
     { isVisible && <Paper
       elevation={0}
       id={`mui-panel-${uniqueId}`}
-      className={`${classes[initialSide]} ${embedded ? classes.rootEmbedded : classes.root}`}
+      className={`${classes[side]} ${embedded ? classes.rootEmbedded : classes.root}`}
       style={isExternal ? {
         borderBottom: '0px',
         borderBottomLeftRadius: '0px',
@@ -158,7 +161,7 @@ const MuiPanel = withTheme(({
               </Button>
             </Tooltip>
             {/* } */}
-            <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
+            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
           </Box>

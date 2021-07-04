@@ -60,7 +60,7 @@ const MuiPanelManager = withTheme(({
   const [layout, setLayout] = useState([])
 
   const handleAnnounceSelf = (index, side, title, icon) => {
-    setLayout((layout) => ([ ...layout, { isVisible: false, index, side, title, icon } ]));
+    setLayout((layout) => ([ ...layout.filter(lo => lo.index !== index), { isVisible: false, index, side, title, icon } ]));
   }
 
   const activatePanelOnSide = (index) => {
