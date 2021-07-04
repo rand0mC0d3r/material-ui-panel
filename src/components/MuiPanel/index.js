@@ -84,7 +84,7 @@ const MuiPanel = withTheme(({
   subTitle,
   theme
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const classes = useStyles(theme)
   return (
     <Paper
@@ -101,7 +101,7 @@ const MuiPanel = withTheme(({
       height: "100%",
       borderRadius: "0px"
       }}>
-      <Tooltip arrow placement="top" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
+      <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
           justifyContent="space-between"
           onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}

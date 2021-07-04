@@ -12,11 +12,11 @@ function App() {
   return (
     <Box display="flex" style={{width: "100%", height: "100%", position: "absolute"}}>
       <div style={{ flex: "1 1 auto", alignSelf: "stretch" }}>
-      <iframe
-        title="sample"
-        style={{ width: "100%", height: "100%", border: '0px none' }}
-        src="https://material-ui.com/components/material-icons/#material-icons"
-      />
+        <iframe
+          title="sample"
+          style={{ width: "100%", height: "100%", border: '0px none' }}
+          src="https://material-ui.com/components/material-icons/#material-icons"
+        />
       </div>
 
       <MuiPanelGroup panels={[

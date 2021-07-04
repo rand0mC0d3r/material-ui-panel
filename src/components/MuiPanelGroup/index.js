@@ -4,6 +4,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import React, { cloneElement, Fragment, useEffect, useState } from 'react';
 
 const fontSize = 18;
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
   },
   rootStacked: {
+    border: `1px solid ${theme.palette.divider}`,
     borderTop: "0px",
     borderBottom: "0px",
     borderRadius: "0px",
@@ -60,8 +62,10 @@ const useStyles = makeStyles(theme => ({
   activePanel: {
     borderRadius: '0px'
   },
+  windowContainer: {
+    gap: theme.spacing(1),
+  },
   actionsContainer: {
-
   }
 }));
 
@@ -76,13 +80,21 @@ const MuiPanel = withTheme(({
   const [headerList, setHeaderList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isStackable, setIsStackable] = useState(false);
+  const [restClosed, setRestClosed] = useState(false);
+  const [leftSide, setIsLeftSide] = useState(false);
   const classes = useStyles(theme)
 
   useEffect(() => {
-    setHeaderList(panels.map((panel, i) => ({ id: i, title: panel.props.title, icon: panel.props.icon })))
+    setHeaderList(panels.map((panel, i) => {
+      return { id: i, title: panel.props.title, icon: panel.props.icon }
+    }))
   }, [panels]);
 
-  return <Box style={{ ...getRtl(rtl, theme) }}
+  return <Box
+    style={isStackable
+      ? { order: leftSide ? -1 : 101 }
+      : { ...getRtl(leftSide, theme) }
+    }
     display="flex"
     flexDirection="column"
     className={`${classes.root} ${isStackable && classes.rootStacked}`}
@@ -96,11 +108,11 @@ const MuiPanel = withTheme(({
       }}
     >
       {isStackable
-        ? <>{panels.map((panel, i) => cloneElement(panel, { key: i, forceCollapse: i !== activeIndex, handleOnCollapse: () => setActiveIndex(i), embedded: true }))}</>
-        : <>{panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, embedded: true }))}</>}
+        ? <>{panels.map((panel, i) => cloneElement(panel, { key: i, forceCollapse: restClosed ? i !== activeIndex : false, handleOnCollapse: () => setActiveIndex(i), embedded: true }))}</>
+        : <>{panels.filter(( _ ,i) => i === activeIndex).map((panel, i) => cloneElement(panel, { key: i, forceCollapse: false, embedded: true }))}</>}
     </Paper>
     <Box className={classes.toolboxContainer} display="flex" justifyContent="space-between" alignItems="center">
-      <Box>
+      <Box display="flex" className={classes.windowContainer}>
         <Button
           color={isStackable ? 'primary' : 'default'}
           className={classes.toolboxButton}
@@ -109,6 +121,23 @@ const MuiPanel = withTheme(({
           variant="outlined"
         >
           <CalendarViewDayIcon style={{ fontSize }} />
+        </Button>
+        <Button
+          onClick={() => setIsLeftSide((leftSide) => !leftSide)}
+          disableElevation
+          variant="outlined"
+          className={classes.toolboxButton}
+          size="small">
+          <SwapHorizIcon style={{ fontSize }} />
+        </Button>
+        <Button
+          color={restClosed ? 'primary' : 'default'}
+          onClick={() => setRestClosed((restClosed) => !restClosed)}
+          disableElevation
+          variant="outlined"
+          className={classes.toolboxButton}
+          size="small">
+          <ViewStreamIcon style={{ fontSize }} />
         </Button>
       </Box>
       <Box display="flex" className={classes.actionsContainer}>
