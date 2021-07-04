@@ -38,17 +38,17 @@ const useStyles = makeStyles(theme => ({
     gap: theme.spacing(1),
   },
   header: {
-    cursor: "pointer",
+    cursor: "default",
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1.5, 2),
+    padding: theme.spacing(1, 1, 1, 1),
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255,255,255,0.9)',
     backdropFilter: "blur(4px)",
   },
-  headerEmbedded: {
-    cursor: "default",
+  headerInList: {
+    cursor: "pointer",
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
@@ -126,7 +126,7 @@ const MuiPanel = withTheme(({
           onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
-          className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
+          className={`${classes.header} ${inList && classes.headerInList}`}>
 
           <Box
             display="flex"
@@ -136,19 +136,21 @@ const MuiPanel = withTheme(({
             } : {
               gap: theme.spacing(0.5),
             }}>
+            {inList &&
               <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button
-                disableElevation
-                variant="text"
-                className={classes.toolboxButton}
-                onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
-                size="small"
-              >
-                {isCollapsed
-                  ? <ChevronRightIcon style={{ fontSize }} />
-                  : <ExpandMoreIcon style={{ fontSize }} />}
-              </Button>
-            </Tooltip>
+                <Button
+                  disableElevation
+                  variant="text"
+                  className={classes.toolboxButton}
+                  onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
+                  size="small"
+                >
+                  {isCollapsed
+                    ? <ChevronRightIcon style={{ fontSize }} />
+                    : <ExpandMoreIcon style={{ fontSize }} />}
+                </Button>
+              </Tooltip>
+            }
             {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 14}})}</>}
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
