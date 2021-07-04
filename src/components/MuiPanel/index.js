@@ -3,7 +3,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const fontSize = 18;
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -65,10 +65,15 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       filter: "grayscale(0)",
     }
-  }
+  },
+  left: { "grid-area": "left" },
+  right: { "grid-area": "right" },
+  top: { "grid-area": "top" },
+  bottom: { "grid-area": "bottom" },
 }));
 
 const MuiPanel = withTheme(({
+  initialSide = 'left',
   icon,
   handleOnCollapse = () => { },
   uniqueId = "generic",
@@ -82,15 +87,21 @@ const MuiPanel = withTheme(({
   children,
   title,
   subTitle,
-  theme
+  theme,
+  announceSelf = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const classes = useStyles(theme)
+
+  useEffect(() => {
+    announceSelf()
+  }, []);
+
   return (
     <Paper
       elevation={0}
       id={`mui-panel-${uniqueId}`}
-      className={embedded ? classes.rootEmbedded : classes.root}
+      className={`${classes[initialSide]} ${embedded ? classes.rootEmbedded : classes.root}`}
       style={isExternal ? {
       borderBottom: '0px',
       borderBottomLeftRadius: '0px',

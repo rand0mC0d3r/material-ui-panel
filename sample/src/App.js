@@ -7,20 +7,30 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelGroup from './components/MuiPanelGroup';
+import MuiPanelManager from './components/MuiPanelManager';
 
 
 function App() {
   return (
-    <Box display="flex" style={{width: "100%", height: "100%", position: "absolute"}}>
-      <div style={{ flex: "1 1 auto", alignSelf: "stretch" }}>
+    <>
+    <MuiPanelManager>
+      <MuiPanel initialSide="left">1</MuiPanel>
+      <MuiPanel initialSide="right">2</MuiPanel>
+      <MuiPanel initialSide="right">2b</MuiPanel>
+      <MuiPanel initialSide="top">3</MuiPanel>
+      <MuiPanel initialSide="bottom">4</MuiPanel>
+      <div>content</div>
+    </MuiPanelManager>
+    {/* <Box display="flex" style={{width: "100%", height: "100%", position: "absolute"}}> */}
+      {/* <div style={{ flex: "1 1 auto", alignSelf: "stretch" }}>
         <iframe
           title="sample"
           style={{ width: "100%", height: "100%", border: '0px none' }}
           src="https://material-ui.com/components/material-icons/#material-icons"
         />
-      </div>
+      </div> */}
 
-      <MuiPanelGroup panels={[
+      {/* <MuiPanelGroup panels={[
         <MuiPanel width={400} isExternal icon={<CameraIcon />} title="Text">
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" />
@@ -50,7 +60,7 @@ function App() {
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
         </MuiPanel>
-      ]} />
+      ]} /> */}
 
       {/* <MuiPanel
         minMaxWidth={{ min: 200, default: 500, max: 800 }}
@@ -77,7 +87,8 @@ function App() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
         </>
       </MuiPanel> */}
-    </Box>
+      {/* </Box> */}
+      </>
   );
 }
 
