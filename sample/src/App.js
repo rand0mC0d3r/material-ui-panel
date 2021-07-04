@@ -27,13 +27,13 @@ function App() {
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="right">3</MuiPanel>
-      <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="right"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+      <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="left">3</MuiPanel>
+      <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="right">3</MuiPanel>
-      <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="right"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="left">3</MuiPanel>
+      <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
@@ -42,7 +42,7 @@ function App() {
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="right">4d</MuiPanel>
+      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="left">4d</MuiPanel>
         <div>
            <iframe
           title="sample"
