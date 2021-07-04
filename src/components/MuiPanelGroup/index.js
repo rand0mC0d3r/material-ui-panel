@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     borderTop: "0px",
     borderBottom: "0px",
     borderRadius: "0px",
-    height: "100%"
+    height: "100%",
+    position: "initial",
   },
   panelsContainer: {
     alignSelf: "stretch",

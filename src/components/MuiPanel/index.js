@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[0]
   },
   children: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2),
     filter: "grayscale(0.125)",
     "&:hover": {

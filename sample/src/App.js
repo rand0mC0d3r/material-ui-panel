@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
@@ -10,12 +10,14 @@ import MuiPanelGroup from './components/MuiPanelGroup';
 
 function App() {
   return (
-    <>
+    <Box display="flex" style={{position: "absolute"}}>
+      <div style={{ flex: "1 1 auto", alignSelf: "stretch" }}>
       <iframe
         title="sample"
-        style={{ width: "100%", border: '0px none', height: "100%", position:'absolute' }}
+        style={{ width: "100%", height: "100%", border: '0px none' }}
         src="https://material-ui.com/components/material-icons/#material-icons"
       />
+      </div>
 
       <MuiPanelGroup panels={[
         <MuiPanel width={400} isExternal icon={<CameraIcon />} title="Text">
@@ -48,10 +50,7 @@ function App() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
         </MuiPanel>
       ]} />
-      {/* <MuiPanel width={400} isExternal icon="" title="Text">
-        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} width="80%" />
-      </MuiPanel> */}
+
       <MuiPanel
         minMaxWidth={{ min: 200, default: 500, max: 800 }}
         icon={<InfoOutlinedIcon />}
@@ -60,22 +59,24 @@ function App() {
         title="Lorem Ipsum"
         subTitle="sit amet, consectetur 43"
       >
-        <Button variant="contained">Default</Button>
-<Button variant="contained" color="primary">
-  Primary
-</Button>
-<Button variant="contained" color="secondary">
-  Secondary
-</Button>
-<Button variant="contained" disabled>
-  Disabled
-</Button>
-<Button variant="contained" color="primary" href="#contained-buttons">
-  Link
-</Button>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
+        <>
+          <Button variant="contained">Default</Button>
+          <Button variant="contained" color="primary">
+            Primary
+          </Button>
+          <Button variant="contained" color="secondary">
+            Secondary
+          </Button>
+          <Button variant="contained" disabled>
+            Disabled
+          </Button>
+          <Button variant="contained" color="primary" href="#contained-buttons">
+            Link
+          </Button>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet rutrum massa id tincidunt. Pellentesque nunc ante, lacinia sit amet ex ullamcorper, accumsan vestibulum enim. Mauris ut mauris eu dolor commodo hendrerit. Vestibulum sed felis quis magna semper fringilla id ac sapien. Donec velit massa, blandit at luctus eget, elementum at enim. Aenean sed dignissim eros. Maecenas consequat gravida justo, sit amet venenatis lorem pellentesque vitae.
+        </>
       </MuiPanel>
-      </>
+    </Box>
   );
 }
 
