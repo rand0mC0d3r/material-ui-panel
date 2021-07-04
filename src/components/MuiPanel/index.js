@@ -80,7 +80,7 @@ const MuiPanel = withTheme(({
   color = 'textPrimary',
   width = 700,
   minMaxWidth,
-  forceCollapse=false,
+  forceCollapse = false,
   rtl = false,
   embedded = false,
   isExternal = false,
@@ -88,15 +88,16 @@ const MuiPanel = withTheme(({
   title,
   subTitle,
   theme,
-  handleAnnouncements = () => { },
+  handleOnAnnouncements = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const classes = useStyles(theme)
 
   useEffect(() => {
-    console.log("i initialized", initialSide)
-    handleAnnouncements(initialSide)
-  }, []);
+    if (!embedded) {
+      handleOnAnnouncements(initialSide)
+    }
+  }, [embedded]);
 
   return (
     <Paper

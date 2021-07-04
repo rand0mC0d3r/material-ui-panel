@@ -1,9 +1,5 @@
-import { Box, Button, Paper, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { cloneElement, useState } from 'react';
+import React, { cloneElement, useEffect, useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,42 +19,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 const MuiPanelManager = withTheme(({
-  icon,
-  handleOnCollapse = () => { },
-  uniqueId = "generic",
-  color = 'textPrimary',
-  width = 700,
-  minMaxWidth,
-  forceCollapse=false,
-  rtl = false,
-  embedded = false,
-  isExternal = false,
   children,
-  title,
-  subTitle,
   theme
 }) => {
   const classes = useStyles(theme)
+  const [layout, setLayout] = useState([])
 
-  const handleAnnounceSelf = (side) => {
-    console.log(side)
+  const handleAnnounceSelf = (index, side) => {
+    // console.log("index", index, side, [...layout, { index, side } ])
+    setLayout((layout) => ([ ...layout, { index, side } ]));
+
   }
-  return (
-    <div className={classes.root}>
-      {children.map((child, i) => {
-        console.log(child.props);
-        return cloneElement(
-          child,
-          {
-            key: i,
-            embedded: "true",
-            handleAnnouncements: (side) => handleAnnounceSelf(side),
-            className: classes[child.props.initialSide]
-          })
-      })}
-    </div>
-  )
+
+  useEffect(() => {
+    console.log(layout)
+  }, [layout]);
+
+  return <div className={classes.root}>
+    {children.map((child, i) => {
+      console.log(child.props);
+      return cloneElement(
+        child,
+        {
+          key: i,
+          handleOnAnnouncements: (side) => handleAnnounceSelf(i, side),
+        })
+    })}
+  </div>
 })
 export default MuiPanelManager;
