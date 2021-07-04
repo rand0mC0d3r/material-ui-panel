@@ -3,7 +3,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { useEffect, useState } from 'react';
+import React, { cloneElement, useEffect, useState } from 'react';
 
 const fontSize = 18;
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1.5, 2),
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255,255,255,0.9)',
-    backdropFilter: "blur(4px)",
   },
   headerEmbedded: {
     cursor: "default",
@@ -55,16 +54,10 @@ const useStyles = makeStyles(theme => ({
     userSelect: "none",
     padding: theme.spacing(1, 2),
     border: `0px none transparent`,
-    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     boxShadow: theme.shadows[0]
   },
   children: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2),
-    filter: "grayscale(0.125)",
-    "&:hover": {
-      filter: "grayscale(0)",
-    }
   },
   left: { "grid-area": "left-panel" },
   right: { "grid-area": "right-panel" },
@@ -96,8 +89,6 @@ const MuiPanel = withTheme(({
   const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
-
-
   useEffect(() => {
     if (embedded) {
       handleOnAnnouncements(side, title, icon)
@@ -117,12 +108,12 @@ const MuiPanel = withTheme(({
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
         // height: "100%",
+                ...getWidth(width, minMaxWidth),
         borderRadius: "0px"
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
           justifyContent="space-between"
-          onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
           style={isCollapsed ? {
@@ -140,27 +131,19 @@ const MuiPanel = withTheme(({
             } : {
               gap: theme.spacing(1),
             }}>
-            {icon && <>{icon}</>}
+            {icon && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20}})}</>}
+
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography {...{ color }} variant="subtitle1">{title}</Typography>
-                <Typography {...{ color }} variant="caption">{subTitle}</Typography>
+                <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="button">{title}</Typography>
+                <Typography color="textSecondary" variant="caption">{subTitle}</Typography>
               </Box>
-              : <Typography {...{ color }} variant="h6">{title}</Typography>}
+              : <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="button">{title}</Typography>}
           </Box>
           <Box
             display="flex"
             className={classes.toolbox}
           >
-            {/* {!embedded && */}
-            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
-                {isCollapsed
-                  ? <ArrowDropUpIcon style={{ fontSize }} />
-                  : <ArrowDropDownIcon style={{ fontSize }} />}
-              </Button>
-            </Tooltip>
-            {/* } */}
             <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
@@ -168,7 +151,9 @@ const MuiPanel = withTheme(({
         </Box>
       </Tooltip>
       {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
-        {children}
+        {children.map((child, i) => {
+        return cloneElement( child, { key: i, fullWidth: "true"})
+        })}
       </Box>}
     </Paper>
                   }

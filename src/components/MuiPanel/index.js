@@ -76,6 +76,7 @@ const MuiPanel = withTheme(({
   initialSide = 'left',
   type = "panel",
   icon,
+  fullWidth = false,
   isVisible = true,
   handleOnCollapse = () => { },
   uniqueId = "generic",
@@ -117,22 +118,33 @@ const MuiPanel = withTheme(({
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
         // height: "100%",
-        ...getWidth(width, minMaxWidth),
+        ...fullWidth ? { width: 'auto' } : getWidth(width, minMaxWidth),
         borderRadius: "0px"
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
-          justifyContent="space-between"
+          justifyContent="flex-start"
           onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
           style={isCollapsed ? {
-            gap: theme.spacing(0.5),
-            padding: theme.spacing(1),
+            gap: theme.spacing(1),
           } : {
             gap: theme.spacing(1),
           }}
           className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
+           <Box
+            display="flex"
+            className={classes.toolbox}
+          >
+            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
+              <Button disableElevation variant="text" className={classes.toolboxButton} size="small">
+                {isCollapsed
+                  ? <ArrowDropUpIcon style={{ fontSize }} />
+                  : <ArrowDropDownIcon style={{ fontSize }} />}
+              </Button>
+            </Tooltip>
+          </Box>
           <Box
             display="flex"
             alignItems="center"
@@ -149,23 +161,7 @@ const MuiPanel = withTheme(({
               </Box>
               : <Typography {...{ color }} variant="h6">{title}</Typography>}
           </Box>
-          <Box
-            display="flex"
-            className={classes.toolbox}
-          >
-            {/* {!embedded && */}
-            <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-              <Button disableElevation variant="outlined" className={classes.toolboxButton} size="small">
-                {isCollapsed
-                  ? <ArrowDropUpIcon style={{ fontSize }} />
-                  : <ArrowDropDownIcon style={{ fontSize }} />}
-              </Button>
-            </Tooltip>
-            {/* } */}
-            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
-              <SwapHorizIcon style={{ fontSize }} />
-            </Button>
-          </Box>
+
         </Box>
       </Tooltip>
       {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
