@@ -21,11 +21,6 @@ const useStyles = makeStyles(theme => ({
       "left bottom right"
       `
   },
-  left: { "grid-area": "left" },
-  right: { "grid-area": "right" },
-  top: { "grid-area": "top" },
-  bottom: { "grid-area": "bottom" },
-
 }));
 
 
@@ -46,39 +41,24 @@ const MuiPanelManager = withTheme(({
   theme
 }) => {
   const classes = useStyles(theme)
+
+  const handleAnnounceSelf = (side) => {
+    console.log(side)
+  }
   return (
     <div className={classes.root}>
       {children.map((child, i) => {
         console.log(child.props);
-        if (child.props.initialSide) {
-          return cloneElement(child, { key: i, embedded: "true", className: classes[child.props.initialSide] })
-        }
-        return cloneElement(child, { key: i })
+        return cloneElement(
+          child,
+          {
+            key: i,
+            embedded: "true",
+            handleAnnouncements: (side) => handleAnnounceSelf(side),
+            className: classes[child.props.initialSide]
+          })
       })}
     </div>
   )
 })
 export default MuiPanelManager;
-
-
-// .container {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr;
-//   grid-template-rows: 1fr 1fr 1fr;
-//   gap: 0px 0px;
-//   grid-auto-flow: row;
-//   grid-template-areas:
-//     "left top right"
-//     "left main right"
-//     "left bottom right";
-// }
-
-// .left { grid-area: left; }
-
-// .right { grid-area: right; }
-
-// .top { grid-area: top; }
-
-// .bottom { grid-area: bottom; }
-
-// .main { grid-area: main; }

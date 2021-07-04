@@ -88,13 +88,14 @@ const MuiPanel = withTheme(({
   title,
   subTitle,
   theme,
-  announceSelf = () => { },
+  handleAnnouncements = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const classes = useStyles(theme)
 
   useEffect(() => {
-    announceSelf()
+    console.log("i initialized", initialSide)
+    handleAnnouncements(initialSide)
   }, []);
 
   return (

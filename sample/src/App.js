@@ -14,11 +14,11 @@ function App() {
   return (
     <>
     <MuiPanelManager>
-      <MuiPanel initialSide="left">1</MuiPanel>
-      <MuiPanel initialSide="right">2</MuiPanel>
-      <MuiPanel initialSide="right">2b</MuiPanel>
-      <MuiPanel initialSide="top">3</MuiPanel>
-      <MuiPanel initialSide="bottom">4</MuiPanel>
+      <MuiPanel>1</MuiPanel>
+      <MuiPanel>2</MuiPanel>
+      <MuiPanel>2b</MuiPanel>
+      <MuiPanel>3</MuiPanel>
+      <MuiPanel>4</MuiPanel>
       <div>content</div>
     </MuiPanelManager>
     {/* <Box display="flex" style={{width: "100%", height: "100%", position: "absolute"}}> */}
