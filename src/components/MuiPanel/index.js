@@ -21,13 +21,10 @@ const getWidth = (width, minMaxWidth) => minMaxWidth && Object.keys(minMaxWidth)
 
 const useStyles = makeStyles(theme => ({
   root: {
-    border: `2px solid ${theme.palette.augmentColor({ main: theme.palette.primary.main }).light}`,
-    bottom: "0px",
-    backgroundColor: 'initial',
-    position: "absolute",
+    border: `1px solid ${theme.palette.divider}`,
   },
-  rootEmbedded: {
-    borderRadius: '0px'
+  rootInList: {
+    border: `0px none`,
   },
   toolbox: {
     gap: theme.spacing(0.5),
@@ -111,7 +108,7 @@ const MuiPanel = withTheme(({
     { isVisible && <Paper
       elevation={0}
       id={`mui-panel-${uniqueId}`}
-      className={`${classes[side]} ${inList ? classes.rootEmbedded : classes.root}`}
+      className={`${classes[side]} ${classes.root} ${inList && classes.rootInList }`}
       style={isExternal ? {
         borderBottom: '0px',
         borderBottomLeftRadius: '0px',
