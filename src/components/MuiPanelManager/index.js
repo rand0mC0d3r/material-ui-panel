@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useEffect, useState } from 'react';
 
@@ -82,7 +82,7 @@ const MuiPanelManager = withTheme(({
   return <div className={classes.root}>
     {['left', 'right'].map(side => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={classes[`${side}Menu`]}>
-        {layout.filter(lo => lo.side === side).map(lo =>
+        {layout.filter(lo => lo.side === side).map(lo => <Tooltip arrow placement={lo.side} title={`Switch to ${lo.title}`}>
           <Button
             disableElevation
             onClick={() => activatePanelOnSide(lo.index)}
@@ -96,6 +96,7 @@ const MuiPanelManager = withTheme(({
             >
             {cloneElement(lo.icon, { color: lo.isVisible ? "primary" : "action"})}
           </Button>
+          </Tooltip>
         )}
       </div>}
     </>)}
