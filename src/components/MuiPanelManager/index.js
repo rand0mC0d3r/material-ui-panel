@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useEffect, useState } from 'react';
 
@@ -17,6 +18,10 @@ const useStyles = makeStyles(theme => ({
       "left bottom right"
       `
   },
+  left: { "grid-area": "left" },
+  right: { "grid-area": "right" },
+  top: { "grid-area": "top", "display":"flex" },
+  bottom: { "grid-area": "bottom" },
 }));
 
 const MuiPanelManager = withTheme(({
@@ -26,8 +31,8 @@ const MuiPanelManager = withTheme(({
   const classes = useStyles(theme)
   const [layout, setLayout] = useState([])
 
-  const handleAnnounceSelf = (index, side) => {
-    setLayout((layout) => ([ ...layout, { index, side } ]));
+  const handleAnnounceSelf = (index, side, title, icon) => {
+    setLayout((layout) => ([ ...layout, { index, side, title, icon } ]));
   }
 
   useEffect(() => {
@@ -35,14 +40,21 @@ const MuiPanelManager = withTheme(({
   }, [layout]);
 
   return <div className={classes.root}>
+
+    {layout.length > 0 && layout.map(layoutObject =>
+      <Button className={classes[layoutObject.side]}>
+        {layoutObject.side}
+      </Button>
+    )}
     {children.map((child, i) => {
       return cloneElement(
         child,
         {
           key: i,
-          handleOnAnnouncements: (side) => handleAnnounceSelf(i, side),
+          handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),
         })
     })}
+
   </div>
 })
 export default MuiPanelManager;

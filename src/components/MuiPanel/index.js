@@ -95,8 +95,8 @@ const MuiPanel = withTheme(({
   const classes = useStyles(theme)
 
   useEffect(() => {
-    if (!embedded) {
-      handleOnAnnouncements(initialSide)
+    if (embedded) {
+      handleOnAnnouncements(initialSide, title, icon)
     }
   }, [embedded]);
 
