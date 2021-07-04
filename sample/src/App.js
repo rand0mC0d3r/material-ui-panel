@@ -14,7 +14,11 @@ function App() {
   return (
     <>
     <MuiPanelManager>
-      <MuiPanel title="First Panel" icon={<CameraIcon />}>1</MuiPanel>
+        <MuiPanel title="First Panel" icon={<CameraIcon />}>{ `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+
+Vivamus vitae venenatis erat. Donec aliquet porta mauris eu maximus. Integer consectetur velit ut arcu vehicula ultricies. Praesent tincidunt lobortis nisi, eget venenatis velit accumsan in. Sed vulputate nisi nec malesuada feugiat. Cras leo nulla, convallis non lorem at, hendrerit rhoncus risus. Morbi tincidunt nisl eu ornare consectetur.
+
+Phasellus vitae vestibulum orci, id congue turpis. Donec luctus, orci sed scelerisque sagittis, neque nulla hendrerit dolor, sit amet scelerisque lorem nibh vel urna. Aliquam a mi vel nisi eleifend ullamcorper. Cras tincidunt vel justo ut tempor. Suspendisse dapibus lorem urna. Fusce euismod ornare odio at tincidunt. In bibendum id augue sed tincidunt.`}</MuiPanel>
       <MuiPanel title="Second Panel" icon={<CameraIcon />}>2</MuiPanel>
       <MuiPanel title="Funny Panel" icon={<CastIcon />}>2b</MuiPanel>
       <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="right">3</MuiPanel>

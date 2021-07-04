@@ -68,7 +68,7 @@ const MuiPanelManager = withTheme(({
     if (foundObject) {
       setLayout((layout) => ([...layout.map(lo => {
             if (lo.side === foundObject.side) {
-              return {...lo, isVisible: lo.index === foundObject.index}
+              return {...lo, isVisible: lo.index === foundObject.index ? !lo.isVisible : false}
             }
         return lo
       }) ]));
@@ -103,7 +103,7 @@ const MuiPanelManager = withTheme(({
 
     {children.map((child, i) => {
       if (child.props.title) {
-        return cloneElement( child, { key: i, isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
+        return cloneElement( child, { key: i, width: 500, isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
       } else {
         return cloneElement( child, { key: i, className: classes.main})
       }

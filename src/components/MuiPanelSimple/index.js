@@ -117,7 +117,6 @@ const MuiPanel = withTheme(({
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
         // height: "100%",
-        ...getWidth(width, minMaxWidth),
         borderRadius: "0px"
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
