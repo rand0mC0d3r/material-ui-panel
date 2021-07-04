@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     width: "100%",
     display: "grid",
-    "grid-template-columns": "50px auto 1fr auto 50px",
+    "grid-template-columns": "54px auto 1fr auto 54px",
     "grid-template-rows": "1fr",
     "gap": "0px 0px",
     "grid-auto-flow": "row",
@@ -16,12 +16,18 @@ const useStyles = makeStyles(theme => ({
       "left-menu left-panel main right-panel right-menu"
       `
   },
-  leftMenu: { "grid-area": "left-menu" },
+  leftMenu: {
+    "grid-area": "left-menu",
+    borderRight: `1px solid ${theme.palette.divider}`
+  },
   leftPanel: { "grid-area": "left-panel" },
   topMenu: { "grid-area": "top-menu" },
   topPanel: { "grid-area": "top-panel" },
   rightPanel: { "grid-area": "right-panel" },
-  rightMenu: { "grid-area": "right-menu" },
+  rightMenu: {
+    "grid-area": "right-menu",
+    borderLeft: `1px solid ${theme.palette.divider}`
+  },
   bottomPanel: { "grid-area": "bottom-panel" },
   bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
@@ -30,15 +36,19 @@ const useStyles = makeStyles(theme => ({
     border: "0px none",
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
-    minWidth: "initial"
+    minWidth: "initial",
+  },
+  rightButtonMenu: {
+    borderRight: "3px solid transparent",
+  },
+  leftButtonMenu: {
+    borderLeft: "3px solid transparent"
   },
   rightActiveButtonMenu: {
-    border: "0px none",
-    borderRight: `3px solid ${theme.palette.primary.main}`
+    borderRight: `3px solid ${theme.palette.primary.main}`,
   },
   leftActiveButtonMenu: {
-    border: "0px none",
-    borderLeft: `3px solid ${theme.palette.primary.main}`
+    borderLeft: `3px solid ${theme.palette.primary.main}`,
   }
 }));
 
@@ -73,7 +83,17 @@ const MuiPanelManager = withTheme(({
     {['left', 'right'].map(side => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={classes[`${side}Menu`]}>
         {layout.filter(lo => lo.side === side).map(lo =>
-          <Button disableElevation onClick={() => activatePanelOnSide(lo.index)} variant="outlined" fullWidth className={`${classes.buttonMenu} ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}`} >
+          <Button
+            disableElevation
+            onClick={() => activatePanelOnSide(lo.index)}
+            variant="outlined"
+            fullWidth
+            className={`
+              ${classes.buttonMenu}
+              ${classes[`${side}ButtonMenu`]}
+              ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+            `}
+            >
             {cloneElement(lo.icon, { color: lo.isVisible ? "primary" : "action"})}
           </Button>
         )}
