@@ -44,26 +44,33 @@ const MuiPanelManager = withTheme(({
     setLayout((layout) => ([ ...layout, { isVisible: false, index, side, title, icon } ]));
   }
 
+  const activatePanelOnSide = (index) => {
+    const foundObject = layout.find(lo => lo.index === index)
+    if (foundObject) {
+      setLayout((layout) => ([...layout.map(lo => {
+            if (lo.side === foundObject.side) {
+              return {...lo, isVisible: lo.index === foundObject.index}
+            }
+        return lo
+      }) ]));
+    }
+  }
+
   useEffect(() => {
     console.log(layout)
   }, [layout]);
 
   return <div className={classes.root}>
-
-    {layout.filter(lo => lo.side === 'left').length > 0 && <div className={classes.leftMenu}>
-      {layout.filter(lo => lo.side === 'left').map(layoutObject =>
-        <Button disableElevation variant="outlined" fullWidth className={classes.buttonMenu} >
-          {layoutObject.icon}
-        </Button>
-      )}
-    </div>}
-    {layout.filter(lo => lo.side === 'right').length > 0 && <div className={classes.rightMenu}>
-      {layout.filter(lo => lo.side === 'right').map(layoutObject =>
-        <Button disableElevation variant="outlined" fullWidth className={classes.buttonMenu} >
-          {layoutObject.icon}
-        </Button>
-      )}
-    </div>}
+    {['left', 'right'].map(side => <>
+      {layout.filter(lo => lo.side === side).length > 0 && <div className={classes[`${side}Menu`]}>
+        {layout.filter(lo => lo.side === side).map(layoutObject =>
+          <Button disableElevation onClick={() => activatePanelOnSide(layoutObject.index)} variant="outlined" fullWidth className={classes.buttonMenu} >
+            {layoutObject.isVisible ? "VIS" : "HID"}
+            {layoutObject.icon}
+          </Button>
+        )}
+      </div>}
+    </>)}
 
     {children.map((child, i) => {
       if (child.props.title) {
