@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     "grid-template-areas":`
       "left-menu left-panel top-menu right-panel right-menu"
       "left-menu left-panel top-panel right-panel right-menu"
-      "left-menu left-panel . right-panel right-menu"
+      "left-menu left-panel main right-panel right-menu"
       "left-menu left-panel bottom-panel right-panel right-menu"
       "left-menu left-panel bottom-menu right-panel right-menu";
       `
@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   rightMenu: { "grid-area": "right-menu" },
   bottomPanel: { "grid-area": "bottom-panel" },
   bottomMenu: { "grid-area": "bottom-menu" },
+  main: { "grid-area": "main" },
 }));
 
 const MuiPanelManager = withTheme(({
@@ -47,18 +48,21 @@ const MuiPanelManager = withTheme(({
 
   return <div className={classes.root}>
 
-    {layout.length > 0 && layout.map(layoutObject =>
-      <Button className={classes[`${layoutObject.side}Menu`]}>
-        {layoutObject.side}
-      </Button>
-    )}
+    {layout.filter(lo => lo.side === 'left').length > 0 && <div className={classes.leftMenu}>
+      {layout.filter(lo => lo.side === 'left').map(layoutObject =>
+        <Button className={classes[`${layoutObject.side}Menu`]}>
+          {/* {layoutObject.icon} */}
+          {layoutObject.title}
+        </Button>
+      )}
+    </div>}
+
     {children.map((child, i) => {
-      return cloneElement(
-        child,
-        {
-          key: i,
-          handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),
-        })
+      if (child.props.title) {
+        return cloneElement( child, { key: i, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
+      } else {
+        return cloneElement( child, { key: i, className: classes.main})
+      }
     })}
 
   </div>

@@ -14,17 +14,24 @@ function App() {
   return (
     <>
     <MuiPanelManager>
-      <MuiPanel>1</MuiPanel>
-      <MuiPanel>2</MuiPanel>
-      <MuiPanel>2b</MuiPanel>
-      <MuiPanel initialSide="right">3</MuiPanel>
-      <MuiPanel initialSide="right">3</MuiPanel>
-      <MuiPanel initialSide="top">3</MuiPanel>
-      <MuiPanel initialSide="top">3b</MuiPanel>
-      <MuiPanel initialSide="bottom">4</MuiPanel>
-      <MuiPanel initialSide="bottom">4c</MuiPanel>
-      <MuiPanel initialSide="bottom">4d</MuiPanel>
-      <div>content</div>
+      <MuiPanel title="First Panel" icon={<CameraIcon />}>1</MuiPanel>
+      <MuiPanel title="Second Panel" icon={<CameraIcon />}>2</MuiPanel>
+      <MuiPanel title="Funny Panel" icon={<CastIcon />}>2b</MuiPanel>
+      <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="right">3</MuiPanel>
+      <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="right">3</MuiPanel>
+      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="top">3</MuiPanel>
+      <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="top">3b</MuiPanel>
+      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="bottom">4</MuiPanel>
+      <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="bottom">4c</MuiPanel>
+      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="bottom">4d</MuiPanel>
+        <div>
+           <iframe
+          title="sample"
+          style={{ width: "100%", height: "100%", border: '0px none' }}
+          src="https://material-ui.com/components/material-icons/#material-icons"
+        />
+
+      </div>
     </MuiPanelManager>
     {/* <Box display="flex" style={{width: "100%", height: "100%", position: "absolute"}}> */}
       {/* <div style={{ flex: "1 1 auto", alignSelf: "stretch" }}>
