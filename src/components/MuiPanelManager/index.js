@@ -27,9 +27,18 @@ const useStyles = makeStyles(theme => ({
   main: { "grid-area": "main" },
 
   buttonMenu: {
-    border: "1px solid gray",
+    border: "0px none",
+    padding: theme.spacing(2, 0),
     borderRadius: "0px",
     minWidth: "initial"
+  },
+  rightActiveButtonMenu: {
+    border: "0px none",
+    borderRight: `3px solid ${theme.palette.primary.main}`
+  },
+  leftActiveButtonMenu: {
+    border: "0px none",
+    borderLeft: `3px solid ${theme.palette.primary.main}`
   }
 }));
 
@@ -63,10 +72,9 @@ const MuiPanelManager = withTheme(({
   return <div className={classes.root}>
     {['left', 'right'].map(side => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={classes[`${side}Menu`]}>
-        {layout.filter(lo => lo.side === side).map(layoutObject =>
-          <Button disableElevation onClick={() => activatePanelOnSide(layoutObject.index)} variant="outlined" fullWidth className={classes.buttonMenu} >
-            {layoutObject.isVisible ? "VIS" : "HID"}
-            {layoutObject.icon}
+        {layout.filter(lo => lo.side === side).map(lo =>
+          <Button disableElevation onClick={() => activatePanelOnSide(lo.index)} variant="outlined" fullWidth className={`${classes.buttonMenu} ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}`} >
+            {cloneElement(lo.icon, { color: lo.isVisible ? "primary" : "action"})}
           </Button>
         )}
       </div>}
