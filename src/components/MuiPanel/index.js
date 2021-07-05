@@ -145,9 +145,7 @@ const MuiPanel = withTheme(({
                   onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
                   size="small"
                 >
-                  {isCollapsed
-                    ? <ChevronRightIcon style={{ fontSize }} />
-                    : <ExpandMoreIcon style={{ fontSize }} />}
+                  {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
                 </Button>
               </Tooltip>
             }
