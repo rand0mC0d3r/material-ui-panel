@@ -12,6 +12,7 @@
     "@babel/types": "^7.14.5",
     "babel-eslint": "^10.0.3",
     "babel-loader": "8.2.2",
+    "concurrently": "^6.2.0",
     "copy-and-watch": "^0.1.5",
     "npm-check-updates": "^11.8.1"
   },
@@ -37,7 +38,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "ncu -u && npm audit fix",
-    "start": "cd sample && npx react-scripts start",
+    "start": "concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
     "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/components/* sample/src/components/",
