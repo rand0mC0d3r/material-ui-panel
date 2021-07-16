@@ -2,6 +2,7 @@ import { Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { cloneElement, useEffect, useState } from 'react';
+import MuiPanelSettings from '../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -141,20 +142,7 @@ const MuiPanelManager = withTheme(({
         )}
         </div>
         {index === 0 && <div>
-          <Tooltip
-          arrow
-          title={`Panel settings`}>
-          <Button
-            disableElevation
-            variant="outlined"
-            fullWidth
-            className={`
-              ${classes.buttonMenu}
-            `}
-            >
-            <SettingsIcon />
-            </Button>
-            </Tooltip>
+          <MuiPanelSettings />
         </div>}
       </div>}
     </>)}
