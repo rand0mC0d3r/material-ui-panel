@@ -131,9 +131,10 @@ const MuiPanelManager = withTheme(({
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
   >
-    {['left', 'right'].filter(side => layout.some(lo => lo.side === side)).map((side, index) => <>
+    {['left', 'right']
+      .filter(side => layout.some(lo => lo.side === side))
+      .map((side, index) => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
-
         <div>
           {layout.filter(lo => lo.side === side).map(lo => <Tooltip
             arrow
