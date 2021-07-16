@@ -151,7 +151,6 @@ const MuiPanel = withTheme(({
             <Box className={classes.headerContainer} display="flex" alignItems="center">
                 <Typography
                   style={{
-                    lineHeight: '0px',
                     fontWeight: inList ? 'bold' : 'normal'
                   }} {...{ color }}
                   variant={inList ? 'caption' : 'button'}

@@ -125,8 +125,7 @@ const MuiPanel = withTheme(({
           alignItems="center"
           display="flex"
           style={isCollapsed ? {
-            gap: theme.spacing(0.5),
-            padding: theme.spacing(1),
+            gap: theme.spacing(1),
           } : {
             gap: theme.spacing(1),
           }}
