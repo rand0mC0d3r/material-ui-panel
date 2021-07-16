@@ -58,6 +58,10 @@ const useStyles = makeStyles(theme => ({
   },
   children: {
     backgroundColor: theme.palette.background.paper,
+    flex: '1 1 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   left: { "grid-area": "left-panel" },
   right: { "grid-area": "right-panel" },
@@ -111,6 +115,8 @@ const MuiPanel = withTheme(({
       } : {
         ...getWidth(width, minMaxWidth),
           borderRadius: "0px",
+          display: 'flex',
+          flexDirection: 'column',
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
@@ -150,7 +156,7 @@ const MuiPanel = withTheme(({
         })}
       </Box>}
     </Paper>
-                  }
- </> )
+  }
+</> )
 })
 export default MuiPanel;
