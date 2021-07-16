@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     "grid-template-rows": "1fr",
     "gap": "0px 0px",
     "grid-auto-flow": "row",
+    backgroundColor: theme.palette.background.default,
   },
   bothGrid: {
     "grid-template-columns": "54px auto 1fr auto 54px",
@@ -56,6 +57,8 @@ const useStyles = makeStyles(theme => ({
   bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
   iconButton: {
+    fontSize: "26px",
+
     "&:hover": {
       color: theme.palette.primary.main,
     }
@@ -143,6 +146,7 @@ const MuiPanelManager = withTheme(({
             exitDelay={0}
             title={lo.title}>
             <Button
+              disableRipple
               disableElevation
               onClick={() => activatePanelOnSide(lo.index)}
               variant="outlined"

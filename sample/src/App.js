@@ -2,6 +2,7 @@ import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
@@ -19,7 +20,7 @@ function App() {
         title="Shapes"
         subTitle="Forms and panels"
         icon={<CalendarViewDayIcon />}>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+        <MuiPanel title="SubFunny Panel BlaBla" icon={<CastIcon />}>
           <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
@@ -33,7 +34,7 @@ function App() {
           <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={24} width="80%" />
         </MuiPanel>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+        <MuiPanel title="SubFunny Panel" icon={<FileCopyIcon />}>
           <Skeleton variant="rect" width={'100%'} height={600} />
         </MuiPanel>
         <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
@@ -43,7 +44,7 @@ function App() {
           <Skeleton variant="circle" width={100} height={100} />
         </MuiPanel>
       </MuiPanelList>
-      <MuiPanelList iconInPanel={false} title="Test Panel NoCion" subTitle="Lorem Ipsum sit dolor amet" noIconInPanel icon={<CameraIcon />}>
+      <MuiPanelList iconInPanel={false} title="Test Panel NoCion" noIconInPanel icon={<CameraIcon />}>
         <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -58,14 +59,14 @@ function App() {
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} width="80%" />
       </MuiPanel> */}
-      <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="left">
+      {/* <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="left">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
       <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Music Panel" icon={<ChromeReaderModeIcon />} initialSide="left">3</MuiPanel>
+          <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
+      <MuiPanel title="Music Panel" icon={<FileCopyIcon />} initialSide="left">3</MuiPanel>
       {/* <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -75,7 +76,9 @@ function App() {
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />}  initialSide="left">4d</MuiPanel>
+      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />} initialSide="left">
+        <Skeleton variant="rect" width={'100%'} height={600} />
+      </MuiPanel>
         <div>
           <iframe
           title="sample"

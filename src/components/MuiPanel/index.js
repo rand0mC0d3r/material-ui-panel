@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1, 1, 1, 1),
+    padding: theme.spacing(1.5, 2.5),
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255,255,255,0.9)',
     backdropFilter: "blur(4px)",
@@ -126,7 +126,7 @@ const MuiPanel = withTheme(({
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
           justifyContent="space-between"
-          onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
+          onClick={() => { if (inList) { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); } }}
           alignItems="center"
           display="flex"
           className={`${classes.header} ${inList && classes.headerInList}`}>
@@ -136,25 +136,35 @@ const MuiPanel = withTheme(({
             alignItems="center"
             style={isCollapsed ? {
               gap: theme.spacing(0.25),
+              padding: theme.spacing(1),
             } : {
-              gap: theme.spacing(0.25),
+              gap: theme.spacing(inList ? 0.25 : 1),
             }}>
-            {inList &&
-              <div className={classes.toolboxButton}>
-                {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
-              </div>
-            }
-            {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 14}})}</>}
-            {subTitle
-              ? <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography style={{ lineHeight: '0px', fontWeight: 'bold'}} {...{ color }} variant="caption">{title}</Typography>
-                <Typography {...{ color }} variant="button">{subTitle}</Typography>
-              </Box>
-              : <Typography style={{ lineHeight: '0px', fontWeight: 'bold', fontSize: "12px"}} {...{ color }} variant="button">{title}</Typography>}
-        </Box>
+
+            {inList && <div className={classes.toolboxButton}>
+              {isCollapsed
+                ? <ChevronRightIcon style={{ fontSize }} />
+                : <ExpandMoreIcon style={{ fontSize }} />}
+            </div>}
+
+            {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}</>}
+
+            <Box className={classes.headerContainer} display="flex" alignItems="center">
+                <Typography
+                  style={{
+                    lineHeight: '0px',
+                    fontWeight: inList ? 'bold' : 'normal'
+                  }} {...{ color }}
+                  variant={inList ? 'caption' : 'button'}
+                >
+                  {title}
+                </Typography>
+              {subTitle && <Typography {...{ color }} variant="button">{subTitle}</Typography>}
+            </Box>
+          </Box>
           <Box display="flex" className={classes.toolbox}>
             {!inList &&
-            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
+            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="text" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
             }
