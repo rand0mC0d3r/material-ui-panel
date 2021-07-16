@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     flex: '1 1 auto',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   left: { "grid-area": "left-panel" },
   right: { "grid-area": "right-panel" },

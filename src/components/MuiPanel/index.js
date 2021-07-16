@@ -20,9 +20,7 @@ const getWidth = (width, minMaxWidth) => minMaxWidth && Object.keys(minMaxWidth)
   : { width: `${width}px` };
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // border: `1px solid ${theme.palette.divider}`,
-  },
+  root: {},
   rootInList: {
     border: `0px none`,
   },
@@ -64,7 +62,8 @@ const useStyles = makeStyles(theme => ({
     filter: "grayscale(0.125)",
     "&:hover": {
       filter: "grayscale(0)",
-    }
+    },
+
   },
   left: { "grid-area": "left-panel" },
   right: { "grid-area": "right-panel" },
@@ -169,9 +168,9 @@ const MuiPanel = withTheme(({
           </Box>
         </Box>
       </Tooltip>
-      {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
-        {children}
-      </Box>}
+      {forceCollapse || (!forceCollapse && isCollapsed)
+        ? <></>
+        : <Box className={classes.children}>{children}</Box>}
     </Paper>
   }
 </> )
