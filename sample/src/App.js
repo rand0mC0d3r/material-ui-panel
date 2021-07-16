@@ -37,6 +37,9 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={600} />
         </MuiPanel>
         <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+          <Skeleton variant="rect" width={'100%'} height={600} />
+        </MuiPanel>
+        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
           <Skeleton variant="circle" width={100} height={100} />
         </MuiPanel>
       </MuiPanelList>
