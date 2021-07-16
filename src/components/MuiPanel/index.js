@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, useEffect, useState } from 'react';
 
-const fontSize = 23;
+const fontSize = 20;
 const getRtl = (rtl, theme, factor = 8) => rtl
   ? { right: theme.spacing(factor) }
   : { left: theme.spacing(factor) };
@@ -139,20 +139,17 @@ const MuiPanel = withTheme(({
               gap: theme.spacing(0.25),
             }}>
             {inList &&
-              <div
-                className={classes.toolboxButton}
-
-              >
+              <div className={classes.toolboxButton}>
                 {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
               </div>
             }
             {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 14}})}</>}
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="caption">{title}</Typography>
+                <Typography style={{ lineHeight: '0px', fontWeight: 'bold'}} {...{ color }} variant="caption">{title}</Typography>
                 <Typography {...{ color }} variant="button">{subTitle}</Typography>
               </Box>
-              : <Typography style={{ fontWeight: 'bold', fontSize: "12px"}} {...{ color }} variant="button">{title}</Typography>}
+              : <Typography style={{ lineHeight: '0px', fontWeight: 'bold', fontSize: "12px"}} {...{ color }} variant="button">{title}</Typography>}
         </Box>
           <Box display="flex" className={classes.toolbox}>
             {!inList &&
