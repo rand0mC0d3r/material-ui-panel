@@ -1,5 +1,6 @@
 import { Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import SettingsIcon from '@material-ui/icons/Settings';
 import React, { cloneElement, useEffect, useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
@@ -30,18 +31,26 @@ const useStyles = makeStyles(theme => ({
       "left-menu left-panel main right-panel right-menu"
     `
   },
+
+  bothMenus: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
   leftMenu: {
     "grid-area": "left-menu",
     borderRight: `1px solid ${theme.palette.divider}`
   },
-  leftPanel: { "grid-area": "left-panel" },
-  topMenu: { "grid-area": "top-menu" },
-  topPanel: { "grid-area": "top-panel" },
-  rightPanel: { "grid-area": "right-panel" },
   rightMenu: {
     "grid-area": "right-menu",
     borderLeft: `1px solid ${theme.palette.divider}`
   },
+
+  leftPanel: { "grid-area": "left-panel" },
+  topMenu: { "grid-area": "top-menu" },
+  topPanel: { "grid-area": "top-panel" },
+  rightPanel: { "grid-area": "right-panel" },
+
   bottomPanel: { "grid-area": "bottom-panel" },
   bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
@@ -107,8 +116,10 @@ const MuiPanelManager = withTheme(({
   }, [layout]);
 
   return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
-    {['left', 'right'].filter(side => layout.some(lo => lo.side === side)).map(side => <>
-      {layout.filter(lo => lo.side === side).length > 0 && <div className={classes[`${side}Menu`]}>
+    {['left', 'right'].filter(side => layout.some(lo => lo.side === side)).map((side, index) => <>
+      {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
+
+        <div>
         {layout.filter(lo => lo.side === side).map(lo => <Tooltip
           arrow
           placement={lo.side}
@@ -128,6 +139,23 @@ const MuiPanelManager = withTheme(({
           </Button>
           </Tooltip>
         )}
+        </div>
+        {index === 0 && <div>
+          <Tooltip
+          arrow
+          title={`Panel settings`}>
+          <Button
+            disableElevation
+            variant="outlined"
+            fullWidth
+            className={`
+              ${classes.buttonMenu}
+            `}
+            >
+            <SettingsIcon />
+            </Button>
+            </Tooltip>
+        </div>}
       </div>}
     </>)}
 
