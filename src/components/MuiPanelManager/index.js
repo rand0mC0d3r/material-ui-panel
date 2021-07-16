@@ -45,7 +45,11 @@ const useStyles = makeStyles(theme => ({
   bottomPanel: { "grid-area": "bottom-panel" },
   bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
-
+  iconButton: {
+    "&:hover": {
+      color: theme.palette.primary.main,
+    }
+  },
   buttonMenu: {
     border: "0px none",
     padding: theme.spacing(2, 0),
@@ -120,7 +124,7 @@ const MuiPanelManager = withTheme(({
               ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
             `}
             >
-            {cloneElement(lo.icon, { color: lo.isVisible ? "primary" : "action"})}
+            {cloneElement(lo.icon, { className: classes.iconButton,  color: lo.isVisible ? "primary" : "action"})}
           </Button>
           </Tooltip>
         )}
