@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
   },
   children: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1, 1, 1, 2.5),
     filter: "grayscale(0.125)",
     "&:hover": {
       filter: "grayscale(0)",

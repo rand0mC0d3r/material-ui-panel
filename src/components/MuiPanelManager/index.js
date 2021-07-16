@@ -139,6 +139,7 @@ const MuiPanelManager = withTheme(({
             arrow
             placement={lo.side}
             enterDelay={1000}
+            exitDelay={0}
             title={lo.title}>
             <Button
               disableElevation
@@ -169,7 +170,7 @@ const MuiPanelManager = withTheme(({
       return cloneElement(
         child, {
         key: i,
-          width: 500,
+        width: 500,
         showBorders: true,
         isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false,
         handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),
