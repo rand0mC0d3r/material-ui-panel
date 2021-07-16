@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, useEffect, useState } from 'react';
 
-const fontSize = 18;
+const fontSize = 23;
 const getRtl = (rtl, theme, factor = 8) => rtl
   ? { right: theme.spacing(factor) }
   : { left: theme.spacing(factor) };
