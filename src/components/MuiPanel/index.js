@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
   toolboxButton: {
     padding: "0px",
     width: '20px',
-    minWidth: '20px'
+    minWidth: '20px',
+    lineHeight: '0px'
   },
   headerContainer: {
     gap: theme.spacing(1),
@@ -117,7 +118,6 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
-        // height: "100%",
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
@@ -125,7 +125,7 @@ const MuiPanel = withTheme(({
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
           justifyContent="space-between"
-          onDoubleClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
+          onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
           alignItems="center"
           display="flex"
           className={`${classes.header} ${inList && classes.headerInList}`}>
@@ -134,22 +134,17 @@ const MuiPanel = withTheme(({
             display="flex"
             alignItems="center"
             style={isCollapsed ? {
-              gap: theme.spacing(0.5),
+              gap: theme.spacing(0.25),
             } : {
-              gap: theme.spacing(0.5),
+              gap: theme.spacing(0.25),
             }}>
             {inList &&
-              <Tooltip title={isCollapsed ? 'Expand' : 'Minimize'}>
-                <Button
-                  disableElevation
-                  variant="text"
-                  className={classes.toolboxButton}
-                  onClick={() => { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); }}
-                  size="small"
-                >
-                  {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
-                </Button>
-              </Tooltip>
+              <div
+                className={classes.toolboxButton}
+
+              >
+                {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
+              </div>
             }
             {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 14}})}</>}
             {subTitle
@@ -172,7 +167,7 @@ const MuiPanel = withTheme(({
         {children}
       </Box>}
     </Paper>
-                  }
- </> )
+  }
+</> )
 })
 export default MuiPanel;

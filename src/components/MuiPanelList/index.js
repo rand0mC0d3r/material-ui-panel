@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
   },
   rootEmbedded: {
-    border: `1px solid ${theme.palette.augmentColor({ main: theme.palette.divider }).dark}`,
+    // border: `1px solid ${theme.palette.augmentColor({ main: theme.palette.divider }).dark}`,
     borderRadius: '0px'
   },
   toolbox: {
@@ -71,6 +71,7 @@ const MuiPanel = withTheme(({
   type = "panel",
   icon,
   isVisible = true,
+  showBorders = false,
   handleOnCollapse = () => { },
   uniqueId = "generic",
   color = 'textPrimary',
@@ -108,9 +109,9 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
-        // height: "100%",
-                ...getWidth(width, minMaxWidth),
-        borderRadius: "0px"
+        ...getWidth(width, minMaxWidth),
+          borderRadius: "0px",
+        ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box
