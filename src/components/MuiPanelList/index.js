@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1.5, 2),
+    padding: theme.spacing(1.5, 2.5),
     border: `0px none transparent`,
     boxShadow: theme.shadows[0]
   },
@@ -137,7 +137,7 @@ const MuiPanel = withTheme(({
 
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="button">{title}</Typography>
+                <Typography {...{ color }} variant="button">{title}</Typography>
                 <Typography color="textSecondary" variant="caption">{subTitle}</Typography>
               </Box>
               : <Typography style={{ fontWeight: 'bold'}} {...{ color }} variant="button">{title}</Typography>}
