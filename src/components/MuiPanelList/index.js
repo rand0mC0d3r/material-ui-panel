@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1.5, 2),
+    padding: theme.spacing(2, 2),
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255,255,255,0.9)',
   },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(1.5, 2),
     border: `0px none transparent`,
     boxShadow: theme.shadows[0]
   },
@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   initialSide = 'left',
+  iconInPanel = true,
   type = "panel",
   icon,
   isVisible = true,
@@ -131,7 +132,7 @@ const MuiPanel = withTheme(({
             } : {
               gap: theme.spacing(1),
             }}>
-            {icon && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20}})}</>}
+            {iconInPanel && icon && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20}})}</>}
 
             {subTitle
               ? <Box className={classes.headerContainer} display="flex" alignItems="center">
@@ -144,7 +145,7 @@ const MuiPanel = withTheme(({
             display="flex"
             className={classes.toolbox}
           >
-            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="outlined" className={classes.toolboxButton} size="small">
+            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="text" className={classes.toolboxButton} size="small">
               <SwapHorizIcon style={{ fontSize }} />
             </Button>
           </Box>

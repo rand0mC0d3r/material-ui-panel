@@ -77,30 +77,41 @@ const useStyles = makeStyles(theme => ({
   },
   leftActiveButtonMenu: {
     borderLeft: `3px solid ${theme.palette.primary.main}`,
+  },
+  panelWrapper: {
+    display: 'flex',
+    alignItems: 'stretch'
+  },
+  leftPanelWrapper: {
+    borderLeft: `3px solid ${theme.palette.primary.main}`,
+  },
+  rightPanelWrapper: {
+    borderRight: `3px solid ${theme.palette.primary.main}`,
   }
 }));
 
 const MuiPanelManager = withTheme(({
   children,
-  theme
+  theme,
+  allowRightClick = false,
 }) => {
   const classes = useStyles(theme)
   const [layout, setLayout] = useState([])
   const [sides, setSides] = useState('both')
 
   const handleAnnounceSelf = (index, side, title, icon) => {
-    setLayout((layout) => ([ ...layout.filter(lo => lo.index !== index), { isVisible: false, index, side, title, icon } ]));
+    setLayout((layout) => ([...layout.filter(lo => lo.index !== index), { isVisible: false, index, side, title, icon }]));
   }
 
   const activatePanelOnSide = (index) => {
     const foundObject = layout.find(lo => lo.index === index)
     if (foundObject) {
       setLayout((layout) => ([...layout.map(lo => {
-            if (lo.side === foundObject.side) {
-              return {...lo, isVisible: lo.index === foundObject.index ? !lo.isVisible : false}
-            }
+        if (lo.side === foundObject.side) {
+          return { ...lo, isVisible: lo.index === foundObject.index ? !lo.isVisible : false }
+        }
         return lo
-      }) ]));
+      })]));
     }
   }
 
@@ -116,30 +127,34 @@ const MuiPanelManager = withTheme(({
     }
   }, [layout]);
 
-  return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+  return <div
+    onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
+    className={`${classes.root} ${classes[`${sides}Grid`]}`}
+  >
     {['left', 'right'].filter(side => layout.some(lo => lo.side === side)).map((side, index) => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
 
         <div>
-        {layout.filter(lo => lo.side === side).map(lo => <Tooltip
-          arrow
-          placement={lo.side}
-          title={`${lo.title} ${lo.isVisible ? '(Activated)' : '- click to activate'}`}>
-          <Button
-            disableElevation
-            onClick={() => activatePanelOnSide(lo.index)}
-            variant="outlined"
-            fullWidth
-            className={`
+          {layout.filter(lo => lo.side === side).map(lo => <Tooltip
+            arrow
+            placement={lo.side}
+            enterDelay={1000}
+            title={lo.title}>
+            <Button
+              disableElevation
+              onClick={() => activatePanelOnSide(lo.index)}
+              variant="outlined"
+              fullWidth
+              className={`
               ${classes.buttonMenu}
               ${classes[`${side}ButtonMenu`]}
               ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
             `}
             >
-            {cloneElement(lo.icon, { className: classes.iconButton,  color: lo.isVisible ? "primary" : "action"})}
-          </Button>
+              {cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+            </Button>
           </Tooltip>
-        )}
+          )}
         </div>
         {index === 0 && <div>
           <MuiPanelSettings />
@@ -147,14 +162,23 @@ const MuiPanelManager = withTheme(({
       </div>}
     </>)}
 
-    {children.map((child, i) => {
-      if (child.props.title) {
-        return cloneElement( child, { key: i, width: 500, isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false, handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),})
-      } else {
-        return cloneElement( child, { key: i, className: classes.main})
-      }
+
+    {children
+      .filter(child => child.props.title)
+      .map((child, i) => {
+      return cloneElement(
+        child, {
+        key: i,
+          width: 500,
+        showBorders: true,
+        isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false,
+        handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),
+      })
     })}
 
+    {children.filter(child => !child.props.title).map((child, i) => {
+        return cloneElement( child, { key: i, className: classes.main})
+    })}
   </div>
 })
 export default MuiPanelManager;

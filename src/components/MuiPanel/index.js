@@ -21,7 +21,7 @@ const getWidth = (width, minMaxWidth) => minMaxWidth && Object.keys(minMaxWidth)
 
 const useStyles = makeStyles(theme => ({
   root: {
-    border: `1px solid ${theme.palette.divider}`,
+    // border: `1px solid ${theme.palette.divider}`,
   },
   rootInList: {
     border: `0px none`,
@@ -74,6 +74,7 @@ const useStyles = makeStyles(theme => ({
 const MuiPanel = withTheme(({
   initialSide = 'left',
   type = "panel",
+  showBorders = false,
   icon,
   inList = false,
   isVisible = true,
@@ -118,7 +119,8 @@ const MuiPanel = withTheme(({
       } : {
         // height: "100%",
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
-        borderRadius: "0px"
+          borderRadius: "0px",
+        ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
       }}>
       <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
         <Box

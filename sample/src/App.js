@@ -14,15 +14,24 @@ function App() {
       <MuiPanel title="First Panel" icon={<CameraIcon />}>
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
-        <MuiPanelList title="Second are Panel" subTitle="Lorem Ipsum sit dolor amet" icon={<CameraIcon />}>
-          <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} width="80%" />
-          </MuiPanel>
-          <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
-        </MuiPanelList>
+      <MuiPanelList title="Second are Panel" subTitle="Lorem Ipsum sit dolor amet" icon={<CameraIcon />}>
+        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+        </MuiPanel>
+        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
+      </MuiPanelList>
+      <MuiPanelList iconInPanel={false} title="Test Panel NoCion" subTitle="Lorem Ipsum sit dolor amet" noIconInPanel icon={<CameraIcon />}>
+        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+        </MuiPanel>
+        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
+      </MuiPanelList>
       <MuiPanel title="Funny Panel" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
