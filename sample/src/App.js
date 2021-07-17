@@ -21,23 +21,25 @@ function App() {
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
 
-      {/* <MuiDivider shortText="////" showIcon={false} /> */}
+      <MuiDivider tooltip="Default separator" />
       <MuiPanel title="SubFunny Panel Skeletons" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} width="80%" />
       </MuiPanel>
+
+      <MuiDivider icon={<NotificationsIcon />} tooltip="Only icon separator" />
       <MuiPanel title="SubFunny Panel Text" subTitle="No icon big guy..." icon={<CastIcon />}>sub 2b</MuiPanel>
+      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
 
       {/* <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
-      <MuiDivider tooltip="Default separator" />
-      <MuiDivider icon={<NotificationsIcon />} tooltip="Only icon separator" />
+
       <MuiDivider shortText="ABCD" tooltip="No icon separator" showIcon={false} />
       <MuiDivider shortText="ABCD" tooltip="Icon and text" icon={<NotificationsIcon />} />
       <MuiDivider shortText="ABCDEFGH" tooltip="Icon and long long text" icon={<NotificationsIcon />} /> */}
 
-      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
+
 
       {/* <MuiDivider title="Notifications" />
       <MuiPanel title="Notifications Panel" icon={<NotificationsIcon />} initialSide="left">
