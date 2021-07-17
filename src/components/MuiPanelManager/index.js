@@ -144,23 +144,6 @@ const MuiPanelManager = withTheme(({
   const [sides, setSides] = useState('both')
   const { layout, handleCountRows, rows, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
 
-  // const handleAnnounceNotification = (index, notificationCount) => {
-  //   setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
-  // }
-
-  const activatePanelOnSide = (index) => {
-    const foundObject = layout.find(lo => lo.index === index)
-    if (foundObject) {
-      setLayout(layout => ([...layout.map(lo => {
-        if (lo.side === foundObject.side) {
-          return { ...lo, isVisible: lo.index === foundObject.index ? !lo.isVisible : false }
-        }
-        return lo
-      })]));
-    }
-  }
-
-
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
     setSides(foundSides.length === 1 ? foundSides : 'both')
@@ -170,8 +153,7 @@ const MuiPanelManager = withTheme(({
   return <div
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
-    // style={{ gridTemplateRows: `repeat(${maxHeight})` }}
-    style={{ 'grid-template-rows': `repeat(${rows}, 1fr)` }}
+    style={{ 'grid-template-rows': `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))

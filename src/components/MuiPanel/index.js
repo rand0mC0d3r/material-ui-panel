@@ -113,7 +113,7 @@ const MuiPanel = withTheme(({
   useEffect(() => {
     if (receivedUniqueId && currentSettings) {
       // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId).findIndex(lo => lo.uniqueId === receivedUniqueId))
-      console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId))
+      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId))
       // setCurrentPosition(
     }
   }, [layout, receivedUniqueId, currentSettings]);

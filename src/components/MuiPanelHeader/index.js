@@ -119,16 +119,17 @@ const MuiPanel = withTheme(({
               </Button>
             </>}
 
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={'none'}
-          // value={layout ? layout.find(lo => lo.uniqueId === currentSettings.parentId).title : 'none'}
-          disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
-          onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
-        >
-          {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>{lo.title}</MenuItem>)}
-        </Select>
+        {!currentSettings.asEmbedded &&
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={'none'}
+            // value={layout ? layout.find(lo => lo.uniqueId === currentSettings.parentId).title : 'none'}
+            disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
+            onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
+          >
+            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>{lo.title}</MenuItem>)}
+          </Select>}
       </Box>
     </Box>
   </Tooltip>

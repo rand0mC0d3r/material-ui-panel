@@ -45,6 +45,7 @@ function DataContextProvider(props) {
             const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
             if (tmpCount > count) { count = tmpCount + 1; }
         })
+        console.log("count Rows", count);
         setRows(count)
     }
 
