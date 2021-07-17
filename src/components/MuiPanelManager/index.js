@@ -85,6 +85,9 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "0px",
     minWidth: "initial",
   },
+  groupButtonMenu: {
+    boxShadow: "inset 0px 0px 4px 0px #000"
+  },
   rightButtonMenu: {
     borderRight: "3px solid transparent",
   },
@@ -175,11 +178,12 @@ const MuiPanelManager = withTheme(({
               disableRipple
               disableElevation
               disabled={lo.noPanel}
-                onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
+              onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
               variant="text"
               fullWidth
               className={`
               ${classes.buttonMenu}
+              ${lo.asGroup && classes.groupButtonMenu}
               ${classes[`${side}ButtonMenu`]}
               ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
             `}

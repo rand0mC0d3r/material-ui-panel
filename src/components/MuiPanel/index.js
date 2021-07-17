@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
     gap: theme.spacing(1),
     userSelect: "none",
     padding: theme.spacing(1.5, 2.5),
+    borderTop: `1px solid ${theme.palette.divider}`,
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255,255,255,0.9)',
     backdropFilter: "blur(4px)",

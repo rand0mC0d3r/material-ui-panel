@@ -1,5 +1,6 @@
 import { Box, Button, MenuItem, Paper, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
         gap: theme.spacing(1),
         userSelect: "none",
         padding: theme.spacing(1.5, 2.5),
+        borderTop: `1px solid ${theme.palette.divider}`,
         borderBottom: `1px solid ${theme.palette.divider}`,
         backgroundColor: 'rgba(255,255,255,0.9)',
         backdropFilter: "blur(4px)",
@@ -99,14 +101,20 @@ const MuiPanel = withTheme(({
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
-        {!currentSettings.isEmbedded && <>
-        <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId})} disableElevation variant="text" className={classes.toolboxButton}>
-          <SwapHorizIcon style={{ fontSize }} />
-        </Button>
-        <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-          {!currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
-          </Button>
-        </>}
+        {!currentSettings.asEmbedded
+          ? <>
+              <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId})} disableElevation variant="text" className={classes.toolboxButton}>
+                <SwapHorizIcon style={{ fontSize }} />
+              </Button>
+              <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+                {!currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+              </Button>
+            </>
+          : <>
+              <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+                <AddToHomeScreenIcon />
+              </Button>
+            </>}
 
         <Select
           labelId="demo-simple-select-label"

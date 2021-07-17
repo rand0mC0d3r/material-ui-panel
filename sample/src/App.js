@@ -39,7 +39,7 @@ function App() {
 
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
 
-      <MuiDivider title="Notifications" />
+      {/* <MuiDivider title="Notifications" />
       <MuiPanel title="Notifications Panel" icon={<NotificationsIcon />} initialSide="left">
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -57,7 +57,7 @@ function App() {
       </MuiPanel>
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
-      </MuiPanel>
+      </MuiPanel> */}
 
       <div>
         <iframe
