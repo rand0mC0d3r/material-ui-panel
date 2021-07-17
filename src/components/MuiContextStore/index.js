@@ -12,7 +12,6 @@ function DataContextProvider(props) {
 
     const handlePanelAnnouncement = ({ side, shortText, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
-        // console.log("Generated UniqueID:", uniqueId);
         setLayout(layout => [
             ...layout,
             {
@@ -61,8 +60,6 @@ function DataContextProvider(props) {
         handleCountRows()
     }
 
-
-
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
         const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
         if (findParent) {
@@ -78,9 +75,20 @@ function DataContextProvider(props) {
     }
 
     const handleSetSide = ({ uniqueId }) => {
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, isVisible: false, side: layoutObject.side === 'right' ? "left" : 'right' }
-            : layoutObject));
+        const findCurrent = layout.find(layoutObject => layoutObject.uniqueId === uniqueId);
+        setLayout(layout
+            .map(layoutObject => layoutObject.uniqueId === uniqueId
+                ? {
+                    ...layoutObject,
+                    isVisible: true,
+                    side: layoutObject.side === 'right' ? "left" : 'right'
+                }
+                : {
+                    ...layoutObject,
+                    isVisible: false,
+                })
+
+        );
     }
 
     const handleSetVisible = ({ uniqueId }) => {
