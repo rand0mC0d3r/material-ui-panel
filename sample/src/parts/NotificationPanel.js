@@ -23,8 +23,8 @@ const NotificationPanel = () => {
       {alertBox}
       {alertBox}
       Alerts: {alerts}
-      <Button variant="outlined" onClick={() => setAlerts(alerts+1) }>Add</Button>
-      <Button variant="outlined" onClick={() => setAlerts(Math.max(0, alerts-1)) }>Remove</Button>
+      <Button disableRipple variant="outlined" onClick={() => setAlerts(alerts+1) }>Add</Button>
+      <Button disableRipple variant="outlined" onClick={() => setAlerts(Math.max(0, alerts-1)) }>Remove</Button>
     </Box>
   </MuiPanel>
 }

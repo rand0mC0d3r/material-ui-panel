@@ -23,6 +23,10 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis'
   },
   badge: {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
   },
   bothGrid: {
     "grid-template-columns": "54px auto 1fr auto 54px",
@@ -168,26 +172,25 @@ const MuiPanelManager = withTheme(({
             enterDelay={1000}
             title={lo.tooltip}>
             <span>
-            <Button
-              disableRipple
-              disableElevation
-              disabled={lo.noPanel}
-              onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
-              variant="text"
-              fullWidth
-              className={`
-              ${classes.buttonMenu}
-              ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
-              ${classes[`${side}ButtonMenu`]}
-              ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
-            `}
-            >
-              <Badge
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }}
-                badgeContent={lo.notificationCount}
-                // invisible={!lo.showBadge}
-                color="primary"
-                variant={lo.variant}
+              <Button
+                disableRipple
+                disableElevation
+                disabled={lo.noPanel}
+                onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
+                variant="text"
+                fullWidth
+                className={`
+                ${classes.buttonMenu}
+                ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
+                ${classes[`${side}ButtonMenu`]}
+                ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+              `}
+              >
+                <Badge
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  badgeContent={lo.notificationCount}
+                  color="primary"
+                  variant={lo.variant}
                 >
                   <Box display="flex" alignItems="center" flexDirection="column">
                     {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
