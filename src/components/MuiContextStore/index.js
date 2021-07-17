@@ -104,7 +104,7 @@ function DataContextProvider(props) {
                 if (lo.side === foundObject.side) {
                     if (lo.uniqueId === foundObject.uniqueId) {
                         // console.log('found by uniqueId')
-                        return { ...lo, isVisible: !lo.isVisible }
+                        return { ...lo, isVisible: !lo.isVisible, notificationCount: 0 }
                     } else if (lo.parentId === foundObject.uniqueId) {
                         // console.log('found by parentId')
                         return { ...lo, isVisible: !lo.isVisible }
