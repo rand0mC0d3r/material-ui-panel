@@ -52,7 +52,10 @@ function DataContextProvider(props) {
             ? { ...layoutObject, parentId, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
             : layoutObject);
 
-            const activateParent = updateEmbedded.map(layoutObject => { return { ...layoutObject, isVisible: layoutObject.uniqueId === parentId } });
+            const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId
+                ? { ...layoutObject, isVisible: true }
+                : layoutObject
+            );
 
             setLayout(activateParent);
         }

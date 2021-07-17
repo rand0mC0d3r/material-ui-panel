@@ -92,7 +92,7 @@ const MuiPanel = withTheme(({
 }) => {
   const [receivedUniqueId, setReceivedUniqueId] = useState();
   const [currentSettings, setCurrentSettings] = useState();
-  // const [side, setSide] = useState(initialSide);
+  const [currentPosition, setCurrentPosition] = useState(0);
   const classes = useStyles(theme)
 
   const { layout, rows, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
@@ -109,6 +109,14 @@ const MuiPanel = withTheme(({
     }
   }, [layout, receivedUniqueId]);
 
+  useEffect(() => {
+    if (receivedUniqueId && currentSettings) {
+      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId).findIndex(lo => lo.uniqueId === receivedUniqueId))
+      console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId))
+      // setCurrentPosition(
+    }
+  }, [layout, receivedUniqueId, currentSettings]);
+
   return <>
     {currentSettings && currentSettings.isVisible &&
     <Paper
@@ -124,7 +132,7 @@ const MuiPanel = withTheme(({
           'grid-area': currentSettings.asGroup
             ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
             : currentSettings.asEmbedded
-              ? `2 / ${currentSettings.side === 'left' ? 2 : 4} / 2 / ${currentSettings.side === 'left' ? 2 : 4}`
+              ? `${layout.filter(lo => lo.parentId === currentSettings.uniqueId)}2 / ${currentSettings.side === 'left' ? 2 : 4} / 2 / ${currentSettings.side === 'left' ? 2 : 4}`
               : `1 / ${currentSettings.side === 'left' ? 2 : 4} / ${rows+1} / ${currentSettings.side === 'left' ? 2 : 4}`,
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
