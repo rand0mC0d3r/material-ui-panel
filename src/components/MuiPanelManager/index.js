@@ -94,8 +94,8 @@ const useStyles = makeStyles(theme => ({
       fontSize: "8px",
       lineHeight: "12px",
       width: '12px',
-      top: 0,
-      left: 0,
+      top: 2,
+      left: 2,
     },
   },
   leftGroupButtonMenu: {
@@ -107,8 +107,8 @@ const useStyles = makeStyles(theme => ({
       fontSize: "8px",
       lineHeight: "12px",
       width: '10px',
-      top: 0,
-      right: 0,
+      top: 2,
+      right: 2,
     },
   },
   rightButtonMenu: {

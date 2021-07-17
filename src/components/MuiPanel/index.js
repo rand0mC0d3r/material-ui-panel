@@ -138,7 +138,7 @@ const MuiPanel = withTheme(({
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
           flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
-        ...showBorders && (currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
+        ...currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`}
     }}
   >
     <MuiPanelHeader {...{ uniqueId: receivedUniqueId, title, subTitle, icon, iconInHeader, currentSettings, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />

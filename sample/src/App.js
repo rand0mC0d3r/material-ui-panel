@@ -22,13 +22,13 @@ function App() {
       </MuiPanel>
 
       {/* <MuiDivider shortText="////" showIcon={false} /> */}
-      <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
+      <MuiPanel title="SubFunny Panel Skeletons" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} width="80%" />
       </MuiPanel>
-      <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
+      <MuiPanel title="SubFunny Panel Text" subTitle="No icon big guy..." icon={<CastIcon />}>sub 2b</MuiPanel>
 
       {/* <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
       <MuiDivider tooltip="Default separator" />

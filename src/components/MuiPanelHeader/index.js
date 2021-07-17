@@ -89,15 +89,18 @@ const MuiPanel = withTheme(({
         {iconInHeader && icon !== undefined && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}</>}
 
         <Box className={classes.headerContainer} display="flex" alignItems="center">
-            <Typography
+          <Typography
               style={{
                 fontWeight: inList ? 'bold' : 'normal'
               }} {...{ color }}
               variant={inList ? 'caption' : 'button'}
-            >
-              {title}
+          >
+
+            {title}
+
             </Typography>
           {subTitle && <Typography color="textSecondary" variant="caption">{subTitle}</Typography>}
+          {currentSettings.asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
@@ -107,7 +110,7 @@ const MuiPanel = withTheme(({
                 <SwapHorizIcon style={{ fontSize }} />
               </Button>
               <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-                {!currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+                {currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
               </Button>
             </>
           : <>
