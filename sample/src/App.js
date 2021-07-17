@@ -37,9 +37,13 @@ function App() {
       </MuiPanel>
 
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">
-        <Box display="flex" flexDirection="column" style={{ gap: "16px"}}>
+        <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
           <div>
-            <Skeleton variant="rect" width={'100%'} height={600} />
+            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+            <Skeleton animation="wave" height={10} />
+          </div>
+          <div>
+            <Skeleton variant="rect" width={'100%'} height={400} />
           </div>
           <div>
             <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />

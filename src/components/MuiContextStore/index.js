@@ -82,7 +82,7 @@ function DataContextProvider(props) {
     const handleSetSide = ({ uniqueId }) => {
         const findCurrent = layout.find(layoutObject => layoutObject.uniqueId === uniqueId);
         setLayout(layout
-            .map(layoutObject => layoutObject.uniqueId === uniqueId
+            .map(layoutObject => (layoutObject.uniqueId === uniqueId || layoutObject.parentId === uniqueId)
                 ? {
                     ...layoutObject,
                     isVisible: true,
