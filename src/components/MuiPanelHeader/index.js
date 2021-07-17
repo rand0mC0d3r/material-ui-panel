@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, MenuItem, Paper, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -6,6 +6,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
 const fontSize = 20;
@@ -13,12 +14,12 @@ const fontSize = 20;
 const useStyles = makeStyles(theme => ({
 
     toolbox: {
-      gap: theme.spacing(0.5),
+      gap: theme.spacing(1),
     },
       toolboxButton: {
         padding: "0px",
-        width: '20px',
-        minWidth: '20px',
+        width: '28px',
+        minWidth: '28px',
         lineHeight: '0px'
       },
       headerContainer: {
@@ -49,19 +50,20 @@ const useStyles = makeStyles(theme => ({
 const MuiPanel = withTheme(({
   iconInHeader = true,
   icon,
-  uniqueId,
   inList = false,
   handleOnCollapse = () => { },
   color = 'textPrimary',
   embedded = true,
   title,
   subTitle,
+  asGroup,
+  currentSettings,
   isCollapsed,
   setIsCollapsed = () => { },
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { handleSetAsGroup, handleSetSide } = useContext(DataProvider);
+  const { layout, handleSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
   return <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
     <Box
@@ -97,14 +99,25 @@ const MuiPanel = withTheme(({
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
-        {!inList &&
-          <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton} size="small">
+        {!currentSettings.isEmbedded && <>
+        <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId})} disableElevation variant="text" className={classes.toolboxButton}>
           <SwapHorizIcon style={{ fontSize }} />
         </Button>
-        }
-        <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton} size="small">
-          <ViewStreamIcon />
-        </Button>
+        <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+          {!currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+          </Button>
+        </>}
+
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={'none'}
+          // value={layout ? layout.find(lo => lo.uniqueId === currentSettings.parentId).title : 'none'}
+          disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
+          onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
+        >
+          {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>{lo.title}</MenuItem>)}
+        </Select>
       </Box>
     </Box>
   </Tooltip>

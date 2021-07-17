@@ -155,7 +155,10 @@ const MuiPanelManager = withTheme(({
       .map((side, index) => <>
       {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
         <div>
-          {layout.filter(lo => lo.side === side).map(lo => <Tooltip
+            {layout
+              .filter(lo => lo.side === side)
+              .filter(lo => !lo.isEmbedded)
+              .map(lo => <Tooltip
             arrow
             placement={lo.side}
             enterDelay={1000}

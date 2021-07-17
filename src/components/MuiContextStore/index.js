@@ -8,7 +8,7 @@ function DataContextProvider(props) {
 
     const [layout, setLayout] = useState(initialLayout);
 
-    const handlePanelAnnouncement = ({ side, shortText, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ side, shortText, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
         // console.log("Generated UniqueID:", uniqueId);
         setLayout(layout => [
@@ -16,6 +16,8 @@ function DataContextProvider(props) {
             {
                 uniqueId,
                 asGroup: false,
+                asEmbedded: false,
+                parentId: null,
                 showBadge: false,
                 notificationCount: 0,
                 variant: 'dot',
@@ -23,6 +25,7 @@ function DataContextProvider(props) {
                 isCollapsed: false,
                 index: layout.length,
                 side,
+                title,
                 showIcon,
                 shortText,
                 tooltip,
@@ -36,6 +39,11 @@ function DataContextProvider(props) {
     const handleSetAsGroup = ({ uniqueId }) => {
         // console.log("announcing as group for id", uniqueId, layout);
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, asGroup: !layoutObject.asGroup } : layoutObject));
+    }
+
+    const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
+        // console.log("announcing as embedded for id", uniqueId, layout);
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, parentId, isEmbedded: !layoutObject.isEmbedded } : layoutObject));
     }
 
     const handleSetSide = ({ uniqueId }) => {
@@ -56,14 +64,16 @@ function DataContextProvider(props) {
         }
     }
 
-    // useEffect(() => { console.log('store layout', ...layout) }, [layout]);
+    useEffect(() => { console.log('store layout', ...layout) }, [layout]);
 
     return <DataContext.Provider
         value={{
             layout, setLayout,
+
             handleSetAsGroup,
             handleSetVisible,
             handleSetSide,
+            handleSetAsEmbedded,
             handlePanelAnnouncement
     }}>{props.children}</DataContext.Provider>
 }

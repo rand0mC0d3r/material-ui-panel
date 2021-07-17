@@ -99,7 +99,7 @@ const MuiPanel = withTheme(({
 
   useEffect(() => {
     // console.log("Announcing panel");
-    setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
+    setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const MuiPanel = withTheme(({
         ...showBorders && (currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
     }}
   >
-    <MuiPanelHeader {...{ uniqueId: receivedUniqueId, title, subTitle, icon, iconInHeader, setAsGroup: handleSetAsGroup, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
+    <MuiPanelHeader {...{ uniqueId: receivedUniqueId, title, subTitle, icon, iconInHeader, currentSettings, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
       {!(forceCollapse || (!forceCollapse && currentSettings.isCollapsed)) && <Box className={classes.children}>{children}</Box>}
     </Paper>
     }
