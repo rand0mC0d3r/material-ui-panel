@@ -23,7 +23,7 @@ function DataContextProvider(props) {
                 index: layout.length,
                 showBadge: false,
                 notificationCount: 0,
-                variant: 'dot',
+                variant: 'standard',
                 isCollapsed: false,
                 index: layout.length,
                 side,
@@ -58,6 +58,11 @@ function DataContextProvider(props) {
             ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
             : layoutObject));
         handleCountRows()
+    }
+    const handlePanelAlerts = ({ uniqueId, notificationCount }) => {
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, notificationCount }
+            : layoutObject));
     }
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
@@ -114,7 +119,7 @@ function DataContextProvider(props) {
         }
     }
 
-    // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 
     return <DataContext.Provider
         value={{
@@ -125,6 +130,7 @@ function DataContextProvider(props) {
             handleUnSetAsEmbedded,
             handleSetAsGroup,
             handleSetVisible,
+            handlePanelAlerts,
             handleSetSide,
             handleSetAsEmbedded,
             handlePanelAnnouncement

@@ -10,8 +10,7 @@ import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelManager from './components/MuiPanelManager';
-
-
+import NotificationPanel from './parts/NotificationPanel';
 
 function App() {
   return <DataContextProvider>
@@ -19,6 +18,8 @@ function App() {
       <MuiDivider icon={<GitHubIcon />}/>
       <MuiDivider tooltip="Default separator" />
       <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
+
+      <NotificationPanel />
 
       <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}

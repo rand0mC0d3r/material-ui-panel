@@ -83,6 +83,7 @@ const MuiPanel = withTheme(({
   children,
   title,
   subTitle,
+  notificationCount = 0,
   theme,
 }) => {
   const [receivedUniqueId, setReceivedUniqueId] = useState();
@@ -90,11 +91,17 @@ const MuiPanel = withTheme(({
   const [currentPosition, setCurrentPosition] = useState(0);
   const classes = useStyles(theme)
 
-  const { layout, rows, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, rows, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
     setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
+
+  useEffect(() => {
+    if (receivedUniqueId) {
+      handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount });
+    }
+  }, [notificationCount, receivedUniqueId]);
 
   useEffect(() => {
     if (receivedUniqueId) {

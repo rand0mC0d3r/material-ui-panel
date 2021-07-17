@@ -184,8 +184,8 @@ const MuiPanelManager = withTheme(({
             >
               <Badge
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }}
-                badgeContent={4}
-                invisible={!lo.showBadge}
+                badgeContent={lo.notificationCount}
+                // invisible={!lo.showBadge}
                 color="primary"
                 variant={lo.variant}
                 >
