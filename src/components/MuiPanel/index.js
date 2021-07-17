@@ -130,6 +130,7 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
+          alignSelf:  currentSettings.isCollapsed ? 'flex-end' : 'stretch',
           gridArea: currentSettings.asGroup
             ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
             : currentSettings.asEmbedded
