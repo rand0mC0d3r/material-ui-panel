@@ -1,5 +1,6 @@
 import { Badge, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { cloneElement, useEffect, useState } from 'react';
 import MuiPanelSettings from '../MuiPanelSettings';
@@ -111,7 +112,7 @@ const MuiPanelManager = withTheme(({
   const handleAnnounceSelf = (index, side, title, icon) => {
     setLayout(layout => [
       ...layout.filter(lo => lo.index !== index),
-      { showBadge: false, variant: 'dot', isVisible: false, index, side, title, icon }
+      { showBadge: false, variant: 'dot', isVisible: false, index, side, title, icon: icon ? icon : <NotInterestedIcon  /> }
     ]);
   }
 

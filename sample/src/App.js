@@ -2,6 +2,7 @@ import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import CropSquareIcon from '@material-ui/icons/CropSquare';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -75,8 +76,18 @@ function App() {
       <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
-      <MuiPanel title="Blue Panel" icon={<InfoOutlinedIcon />} initialSide="left">
+        <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
+
+
+
+
+      <MuiPanel title="Square Iconless" initialSide="left" subTitle="No icon big guy...">
+        <Skeleton variant="rect" width={'100%'} height={600} />
+      </MuiPanel>
+      <MuiPanel title="Square Icon Disabled" icon={<CropSquareIcon />} iconInHeader={false} initialSide="left" subTitle="No icon big guy...">
+        <Skeleton variant="rect" width={'100%'} height={600} />
+      </MuiPanel>
+      <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
         <div>

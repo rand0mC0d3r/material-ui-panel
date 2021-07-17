@@ -4,6 +4,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, useEffect, useState } from 'react';
+import MuiPanelHeader from '../MuiPanelHeader';
 
 const fontSize = 18;
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -71,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   initialSide = 'left',
-  iconInPanel = true,
+  iconInHeader = true,
   type = "panel",
   icon,
   isVisible = true,
@@ -119,30 +120,7 @@ const MuiPanel = withTheme(({
           flexDirection: 'column',
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
       }}>
-      <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
-        <Box
-          justifyContent="space-between"
-          alignItems="center"
-          display="flex"
-          style={{ gap: theme.spacing(1) }}
-          className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
-          <Box display="flex" alignItems="center" style={{ gap: theme.spacing(isCollapsed ? 0.75 : 1) }}>
-            {iconInPanel && icon && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 }})}
-              <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography {...{ color }} variant="button">{title}</Typography>
-                {subTitle && <Typography color="textSecondary" variant="caption">{subTitle}</Typography>}
-              </Box>
-          </Box>
-          <Box
-            display="flex"
-            className={classes.toolbox}
-          >
-            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="text" className={classes.toolboxButton} size="small">
-              <SwapHorizIcon style={{ fontSize }} />
-            </Button>
-          </Box>
-        </Box>
-      </Tooltip>
+      <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, setIsCollapsed, isCollapsed }} />
       {forceCollapse || (!forceCollapse && isCollapsed) ? <></> : <Box className={classes.children}>
         {children.map((child, i) => {
         return cloneElement( child, { key: i, inList: "true"})

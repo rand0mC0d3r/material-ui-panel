@@ -6,8 +6,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, useEffect, useState } from 'react';
+import MuiPanelHeader from '../MuiPanelHeader';
 
-const fontSize = 20;
 const getRtl = (rtl, theme, factor = 8) => rtl
   ? { right: theme.spacing(factor) }
   : { left: theme.spacing(factor) };
@@ -73,14 +73,13 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   initialSide = 'left',
-  type = "panel",
   showBorders = false,
+  iconInHeader = true,
   icon,
   inList = false,
   isVisible = true,
   handleOnCollapse = () => { },
   uniqueId = "generic",
-  color = 'textPrimary',
   width = 700,
   minMaxWidth,
   forceCollapse = false,
@@ -97,16 +96,10 @@ const MuiPanel = withTheme(({
   const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
+  useEffect(() => { if(embedded) { handleOnAnnouncements(side, title, icon) }}, [embedded, side]);
 
-
-  useEffect(() => {
-    if (embedded) {
-      handleOnAnnouncements(side, title, icon)
-    }
-  }, [embedded, side]);
-
-  return (<>
-    { isVisible && <Paper
+  return <>{isVisible &&
+    <Paper
       elevation={0}
       id={`mui-panel-${uniqueId}`}
       className={`${classes[side]} ${classes.root} ${inList && classes.rootInList }`}
@@ -122,57 +115,10 @@ const MuiPanel = withTheme(({
           flex: isCollapsed ? "0 0 auto" : "1 1 auto",
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
       }}>
-      <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
-        <Box
-          justifyContent="space-between"
-          onClick={() => { if (inList) { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); } }}
-          alignItems="center"
-          display="flex"
-          className={`${classes.header} ${inList && classes.headerInList}`}>
 
-          <Box
-            display="flex"
-            alignItems="center"
-            style={isCollapsed ? {
-              gap: theme.spacing(inList ? 0.25 : 1),
-            } : {
-              gap: theme.spacing(inList ? 0.25 : 1),
-            }}>
-
-            {inList && <div className={classes.toolboxButton}>
-              {isCollapsed
-                ? <ChevronRightIcon style={{ fontSize }} />
-                : <ExpandMoreIcon style={{ fontSize }} />}
-            </div>}
-
-            {icon && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}</>}
-
-            <Box className={classes.headerContainer} display="flex" alignItems="center">
-                <Typography
-                  style={{
-                    fontWeight: inList ? 'bold' : 'normal'
-                  }} {...{ color }}
-                  variant={inList ? 'caption' : 'button'}
-                >
-                  {title}
-                </Typography>
-              {subTitle && <Typography {...{ color }} variant="button">{subTitle}</Typography>}
-            </Box>
-          </Box>
-          <Box display="flex" className={classes.toolbox}>
-            {!inList &&
-            <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="text" className={classes.toolboxButton} size="small">
-              <SwapHorizIcon style={{ fontSize }} />
-            </Button>
-            }
-          </Box>
-        </Box>
-      </Tooltip>
-      {forceCollapse || (!forceCollapse && isCollapsed)
-        ? <></>
-        : <Box className={classes.children}>{children}</Box>}
+      <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed, isCollapsed }} />
+      {!(forceCollapse || (!forceCollapse && isCollapsed)) && <Box className={classes.children}>{children}</Box>}
     </Paper>
-  }
-</> )
+  }</>
 })
 export default MuiPanel;
