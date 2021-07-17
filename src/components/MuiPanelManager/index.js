@@ -85,8 +85,31 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "0px",
     minWidth: "initial",
   },
-  groupButtonMenu: {
-    boxShadow: "inset 0px 0px 4px 0px #000"
+  rightGroupButtonMenu: {
+    position: 'relative',
+    "&::after": {
+      content: '"G"',
+      backgroundColor: "#CCC",
+      position: 'absolute',
+      fontSize: "8px",
+      lineHeight: "12px",
+      width: '12px',
+      // top: 0,
+      left: 0,
+    },
+  },
+  leftGroupButtonMenu: {
+    position: 'relative',
+    "&::after": {
+      content: '"G"',
+      backgroundColor: "#CCC",
+      position: 'absolute',
+      fontSize: "8px",
+      lineHeight: "12px",
+      width: '10px',
+      // top: 0,
+      right: 0,
+    },
   },
   rightButtonMenu: {
     borderRight: "3px solid transparent",
@@ -183,7 +206,7 @@ const MuiPanelManager = withTheme(({
               fullWidth
               className={`
               ${classes.buttonMenu}
-              ${lo.asGroup && classes.groupButtonMenu}
+              ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
               ${classes[`${side}ButtonMenu`]}
               ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
             `}
