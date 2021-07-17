@@ -94,7 +94,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "8px",
       lineHeight: "12px",
       width: '12px',
-      // top: 0,
+      top: 0,
       left: 0,
     },
   },
@@ -107,7 +107,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "8px",
       lineHeight: "12px",
       width: '10px',
-      // top: 0,
+      top: 0,
       right: 0,
     },
   },
@@ -142,7 +142,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, setRows, rows, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, handleCountRows, rows, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
 
   // const handleAnnounceNotification = (index, notificationCount) => {
   //   setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
@@ -163,15 +163,8 @@ const MuiPanelManager = withTheme(({
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-    let count = 0;
     setSides(foundSides.length === 1 ? foundSides : 'both')
-
-    layout.forEach(lo => {
-      const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
-      if (tmpCount > count) { count = tmpCount + 1; }
-    })
-    setRows(count)
-    console.log('effect counting sides', count);
+    handleCountRows()
   }, [layout]);
 
   return <div

@@ -39,32 +39,47 @@ function DataContextProvider(props) {
         return uniqueId
     }
 
-    const handleSetAsGroup = ({ uniqueId }) => {
-        // console.log("announcing as group for id", uniqueId, layout);
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, asGroup: !layoutObject.asGroup } : layoutObject));
+    const handleCountRows = () => {
+        let count = 0;
+        layout.forEach(lo => {
+            const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
+            if (tmpCount > count) { count = tmpCount + 1; }
+        })
+        setRows(count)
     }
 
+    const handleSetAsGroup = ({ uniqueId }) => {
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, asGroup: !layoutObject.asGroup }
+            : layoutObject));
+    }
+    const handleUnSetAsEmbedded = ({ uniqueId }) => {
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
+            : layoutObject));
+        handleCountRows()
+    }
+
+
+
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
-        // console.log("announcing as embedded for id", uniqueId, layout);
         const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
         if (findParent) {
             const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, parentId, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
             : layoutObject);
-
             const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId
                 ? { ...layoutObject, isVisible: true }
                 : layoutObject
             );
-
             setLayout(activateParent);
         }
-
     }
 
     const handleSetSide = ({ uniqueId }) => {
-        // console.log("switching side for id", uniqueId, layout);
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, isVisible: false, side: layoutObject.side === 'right' ? "left" : 'right' } : layoutObject));
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, isVisible: false, side: layoutObject.side === 'right' ? "left" : 'right' }
+            : layoutObject));
     }
 
     const handleSetVisible = ({ uniqueId }) => {
@@ -95,8 +110,10 @@ function DataContextProvider(props) {
     return <DataContext.Provider
         value={{
             layout, setLayout,
-            rows, setRows,
+            rows,
 
+            handleCountRows,
+            handleUnSetAsEmbedded,
             handleSetAsGroup,
             handleSetVisible,
             handleSetSide,

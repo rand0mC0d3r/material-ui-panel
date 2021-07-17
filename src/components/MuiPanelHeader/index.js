@@ -65,7 +65,7 @@ const MuiPanel = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { layout, handleSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
+  const { layout, handleSetAsEmbedded, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
   return <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
     <Box
@@ -111,7 +111,7 @@ const MuiPanel = withTheme(({
               </Button>
             </>
           : <>
-              <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+              <Button onClick={() => handleUnSetAsEmbedded({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
                 <AddToHomeScreenIcon />
               </Button>
             </>}
