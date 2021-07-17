@@ -5,7 +5,9 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { cloneElement, useEffect, useState } from 'react';
+import TextureIcon from '@material-ui/icons/Texture';
+import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 
 const getRtl = (rtl, theme, factor = 8) => rtl
@@ -90,14 +92,18 @@ const MuiPanel = withTheme(({
   title,
   subTitle,
   theme,
-  handleOnAnnouncements = () => { },
+  // handleOnAnnouncements = () => { },
   handleAnnounceNotification = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
-  useEffect(() => { if(embedded) { handleOnAnnouncements(side, title, icon) }}, [embedded, side]);
+  const { handlePanelAnnouncement } = useContext(DataProvider);
+
+  useEffect(() => {
+    handlePanelAnnouncement(side, title, icon ? icon : <TextureIcon />)
+  }, [side]);
 
   return <>{isVisible &&
     <Paper

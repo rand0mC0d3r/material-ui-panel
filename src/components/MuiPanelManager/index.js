@@ -3,7 +3,8 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SettingsIcon from '@material-ui/icons/Settings';
 import TextureIcon from '@material-ui/icons/Texture';
-import React, { cloneElement, useEffect, useState } from 'react';
+import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import DataProvider from '../MuiContextStore';
 import MuiPanelSettings from '../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({
@@ -107,29 +108,12 @@ const MuiPanelManager = withTheme(({
   allowRightClick = false,
 }) => {
   const classes = useStyles(theme)
-  const [layout, setLayout] = useState([])
   const [sides, setSides] = useState('both')
+  const { layout, setLayout, handlePanelAnnouncement } = useContext(DataProvider);
 
-  const handleAnnounceSelf = (index, side, title, icon, noPanel = false) => {
-    setLayout(layout => [
-      ...layout.filter(lo => lo.index !== index),
-      {
-        showBadge: false,
-        notificationCount: 0,
-        variant: 'dot',
-        isVisible: false,
-        index,
-        side,
-        title,
-        noPanel,
-        icon: icon ? icon : <TextureIcon />
-      }
-    ]);
-  }
-
-  const handleAnnounceNotification = (index, notificationCount) => {
-    setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
-  }
+  // const handleAnnounceNotification = (index, notificationCount) => {
+  //   setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
+  // }
 
   const activatePanelOnSide = (index) => {
     const foundObject = layout.find(lo => lo.index === index)
@@ -145,19 +129,14 @@ const MuiPanelManager = withTheme(({
 
 
   useEffect(() => {
-    if (layout.length > 0) {
       const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
       if (foundSides.length === 1) {
         setSides(foundSides)
       } else {
         setSides('both')
       }
-    }
 
-    console.log(layout);
-    localStorage.setItem(
-      'layout',
-      JSON.stringify(layout.map(({ index, side, title }) => { return { index, side, title }; })))
+    console.log('effect', layout);
   }, [layout]);
 
   return <div
@@ -208,23 +187,7 @@ const MuiPanelManager = withTheme(({
       </div>}
     </>)}
 
-    {children.map(child => console.log(child))}
-
-    {children
-      .filter(child => child.props.title || child.props.icon)
-      .map((child, i) => {
-      return cloneElement(
-        child, {
-        key: i,
-        width: 500,
-        showBorders: true,
-        isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false,
-        handleAnnounceNotification: (notificationCount) => { handleAnnounceNotification(i, notificationCount) },
-        handleOnAnnouncements: (side, title, icon, noPanel) => handleAnnounceSelf(i, side, title, icon, noPanel),
-      })
-    })}
-
-    {children.filter(child => !(child.props.title || child.props.icon)).map((child, i) => {
+    {children.map((child, i) => {
         return cloneElement( child, { key: i, className: classes.main})
     })}
   </div>
