@@ -118,7 +118,7 @@ const MuiPanelManager = withTheme(({
   const activatePanelOnSide = (index) => {
     const foundObject = layout.find(lo => lo.index === index)
     if (foundObject) {
-      setLayout((layout) => ([...layout.map(lo => {
+      setLayout(layout => ([...layout.map(lo => {
         if (lo.side === foundObject.side) {
           return { ...lo, isVisible: lo.index === foundObject.index ? !lo.isVisible : false }
         }

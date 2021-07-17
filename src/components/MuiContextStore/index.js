@@ -9,13 +9,17 @@ function DataContextProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
 
     const handlePanelAnnouncement = (side, title, icon, noPanel = false) => {
+        const uniqueId = Math.random().toString(36).substring(7);
+        console.log("Generated UniqueID:", uniqueId);
         setLayout(layout => [
-            ...layout.filter(lo => lo.title !== title),
+            ...layout,
             {
+                uniqueId,
                 showBadge: false,
                 notificationCount: 0,
                 variant: 'dot',
                 isVisible: false,
+                isCollapsed: false,
                 index: layout.length,
                 side,
                 title,
@@ -23,9 +27,10 @@ function DataContextProvider(props) {
                 icon,
             }
         ]);
+        return uniqueId
     }
 
-    useEffect(() => { console.log('store layout', layout) }, [layout]);
+    useEffect(() => { console.log('store layout', ...layout) }, [layout]);
 
     return <DataContext.Provider
         value={{

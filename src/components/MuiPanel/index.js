@@ -79,9 +79,6 @@ const MuiPanel = withTheme(({
   iconInHeader = true,
   icon,
   inList = false,
-  isVisible = true,
-  handleOnCollapse = () => { },
-  uniqueId = "generic",
   width = 700,
   minMaxWidth,
   forceCollapse = false,
@@ -92,23 +89,30 @@ const MuiPanel = withTheme(({
   title,
   subTitle,
   theme,
-  // handleOnAnnouncements = () => { },
-  handleAnnounceNotification = () => { },
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [receivedUniqueId, setReceivedUniqueId] = useState();
+  const [currentSettings, setCurrentSettings] = useState();
   const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
-  const { handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
-    handlePanelAnnouncement(side, title, icon ? icon : <TextureIcon />)
-  }, [side]);
+    console.log("Announcing panel");
+    setReceivedUniqueId(handlePanelAnnouncement(side, title, icon ? icon : <TextureIcon />))
+  }, []);
 
-  return <>{isVisible &&
+  useEffect(() => {
+    if (receivedUniqueId) {
+      console.log("layout changes", ...layout, receivedUniqueId);
+      setCurrentSettings(layout.find(layoutObject => layoutObject.uniqueId === receivedUniqueId));
+    }
+  }, [layout, receivedUniqueId]);
+
+  return <>
+    {currentSettings && currentSettings.isVisible &&
     <Paper
       elevation={0}
-      id={`mui-panel-${uniqueId}`}
       className={`${classes[side]} ${classes.root} ${inList && classes.rootInList }`}
       style={isExternal ? {
         borderBottom: '0px',
@@ -119,13 +123,14 @@ const MuiPanel = withTheme(({
       } : {
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
-          flex: isCollapsed ? "0 0 auto" : "1 1 auto",
+          flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
     }}
   >
-      <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed, isCollapsed }} />
-      {!(forceCollapse || (!forceCollapse && isCollapsed)) && <Box className={classes.children}>{children}</Box>}
+    <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
+      {!(forceCollapse || (!forceCollapse && currentSettings.isCollapsed)) && <Box className={classes.children}>{children}</Box>}
     </Paper>
-  }</>
+    }
+  </>
 })
 export default MuiPanel;
