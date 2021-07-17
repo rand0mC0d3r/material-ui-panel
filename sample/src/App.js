@@ -73,11 +73,11 @@ function App() {
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
-      {/* <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
+      <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
       <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
+        <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
 
 
 
@@ -85,12 +85,12 @@ function App() {
       <MuiPanel title="Square Iconless" initialSide="left" subTitle="No icon big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
-      {/* <MuiPanel title="Square Icon Disabled" icon={<CropSquareIcon />} iconInHeader={false} initialSide="left" subTitle="No icon big guy...">
+      <MuiPanel title="Square Icon Disabled" icon={<CropSquareIcon />} iconInHeader={false} initialSide="left" subTitle="No icon big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
-      </MuiPanel> */}
+      </MuiPanel>
         <div>
           <iframe
           title="sample"

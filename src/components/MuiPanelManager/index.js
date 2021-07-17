@@ -168,11 +168,13 @@ const MuiPanelManager = withTheme(({
             placement={lo.side}
             enterDelay={1000}
             title={lo.title}>
+            <span>
             <Button
               disableRipple
               disableElevation
-              onClick={() => activatePanelOnSide(lo.index)}
-              variant="outlined"
+              disabled={lo.noPanel}
+              onClick={() => !lo.noPanel && activatePanelOnSide(lo.index)}
+              variant="text"
               fullWidth
               className={`
               ${classes.buttonMenu}
@@ -190,6 +192,7 @@ const MuiPanelManager = withTheme(({
                 {cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
                 </Badge>
               </Button>
+            </span>
           </Tooltip>
           )}
         </div>
