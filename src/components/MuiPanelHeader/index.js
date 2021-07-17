@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Paper, Select, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -15,7 +15,8 @@ const fontSize = 20;
 const useStyles = makeStyles(theme => ({
 
     toolbox: {
-      gap: theme.spacing(1),
+    gap: theme.spacing(1),
+      height: "32px"
     },
       toolboxButton: {
         padding: "0px",
@@ -104,32 +105,29 @@ const MuiPanel = withTheme(({
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
-        {!currentSettings.asEmbedded
-          ? <>
-              <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId})} disableElevation variant="text" className={classes.toolboxButton}>
-                <SwapHorizIcon style={{ fontSize }} />
-              </Button>
-              <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-                {currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
-              </Button>
-            </>
-          : <>
-              <Button onClick={() => handleUnSetAsEmbedded({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-                <AddToHomeScreenIcon />
-              </Button>
-            </>}
-
         {!currentSettings.asEmbedded &&
+          <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+            <SwapHorizIcon style={{ fontSize }} />
+          </Button>
+        }
+        {!currentSettings.asEmbedded && !currentSettings.asGroup &&
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={'none'}
-            // value={layout ? layout.find(lo => lo.uniqueId === currentSettings.parentId).title : 'none'}
-            disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
-            onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
-          >
-            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>{lo.title}</MenuItem>)}
-          </Select>}
+              disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
+              onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
+            >
+            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
+              <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
+            </MenuItem>)}
+            </Select>
+        }
+        {!currentSettings.asEmbedded
+          ? <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+              {currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+            </Button>
+          : <Button onClick={() => handleUnSetAsEmbedded({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+              <AddToHomeScreenIcon />
+            </Button>
+        }
       </Box>
     </Box>
   </Tooltip>

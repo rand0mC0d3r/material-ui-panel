@@ -44,7 +44,7 @@ function DataContextProvider(props) {
             const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
             if (tmpCount > count) { count = tmpCount + 1; }
         })
-        console.log("count Rows", count);
+        // console.log("count Rows", count);
         setRows(count)
     }
 
@@ -98,23 +98,23 @@ function DataContextProvider(props) {
             setLayout(layout => ([...layout.map(lo => {
                 if (lo.side === foundObject.side) {
                     if (lo.uniqueId === foundObject.uniqueId) {
-                        console.log('found by uniqueId')
+                        // console.log('found by uniqueId')
                         return { ...lo, isVisible: !lo.isVisible }
                     } else if (lo.parentId === foundObject.uniqueId) {
-                        console.log('found by parentId')
+                        // console.log('found by parentId')
                         return { ...lo, isVisible: !lo.isVisible }
                     } else {
-                        console.log('not found')
+                        // console.log('not found')
                         return { ...lo, isVisible: false }
                     }
                 }
-                console.log('other side')
+                // console.log('other side')
                 return lo
             })]));
         }
     }
 
-    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 
     return <DataContext.Provider
         value={{

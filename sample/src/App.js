@@ -1,8 +1,13 @@
+import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
+import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
+import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import HotTubIcon from '@material-ui/icons/HotTub';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
@@ -17,29 +22,36 @@ import NotificationPanel from './parts/NotificationPanel';
 function App() {
   return <DataContextProvider>
     <MuiPanelManager>
-      <MuiDivider icon={<GitHubIcon />} tooltip="Only icon separator" />
+      <MuiDivider icon={<GitHubIcon />}/>
       <MuiDivider tooltip="Default separator" />
       <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
-      <MuiPanel title="First Panel" icon={<CameraIcon />}>
+      <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
 
-      <MuiPanel title="SubFunny Panel Skeletons" icon={<CastIcon />}>
+      <MuiPanel title="SubFunny Panel Skeletons" icon={<FormatAlignLeftIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} width="80%" />
       </MuiPanel>
 
-      <MuiPanel title="SubFunny Panel Text" subTitle="No icon big guy..." icon={<CastIcon />}>
+      <MuiPanel title="SubFunny Panel Text" subTitle="No icon big guy..." icon={<AmpStoriesIcon  />}>
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
 
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">
-        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} width="80%" />
+        <Box display="flex" flexDirection="column" style={{ gap: "16px"}}>
+          <div>
+            <Skeleton variant="rect" width={'100%'} height={600} />
+          </div>
+          <div>
+            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+            <Skeleton animation="wave" height={10} width="80%" />
+          </div>
+        </Box>
       </MuiPanel>
 
       <div>

@@ -117,7 +117,7 @@ const MuiPanel = withTheme(({
         .map(lo => lo.uniqueId);
 
       // if (keysRelevant.length > 1) {
-        console.log("total keys", keysRelevant, currentSettings.parentId, receivedUniqueId, keysRelevant.indexOf(receivedUniqueId));
+        // console.log("total keys", keysRelevant, currentSettings.parentId, receivedUniqueId, keysRelevant.indexOf(receivedUniqueId));
       // }
 
       // console.log(keysRelevant.indexOf(receivedUniqueId),
