@@ -1,4 +1,4 @@
-import { Badge, Button, Tooltip } from '@material-ui/core';
+import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -17,6 +17,13 @@ const useStyles = makeStyles(theme => ({
     "gap": "0px 0px",
     "grid-auto-flow": "row",
     backgroundColor: theme.palette.background.default,
+  },
+  shortText: {
+    fontSize: '10px',
+    width: '40px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   badge: {
     // right: -3,
@@ -152,7 +159,7 @@ const MuiPanelManager = withTheme(({
             arrow
             placement={lo.side}
             enterDelay={1000}
-            title={lo.title}>
+            title={lo.tooltip}>
             <span>
             <Button
               disableRipple
@@ -173,8 +180,11 @@ const MuiPanelManager = withTheme(({
                 invisible={!lo.showBadge}
                 color="primary"
                 variant={lo.variant}
-              >
-                {cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+                >
+                  <Box display="flex" alignItems="center" flexDirection="column">
+                    {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+                    {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
+                  </Box>
                 </Badge>
               </Button>
             </span>

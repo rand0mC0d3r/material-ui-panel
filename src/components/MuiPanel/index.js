@@ -99,7 +99,7 @@ const MuiPanel = withTheme(({
 
   useEffect(() => {
     console.log("Announcing panel");
-    setReceivedUniqueId(handlePanelAnnouncement(side, title, icon ? icon : <TextureIcon />))
+    setReceivedUniqueId(handlePanelAnnouncement({ side, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
 
   useEffect(() => {

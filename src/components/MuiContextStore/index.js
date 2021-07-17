@@ -8,7 +8,7 @@ function DataContextProvider(props) {
 
     const [layout, setLayout] = useState(initialLayout);
 
-    const handlePanelAnnouncement = (side, title, icon, noPanel = false) => {
+    const handlePanelAnnouncement = ({ side, shortText, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
         console.log("Generated UniqueID:", uniqueId);
         setLayout(layout => [
@@ -22,7 +22,9 @@ function DataContextProvider(props) {
                 isCollapsed: false,
                 index: layout.length,
                 side,
-                title,
+                showIcon,
+                shortText,
+                tooltip,
                 noPanel,
                 icon,
             }
