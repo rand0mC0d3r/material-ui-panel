@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
 import MuiPanelSettings from '../MuiPanelSettings';
 
@@ -23,10 +23,6 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis'
   },
   badge: {
-    // right: -3,
-    // top: 13,
-    // border: `2px solid ${theme.palette.background.paper}`,
-    // padding: '0 4px',
   },
   bothGrid: {
     "grid-template-columns": "54px auto 1fr auto 54px",
@@ -156,7 +152,7 @@ const MuiPanelManager = withTheme(({
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
-      .map((side, index) => <>
+      .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
           style={{ gridArea: `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
@@ -166,7 +162,8 @@ const MuiPanelManager = withTheme(({
               .filter(lo => lo.side === side)
               .filter(lo => !lo.asEmbedded)
               .map(lo => <Tooltip
-            arrow
+                arrow
+                key={lo.index}
             placement={lo.side}
             enterDelay={1000}
             title={lo.tooltip}>
@@ -206,7 +203,7 @@ const MuiPanelManager = withTheme(({
           <MuiPanelSettings />
         </div>}
       </div>}
-    </>)}
+    </Fragment>)}
     {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / ${rows + 1} / 4`}}))}
   </div>
 })
