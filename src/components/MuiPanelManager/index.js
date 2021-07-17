@@ -2,6 +2,7 @@ import { Badge, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import SettingsIcon from '@material-ui/icons/Settings';
+import TextureIcon from '@material-ui/icons/Texture';
 import React, { cloneElement, useEffect, useState } from 'react';
 import MuiPanelSettings from '../MuiPanelSettings';
 
@@ -114,15 +115,20 @@ const MuiPanelManager = withTheme(({
       ...layout.filter(lo => lo.index !== index),
       {
         showBadge: false,
+        notificationCount: 0,
         variant: 'dot',
         isVisible: false,
         index,
         side,
         title,
         noPanel,
-        icon: icon ? icon : <NotInterestedIcon />
+        icon: icon ? icon : <TextureIcon />
       }
     ]);
+  }
+
+  const handleAnnounceNotification = (index, notificationCount) => {
+    setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
   }
 
   const activatePanelOnSide = (index) => {
@@ -202,6 +208,8 @@ const MuiPanelManager = withTheme(({
       </div>}
     </>)}
 
+    {children.map(child => console.log(child))}
+
     {children
       .filter(child => child.props.title || child.props.icon)
       .map((child, i) => {
@@ -211,6 +219,7 @@ const MuiPanelManager = withTheme(({
         width: 500,
         showBorders: true,
         isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false,
+        handleAnnounceNotification: (notificationCount) => { handleAnnounceNotification(i, notificationCount) },
         handleOnAnnouncements: (side, title, icon, noPanel) => handleAnnounceSelf(i, side, title, icon, noPanel),
       })
     })}

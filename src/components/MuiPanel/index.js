@@ -91,6 +91,7 @@ const MuiPanel = withTheme(({
   subTitle,
   theme,
   handleOnAnnouncements = () => { },
+  handleAnnounceNotification = () => { },
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [side, setSide] = useState(initialSide);
@@ -116,7 +117,6 @@ const MuiPanel = withTheme(({
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
     }}
   >
-
       <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed, isCollapsed }} />
       {!(forceCollapse || (!forceCollapse && isCollapsed)) && <Box className={classes.children}>{children}</Box>}
     </Paper>

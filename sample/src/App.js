@@ -5,12 +5,14 @@ import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelList from './components/MuiPanelList';
 import MuiPanelManager from './components/MuiPanelManager';
+import NotificationPanel from './parts/NotificationPanel';
 
 function App() {
   return (
@@ -74,14 +76,17 @@ function App() {
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
-      <MuiPanel title="Earth Panel" icon={<InfoOutlinedIcon />}  initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} width="80%" /></MuiPanel>
+
+      <MuiDivider title="Notifications" />
+      <MuiPanel title="Notifications Panel" icon={<NotificationsIcon />} initialSide="left">
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+        <Skeleton animation="wave" height={10} width="80%" />
+      </MuiPanel>
 
 
 
-      <MuiDivider title="Headers" />
+      <MuiDivider title="Headers and Icons" />
       <MuiPanel title="Square Iconless" initialSide="left" subTitle="No icon big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
@@ -91,12 +96,13 @@ function App() {
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
-        <div>
-          <iframe
-          title="sample"
-          style={{ width: "100%", height: "100%", border: '0px none' }}
-          src="https://material-ui.com"
-        />
+
+      <div>
+        <iframe
+        title="sample"
+        style={{ width: "100%", height: "100%", border: '0px none' }}
+        src="https://material-ui.com"
+      />
       </div>
     </MuiPanelManager>
   );
