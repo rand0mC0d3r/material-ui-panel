@@ -109,10 +109,19 @@ const MuiPanelManager = withTheme(({
   const [layout, setLayout] = useState([])
   const [sides, setSides] = useState('both')
 
-  const handleAnnounceSelf = (index, side, title, icon) => {
+  const handleAnnounceSelf = (index, side, title, icon, noPanel = false) => {
     setLayout(layout => [
       ...layout.filter(lo => lo.index !== index),
-      { showBadge: false, variant: 'dot', isVisible: false, index, side, title, icon: icon ? icon : <NotInterestedIcon  /> }
+      {
+        showBadge: false,
+        variant: 'dot',
+        isVisible: false,
+        index,
+        side,
+        title,
+        noPanel,
+        icon: icon ? icon : <NotInterestedIcon />
+      }
     ]);
   }
 
@@ -139,6 +148,7 @@ const MuiPanelManager = withTheme(({
       }
     }
 
+    console.log(layout);
     localStorage.setItem(
       'layout',
       JSON.stringify(layout.map(({ index, side, title }) => { return { index, side, title }; })))
@@ -157,7 +167,6 @@ const MuiPanelManager = withTheme(({
             arrow
             placement={lo.side}
             enterDelay={1000}
-            exitDelay={0}
             title={lo.title}>
             <Button
               disableRipple
@@ -190,9 +199,8 @@ const MuiPanelManager = withTheme(({
       </div>}
     </>)}
 
-
     {children
-      .filter(child => child.props.title)
+      .filter(child => child.props.title || child.props.icon)
       .map((child, i) => {
       return cloneElement(
         child, {
@@ -200,11 +208,11 @@ const MuiPanelManager = withTheme(({
         width: 500,
         showBorders: true,
         isVisible: layout.length > 0 ? layout.find(lo => lo.index === i).isVisible : false,
-        handleOnAnnouncements: (side, title, icon) => handleAnnounceSelf(i, side, title, icon),
+        handleOnAnnouncements: (side, title, icon, noPanel) => handleAnnounceSelf(i, side, title, icon, noPanel),
       })
     })}
 
-    {children.filter(child => !child.props.title).map((child, i) => {
+    {children.filter(child => !(child.props.title || child.props.icon)).map((child, i) => {
         return cloneElement( child, { key: i, className: classes.main})
     })}
   </div>

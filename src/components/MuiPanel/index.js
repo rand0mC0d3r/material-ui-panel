@@ -114,7 +114,8 @@ const MuiPanel = withTheme(({
           borderRadius: "0px",
           flex: isCollapsed ? "0 0 auto" : "1 1 auto",
         ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
-      }}>
+    }}
+  >
 
       <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed, isCollapsed }} />
       {!(forceCollapse || (!forceCollapse && isCollapsed)) && <Box className={classes.children}>{children}</Box>}
