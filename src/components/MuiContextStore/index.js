@@ -5,8 +5,10 @@ const DataContext = createContext(null);
 
 function DataContextProvider(props) {
     const initialLayout = get(props, 'layout', []);
+    const initialRows = get(props, 'rows', 1);
 
     const [layout, setLayout] = useState(initialLayout);
+    const [rows, setRows] = useState(initialRows);
 
     const handlePanelAnnouncement = ({ side, shortText, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
@@ -44,12 +46,17 @@ function DataContextProvider(props) {
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
         // console.log("announcing as embedded for id", uniqueId, layout);
-        const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, parentId, asEmbedded: !layoutObject.asEmbedded }
+        const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
+        if (findParent) {
+            const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, parentId, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
             : layoutObject);
-        const activateParent = updateEmbedded.map(layoutObject => { return { ...layoutObject, isVisible: layoutObject.uniqueId === parentId } });
 
-        setLayout(activateParent);
+            const activateParent = updateEmbedded.map(layoutObject => { return { ...layoutObject, isVisible: layoutObject.uniqueId === parentId } });
+
+            setLayout(activateParent);
+        }
+
     }
 
     const handleSetSide = ({ uniqueId }) => {
@@ -85,6 +92,7 @@ function DataContextProvider(props) {
     return <DataContext.Provider
         value={{
             layout, setLayout,
+            rows, setRows,
 
             handleSetAsGroup,
             handleSetVisible,
