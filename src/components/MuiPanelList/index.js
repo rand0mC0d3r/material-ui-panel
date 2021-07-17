@@ -124,11 +124,7 @@ const MuiPanel = withTheme(({
           justifyContent="space-between"
           alignItems="center"
           display="flex"
-          style={isCollapsed ? {
-            gap: theme.spacing(1),
-          } : {
-            gap: theme.spacing(1),
-          }}
+          style={{ gap: theme.spacing(1) }}
           className={`${classes.header} ${embedded && classes.headerEmbedded}`}>
           <Box display="flex" alignItems="center" style={{ gap: theme.spacing(isCollapsed ? 0.75 : 1) }}>
             {iconInPanel && icon && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 }})}

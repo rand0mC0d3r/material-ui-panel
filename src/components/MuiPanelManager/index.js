@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@material-ui/core';
+import { Badge, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { cloneElement, useEffect, useState } from 'react';
@@ -14,6 +14,12 @@ const useStyles = makeStyles(theme => ({
     "gap": "0px 0px",
     "grid-auto-flow": "row",
     backgroundColor: theme.palette.background.default,
+  },
+  badge: {
+    // right: -3,
+    // top: 13,
+    // border: `2px solid ${theme.palette.background.paper}`,
+    // padding: '0 4px',
   },
   bothGrid: {
     "grid-template-columns": "54px auto 1fr auto 54px",
@@ -103,7 +109,10 @@ const MuiPanelManager = withTheme(({
   const [sides, setSides] = useState('both')
 
   const handleAnnounceSelf = (index, side, title, icon) => {
-    setLayout((layout) => ([...layout.filter(lo => lo.index !== index), { isVisible: false, index, side, title, icon }]));
+    setLayout(layout => [
+      ...layout.filter(lo => lo.index !== index),
+      { showBadge: false, variant: 'dot', isVisible: false, index, side, title, icon }
+    ]);
   }
 
   const activatePanelOnSide = (index) => {
@@ -128,6 +137,10 @@ const MuiPanelManager = withTheme(({
         setSides('both')
       }
     }
+
+    localStorage.setItem(
+      'layout',
+      JSON.stringify(layout.map(({ index, side, title }) => { return { index, side, title }; })))
   }, [layout]);
 
   return <div
@@ -157,8 +170,16 @@ const MuiPanelManager = withTheme(({
               ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
             `}
             >
-              {cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
-            </Button>
+              <Badge
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }}
+                badgeContent={4}
+                invisible={!lo.showBadge}
+                color="primary"
+                variant={lo.variant}
+              >
+                {cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+                </Badge>
+              </Button>
           </Tooltip>
           )}
         </div>
