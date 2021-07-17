@@ -23,7 +23,6 @@ function DataContextProvider(props) {
                 isCollapsed: false,
                 index: layout.length,
                 side,
-
                 showIcon,
                 shortText,
                 tooltip,
@@ -41,7 +40,23 @@ function DataContextProvider(props) {
 
     const handleSetSide = ({ uniqueId }) => {
         console.log("switching side for id", uniqueId, layout);
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, side: layoutObject.side === 'right' ? "left" : 'right' } : layoutObject));
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, isVisible: false, side: layoutObject.side === 'right' ? "left" : 'right' } : layoutObject));
+    }
+
+    const handleSetVisible = ({ uniqueId }) => {
+        console.log("toggling visibility for id", uniqueId, layout);
+
+        const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
+        if (foundObject) {
+            setLayout(layout => ([...layout.map(lo => {
+                if (lo.side === foundObject.side) {
+                return { ...lo, isVisible: lo.uniqueId === foundObject.uniqueId ? !lo.isVisible : false }
+                }
+                return lo
+            })]));
+        }
+
+        // setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, isVisible: !layoutObject.isVisible } : layoutObject));
     }
 
     useEffect(() => { console.log('store layout', ...layout) }, [layout]);
@@ -50,6 +65,7 @@ function DataContextProvider(props) {
         value={{
             layout, setLayout,
             handleSetAsGroup,
+            handleSetVisible,
             handleSetSide,
             handlePanelAnnouncement
     }}>{props.children}</DataContext.Provider>

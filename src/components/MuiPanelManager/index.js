@@ -116,7 +116,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, setLayout, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
 
   // const handleAnnounceNotification = (index, notificationCount) => {
   //   setLayout(layout => layout.map(lo => { if (lo.index !== index) { return { ...lo, notificationCount } } return lo}));
@@ -165,7 +165,7 @@ const MuiPanelManager = withTheme(({
               disableRipple
               disableElevation
               disabled={lo.noPanel}
-              onClick={() => !lo.noPanel && activatePanelOnSide(lo.index)}
+                onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
               variant="text"
               fullWidth
               className={`

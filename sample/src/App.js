@@ -1,19 +1,17 @@
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
-import MuiPanelList from './components/MuiPanelList';
 import MuiPanelManager from './components/MuiPanelManager';
 import NotificationPanel from './parts/NotificationPanel';
+
+
 
 function App() {
   return <DataContextProvider>
@@ -23,7 +21,7 @@ function App() {
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
 
-      {/* <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
+      <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
       <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -59,7 +57,7 @@ function App() {
       </MuiPanel>
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
-      </MuiPanel> */}
+      </MuiPanel>
 
       <div>
         <iframe
