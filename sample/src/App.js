@@ -35,7 +35,7 @@ function App() {
       <MuiDivider icon={<NotificationsIcon />} tooltip="Only icon separator" />
       <MuiDivider shortText="ABCD" tooltip="No icon separator" showIcon={false} />
       <MuiDivider shortText="ABCD" tooltip="Icon and text" icon={<NotificationsIcon />} />
-      <MuiDivider shortText="ABCDEFGH" tooltip="Icon and long long text" icon={<NotificationsIcon />} />
+      <MuiDivider shortText="ABCDEFGH" tooltip="Icon and long long text" icon={<NotificationsIcon />} /> */}
 
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">4</MuiPanel>
 
@@ -57,7 +57,7 @@ function App() {
       </MuiPanel>
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
-      </MuiPanel> */}
+      </MuiPanel>
 
       <div>
         <iframe

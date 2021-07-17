@@ -116,6 +116,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
+  const [maxHeight, setMaxHeight] = useState(1)
   const { layout, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
 
   // const handleAnnounceNotification = (index, notificationCount) => {
@@ -136,24 +137,31 @@ const MuiPanelManager = withTheme(({
 
 
   useEffect(() => {
-      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-      if (foundSides.length === 1) {
-        setSides(foundSides)
-      } else {
-        setSides('both')
-      }
+    const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
+    let count = 0;
+    setSides(foundSides.length === 1 ? foundSides : 'both')
 
-    // console.log('effect', layout);
+    layout.forEach(lo => {
+      const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
+      if (tmpCount > count) { count = tmpCount + 1; }
+    })
+    setMaxHeight(count);
+    console.log('effect counting sides', count);
   }, [layout]);
 
   return <div
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
+    // style={{ gridTemplateRows: `repeat(${maxHeight})` }}
+    style={{ 'grid-template-rows': `repeat(${maxHeight}, 1fr)` }}
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <>
-      {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
+        {layout.filter(lo => lo.side === side).length > 0 && <div
+          className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
+          style={{ 'grid-area': `1 / ${side === 'left' ? 1 : 5} / ${maxHeight + 1} / ${side === 'left' ? 1 : 5}` }}
+        >
         <div>
             {layout
               .filter(lo => lo.side === side)
@@ -199,7 +207,7 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
     </>)}
-    {children.map((child, i) => cloneElement( child, { key: i, className: classes.main}))}
+    {children.map((child, i) => cloneElement(child, { key: i, style: { "grid-area": `1 / 3 / ${maxHeight + 1} / 4`}}))}
   </div>
 })
 export default MuiPanelManager;
