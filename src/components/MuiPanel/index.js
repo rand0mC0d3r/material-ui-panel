@@ -95,7 +95,7 @@ const MuiPanel = withTheme(({
   // const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
-  const { layout, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, rows, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
     // console.log("Announcing panel");
@@ -121,7 +121,11 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
-        'grid-area': currentSettings.asGroup ? '' : `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`,
+          'grid-area': currentSettings.asGroup
+            ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
+            : currentSettings.asEmbedded
+              ? `2 / ${currentSettings.side === 'left' ? 2 : 4} / 2 / ${currentSettings.side === 'left' ? 2 : 4}`
+              : `1 / ${currentSettings.side === 'left' ? 2 : 4} / ${rows+1} / ${currentSettings.side === 'left' ? 2 : 4}`,
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
           flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",

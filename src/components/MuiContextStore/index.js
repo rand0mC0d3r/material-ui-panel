@@ -21,7 +21,7 @@ function DataContextProvider(props) {
                 asEmbedded: false,
                 parentId: null,
                 isVisible: false,
-
+                index: layout.length,
                 showBadge: false,
                 notificationCount: 0,
                 variant: 'dot',
