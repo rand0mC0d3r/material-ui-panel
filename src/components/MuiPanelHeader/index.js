@@ -1,14 +1,12 @@
-import { Box, Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
-import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import React, { cloneElement, useContext } from 'react';
 import DataProvider from '../MuiContextStore';
 const fontSize = 20;
 

@@ -1,11 +1,11 @@
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Popover, Tooltip } from '@material-ui/core';
+import { Button, List, ListItem, ListItemIcon, ListItemText, Popover, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import DevicesIcon from '@material-ui/icons/Devices';
 import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
 import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
 import SettingsIcon from '@material-ui/icons/Settings';
-import React, { cloneElement, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   buttonMenu: {
@@ -36,7 +36,6 @@ const MuiPanelManager = withTheme(({
 	};
 
 	const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
 
   return <>
 		<Tooltip arrow title={`Panel settings`}>

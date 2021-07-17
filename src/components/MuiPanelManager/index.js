@@ -1,8 +1,5 @@
-import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import SettingsIcon from '@material-ui/icons/Settings';
-import TextureIcon from '@material-ui/icons/Texture';
 import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
 import MuiPanelSettings from '../MuiPanelSettings';
@@ -144,7 +141,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, handleCountRows, rows, setLayout, handleSetVisible, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, handleCountRows, rows,  handleSetVisible } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
@@ -155,14 +152,14 @@ const MuiPanelManager = withTheme(({
   return <div
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
-    style={{ 'grid-template-rows': `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
+    style={{ gridTemplateRows: `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
-          style={{ 'grid-area': `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
+          style={{ gridArea: `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
         >
         <div>
             {layout
@@ -210,7 +207,7 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
     </>)}
-    {children.map((child, i) => cloneElement(child, { key: i, style: { "grid-area": `1 / 3 / ${rows + 1} / 4`}}))}
+    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / ${rows + 1} / 4`}}))}
   </div>
 })
 export default MuiPanelManager;

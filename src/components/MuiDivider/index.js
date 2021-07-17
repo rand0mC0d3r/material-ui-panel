@@ -1,6 +1,6 @@
 import { withTheme } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiContextStore';
 
 const MuiDivider = withTheme(({
@@ -11,9 +11,10 @@ const MuiDivider = withTheme(({
   showIcon = true,
   theme,
 }) => {
-  const [side, setSide] = useState(initialSide);
   const { handlePanelAnnouncement } = useContext(DataProvider);
-  useEffect(() => { handlePanelAnnouncement({ side, shortText, showIcon, tooltip, icon: icon ? icon: <RemoveIcon />, noPanel: true}) }, [side]);
+  useEffect(() => {
+    handlePanelAnnouncement({ side: initialSide, shortText, showIcon, tooltip, icon: icon ? icon : <RemoveIcon />, noPanel: true })
+  }, []);
   return null
 })
 

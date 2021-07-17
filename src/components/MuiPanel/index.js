@@ -1,12 +1,7 @@
-import { Box, Button, Paper, Tooltip, Typography } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import TextureIcon from '@material-ui/icons/Texture';
-import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 
@@ -76,7 +71,6 @@ const useStyles = makeStyles(theme => ({
 
 const MuiPanel = withTheme(({
   initialSide = 'left',
-  showBorders = false,
   iconInHeader = true,
   icon,
   inList = false,
@@ -96,16 +90,14 @@ const MuiPanel = withTheme(({
   const [currentPosition, setCurrentPosition] = useState(0);
   const classes = useStyles(theme)
 
-  const { layout, rows, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, rows, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
-    // console.log("Announcing panel");
     setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
 
   useEffect(() => {
     if (receivedUniqueId) {
-      // console.log("layout changes", ...layout, receivedUniqueId);
       setCurrentSettings(layout.find(layoutObject => layoutObject.uniqueId === receivedUniqueId));
     }
   }, [layout, receivedUniqueId]);
@@ -115,15 +107,6 @@ const MuiPanel = withTheme(({
       const keysRelevant = layout
         .filter(lo => lo.parentId === currentSettings.parentId || lo.uniqueId === currentSettings.parentId)
         .map(lo => lo.uniqueId);
-
-      // if (keysRelevant.length > 1) {
-        // console.log("total keys", keysRelevant, currentSettings.parentId, receivedUniqueId, keysRelevant.indexOf(receivedUniqueId));
-      // }
-
-      // console.log(keysRelevant.indexOf(receivedUniqueId),
-      //   currentSettings.uniqueId,
-      //   receivedUniqueId)
-      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId).findIndex(lo => lo.uniqueId === currentSettings.uniqueId))
       setCurrentPosition(keysRelevant.indexOf(receivedUniqueId))
     }
   }, [layout, receivedUniqueId, currentSettings]);
@@ -140,7 +123,7 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
-          'grid-area': currentSettings.asGroup
+          gridArea: currentSettings.asGroup
             ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
             : currentSettings.asEmbedded
               ? `${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4} / ${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4}`

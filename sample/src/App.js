@@ -1,21 +1,15 @@
-import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
-import CameraIcon from '@material-ui/icons/Camera';
-import CastIcon from '@material-ui/icons/Cast';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
-import CropSquareIcon from '@material-ui/icons/CropSquare';
 import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import HotTubIcon from '@material-ui/icons/HotTub';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import Skeleton from '@material-ui/lab/Skeleton';
 import './App.css';
 import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelManager from './components/MuiPanelManager';
-import NotificationPanel from './parts/NotificationPanel';
 
 
 
