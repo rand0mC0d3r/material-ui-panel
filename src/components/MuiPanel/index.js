@@ -112,9 +112,19 @@ const MuiPanel = withTheme(({
 
   useEffect(() => {
     if (receivedUniqueId && currentSettings) {
-      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId).findIndex(lo => lo.uniqueId === receivedUniqueId))
-      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId))
-      // setCurrentPosition(
+      const keysRelevant = layout
+        .filter(lo => lo.parentId === currentSettings.parentId || lo.uniqueId === currentSettings.parentId)
+        .map(lo => lo.uniqueId);
+
+      // if (keysRelevant.length > 1) {
+        console.log("total keys", keysRelevant, currentSettings.parentId, receivedUniqueId, keysRelevant.indexOf(receivedUniqueId));
+      // }
+
+      // console.log(keysRelevant.indexOf(receivedUniqueId),
+      //   currentSettings.uniqueId,
+      //   receivedUniqueId)
+      // console.log(layout.filter(lo => lo.parentId === currentSettings.uniqueId).findIndex(lo => lo.uniqueId === currentSettings.uniqueId))
+      setCurrentPosition(keysRelevant.indexOf(receivedUniqueId))
     }
   }, [layout, receivedUniqueId, currentSettings]);
 
@@ -133,7 +143,7 @@ const MuiPanel = withTheme(({
           'grid-area': currentSettings.asGroup
             ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
             : currentSettings.asEmbedded
-              ? `${layout.filter(lo => lo.parentId === currentSettings.uniqueId)}2 / ${currentSettings.side === 'left' ? 2 : 4} / 2 / ${currentSettings.side === 'left' ? 2 : 4}`
+              ? `${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4} / ${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4}`
               : `1 / ${currentSettings.side === 'left' ? 2 : 4} / ${rows+1} / ${currentSettings.side === 'left' ? 2 : 4}`,
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
