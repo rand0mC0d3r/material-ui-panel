@@ -64,7 +64,7 @@ const MuiPanel = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { layout, handleSetAsEmbedded, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
+  const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
   return <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
     <Box
@@ -78,12 +78,6 @@ const MuiPanel = withTheme(({
         display="flex"
         alignItems="center"
         style={{gap: theme.spacing(inList ? 0.25 : 1)}}>
-
-        {inList && <div className={classes.toolboxButton}>
-          {isCollapsed
-            ? <ChevronRightIcon style={{ fontSize }} />
-            : <ExpandMoreIcon style={{ fontSize }} />}
-        </div>}
 
         {iconInHeader && icon !== undefined && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}</>}
 
@@ -103,6 +97,13 @@ const MuiPanel = withTheme(({
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
+
+        {currentSettings.asEmbedded && <div onClick={() => handleToggleCollapse({ uniqueId: currentSettings.uniqueId })} className={classes.toolboxButton}>
+          {isCollapsed
+            ? <ChevronRightIcon style={{ fontSize }} />
+            : <ExpandMoreIcon style={{ fontSize }} />}
+        </div>}
+
         {!currentSettings.asEmbedded &&
           <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
             <SwapHorizIcon style={{ fontSize }} />

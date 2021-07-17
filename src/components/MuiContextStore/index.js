@@ -53,15 +53,23 @@ function DataContextProvider(props) {
             ? { ...layoutObject, asGroup: !layoutObject.asGroup }
             : layoutObject));
     }
+
     const handleUnSetAsEmbedded = ({ uniqueId }) => {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
             : layoutObject));
         handleCountRows()
     }
+
     const handlePanelAlerts = ({ uniqueId, notificationCount }) => {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, notificationCount }
+            : layoutObject));
+    }
+
+    const handleToggleCollapse = ({ uniqueId }) => {
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
             : layoutObject));
     }
 
@@ -132,6 +140,7 @@ function DataContextProvider(props) {
             handleSetVisible,
             handlePanelAlerts,
             handleSetSide,
+            handleToggleCollapse,
             handleSetAsEmbedded,
             handlePanelAnnouncement
     }}>{props.children}</DataContext.Provider>
