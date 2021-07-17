@@ -113,7 +113,7 @@ const MuiPanel = withTheme(({
     {currentSettings && currentSettings.isVisible &&
     <Paper
       elevation={0}
-      className={`${classes[currentSettings.side]} ${classes.root} ${inList && classes.rootInList }`}
+      className={`${classes.root} ${inList && classes.rootInList }`}
       style={isExternal ? {
         borderBottom: '0px',
         borderBottomLeftRadius: '0px',
@@ -121,6 +121,7 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
+        'grid-area': currentSettings.asGroup ? '' : `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`,
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
           flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
