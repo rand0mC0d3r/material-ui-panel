@@ -43,7 +43,12 @@ function DataContextProvider(props) {
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
         // console.log("announcing as embedded for id", uniqueId, layout);
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, parentId, isEmbedded: !layoutObject.isEmbedded } : layoutObject));
+        const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+            ? { ...layoutObject, parentId, isEmbedded: !layoutObject.isEmbedded }
+            : layoutObject);
+        const activateParent = updateEmbedded.map(layoutObject => { return { ...layoutObject, isVisible: layoutObject.uniqueId === parentId } });
+
+        setLayout(activateParent);
     }
 
     const handleSetSide = ({ uniqueId }) => {
