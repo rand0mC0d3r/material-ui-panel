@@ -21,7 +21,7 @@ function App() {
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
 
-      <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
+      <MuiDivider shortText="////" showIcon={false} />
       <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />

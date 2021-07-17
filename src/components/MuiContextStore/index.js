@@ -10,7 +10,7 @@ function DataContextProvider(props) {
 
     const handlePanelAnnouncement = ({ side, shortText, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
-        console.log("Generated UniqueID:", uniqueId);
+        // console.log("Generated UniqueID:", uniqueId);
         setLayout(layout => [
             ...layout,
             {
@@ -34,18 +34,17 @@ function DataContextProvider(props) {
     }
 
     const handleSetAsGroup = ({ uniqueId }) => {
-        console.log("announcing as group for id", uniqueId, layout);
+        // console.log("announcing as group for id", uniqueId, layout);
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, asGroup: !layoutObject.asGroup } : layoutObject));
     }
 
     const handleSetSide = ({ uniqueId }) => {
-        console.log("switching side for id", uniqueId, layout);
+        // console.log("switching side for id", uniqueId, layout);
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, isVisible: false, side: layoutObject.side === 'right' ? "left" : 'right' } : layoutObject));
     }
 
     const handleSetVisible = ({ uniqueId }) => {
-        console.log("toggling visibility for id", uniqueId, layout);
-
+        // console.log("toggling visibility for id", uniqueId, layout);
         const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
         if (foundObject) {
             setLayout(layout => ([...layout.map(lo => {
@@ -55,11 +54,9 @@ function DataContextProvider(props) {
                 return lo
             })]));
         }
-
-        // setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, isVisible: !layoutObject.isVisible } : layoutObject));
     }
 
-    useEffect(() => { console.log('store layout', ...layout) }, [layout]);
+    // useEffect(() => { console.log('store layout', ...layout) }, [layout]);
 
     return <DataContext.Provider
         value={{

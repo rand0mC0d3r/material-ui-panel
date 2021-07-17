@@ -143,7 +143,7 @@ const MuiPanelManager = withTheme(({
         setSides('both')
       }
 
-    console.log('effect', layout);
+    // console.log('effect', layout);
   }, [layout]);
 
   return <div

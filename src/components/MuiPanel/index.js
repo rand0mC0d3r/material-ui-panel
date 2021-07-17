@@ -98,13 +98,13 @@ const MuiPanel = withTheme(({
   const { layout, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
-    console.log("Announcing panel");
+    // console.log("Announcing panel");
     setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
 
   useEffect(() => {
     if (receivedUniqueId) {
-      console.log("layout changes", ...layout, receivedUniqueId);
+      // console.log("layout changes", ...layout, receivedUniqueId);
       setCurrentSettings(layout.find(layoutObject => layoutObject.uniqueId === receivedUniqueId));
     }
   }, [layout, receivedUniqueId]);
