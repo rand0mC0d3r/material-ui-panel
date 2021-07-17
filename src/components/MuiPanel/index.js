@@ -74,7 +74,7 @@ const MuiPanel = withTheme(({
   iconInHeader = true,
   icon,
   inList = false,
-  width = 700,
+  width = 550,
   minMaxWidth,
   forceCollapse = false,
   rtl = false,
@@ -130,7 +130,7 @@ const MuiPanel = withTheme(({
         ...!embedded && getRtl(rtl, theme),
         ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
       } : {
-          alignSelf:  currentSettings.isCollapsed ? 'flex-end' : 'stretch',
+          alignSelf:  currentSettings.isCollapsed ? 'flex-start' : 'stretch',
           gridArea: currentSettings.asGroup
             ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
             : currentSettings.asEmbedded
@@ -138,7 +138,7 @@ const MuiPanel = withTheme(({
               : `1 / ${currentSettings.side === 'left' ? 2 : 4} / ${rows+1} / ${currentSettings.side === 'left' ? 2 : 4}`,
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
-          flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
+          // flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
         ...currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`}
     }}
   >

@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     position: "absolute",
     width: "100%",
+    overflow: "hidden",
     display: "grid",
     "grid-template-rows": "1fr",
     "gap": "0px 0px",
@@ -124,7 +125,7 @@ const useStyles = makeStyles(theme => ({
   },
   panelWrapper: {
     display: 'flex',
-    alignItems: 'stretch'
+    // alignItems: 'stretch'
   },
   leftPanelWrapper: {
     borderLeft: `3px solid ${theme.palette.primary.main}`,
@@ -152,7 +153,7 @@ const MuiPanelManager = withTheme(({
   return <div
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
-    style={{ gridTemplateRows: `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
+    // style={{ gridTemplateRows: `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
@@ -207,7 +208,7 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
     </Fragment>)}
-    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / ${rows + 1} / 4`}}))}
+    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / ${rows + 1} / 3`}}))}
   </div>
 })
 export default MuiPanelManager;

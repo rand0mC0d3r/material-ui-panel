@@ -98,10 +98,11 @@ const MuiPanel = withTheme(({
       </Box>
       <Box display="flex" className={classes.toolbox}>
 
-        {currentSettings.asEmbedded &&
+        {/* {currentSettings.asEmbedded && */}
           <Button onClick={() => handleToggleCollapse({ uniqueId: currentSettings.uniqueId })} className={classes.toolboxButton}>
             {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
-        </Button>}
+        </Button>
+        {/* } */}
 
         {!currentSettings.asEmbedded &&
           <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>

@@ -35,6 +35,15 @@ function App() {
       <MuiPanel title="SubFunny Panel Text" subTitle="No icon big guy..." icon={<AmpStoriesIcon  />}>
         <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
+      <MuiPanel title="SubFunny Panel Text1" subTitle="No icon big guy..." icon={<AmpStoriesIcon  />}>
+        <Skeleton variant="rect" width={'100%'} height={150} />
+      </MuiPanel>
+      <MuiPanel title="SubFunny Panel Text2" subTitle="No icon big guy..." icon={<AmpStoriesIcon  />}>
+        <Skeleton variant="rect" width={'100%'} height={400} />
+      </MuiPanel>
+      <MuiPanel title="SubFunny Panel Text3" subTitle="No icon big guy..." icon={<AmpStoriesIcon  />}>
+        <Skeleton variant="rect" width={'100%'} height={300} />
+      </MuiPanel>
 
       <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">
         <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
