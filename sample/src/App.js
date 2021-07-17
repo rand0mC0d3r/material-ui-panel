@@ -18,65 +18,21 @@ import NotificationPanel from './parts/NotificationPanel';
 function App() {
   return <DataContextProvider>
     <MuiPanelManager>
-      {/* <MuiPanel title="First Panel" icon={<CameraIcon />}>
+      <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
+      <MuiPanel title="First Panel" icon={<CameraIcon />}>
         {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
       </MuiPanel>
-      <MuiPanelList
-        title="Shapes"
-        subTitle="Forms and panels"
-        icon={<CalendarViewDayIcon />}>
-        <MuiPanel title="SubFunny Panel BlaBla" icon={<CastIcon />}>
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton variant="circle" width={48} height={48} />
-          <Skeleton animation="wave" height={24} width="60%" />
-          <Skeleton animation="wave" height={48} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={24} width="40%" />
-          <Skeleton animation="wave" height={18} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={24} width="80%" />
-        </MuiPanel>
-        <MuiPanel title="SubFunny Panel" icon={<FileCopyIcon />}>
-          <Skeleton variant="rect" width={'100%'} height={600} />
-        </MuiPanel>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
-          <Skeleton variant="rect" width={'100%'} height={600} />
-        </MuiPanel>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
-          <Skeleton variant="circle" width={100} height={100} />
-        </MuiPanel>
-      </MuiPanelList>
-      <MuiPanelList iconInPanel={false} title="Test Panel NoCion" noIconInPanel icon={<CameraIcon />}>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" />
-        </MuiPanel>
-        <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
-      </MuiPanelList> */}
-      {/* <MuiPanel title="Funny Panel" icon={<CastIcon />}>
+
+      {/* <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
+      <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} width="80%" />
-      </MuiPanel> */}
-      {/* <MuiPanel title="Silly Panel" icon={<CastIcon />} initialSide="left">
-        <Skeleton variant="rect" width={'100%'} height={600} />
       </MuiPanel>
-      <MuiPanel title="Rainbow Panel" icon={<ChromeReaderModeIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
-      {/* <MuiPanel title="Music Panel" icon={<FileCopyIcon />} initialSide="left">3</MuiPanel> */}
-      {/* <MuiPanel title="Musk Panel" icon={<CastIcon />} initialSide="left"> <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" /></MuiPanel> */}
+      <MuiPanel title="SubFunny Panel" icon={<CastIcon />}>sub 2b</MuiPanel>
 
+      <MuiDivider shortText="////" tooltip="No icon separator" showIcon={false} />
       <MuiDivider tooltip="Default separator" />
       <MuiDivider icon={<NotificationsIcon />} tooltip="Only icon separator" />
       <MuiDivider shortText="ABCD" tooltip="No icon separator" showIcon={false} />
@@ -103,7 +59,7 @@ function App() {
       </MuiPanel>
       <MuiPanel title="Square Sample" icon={<CropSquareIcon />} initialSide="left" subTitle="A big guy...">
         <Skeleton variant="rect" width={'100%'} height={600} />
-      </MuiPanel>
+      </MuiPanel> */}
 
       <div>
         <iframe

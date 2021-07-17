@@ -15,6 +15,7 @@ function DataContextProvider(props) {
             ...layout,
             {
                 uniqueId,
+                asGroup: false,
                 showBadge: false,
                 notificationCount: 0,
                 variant: 'dot',
@@ -22,6 +23,7 @@ function DataContextProvider(props) {
                 isCollapsed: false,
                 index: layout.length,
                 side,
+
                 showIcon,
                 shortText,
                 tooltip,
@@ -32,11 +34,23 @@ function DataContextProvider(props) {
         return uniqueId
     }
 
+    const handleSetAsGroup = ({ uniqueId }) => {
+        console.log("announcing as group for id", uniqueId, layout);
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, asGroup: !layoutObject.asGroup } : layoutObject));
+    }
+
+    const handleSetSide = ({ uniqueId }) => {
+        console.log("switching side for id", uniqueId, layout);
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, side: layoutObject.side === 'right' ? "left" : 'right' } : layoutObject));
+    }
+
     useEffect(() => { console.log('store layout', ...layout) }, [layout]);
 
     return <DataContext.Provider
         value={{
             layout, setLayout,
+            handleSetAsGroup,
+            handleSetSide,
             handlePanelAnnouncement
     }}>{props.children}</DataContext.Provider>
 }

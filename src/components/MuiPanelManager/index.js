@@ -196,10 +196,7 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
     </>)}
-
-    {children.map((child, i) => {
-        return cloneElement( child, { key: i, className: classes.main})
-    })}
+    {children.map((child, i) => cloneElement( child, { key: i, className: classes.main}))}
   </div>
 })
 export default MuiPanelManager;

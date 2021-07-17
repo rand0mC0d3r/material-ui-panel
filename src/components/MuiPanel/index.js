@@ -92,14 +92,14 @@ const MuiPanel = withTheme(({
 }) => {
   const [receivedUniqueId, setReceivedUniqueId] = useState();
   const [currentSettings, setCurrentSettings] = useState();
-  const [side, setSide] = useState(initialSide);
+  // const [side, setSide] = useState(initialSide);
   const classes = useStyles(theme)
 
-  const { layout, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, handleSetAsGroup, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
     console.log("Announcing panel");
-    setReceivedUniqueId(handlePanelAnnouncement({ side, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
+    setReceivedUniqueId(handlePanelAnnouncement({ side: initialSide, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
   }, []);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ const MuiPanel = withTheme(({
     {currentSettings && currentSettings.isVisible &&
     <Paper
       elevation={0}
-      className={`${classes[side]} ${classes.root} ${inList && classes.rootInList }`}
+      className={`${classes[currentSettings.side]} ${classes.root} ${inList && classes.rootInList }`}
       style={isExternal ? {
         borderBottom: '0px',
         borderBottomLeftRadius: '0px',
@@ -124,10 +124,10 @@ const MuiPanel = withTheme(({
         ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
           borderRadius: "0px",
           flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
-        ...showBorders && (side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
+        ...showBorders && (currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`})
     }}
   >
-    <MuiPanelHeader {...{ title, subTitle, icon, iconInHeader, side, setSide, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
+    <MuiPanelHeader {...{ uniqueId: receivedUniqueId, title, subTitle, icon, iconInHeader, setAsGroup: handleSetAsGroup, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
       {!(forceCollapse || (!forceCollapse && currentSettings.isCollapsed)) && <Box className={classes.children}>{children}</Box>}
     </Paper>
     }

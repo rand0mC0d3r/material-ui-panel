@@ -5,8 +5,9 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import React, { cloneElement, useEffect, useState } from 'react';
-
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import React, { cloneElement, useContext, useEffect, useState } from 'react';
+import DataProvider from '../MuiContextStore';
 const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
@@ -46,9 +47,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MuiPanel = withTheme(({
-  initialSide = 'left',
   iconInHeader = true,
   icon,
+  uniqueId,
   inList = false,
   handleOnCollapse = () => { },
   color = 'textPrimary',
@@ -58,17 +59,9 @@ const MuiPanel = withTheme(({
   isCollapsed,
   setIsCollapsed = () => { },
   theme,
-  side,
-  setSide = () => { },
-  handleOnAnnouncements = () => { },
 }) => {
   const classes = useStyles(theme)
-
-  useEffect(() => {
-    if (embedded) {
-      handleOnAnnouncements(side, title, icon)
-    }
-  }, [embedded, side]);
+  const { handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
   return <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
     <Box
@@ -105,10 +98,13 @@ const MuiPanel = withTheme(({
       </Box>
       <Box display="flex" className={classes.toolbox}>
         {!inList &&
-        <Button onClick={() => setSide(side === 'right' ? 'left' : 'right')} disableElevation variant="text" className={classes.toolboxButton} size="small">
+          <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton} size="small">
           <SwapHorizIcon style={{ fontSize }} />
         </Button>
         }
+        <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton} size="small">
+          <ViewStreamIcon />
+        </Button>
       </Box>
     </Box>
   </Tooltip>
