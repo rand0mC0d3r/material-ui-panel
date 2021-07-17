@@ -157,7 +157,7 @@ const MuiPanelManager = withTheme(({
         <div>
             {layout
               .filter(lo => lo.side === side)
-              .filter(lo => !lo.isEmbedded)
+              .filter(lo => !lo.asEmbedded)
               .map(lo => <Tooltip
             arrow
             placement={lo.side}

@@ -18,10 +18,11 @@ function DataContextProvider(props) {
                 asGroup: false,
                 asEmbedded: false,
                 parentId: null,
+                isVisible: false,
+
                 showBadge: false,
                 notificationCount: 0,
                 variant: 'dot',
-                isVisible: false,
                 isCollapsed: false,
                 index: layout.length,
                 side,
@@ -44,7 +45,7 @@ function DataContextProvider(props) {
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
         // console.log("announcing as embedded for id", uniqueId, layout);
         const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, parentId, isEmbedded: !layoutObject.isEmbedded }
+            ? { ...layoutObject, parentId, asEmbedded: !layoutObject.asEmbedded }
             : layoutObject);
         const activateParent = updateEmbedded.map(layoutObject => { return { ...layoutObject, isVisible: layoutObject.uniqueId === parentId } });
 
@@ -57,19 +58,29 @@ function DataContextProvider(props) {
     }
 
     const handleSetVisible = ({ uniqueId }) => {
-        // console.log("toggling visibility for id", uniqueId, layout);
         const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
         if (foundObject) {
+            console.log("toggling visibility for id", uniqueId, foundObject);
             setLayout(layout => ([...layout.map(lo => {
                 if (lo.side === foundObject.side) {
-                return { ...lo, isVisible: lo.uniqueId === foundObject.uniqueId ? !lo.isVisible : false }
+                    if (lo.uniqueId === foundObject.uniqueId) {
+                        console.log('found by uniqueId')
+                        return { ...lo, isVisible: !lo.isVisible }
+                    } else if (lo.parentId === foundObject.uniqueId) {
+                        console.log('found by parentId')
+                        return { ...lo, isVisible: !lo.isVisible }
+                    } else {
+                        console.log('not found')
+                        return { ...lo, isVisible: false }
+                    }
                 }
+                console.log('other side')
                 return lo
             })]));
         }
     }
 
-    useEffect(() => { console.log('store layout', ...layout) }, [layout]);
+    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 
     return <DataContext.Provider
         value={{
