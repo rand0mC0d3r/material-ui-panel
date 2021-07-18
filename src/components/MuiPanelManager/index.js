@@ -137,6 +137,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     // alignItems: 'stretch'
   },
+  panelContent: {
+    padding: "16px",
+  },
   leftPanelWrapper: {
     borderLeft: `3px solid ${theme.palette.primary.main}`,
   },
@@ -224,7 +227,7 @@ const MuiPanelManager = withTheme(({
           .filter(lo => lo.side === 'left')
           .map(layoutObject => <div>
             <MuiPanelHeader {...{ layoutObject }} />
-            {layoutObject.children}
+            <div className={classes.panelContent}>{layoutObject.children}</div>
           </div>)}
     </div>
     </div>}
