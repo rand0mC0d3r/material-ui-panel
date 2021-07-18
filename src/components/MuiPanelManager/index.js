@@ -171,7 +171,6 @@ const MuiPanelManager = withTheme(({
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
-          // style={{ gridArea: `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
         >
         <div>
             {layout
@@ -219,24 +218,20 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
       </Fragment>)}
-    {sides === 'left' && <div className={classes.panelContainer}>
-      <div className={classes.leftPanel}>
+
+
+
+    {['left', 'right']
+      .filter(side => side === sides)
+      .map(side => <div key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
         {layout
-          .filter(lo => lo.side === 'left' && lo.isVisible && !lo.noPanel)
-          .map(layoutObject => <div>
+          .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
+          .map(layoutObject => <>
             <MuiPanelHeader {...{ layoutObject }} />
             {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>}
-          </div>)}
-    </div>
-    </div>}
-    {sides === 'right' && <div className={classes.panelContainer}>
-      <div className={classes.rightPanel}>
-      rp
-    {layout
-        .filter(lo => lo.side === 'right'  && lo.isVisible)
-        .map(lo => <>{lo.title}{lo.children}</>)}
-      </div>
-    </div>}
+          </>)}
+      </div>)}
+
     {children}
   </div>
 })
