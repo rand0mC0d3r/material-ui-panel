@@ -5,6 +5,7 @@ import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 import MuiPanelSettings from '../MuiPanelSettings';
 
+const panelSize = '600px';
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100%",
@@ -31,19 +32,19 @@ const useStyles = makeStyles(theme => ({
       padding: '0 4px',
   },
   bothGrid: {
-    "grid-template-columns": "54px 600px 1fr 500px 54px",
+    "grid-template-columns": `54px ${panelSize} 1fr ${panelSize} 54px`,
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
   },
   leftGrid: {
-    "grid-template-columns": "54px 600px 1fr",
+    "grid-template-columns": `54px ${panelSize} 1fr`,
     "grid-template-areas":`
       "left-menu left-panel main"
     `
   },
   rightRight: {
-    "grid-template-columns": "1fr 600px 54px",
+    "grid-template-columns": `1fr ${panelSize} 54px`,
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
@@ -222,7 +223,6 @@ const MuiPanelManager = withTheme(({
 
 
     {['left', 'right']
-      .filter(side => side === sides)
       .map(side => <div key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
         {layout
           .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
