@@ -2,6 +2,7 @@ import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
+import MuiPanelHeader from '../MuiPanelHeader';
 import MuiPanelSettings from '../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({
@@ -30,19 +31,19 @@ const useStyles = makeStyles(theme => ({
       padding: '0 4px',
   },
   bothGrid: {
-    "grid-template-columns": "54px auto 1fr auto 54px",
+    "grid-template-columns": "54px 500px 1fr 500px 54px",
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
   },
   leftGrid: {
-    "grid-template-columns": "54px auto 1fr",
+    "grid-template-columns": "54px 500px 1fr",
     "grid-template-areas":`
       "left-menu left-panel main"
     `
   },
   rightRight: {
-    "grid-template-columns": "1fr auto 54px",
+    "grid-template-columns": "1fr 500px 54px",
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
@@ -62,7 +63,16 @@ const useStyles = makeStyles(theme => ({
     borderLeft: `1px solid ${theme.palette.divider}`
   },
 
-  leftPanel: { "grid-area": "left-panel" },
+  panelContainer: {
+    position: "relative",
+    overflow: 'scroll',
+  },
+  leftPanel: {
+    "grid-area": "left-panel",
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
   topMenu: { "grid-area": "top-menu" },
   topPanel: { "grid-area": "top-panel" },
   rightPanel: { "grid-area": "right-panel" },
@@ -142,25 +152,23 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, handleCountRows, rows,  handleSetVisible } = useContext(DataProvider);
+  const { layout, rows,  handleSetVisible } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-    setSides(foundSides.length === 1 ? foundSides : 'both')
-    handleCountRows()
+    setSides(foundSides.length === 1 ? foundSides[0] : 'both')
   }, [layout]);
 
   return <div
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
-    // style={{ gridTemplateRows: `repeat(${rows === 0 ? 1 : rows}, 1fr)` }}
   >
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
-          style={{ gridArea: `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
+          // style={{ gridArea: `1 / ${side === 'left' ? 1 : 5} / ${rows + 1} / ${side === 'left' ? 1 : 5}` }}
         >
         <div>
             {layout
@@ -207,8 +215,28 @@ const MuiPanelManager = withTheme(({
           <MuiPanelSettings />
         </div>}
       </div>}
-    </Fragment>)}
-    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / ${rows + 1} / 3`}}))}
+      </Fragment>)}
+    {sides === 'left' && <div className={classes.panelContainer}>
+      <div className={classes.leftPanel}>
+        {layout
+          // .filter(lo => lo.side === 'left' && lo.isVisible)
+          .filter(lo => !lo.noPanel)
+          .filter(lo => lo.side === 'left')
+          .map(layoutObject => <div>
+            <MuiPanelHeader {...{ layoutObject }} />
+            {layoutObject.children}
+          </div>)}
+    </div>
+    </div>}
+    {sides === 'right' && <div className={classes.panelContainer}>
+      <div className={classes.rightPanel}>
+      rp
+    {layout
+        .filter(lo => lo.side === 'right'  && lo.isVisible)
+        .map(lo => <>{lo.title}{lo.children}</>)}
+      </div>
+    </div>}
+    {children}
   </div>
 })
 export default MuiPanelManager;

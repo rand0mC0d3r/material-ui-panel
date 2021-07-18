@@ -49,60 +49,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MuiPanel = withTheme(({
-  iconInHeader = true,
-  icon,
-  inList = false,
-  handleOnCollapse = () => { },
-  color = 'textPrimary',
-  embedded = true,
-  title,
-  subTitle,
-  asGroup,
-  currentSettings,
-  isCollapsed,
-  setIsCollapsed = () => { },
+  layoutObject: { iconInHeader, icon, asEmbedded, title, subTitle, asGroup },
   theme,
 }) => {
   const classes = useStyles(theme)
   const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
-  return <Tooltip arrow placement="right" title={!embedded ? `Double-Click to ${isCollapsed ? 'expand' : 'minimize'}` : ''}>
+  return <Tooltip arrow placement="right">
     <Box
       justifyContent="space-between"
-      onClick={() => { if (inList) { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); } }}
+      // onClick={() => { if (inList) { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); } }}
       alignItems="center"
       display="flex"
-      className={`${classes.header} ${inList && classes.headerInList}`}>
-
-      <Box
-        display="flex"
-        alignItems="center"
-        style={{gap: theme.spacing(inList ? 0.25 : 1)}}>
-
-        {iconInHeader && icon !== undefined && !inList && <>{cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}</>}
+      // className={`${classes.header} ${inList && classes.headerInList}`}
+      className={`${classes.header}`}
+    >
+      <Box display="flex" alignItems="center" style={{gap: theme.spacing(1)}}>
+        {iconInHeader
+          && icon !== undefined
+          && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
 
         <Box className={classes.headerContainer} display="flex" alignItems="center">
           <Typography
-              style={{
-                fontWeight: inList ? 'bold' : 'normal'
-              }} {...{ color }}
-              variant={inList ? 'caption' : 'button'}
-          >
-
-            {title}
-
-            </Typography>
+            style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
+            variant={asEmbedded ? 'caption' : 'button'}
+          >{title}</Typography>
           {subTitle && <Typography color="textSecondary" variant="caption">{subTitle}</Typography>}
-          {currentSettings.asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
+          {asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
         </Box>
       </Box>
-      <Box display="flex" className={classes.toolbox}>
+      {/* <Box display="flex" className={classes.toolbox}>
 
-        {/* {currentSettings.asEmbedded && */}
+        {currentSettings.asEmbedded &&
           <Button onClick={() => handleToggleCollapse({ uniqueId: currentSettings.uniqueId })} className={classes.toolboxButton}>
             {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
         </Button>
-        {/* } */}
+        }
 
         {!currentSettings.asEmbedded &&
           <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
@@ -127,7 +109,7 @@ const MuiPanel = withTheme(({
               <AddToHomeScreenIcon />
             </Button>
         }
-      </Box>
+      </Box> */}
     </Box>
   </Tooltip>
 })
