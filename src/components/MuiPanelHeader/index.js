@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MuiPanel = withTheme(({
-  layoutObject: { iconInHeader, icon, asEmbedded, title, subTitle, asGroup },
+  layoutObject: { uniqueId, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
   theme,
 }) => {
   const classes = useStyles(theme)
@@ -78,38 +78,34 @@ const MuiPanel = withTheme(({
           {asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
         </Box>
       </Box>
-      {/* <Box display="flex" className={classes.toolbox}>
+      <Box display="flex" className={classes.toolbox}>
 
-        {currentSettings.asEmbedded &&
-          <Button onClick={() => handleToggleCollapse({ uniqueId: currentSettings.uniqueId })} className={classes.toolboxButton}>
-            {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
+        <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
+          {isCollapsed
+            ? <ChevronRightIcon style={{ fontSize }} />
+            : <ExpandMoreIcon style={{ fontSize }} />}
         </Button>
-        }
 
-        {!currentSettings.asEmbedded &&
-          <Button onClick={() => handleSetSide({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+        {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
             <SwapHorizIcon style={{ fontSize }} />
-          </Button>
-        }
-        {!currentSettings.asEmbedded && !currentSettings.asGroup &&
-          <Select
-              disabled={currentSettings.asGroup || !layout.some(lo => lo.asGroup)}
-              onChange={(event) => { handleSetAsEmbedded({ uniqueId: currentSettings.uniqueId, parentId: event.target.value }) }}
-            >
+        </Button>}
+
+        {!asEmbedded && !asGroup && <Select
+          disabled={asGroup || !layout.some(lo => lo.asGroup)}
+          onChange={(event) => { handleSetAsEmbedded({ uniqueId: uniqueId, parentId: event.target.value }) }}>
             {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
               <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
             </MenuItem>)}
-            </Select>
-        }
-        {!currentSettings.asEmbedded
-          ? <Button onClick={() => handleSetAsGroup({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-              {currentSettings.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+        </Select>}
+
+        {!asEmbedded
+          ? <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+              {asGroup ? <ViewStreamIcon /> : <WebAssetIcon />}
             </Button>
-          : <Button onClick={() => handleUnSetAsEmbedded({ uniqueId: currentSettings.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+          : <Button onClick={() => handleUnSetAsEmbedded({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
               <AddToHomeScreenIcon />
-            </Button>
-        }
-      </Box> */}
+            </Button>}
+      </Box>
     </Box>
   </Tooltip>
 })

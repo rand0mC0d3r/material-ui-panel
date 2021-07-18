@@ -31,19 +31,19 @@ const useStyles = makeStyles(theme => ({
       padding: '0 4px',
   },
   bothGrid: {
-    "grid-template-columns": "54px 500px 1fr 500px 54px",
+    "grid-template-columns": "54px 600px 1fr 500px 54px",
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
   },
   leftGrid: {
-    "grid-template-columns": "54px 500px 1fr",
+    "grid-template-columns": "54px 600px 1fr",
     "grid-template-areas":`
       "left-menu left-panel main"
     `
   },
   rightRight: {
-    "grid-template-columns": "1fr 500px 54px",
+    "grid-template-columns": "1fr 600px 54px",
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
@@ -222,12 +222,10 @@ const MuiPanelManager = withTheme(({
     {sides === 'left' && <div className={classes.panelContainer}>
       <div className={classes.leftPanel}>
         {layout
-          // .filter(lo => lo.side === 'left' && lo.isVisible)
-          .filter(lo => !lo.noPanel)
-          .filter(lo => lo.side === 'left')
+          .filter(lo => lo.side === 'left' && lo.isVisible && !lo.noPanel)
           .map(layoutObject => <div>
             <MuiPanelHeader {...{ layoutObject }} />
-            <div className={classes.panelContent}>{layoutObject.children}</div>
+            {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>}
           </div>)}
     </div>
     </div>}
