@@ -1,7 +1,7 @@
 import { Box, Paper } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import TextureIcon from '@material-ui/icons/Texture';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 
@@ -91,11 +91,22 @@ const MuiPanel = withTheme(({
   const [currentPosition, setCurrentPosition] = useState(0);
   const classes = useStyles(theme)
 
-  const { layout, rows, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
+  const { layout, handleSetChildren, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
 
   useEffect(() => {
-    setReceivedUniqueId(handlePanelAnnouncement({ children, iconInHeader, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
-  }, []);
+    if (!receivedUniqueId) {
+      setReceivedUniqueId(handlePanelAnnouncement({ children, iconInHeader, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
+    }
+  }, [receivedUniqueId]);
+
+  const callbackHandleSetChildren = useCallback(({ uniqueId, children }) => {
+    handleSetChildren({uniqueId, children})
+  }, [handleSetChildren]);
+
+  useEffect(() => {
+    console.log('children updated of uniqueId', receivedUniqueId, children)
+    // if (receivedUniqueId) { callbackHandleSetChildren({uniqueId: receivedUniqueId, children})}
+  }, [children, receivedUniqueId]);
 
   useEffect(() => {
     if (receivedUniqueId) {
@@ -119,35 +130,5 @@ const MuiPanel = withTheme(({
   }, [layout, receivedUniqueId, currentSettings]);
 
   return null;
-
-  // <>
-  //   {currentSettings && currentSettings.isVisible &&
-  //   <Paper
-  //     elevation={0}
-  //     className={`${classes.root} ${inList && classes.rootInList }`}
-  //     style={isExternal ? {
-  //       borderBottom: '0px',
-  //       borderBottomLeftRadius: '0px',
-  //       borderBottomRightRadius: '0px',
-  //       ...!embedded && getRtl(rtl, theme),
-  //       ...embedded ? { width: 'auto' } : getWidth(width, minMaxWidth)
-  //     } : {
-  //         alignSelf:  currentSettings.isCollapsed ? 'flex-start' : 'stretch',
-  //         gridArea: currentSettings.asGroup
-  //           ? `1 / ${currentSettings.side === 'left' ? 2 : 4} / 1 / ${currentSettings.side === 'left' ? 2 : 4}`
-  //           : currentSettings.asEmbedded
-  //             ? `${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4} / ${currentPosition+1} / ${currentSettings.side === 'left' ? 2 : 4}`
-  //             : `1 / ${currentSettings.side === 'left' ? 2 : 4} / ${rows+1} / ${currentSettings.side === 'left' ? 2 : 4}`,
-  //       ...inList ? { width: 'auto' } : getWidth(width, minMaxWidth),
-  //         borderRadius: "0px",
-  //         // flex: currentSettings.isCollapsed ? "0 0 auto" : "1 1 auto",
-  //       ...currentSettings.side === 'left' ? { borderRight: `1px solid ${theme.palette.divider}`} : { borderLeft: `1px solid ${theme.palette.divider}`}
-  //   }}
-  // >
-  //   <MuiPanelHeader {...{ uniqueId: receivedUniqueId, title, subTitle, icon, iconInHeader, currentSettings, inList, setIsCollapsed: () => { }, isCollapsed: currentSettings.isCollapsed }} />
-  //     {!(forceCollapse || (!forceCollapse && currentSettings.isCollapsed)) && <Box className={classes.children}>{children}</Box>}
-  //   </Paper>
-  //   }
-  // </>
 })
 export default MuiPanel;

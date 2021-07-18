@@ -5,7 +5,6 @@ import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 import MuiPanelSettings from '../MuiPanelSettings';
 
-const panelSize = '600px';
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100%",
@@ -32,19 +31,19 @@ const useStyles = makeStyles(theme => ({
       padding: '0 4px',
   },
   bothGrid: {
-    "grid-template-columns": `54px ${panelSize} 1fr ${panelSize} 54px`,
+    "grid-template-columns": `54px auto 1fr auto 54px`,
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
   },
   leftGrid: {
-    "grid-template-columns": `54px ${panelSize} 1fr`,
+    "grid-template-columns": `54px auto 1fr`,
     "grid-template-areas":`
       "left-menu left-panel main"
     `
   },
   rightRight: {
-    "grid-template-columns": `1fr ${panelSize} 54px`,
+    "grid-template-columns": `1fr auto 54px`,
     "grid-template-areas":`
       "left-menu left-panel main right-panel right-menu"
     `
@@ -223,16 +222,17 @@ const MuiPanelManager = withTheme(({
 
 
     {['left', 'right']
+      .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
       .map(side => <div key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
         {layout
           .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
-          .map(layoutObject => <>
+          .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
             <MuiPanelHeader {...{ layoutObject }} />
             {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>}
-          </>)}
+          </Fragment>)}
       </div>)}
 
-    {children}
+    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / 1 / 3`}}))}
   </div>
 })
 export default MuiPanelManager;

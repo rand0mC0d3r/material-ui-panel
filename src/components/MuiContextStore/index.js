@@ -10,7 +10,7 @@ function DataContextProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
     const [rows, setRows] = useState(initialRows);
 
-    const handlePanelAnnouncement = ({ children, side, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ children, side, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
         console.log(children)
         setLayout(layout => [
@@ -25,7 +25,7 @@ function DataContextProvider(props) {
                 isVisible: false,
                 index: layout.length,
                 showBadge: false,
-                notificationCount: 0,
+                notificationCount,
                 variant: 'standard',
                 isCollapsed: false,
                 index: layout.length,
@@ -75,6 +75,10 @@ function DataContextProvider(props) {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
             : layoutObject));
+    }
+
+    const handleSetChildren = ({ uniqueId, children }) => {
+        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, children } : layoutObject));
     }
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
@@ -138,6 +142,7 @@ function DataContextProvider(props) {
             layout, setLayout,
             rows,
 
+            handleSetChildren,
             handleCountRows,
             handleUnSetAsEmbedded,
             handleSetAsGroup,
