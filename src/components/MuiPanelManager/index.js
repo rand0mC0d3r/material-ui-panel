@@ -1,6 +1,7 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
+import { createPortal } from "react-dom";
 import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
 import MuiPanelSettings from '../MuiPanelSettings';
@@ -223,12 +224,18 @@ const MuiPanelManager = withTheme(({
 
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
-      .map(side => <div key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
+      .map(side => <div id="blabla" key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
         {layout
           .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
           .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
             <MuiPanelHeader {...{ layoutObject }} />
-            {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>}
+            portal start
+            {layoutObject.uniqueId && <>
+              <div id={`portal-${layoutObject.uniqueId}`} />
+              {/* {createPortal(<>{children}</>, document.getElementById(`portal-${layoutObject.uniqueId}`))} */}
+            </>}
+            portal end
+            {/* {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>} */}
             {/* {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.ref.current}</div>} */}
           </Fragment>)}
       </div>)}

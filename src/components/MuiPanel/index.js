@@ -46,7 +46,7 @@ const MuiPanel = ({
 
   useEffect(() => { if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount }); } }, [notificationCount, receivedUniqueId]);
 
-  // return createPortal(children, domNode);
+  // return <>{receivedUniqueId && window.document.querySelector(`portal-${receivedUniqueId}`) && createPortal(<>{children}</>, window.document.querySelector(`portal-${receivedUniqueId}`))}</>;
   return null;
 }
 export default MuiPanel;
