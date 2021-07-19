@@ -13,13 +13,15 @@ const MuiPanel = ({
   const [ receivedUniqueId, setReceivedUniqueId ] = useState();
   const { handleSetChildren, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
 
-  const ref = useRef(null)
-
   useEffect(() => {
     if (!receivedUniqueId) {
-      setReceivedUniqueId(handlePanelAnnouncement({ ref, children, iconInHeader, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
+      setReceivedUniqueId(handlePanelAnnouncement({ children, iconInHeader, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
     }
   }, [receivedUniqueId]);
+
+  // useEffect(() => {
+  //   console.log('reference generated', ref.current)
+  // }, [ref]);
 
   // const callbackHandleSetChildren = useCallback(({ uniqueId, children }) => {
   //   handleSetChildren({uniqueId, children})
@@ -34,6 +36,7 @@ const MuiPanel = ({
 
   useEffect(() => { if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount }); } }, [notificationCount, receivedUniqueId]);
 
-  return <div style={{display: 'none'}} {...{ ref }}>{children}</div>;
+  // return <div style={{display: 'none'}} {...{ ref }}>{children}</div>;
+  return null
 }
 export default MuiPanel;

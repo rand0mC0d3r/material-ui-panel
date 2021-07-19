@@ -9,7 +9,7 @@ const NotificationPanel = () => {
   useEffect(() => { console.log(alerts) }, [alerts]);
 
   return <MuiPanel title="Notifications Panel"
-    // notificationCount={alerts}
+    notificationCount={alerts}
     icon={<NotificationsIcon />}>
     <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
       Alerts: {alerts}
