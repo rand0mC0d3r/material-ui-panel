@@ -229,6 +229,7 @@ const MuiPanelManager = withTheme(({
           .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
             <MuiPanelHeader {...{ layoutObject }} />
             {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>}
+            {/* {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.ref.current}</div>} */}
           </Fragment>)}
       </div>)}
 
