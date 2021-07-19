@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiContextStore';
 
 const MuiDivider = withTheme(({
-  initialSide = 'left',
+  defaultSide = 'left',
   tooltip,
   shortText,
   icon,
@@ -13,7 +13,7 @@ const MuiDivider = withTheme(({
 }) => {
   const { handlePanelAnnouncement } = useContext(DataProvider);
   useEffect(() => {
-    handlePanelAnnouncement({ side: initialSide, shortText, showIcon, tooltip, icon: icon ? icon : <RemoveIcon />, noPanel: true })
+    handlePanelAnnouncement({ side: defaultSide, shortText, showIcon, tooltip, icon: icon ? icon : <RemoveIcon />, noPanel: true })
   }, []);
   return null
 })

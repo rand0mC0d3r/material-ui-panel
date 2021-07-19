@@ -8,7 +8,9 @@ const NotificationPanel = () => {
 
   useEffect(() => { console.log(alerts) }, [alerts]);
 
-  return <MuiPanel title="Notifications Panel" notificationCount={alerts} icon={<NotificationsIcon />}>
+  return <MuiPanel title="Notifications Panel"
+    // notificationCount={alerts}
+    icon={<NotificationsIcon />}>
     <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
       Alerts: {alerts}
       <Button variant="outlined" onClick={() => { setAlerts(alerts => alerts + 1); }}>Add</Button>

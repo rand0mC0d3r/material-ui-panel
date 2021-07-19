@@ -10,7 +10,7 @@ function DataContextProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
     const [rows, setRows] = useState(initialRows);
 
-    const handlePanelAnnouncement = ({ children, side, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ children, side, ref, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
         console.log(children)
         setLayout(layout => [
@@ -18,11 +18,12 @@ function DataContextProvider(props) {
             {
                 uniqueId,
                 side,
+                ref,
+                isVisible: false,
                 asGroup: false,
                 asEmbedded: false,
                 iconInHeader,
                 parentId: null,
-                isVisible: false,
                 index: layout.length,
                 showBadge: false,
                 notificationCount,

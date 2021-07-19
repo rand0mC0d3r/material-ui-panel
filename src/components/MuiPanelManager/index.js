@@ -155,7 +155,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, rows,  handleSetVisible } = useContext(DataProvider);
+  const { layout, handleSetVisible } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
