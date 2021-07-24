@@ -15,13 +15,15 @@ function DataContextProvider(props) {
             {
                 uniqueId,
                 side,
-                ref,
-                isCollapsed: false,
+
+
                 isVisible: false,
                 asGroup: false,
                 asEmbedded: false,
-                iconInHeader,
                 parentId: null,
+                iconInHeader,
+                isCollapsed: false,
+                ref,
                 index: layout.length,
                 showBadge: false,
                 notificationCount,
@@ -68,9 +70,9 @@ function DataContextProvider(props) {
         const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
         if (findParent) {
             const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, parentId, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
+            ? { ...layoutObject, parentId, isVisible: true, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
             : layoutObject);
-            const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId
+            const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
                 ? { ...layoutObject, isVisible: true }
                 : layoutObject
             );
@@ -98,17 +100,17 @@ function DataContextProvider(props) {
             setLayout(layout => ([...layout.map(lo => {
                 if (lo.side === foundObject.side) {
                     if (lo.uniqueId === foundObject.uniqueId) {
-                        // console.log('found by uniqueId')
+                        console.log('found by uniqueId')
                         return { ...lo, isVisible: !lo.isVisible, notificationCount: 0 }
                     } else if (lo.parentId === foundObject.uniqueId) {
-                        // console.log('found by parentId')
-                        return { ...lo, isVisible: !lo.isVisible }
+                        console.log('found by parentId')
+                        return { ...lo, isVisible: true }
                     } else {
-                        // console.log('not found')
+                        console.log('not found')
                         return { ...lo, isVisible: false }
                     }
                 }
-                // console.log('other side')
+                console.log('other side')
                 return lo
             })]));
         }

@@ -33,7 +33,7 @@ function App() {
           <Skeleton animation="wave" height={10} width="80%" />
         </MuiPanel>
 
-        <MuiPanel title="SubFunny Panel Text" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStoriesIcon />}>
+        <MuiPanel title="SubFunny Panel Text sdds sdf dsf sdf sdf sdf sdf dsf sdf sd fsd sd" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStoriesIcon />}>
           <Skeleton variant="rect" width={'100%'} height={600} />
         </MuiPanel>
         <MuiPanel title="SubFunny Panel Text1" subTitle="No icon big guy..." icon={<AmpStoriesIcon />}>
@@ -46,7 +46,7 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
-        <MuiPanel title="Rain Panel" icon={<ChromeReaderModeIcon />} initialSide="left">
+        <MuiPanel title="Rain Panel sdfdsf ds fds fds fsd fsd fsd fsd f sdf sdf sdf sdf  fsdf dsfds" icon={<ChromeReaderModeIcon />} initialSide="left">
           <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
             <div>
               <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />

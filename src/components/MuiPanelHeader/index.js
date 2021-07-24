@@ -86,9 +86,9 @@ const MuiPanel = withTheme(({
             : <ExpandMoreIcon style={{ fontSize }} />}
         </Button>
 
-        {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+        {/* {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
             <SwapHorizIcon style={{ fontSize }} />
-        </Button>}
+        </Button>} */}
 
         {!asEmbedded && !asGroup && <Select
           disabled={asGroup || !layout.some(lo => lo.asGroup)}
@@ -98,13 +98,13 @@ const MuiPanel = withTheme(({
             </MenuItem>)}
         </Select>}
 
-        {!asEmbedded
+        {/* {!asEmbedded
           ? <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
               {asGroup ? <ViewStreamIcon /> : <WebAssetIcon />}
             </Button>
           : <Button onClick={() => handleUnSetAsEmbedded({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
               <AddToHomeScreenIcon />
-            </Button>}
+            </Button>} */}
       </Box>
     </Box>
   </Tooltip>

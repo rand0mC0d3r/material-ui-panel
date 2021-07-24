@@ -1,4 +1,6 @@
-import { Badge, Box, Button, Tooltip } from '@material-ui/core';
+import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
@@ -25,10 +27,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.default,
   },
         toolboxButton: {
-        padding: "0px",
-        width: '28px',
-        minWidth: '28px',
-        lineHeight: '0px'
       },
   shortText: {
     fontSize: '10px',
@@ -131,6 +129,15 @@ const useStyles = makeStyles(theme => ({
       right: 2,
     },
   },
+  modalTitle: {
+    width: '200px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    padding: '8px',
+    fontSize: '12px',
+    backgroundColor: theme.palette.divider,
+  },
   rightButtonMenu: {
     borderRight: "3px solid transparent",
   },
@@ -164,7 +171,7 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { handleSetVisible, handleSetSide } = useContext(DataProvider);
+  const { handleSetVisible, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
 
  const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -225,22 +232,58 @@ const MuiMenuButton = withTheme(({
       </span>
     </Tooltip>
     <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: side !== 'right' ? 'right' : 'left',
+      id={id}
+      open={open}
+      anchorEl={anchorEl}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: 'center',
+        horizontal: side !== 'right' ? 'right' : 'left',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: side !== 'right' ? 'left' : 'right',
+      }}
+    >
+      <div className={ classes.modalTitle}>{lo.tooltip}</div>
+      <Box
+        style={{
+          gap: '8px',
+          padding: '8px',
+
         }}
-        transformOrigin={{
-          vertical: 'center',
-          horizontal: side !== 'right' ? 'left' : 'right',
-        }}
-      >
-        {!lo.asEmbedded && <Button onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-            <SwapHorizIcon style={{ fontSize: 20 }} />
-        </Button>}
+        display="flex"
+        flexDirection="column"
+        alignItems="center">
+
+        {!lo.asEmbedded && <Button
+          size="small"
+          fullWidth
+          onClick={() => handleSetSide({ uniqueId: lo.uniqueId })}
+          variant="outlined"
+          startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}
+          className={classes.toolboxButton}>
+            Switch sides
+      </Button>}
+
+      {!lo.asEmbedded
+          ? <Button
+            onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })}
+            variant="outlined"
+            size="small"
+            fullWidth
+            startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
+            className={classes.toolboxButton}>
+              Grouping
+            </Button>
+          : <Button
+            onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}
+            size="small"
+            startIcon={<AddToHomeScreenIcon />}
+            variant="outlined" className={classes.toolboxButton}>
+              Promote
+          </Button>}
+        </Box>
       </Popover>
     </>
 })
