@@ -42,6 +42,6 @@ const MuiPanel = ({
     if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount }); }
   }, [notificationCount, receivedUniqueId]);
 
-  return layoutObject && receivedUniqueId ? createPortal(children, document.getElementById(`${side}-panel`)) : null
+  return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<>{children}</>, document.getElementById(`${side}-panel`)) : null
 }
 export default MuiPanel;

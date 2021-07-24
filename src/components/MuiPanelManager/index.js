@@ -32,19 +32,19 @@ const useStyles = makeStyles(theme => ({
       padding: '0 4px',
   },
   bothGrid: {
-    "grid-template-columns": `54px auto 1fr auto 54px`,
+    "grid-template-columns": `54px minmax(auto,500px) 1fr minmax(auto,500px) 54px`,
     "grid-template-areas":`
       "leftMenu leftPanel main rightPanel rightMenu"
     `
   },
   leftGrid: {
-    "grid-template-columns": `54px auto 1fr`,
+    "grid-template-columns": `54px minmax(auto,500px) 1fr`,
     "grid-template-areas":`
       "leftMenu leftPanel main"
     `
   },
   rightRight: {
-    "grid-template-columns": `1fr auto 54px`,
+    "grid-template-columns": `1fr minmax(auto,500px) 54px`,
     "grid-template-areas":`
       "leftMenu leftPanel main rightPanel rightMenu"
     `
