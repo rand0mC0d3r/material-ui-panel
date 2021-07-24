@@ -16,9 +16,9 @@ function App() {
   return (
     <DataContextProvider>
       <MuiPanelManager>
-        {/* <MuiDivider icon={<GitHubIcon />} />
+        <MuiDivider icon={<GitHubIcon />} />
         <MuiDivider tooltip="Default separator" />
-        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" /> */}
+        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
         <NotificationPanel />
 

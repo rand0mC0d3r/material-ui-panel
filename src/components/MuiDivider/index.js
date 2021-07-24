@@ -15,6 +15,7 @@ const MuiDivider = withTheme(({
   useEffect(() => {
     handlePanelAnnouncement({ side: defaultSide, shortText, showIcon, tooltip, icon: icon ? icon : <RemoveIcon />, noPanel: true })
   }, []);
+
   return null
 })
 

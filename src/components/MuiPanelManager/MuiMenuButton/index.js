@@ -1,9 +1,8 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider from '../MuiContextStore';
-import MuiPanelSettings from '../MuiPanelSettings';
-import MuiMenuButton from './MuiMenuButton';
+import DataProvider from '../../MuiContextStore';
+import MuiPanelSettings from '../../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -145,47 +144,49 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const availableSides = ['left', 'right'];
-const MuiPanelManager = withTheme(({
-  children,
+const MuiMenuButton = withTheme(({
+  lo,
+  side,
   theme,
-  allowRightClick = false,
 }) => {
   const classes = useStyles(theme)
-  const [sides, setSides] = useState('both')
-  const { layout, handleSetVisible } = useContext(DataProvider);
+  const { handleSetVisible } = useContext(DataProvider);
 
-  useEffect(() => {
-    const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-    setSides(foundSides.length === 1 ? foundSides[0] : 'both')
-  }, [layout]);
-
-  return <div onContextMenu={(e) => { !allowRightClick && e.preventDefault() }} className={`${classes.root} ${classes[`${sides}Grid`]}`}>
-    {availableSides
-      .map(side => <div
-        id={`${side}-panel`} key={`${side}-panel`}
-        className={`${classes.panelContainer} ${side === 'left' ? classes.leftPanel : classes.rightPanel}`}
-        style={{
-          gridArea: `${side}Panel`,
-          overflow: 'hidden auto',
-          width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
-        }}
-      />)}
-    {availableSides
-      .filter(side => layout.some(lo => lo.side === side))
-      .map((side, index) => <Fragment key={index}>
-        {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
-          <div>
-            {layout
-              .filter(lo => lo.side === side)
-              .filter(lo => !lo.asEmbedded)
-              .map(lo => <MuiMenuButton {...{ lo, side }} />)}
-          </div>
-          {index === 0 && <div><MuiPanelSettings /></div>}
-        </div>}
-    </Fragment>)}
-
-    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: "main"}}))}
-  </div>
+  return <Tooltip
+      arrow
+      key={lo.index}
+      placement={lo.side}
+      enterDelay={1000}
+      title={lo.tooltip}
+    >
+      <span>
+        <Button
+          disableRipple
+          disableElevation
+          disabled={lo.noPanel}
+          onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
+          variant="text"
+          fullWidth
+          className={`
+          ${classes.buttonMenu}
+          ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
+          ${classes[`${side}ButtonMenu`]}
+          ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+        `}
+        >
+          <Badge
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            badgeContent={lo.notificationCount}
+            color="primary"
+            variant={lo.variant}
+          >
+            <Box display="flex" alignItems="center" flexDirection="column">
+              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+              {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
+            </Box>
+          </Badge>
+        </Button>
+      </span>
+    </Tooltip>
 })
-export default MuiPanelManager;
+export default MuiMenuButton;
