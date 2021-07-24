@@ -69,6 +69,8 @@ const useStyles = makeStyles(theme => ({
 
     display: 'flex',
     flexDirection: 'column',
+
+    justifyContent: 'flex-end'
   },
   leftPanel: {
     borderRight: `1px solid ${theme.palette.divider}`,
