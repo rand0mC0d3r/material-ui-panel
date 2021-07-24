@@ -68,20 +68,16 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     overflow: 'scroll',
     maxWidth: '500px',
-  },
-  leftPanel: {
-    "grid-area": "leftPanel",
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+  },
+  leftPanel: {
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
   topMenu: { "grid-area": "top-menu" },
   topPanel: { "grid-area": "top-panel" },
   rightPanel: {
-    "grid-area": "rightPanel",
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
+    borderLeft: `1px solid ${theme.palette.divider}`,
   },
 
   bottomPanel: { "grid-area": "bottom-panel" },
@@ -173,8 +169,8 @@ const MuiPanelManager = withTheme(({
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
   >
-    <div id={`left-panel`} className={classes.panelContainer} style={{gridArea: 'leftPanel'}} />
-    <div id={`right-panel`} className={classes.panelContainer} style={{gridArea: 'rightPanel'}} />
+    <div id={`left-panel`} className={classes.panelContainer, classes.leftPanel} style={{gridArea: 'leftPanel'}} />
+    <div id={`right-panel`} className={classes.panelContainer, classes.rightPanel} style={{gridArea: 'rightPanel'}} />
 
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
@@ -228,20 +224,6 @@ const MuiPanelManager = withTheme(({
         </div>}
       </div>}
       </Fragment>)}
-
-
-      {/* {['left', 'right']
-        .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
-        .map(side => <div id={`${side}-panel`} key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
-          {layout
-            .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
-            .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
-              <MuiPanelHeader {...{ layoutObject }} />
-              <div>child.start</div>
-              {layoutObject.uniqueId && document.getElementById(`${side}-panel`) && <>{render(layoutObject.ref.render, document.getElementById(`${side}-panel`))}</>}
-              <div>child.end</div>
-            </Fragment>)}
-        </div>)} */}
 
     {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: "main"}}))}
   </div>

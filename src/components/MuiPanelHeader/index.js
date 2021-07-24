@@ -55,13 +55,12 @@ const MuiPanel = withTheme(({
   const classes = useStyles(theme)
   const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
-  return <Tooltip arrow placement="right">
+  return <Tooltip arrow title="Double click to collapse" placement="right">
     <Box
       justifyContent="space-between"
-      // onClick={() => { if (inList) { setIsCollapsed((isCollapsed) => !isCollapsed); handleOnCollapse(); } }}
+      onDoubleClick={() => handleToggleCollapse({ uniqueId })}
       alignItems="center"
       display="flex"
-      // className={`${classes.header} ${inList && classes.headerInList}`}
       className={`${classes.header}`}
     >
       <Box display="flex" alignItems="center" style={{gap: theme.spacing(1)}}>

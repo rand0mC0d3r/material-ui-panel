@@ -16,9 +16,9 @@ function App() {
   return (
     <DataContextProvider>
       <MuiPanelManager>
-        <MuiDivider icon={<GitHubIcon />} />
+        {/* <MuiDivider icon={<GitHubIcon />} />
         <MuiDivider tooltip="Default separator" />
-        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
+        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" /> */}
 
         <NotificationPanel />
 
@@ -67,7 +67,7 @@ function App() {
           <iframe
             title="sample"
             style={{ width: "100%", height: "100%", border: '0px none' }}
-            src="https://material-ui.com"
+            src="https://en.wikipedia.org/wiki/Special:Random"
           />
           {/* content */}
         </div>

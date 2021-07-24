@@ -18,6 +18,7 @@ function DataContextProvider(props) {
                 uniqueId,
                 side,
                 ref,
+                isCollapsed: false,
                 isVisible: false,
                 asGroup: false,
                 asEmbedded: false,
@@ -27,7 +28,7 @@ function DataContextProvider(props) {
                 showBadge: false,
                 notificationCount,
                 variant: 'standard',
-                isCollapsed: false,
+
                 index: layout.length,
                 subTitle,
                 title,
