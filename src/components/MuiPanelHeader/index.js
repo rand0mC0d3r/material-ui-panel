@@ -3,6 +3,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
@@ -55,7 +56,7 @@ const MuiPanel = withTheme(({
   const classes = useStyles(theme)
   const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
-  return <Tooltip arrow title="Double click to collapse" placement="right">
+  return <Tooltip arrow enterDelay={2500} title="Double click to collapse" placement="right">
     <Box
       justifyContent="space-between"
       onDoubleClick={() => handleToggleCollapse({ uniqueId })}
@@ -68,12 +69,12 @@ const MuiPanel = withTheme(({
           && icon !== undefined
           && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
 
-        <Box className={classes.headerContainer} display="flex" alignItems="center">
+        <Box className={classes.headerContainer} flexWrap={true} display="flex" alignItems="center">
           <Typography
             style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
             variant={asEmbedded ? 'caption' : 'button'}
           >{title}</Typography>
-          {subTitle && <Typography color="textSecondary" variant="caption">{subTitle}</Typography>}
+          {subTitle && <Tooltip title={subTitle} placement='bottom'><InfoOutlinedIcon style={{fontSize: '16px', color: theme.palette.text.hint }} /></Tooltip>}
           {asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
         </Box>
       </Box>

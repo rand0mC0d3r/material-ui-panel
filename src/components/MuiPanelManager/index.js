@@ -72,18 +72,11 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   leftPanel: {
-    width: '500px',
     borderRight: `1px solid ${theme.palette.divider}`,
   },
-  topMenu: { "grid-area": "top-menu" },
-  topPanel: { "grid-area": "top-panel" },
   rightPanel: {
-    width: '500px',
     borderLeft: `1px solid ${theme.palette.divider}`,
   },
-
-  bottomPanel: { "grid-area": "bottom-panel" },
-  bottomMenu: { "grid-area": "bottom-menu" },
   main: { "grid-area": "main" },
   iconButton: {
     fontSize: "26px",
@@ -153,6 +146,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const availableSides = ['left', 'right'];
 const MuiPanelManager = withTheme(({
   children,
   theme,
@@ -172,17 +166,16 @@ const MuiPanelManager = withTheme(({
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
   >
 
-    {['left', 'right']
-      .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
+    {availableSides
       .map(side => <div
         id={`${side}-panel`}
         key={`${side}-panel`}
         className={classes.panelContainer, side === 'left' ? classes.leftPanel : classes.rightPanel}
-        style={{ gridArea: `${side}Panel` }}
+        style={{ gridArea: `${side}Panel`, width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}` }}
       />)}
 
 
-    {['left', 'right']
+    {availableSides
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
