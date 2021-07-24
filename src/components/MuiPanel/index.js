@@ -10,6 +10,8 @@ const MuiPanel = ({
   title, subTitle,
   notificationCount = 0,
 
+  noPadding = false,
+
   children,
 }) => {
   const [ receivedUniqueId, setReceivedUniqueId ] = useState();
@@ -42,6 +44,9 @@ const MuiPanel = ({
     if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount }); }
   }, [notificationCount, receivedUniqueId]);
 
-  return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<>{children}</>, document.getElementById(`${side}-panel`)) : null
+  return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<>
+    <MuiPanelHeader {...{ layoutObject }} />
+    <div style={{padding: noPadding ? null : '16px'}}>{children}</div>
+  </>, document.getElementById(`${side}-panel`)) : null
 }
 export default MuiPanel;
