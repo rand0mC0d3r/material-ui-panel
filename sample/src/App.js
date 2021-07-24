@@ -64,11 +64,12 @@ function App() {
         </MuiPanel> */}
 
         <div>
-          <iframe
+          {/* <iframe
             title="sample"
             style={{ width: "100%", height: "100%", border: '0px none' }}
             src="https://material-ui.com"
-          />
+          /> */}
+          content
         </div>
       </MuiPanelManager>
     </DataContextProvider>
