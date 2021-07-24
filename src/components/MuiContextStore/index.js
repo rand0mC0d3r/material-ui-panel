@@ -5,10 +5,8 @@ const DataContext = createContext(null);
 
 function DataContextProvider(props) {
     const initialLayout = get(props, 'layout', []);
-    const initialRows = get(props, 'rows', 1);
 
     const [layout, setLayout] = useState(initialLayout);
-    const [rows, setRows] = useState(initialRows);
 
     const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
@@ -28,7 +26,6 @@ function DataContextProvider(props) {
                 showBadge: false,
                 notificationCount,
                 variant: 'standard',
-
                 index: layout.length,
                 subTitle,
                 title,
@@ -43,16 +40,6 @@ function DataContextProvider(props) {
         return uniqueId
     }
 
-    const handleCountRows = () => {
-        let count = 0;
-        layout.forEach(lo => {
-            const tmpCount = layout.filter(layoutObject => layoutObject.parentId === lo.uniqueId).length;
-            if (tmpCount > count) { count = tmpCount + 1; }
-        })
-        // console.log("count Rows", count);
-        setRows(count)
-    }
-
     const handleSetAsGroup = ({ uniqueId }) => {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, asGroup: !layoutObject.asGroup }
@@ -63,7 +50,6 @@ function DataContextProvider(props) {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
             : layoutObject));
-        handleCountRows()
     }
 
     const handlePanelAlerts = ({ uniqueId, notificationCount }) => {
@@ -76,22 +62,6 @@ function DataContextProvider(props) {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
             ? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
             : layoutObject));
-    }
-
-    const handleSetChildrenAndReference = ({ uniqueId, children, ref }) => {
-
-        // const addChildrenAndRef = layout.map(layoutObject => {
-        //     if (layoutObject.uniqueId === uniqueId) {
-        //         console.log("match")
-        //         console.log("handlekids", uniqueId, children, ref);
-        //         return { ...layoutObject, children, ref, test: "bla" }
-        //     }
-        //     return layoutObject
-        // });
-        // console.log('infused', addChildrenAndRef)
-
-
-        // setLayout(addChildrenAndRef);
     }
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
@@ -117,11 +87,7 @@ function DataContextProvider(props) {
                     isVisible: true,
                     side: layoutObject.side === 'right' ? "left" : 'right'
                 }
-                : {
-                    ...layoutObject,
-                    isVisible: false,
-                })
-
+                : { ...layoutObject, isVisible: false })
         );
     }
 
@@ -148,15 +114,19 @@ function DataContextProvider(props) {
         }
     }
 
+    useEffect(() => {
+        localStorage.setItem(
+            'material-ui-panel.layout',
+            JSON.stringify(layout.map(l => ({ ...l, children: null, icon: null }))    )
+        )
+    }, [layout]);
+
     useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 
     return <DataContext.Provider
         value={{
             layout, setLayout,
-            rows,
 
-            handleSetChildrenAndReference,
-            handleCountRows,
             handleUnSetAsEmbedded,
             handleSetAsGroup,
             handleSetVisible,

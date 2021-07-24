@@ -163,8 +163,12 @@ const MuiPanelManager = withTheme(({
     {availableSides
       .map(side => <div
         id={`${side}-panel`} key={`${side}-panel`}
-        className={classes.panelContainer, side === 'left' ? classes.leftPanel : classes.rightPanel}
-        style={{ gridArea: `${side}Panel`, width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}` }}
+        className={`${classes.panelContainer} ${side === 'left' ? classes.leftPanel : classes.rightPanel}`}
+        style={{
+          gridArea: `${side}Panel`,
+          overflow: 'hidden auto',
+          width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
+        }}
       />)}
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
