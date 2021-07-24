@@ -1,5 +1,13 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
+import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider from '../../MuiContextStore';
 import MuiPanelSettings from '../../MuiPanelSettings';
@@ -16,6 +24,12 @@ const useStyles = makeStyles(theme => ({
     "grid-auto-flow": "row",
     backgroundColor: theme.palette.background.default,
   },
+        toolboxButton: {
+        padding: "0px",
+        width: '28px',
+        minWidth: '28px',
+        lineHeight: '0px'
+      },
   shortText: {
     fontSize: '10px',
     width: '40px',
@@ -150,9 +164,29 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { handleSetVisible } = useContext(DataProvider);
+  const { handleSetVisible, handleSetSide } = useContext(DataProvider);
 
-  return <Tooltip
+ const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    setAnchorEl(null);
+  }, [side])
+
+  const open = Boolean(anchorEl);
+  const id = open ? `simple-popover-${lo.uniqueId}` : undefined;
+
+
+
+  return <>
+    <Tooltip
       arrow
       key={lo.index}
       placement={lo.side}
@@ -161,7 +195,9 @@ const MuiMenuButton = withTheme(({
     >
       <span>
         <Button
+          aria-describedby={id}
           disableRipple
+          onContextMenu={(e) => handleClick(e)}
           disableElevation
           disabled={lo.noPanel}
           onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
@@ -188,5 +224,24 @@ const MuiMenuButton = withTheme(({
         </Button>
       </span>
     </Tooltip>
+    <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: side !== 'right' ? 'right' : 'left',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: side !== 'right' ? 'left' : 'right',
+        }}
+      >
+        {!lo.asEmbedded && <Button onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
+            <SwapHorizIcon style={{ fontSize: 20 }} />
+        </Button>}
+      </Popover>
+    </>
 })
 export default MuiMenuButton;
