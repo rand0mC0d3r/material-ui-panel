@@ -16,9 +16,9 @@ function App() {
   return (
     <DataContextProvider>
       <MuiPanelManager>
-        {/* <MuiDivider icon={<GitHubIcon />} />
+        <MuiDivider icon={<GitHubIcon />} />
         <MuiDivider tooltip="Default separator" />
-        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" /> */}
+        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
         <NotificationPanel />
 
@@ -26,7 +26,7 @@ function App() {
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
         </MuiPanel>
 
-        {/* <MuiPanel title="SubFunny Panel Skeletons" icon={<FormatAlignLeftIcon />}>
+        <MuiPanel title="SubFunny Panel Skeletons" icon={<FormatAlignLeftIcon />}>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -61,7 +61,7 @@ function App() {
               <Skeleton animation="wave" height={10} width="80%" />
             </div>
           </Box>
-        </MuiPanel> */}
+        </MuiPanel>
 
         <div>
           <iframe
