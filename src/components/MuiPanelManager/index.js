@@ -1,9 +1,7 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import { createPortal, render } from "react-dom";
 import DataProvider from '../MuiContextStore';
-import MuiPanelHeader from '../MuiPanelHeader';
 import MuiPanelSettings from '../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({
@@ -168,12 +166,10 @@ const MuiPanelManager = withTheme(({
 
     {availableSides
       .map(side => <div
-        id={`${side}-panel`}
-        key={`${side}-panel`}
+        id={`${side}-panel`} key={`${side}-panel`}
         className={classes.panelContainer, side === 'left' ? classes.leftPanel : classes.rightPanel}
         style={{ gridArea: `${side}Panel`, width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}` }}
       />)}
-
 
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
@@ -181,52 +177,52 @@ const MuiPanelManager = withTheme(({
         {layout.filter(lo => lo.side === side).length > 0 && <div
           className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
         >
-        <div>
-            {layout
-              .filter(lo => lo.side === side)
-              .filter(lo => !lo.asEmbedded)
-              .map(lo => <Tooltip
-                arrow
-                key={lo.index}
-            placement={lo.side}
-            enterDelay={1000}
-            title={lo.tooltip}>
-            <span>
-              <Button
-                disableRipple
-                disableElevation
-                disabled={lo.noPanel}
-                onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
-                variant="text"
-                fullWidth
-                className={`
-                ${classes.buttonMenu}
-                ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
-                ${classes[`${side}ButtonMenu`]}
-                ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
-              `}
-              >
-                <Badge
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                  badgeContent={lo.notificationCount}
-                  color="primary"
-                  variant={lo.variant}
+          <div>
+              {layout
+                .filter(lo => lo.side === side)
+                .filter(lo => !lo.asEmbedded)
+                .map(lo => <Tooltip
+                  arrow
+                  key={lo.index}
+              placement={lo.side}
+              enterDelay={1000}
+              title={lo.tooltip}>
+              <span>
+                <Button
+                  disableRipple
+                  disableElevation
+                  disabled={lo.noPanel}
+                  onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
+                  variant="text"
+                  fullWidth
+                  className={`
+                  ${classes.buttonMenu}
+                  ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
+                  ${classes[`${side}ButtonMenu`]}
+                  ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+                `}
                 >
-                  <Box display="flex" alignItems="center" flexDirection="column">
-                    {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
-                    {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
-                  </Box>
-                </Badge>
-              </Button>
-            </span>
-          </Tooltip>
-          )}
-        </div>
-        {index === 0 && <div>
-          <MuiPanelSettings />
+                  <Badge
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    badgeContent={lo.notificationCount}
+                    color="primary"
+                    variant={lo.variant}
+                  >
+                    <Box display="flex" alignItems="center" flexDirection="column">
+                      {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+                      {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
+                    </Box>
+                  </Badge>
+                </Button>
+              </span>
+            </Tooltip>
+            )}
+          </div>
+          {index === 0 && <div>
+            <MuiPanelSettings />
+          </div>}
         </div>}
-      </div>}
-      </Fragment>)}
+    </Fragment>)}
 
     {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: "main"}}))}
   </div>
