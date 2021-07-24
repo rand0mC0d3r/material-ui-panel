@@ -220,22 +220,16 @@ const MuiPanelManager = withTheme(({
       </div>}
       </Fragment>)}
 
-
-
-    {['left', 'right']
-      .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
-      .map(side => <div id="blabla" key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
-        {layout
-          .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
-          .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
-            <MuiPanelHeader {...{ layoutObject }} />
-            portal start
-            {layoutObject.uniqueId && <>
-              <div>{layoutObject.ref.current}</div>
-            </>}
-            portal end
-          </Fragment>)}
-      </div>)}
+      {['left', 'right']
+        .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
+        .map(side => <div id="blabla" key={side} className={classes.panelContainer} style={{gridArea: `${side}-panel`}}>
+          {layout
+            .filter(lo => lo.side === side && lo.isVisible && !lo.noPanel)
+            .map(layoutObject => <Fragment key={layoutObject.uniqueId}>
+              <MuiPanelHeader {...{ layoutObject }} />
+              {layoutObject.uniqueId && <>{layoutObject.ref.current}</>}
+            </Fragment>)}
+        </div>)}
 
     {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: `1 / 3 / 1 / 3`}}))}
   </div>
