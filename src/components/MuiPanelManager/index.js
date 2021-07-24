@@ -231,12 +231,9 @@ const MuiPanelManager = withTheme(({
             <MuiPanelHeader {...{ layoutObject }} />
             portal start
             {layoutObject.uniqueId && <>
-              <div id={`portal-${layoutObject.uniqueId}`} />
-              {/* {createPortal(<>{children}</>, document.getElementById(`portal-${layoutObject.uniqueId}`))} */}
+              <div>{layoutObject.ref.current}</div>
             </>}
             portal end
-            {/* {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.children}</div>} */}
-            {/* {!layoutObject.isCollapsed && <div className={classes.panelContent}>{layoutObject.ref.current}</div>} */}
           </Fragment>)}
       </div>)}
 

@@ -10,9 +10,8 @@ function DataContextProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
     const [rows, setRows] = useState(initialRows);
 
-    const handlePanelAnnouncement = ({ children, side, ref, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
-        console.log(children)
         setLayout(layout => [
             ...layout,
             {
@@ -78,8 +77,20 @@ function DataContextProvider(props) {
             : layoutObject));
     }
 
-    const handleSetChildren = ({ uniqueId, children }) => {
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId ? { ...layoutObject, children } : layoutObject));
+    const handleSetChildrenAndReference = ({ uniqueId, children, ref }) => {
+
+        // const addChildrenAndRef = layout.map(layoutObject => {
+        //     if (layoutObject.uniqueId === uniqueId) {
+        //         console.log("match")
+        //         console.log("handlekids", uniqueId, children, ref);
+        //         return { ...layoutObject, children, ref, test: "bla" }
+        //     }
+        //     return layoutObject
+        // });
+        // console.log('infused', addChildrenAndRef)
+
+
+        // setLayout(addChildrenAndRef);
     }
 
     const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
@@ -143,7 +154,7 @@ function DataContextProvider(props) {
             layout, setLayout,
             rows,
 
-            handleSetChildren,
+            handleSetChildrenAndReference,
             handleCountRows,
             handleUnSetAsEmbedded,
             handleSetAsGroup,
