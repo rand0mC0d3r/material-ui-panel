@@ -67,16 +67,18 @@ const useStyles = makeStyles(theme => ({
   panelContainer: {
     position: "relative",
     overflow: 'scroll',
-    maxWidth: '500px',
+
     display: 'flex',
     flexDirection: 'column',
   },
   leftPanel: {
+    width: '500px',
     borderRight: `1px solid ${theme.palette.divider}`,
   },
   topMenu: { "grid-area": "top-menu" },
   topPanel: { "grid-area": "top-panel" },
   rightPanel: {
+    width: '500px',
     borderLeft: `1px solid ${theme.palette.divider}`,
   },
 
@@ -169,8 +171,16 @@ const MuiPanelManager = withTheme(({
     onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
     className={`${classes.root} ${classes[`${sides}Grid`]}`}
   >
-    <div id={`left-panel`} className={classes.panelContainer, classes.leftPanel} style={{gridArea: 'leftPanel'}} />
-    <div id={`right-panel`} className={classes.panelContainer, classes.rightPanel} style={{gridArea: 'rightPanel'}} />
+
+    {['left', 'right']
+      .filter(side => layout.some(lo => lo.side === side && lo.isVisible))
+      .map(side => <div
+        id={`${side}-panel`}
+        key={`${side}-panel`}
+        className={classes.panelContainer, side === 'left' ? classes.leftPanel : classes.rightPanel}
+        style={{ gridArea: `${side}Panel` }}
+      />)}
+
 
     {['left', 'right']
       .filter(side => layout.some(lo => lo.side === side))
