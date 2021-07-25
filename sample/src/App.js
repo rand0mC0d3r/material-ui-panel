@@ -56,6 +56,9 @@ function App() {
                 <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
                 <Skeleton animation="wave" height={10} width="80%" />
               </div>
+              <div>
+                <textarea></textarea>
+              </div>
             </Box>
           </MuiPanel>
 
@@ -63,7 +66,7 @@ function App() {
             <iframe
               title="sample"
               style={{ width: "100%", height: "100%", border: '0px none' }}
-              src="https://en.wikipedia.org/wiki/Special:Random"
+              src="https://material-ui.com/customization/default-theme/"
             />
           </div>
         </MuiPanelManager>
