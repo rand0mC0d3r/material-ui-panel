@@ -1,4 +1,3 @@
-import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiContextStore';
@@ -65,7 +64,6 @@ const useStyles = makeStyles(theme => ({
 
   panelContainer: {
     position: "relative",
-    overflow: 'scroll',
 
     display: 'flex',
     flexDirection: 'column',
@@ -120,6 +118,10 @@ const useStyles = makeStyles(theme => ({
       right: 2,
     },
   },
+  panelContainerWrapper: {
+    position: 'relative',
+    overflow: 'hidden auto',
+  },
   rightButtonMenu: {
     borderRight: "3px solid transparent",
   },
@@ -155,7 +157,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout, handleSetVisible } = useContext(DataProvider);
+  const { layout } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
@@ -164,15 +166,16 @@ const MuiPanelManager = withTheme(({
 
   return <div onContextMenu={(e) => { !allowRightClick && e.preventDefault() }} className={`${classes.root} ${classes[`${sides}Grid`]}`}>
     {availableSides
-      .map(side => <div
+      .map(side => <div className={`${classes.panelContainerWrapper} ${side === 'left' ? classes.leftPanel : classes.rightPanel}`}>
+        <div
         id={`${side}-panel`} key={`${side}-panel`}
-        className={`${classes.panelContainer} ${side === 'left' ? classes.leftPanel : classes.rightPanel}`}
+        className={`${classes.panelContainer}`}
         style={{
           gridArea: `${side}Panel`,
           overflow: 'hidden auto',
           width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
         }}
-      />)}
+      /></div>)}
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>

@@ -45,7 +45,7 @@ const MuiPanel = ({
   }, [notificationCount, receivedUniqueId]);
 
   return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<div style={{
-    order: layoutObject.parentId ? '1' : '0',
+    order: layoutObject.parentId ? '' : '-1',
     flex: !layoutObject.parentId  ? '1 1 auto' : '0 0 auto'
   }} >
     <MuiPanelHeader {...{ layoutObject }} />

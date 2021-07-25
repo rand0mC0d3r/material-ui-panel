@@ -12,41 +12,46 @@ import DataProvider from '../MuiContextStore';
 const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
-
-    toolbox: {
+  toolbox: {
     gap: theme.spacing(1),
-      height: "32px"
-    },
-      toolboxButton: {
-        padding: "0px",
-        width: '28px',
-        minWidth: '28px',
-        lineHeight: '0px'
-      },
-      headerContainer: {
-        gap: theme.spacing(1),
-      },
-      header: {
-        cursor: "default",
-        position: "relative",
-        gap: theme.spacing(1),
-        userSelect: "none",
-        padding: theme.spacing(1.5, 2.5),
-        borderTop: `1px solid ${theme.palette.divider}`,
-        borderBottom: `1px solid ${theme.palette.divider}`,
-        backgroundColor: 'rgba(255,255,255,0.9)',
-        backdropFilter: "blur(4px)",
-      },
-      headerInList: {
-        cursor: "pointer",
-        position: "relative",
-        gap: theme.spacing(1),
-        userSelect: "none",
-        padding: theme.spacing(0.5, 1, 0.5, 0),
-        border: `0px none transparent`,
-        backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
-        boxShadow: theme.shadows[0]
-      },
+    height: "32px"
+  },
+  toolboxButton: {
+    padding: "0px",
+    width: '28px',
+    minWidth: '28px',
+    lineHeight: '0px'
+  },
+  headerContainer: {
+    gap: theme.spacing(1),
+  },
+  panelTitle: {
+    maxWidth: '265px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+  header: {
+    cursor: "default",
+    position: "relative",
+    gap: theme.spacing(1),
+    userSelect: "none",
+    padding: theme.spacing(1.5, 2.5),
+    borderTop: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    backdropFilter: "blur(4px)",
+  },
+  headerInList: {
+    cursor: "pointer",
+    position: "relative",
+    gap: theme.spacing(1),
+    userSelect: "none",
+    padding: theme.spacing(0.5, 1, 0.5, 0),
+    border: `0px none transparent`,
+    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
+    boxShadow: theme.shadows[0]
+  },
 }));
 
 const MuiPanel = withTheme(({
@@ -56,8 +61,7 @@ const MuiPanel = withTheme(({
   const classes = useStyles(theme)
   const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
 
-  return <Tooltip arrow enterDelay={2500} title="Double click to collapse" placement="right">
-    <Box
+  return <Box
       justifyContent="space-between"
       onDoubleClick={() => handleToggleCollapse({ uniqueId })}
       alignItems="center"
@@ -71,20 +75,31 @@ const MuiPanel = withTheme(({
 
         <Box className={classes.headerContainer} flexWrap={true} display="flex" alignItems="center">
           <Typography
+            className={classes.panelTitle}
             style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
             variant={asEmbedded ? 'caption' : 'button'}
           >{title}</Typography>
-          {subTitle && <Tooltip title={subTitle} placement='bottom'><InfoOutlinedIcon style={{fontSize: '16px', color: theme.palette.text.hint }} /></Tooltip>}
-          {asGroup && <Typography color="textSecondary" variant="caption">(group)</Typography>}
+          {subTitle && <Tooltip
+            title={subTitle}
+            placement='bottom'>
+            <InfoOutlinedIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
+          </Tooltip>}
+          {asGroup && <Tooltip
+            title="As group..."
+            placement='bottom'>
+            <WebAssetIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
+          </Tooltip>}
         </Box>
       </Box>
       <Box display="flex" className={classes.toolbox}>
 
-        <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
-          {isCollapsed
-            ? <ChevronRightIcon style={{ fontSize }} />
-            : <ExpandMoreIcon style={{ fontSize }} />}
-        </Button>
+        <Tooltip arrow title="Click to toggle collapse">
+          <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
+            {isCollapsed
+              ? <ChevronRightIcon style={{ fontSize }} />
+              : <ExpandMoreIcon style={{ fontSize }} />}
+          </Button>
+        </Tooltip>
 
         {/* {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
             <SwapHorizIcon style={{ fontSize }} />
@@ -107,7 +122,6 @@ const MuiPanel = withTheme(({
             </Button>} */}
       </Box>
     </Box>
-  </Tooltip>
 })
 
 export default MuiPanel;

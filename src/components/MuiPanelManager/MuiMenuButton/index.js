@@ -104,29 +104,31 @@ const useStyles = makeStyles(theme => ({
   rightGroupButtonMenu: {
     position: 'relative',
     "&::after": {
-      content: '"G"',
-      backgroundColor: "#CCC",
+      content: '"."',
+      backgroundColor: theme.palette.divider,
+      color: theme.palette.divider,
       position: 'absolute',
-      fontSize: "8px",
+      fontSize: '4px',
       lineHeight: "12px",
-      width: '12px',
-      top: 2,
-      borderRadius: "4px",
-      left: 2,
+      width: '4px',
+      top: 24,
+      borderRadius: "0px 4px 4px 0px",
+      left: 0,
     },
   },
   leftGroupButtonMenu: {
     position: 'relative',
     "&::after": {
-      content: '"G"',
-      backgroundColor: "#CCC",
+      content: '"."',
+      backgroundColor: theme.palette.divider,
+      color: theme.palette.divider,
       position: 'absolute',
-      fontSize: "8px",
-      lineHeight: "12px",
-      width: '10px',
-      top: 2,
-      borderRadius: "4px",
-      right: 2,
+      width: '4px',
+      top: 24,
+      borderRadius: "4px 0px 0px 4px",
+      right: 0,
+      lineHeight: '12px',
+      fontSize: '4px'
     },
   },
   modalTitle: {
@@ -185,12 +187,10 @@ const MuiMenuButton = withTheme(({
 
   useEffect(() => {
     setAnchorEl(null);
-  }, [side])
+  }, [lo])
 
   const open = Boolean(anchorEl);
   const id = open ? `simple-popover-${lo.uniqueId}` : undefined;
-
-
 
   return <>
     <Tooltip
