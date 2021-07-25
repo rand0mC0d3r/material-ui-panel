@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
@@ -12,6 +13,7 @@ import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelManager from './components/MuiPanelManager';
+import ComplexPanel from './parts/ComplexPanel';
 import NotificationPanel from './parts/NotificationPanel';
 
 function App() {
@@ -42,25 +44,7 @@ function App() {
             <Skeleton variant="rect" width={'100%'} height={300} />
           </MuiPanel>
 
-          <MuiPanel title="Complex panel long long text with many details" subTitle="Sample sub-title text" icon={<ChromeReaderModeIcon />} initialSide="left">
-            <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
-              <div>
-                <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-                <Skeleton animation="wave" height={10} />
-              </div>
-              <div>
-                <Skeleton variant="rect" width={'100%'} height={400} />
-              </div>
-              <div>
-                <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-                <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-                <Skeleton animation="wave" height={10} width="80%" />
-              </div>
-              <div>
-                <textarea></textarea>
-              </div>
-            </Box>
-          </MuiPanel>
+          <ComplexPanel />
 
           <div>
             <iframe

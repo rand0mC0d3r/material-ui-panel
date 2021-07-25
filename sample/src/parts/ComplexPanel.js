@@ -1,14 +1,18 @@
-import { Box, Button } from '@material-ui/core';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { useEffect, useState } from 'react';
+import { Box, TextField } from '@material-ui/core';
+import { ChromeReaderMode } from '@material-ui/icons';
+import { Skeleton } from '@material-ui/lab';
+import { useState } from 'react';
 import MuiPanel from '../components/MuiPanel';
 
 const NotificationPanel = () => {
-  const [alerts, setAlerts] = useState(0);
+  const [value, setValue] = useState('Sample persisten text...');
+  const handleChange = event => { setValue(event.target.value) };
 
-  useEffect(() => { console.log(alerts) }, [alerts]);
-
-  return <MuiPanel title="Complex panel long long text with many details" subTitle="Sample sub-title text" icon={<ChromeReaderModeIcon />} initialSide="left">
+  return <MuiPanel
+    title="Complex panel long long text with many details"
+    subTitle="Sample sub-title text"
+    icon={<ChromeReaderMode />}
+  >
     <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
       <div>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
@@ -23,7 +27,17 @@ const NotificationPanel = () => {
         <Skeleton animation="wave" height={10} width="80%" />
       </div>
       <div>
-        <textarea></textarea>
+        <TextField
+          fullWidth
+          id="outlined-multiline-flexible"
+          label="Multiline"
+          multiline
+          rowsMax={10}
+          rows={10}
+          value={value}
+          onChange={handleChange}
+          variant="outlined"
+        />
       </div>
     </Box>
   </MuiPanel>
