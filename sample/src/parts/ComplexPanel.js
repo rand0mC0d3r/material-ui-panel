@@ -32,8 +32,7 @@ const NotificationPanel = () => {
           id="outlined-multiline-flexible"
           label="Multiline"
           multiline
-          rowsMax={10}
-          rows={10}
+          maxRows={10}
           value={value}
           onChange={handleChange}
           variant="outlined"

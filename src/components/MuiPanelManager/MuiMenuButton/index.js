@@ -36,10 +36,16 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis'
   },
   badge: {
-      right: -3,
-      top: 13,
+    "& .MuiBadge-badge": {
       border: `2px solid ${theme.palette.background.paper}`,
-      padding: '0 4px',
+      width: '24px',
+      fontSize: '11px',
+      height: '16px',
+      minWidth: '24px',
+      right: '2px',
+      top: '0%',
+      bottom: 'unset',
+    },
   },
   bothGrid: {
     "grid-template-columns": `54px auto 1fr auto 54px`,
@@ -207,7 +213,7 @@ const MuiMenuButton = withTheme(({
       key={lo.index}
       placement={lo.side}
       enterDelay={1000}
-      title={lo.tooltip}
+      title={`${lo.tooltip} ${lo.notificationCount > 0 ? ` - Notifications: ${lo.notificationCount}` : ''}`}
     >
       <span>
         <Button
@@ -227,6 +233,8 @@ const MuiMenuButton = withTheme(({
         `}
         >
           <Badge
+            max={9}
+            className={classes.badge}
             anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
             badgeContent={lo.notificationCount}
             color={lo.notificationColor}

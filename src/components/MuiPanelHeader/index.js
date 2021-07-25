@@ -77,7 +77,7 @@ const MuiPanel = withTheme(({
           && icon !== undefined
           && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
 
-        <Box className={classes.headerContainer} flexWrap={true} display="flex" alignItems="center">
+        <Box className={classes.headerContainer} flexWrap='wrap' display="flex" alignItems="center">
           <Typography
             color="textPrimary"
             className={classes.panelTitle}

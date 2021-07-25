@@ -10,7 +10,7 @@ import ComplexPanel from './parts/ComplexPanel';
 import NotificationPanel from './parts/NotificationPanel';
 
 function App() {
-  const theme = useMemo(() => createTheme({ palette: { type: 'dark' } }), [])
+  const theme = useMemo(() => createTheme({ palette: { type: 'light' } }), [])
 
   return (
     <ThemeProvider {...{ theme }}>
