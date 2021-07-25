@@ -1,18 +1,11 @@
-import { Box, Typography } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import AmpStoriesIcon from '@material-ui/icons/AmpStories';
-import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
-import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
-import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo } from 'react';
 import './App.css';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
-import MuiPanelManager from './components/MuiPanelManager';
-import { DataContextProvider } from './components/MuiPanelStore';
+import { MuiPanelProvider } from './components/MuiPanelStore';
 import ComplexPanel from './parts/ComplexPanel';
 import NotificationPanel from './parts/NotificationPanel';
 
@@ -21,26 +14,25 @@ function App() {
 
   return (
     <ThemeProvider {...{ theme }}>
-      <DataContextProvider>
-        {/* <MuiPanelManager> */}
-          <MuiDivider icon={<GitHubIcon />} />
+      <MuiPanelProvider>
+          <MuiDivider icon={<GitHub />} />
           <MuiDivider tooltip="Default separator" />
           <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
           <NotificationPanel />
 
-          <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
-            {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget purus vitae ipsum tempus aliquam imperdiet quis erat. Pellentesque tellus massa, tincidunt sit amet rutrum eget, finibus sit amet mauris. Aliquam erat volutpat. Fusce placerat rutrum placerat. Curabitur aliquam bibendum tristique. In porta velit ac augue auctor tempus. Sed eget nunc a ligula ultrices euismod ut ac mi. Pellentesque pellentesque auctor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus.`}
+          <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+            {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
           </MuiPanel>
 
-          <MuiPanel title="Sub Forms Panel Skeletons" icon={<FormatAlignLeftIcon />}>
+          <MuiPanel title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
             <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
             <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
             <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
             <Skeleton animation="wave" height={10} width="80%" />
           </MuiPanel>
 
-          <MuiPanel title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStoriesIcon />}>
+          <MuiPanel title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStories />}>
             <Skeleton variant="rect" width={'100%'} height={300} />
           </MuiPanel>
 
@@ -53,8 +45,7 @@ function App() {
               src="https://material-ui.com"
             />
           </div>
-        {/* </MuiPanelManager> */}
-      </DataContextProvider>
+      </MuiPanelProvider>
     </ThemeProvider>
   );
 }

@@ -1,7 +1,7 @@
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider, { DataContextProvider } from '../MuiPanelStore';
 import MuiPanelSettings from '../MuiPanelSettings';
+import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 import MuiMenuButton from './MuiMenuButton';
 
 const useStyles = makeStyles(theme => ({

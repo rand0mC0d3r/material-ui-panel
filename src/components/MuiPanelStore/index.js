@@ -4,7 +4,7 @@ import MuiPanelManager from '../MuiPanelManager';
 
 const DataContext = createContext(null);
 
-function DataContextProvider(props) {
+function MuiPanelProvider(props) {
     const initialLayout = get(props, 'layout', []);
 
     const [layout, setLayout] = useState(initialLayout);
@@ -143,4 +143,4 @@ function DataContextProvider(props) {
 }
 
 export default DataContext;
-export { DataContextProvider };
+export { MuiPanelProvider };
