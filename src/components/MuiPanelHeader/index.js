@@ -110,13 +110,13 @@ const MuiPanel = withTheme(({
             <SwapHorizIcon style={{ fontSize }} />
         </Button>} */}
 
-        {!asEmbedded && !asGroup && <Select
+        {/* {!asEmbedded && !asGroup && <Select
           disabled={asGroup || !layout.some(lo => lo.asGroup)}
           onChange={(event) => { handleSetAsEmbedded({ uniqueId: uniqueId, parentId: event.target.value }) }}>
             {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
               <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
             </MenuItem>)}
-        </Select>}
+        </Select>} */}
 
         {/* {!asEmbedded
           ? <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>

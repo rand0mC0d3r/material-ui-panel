@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import { Badge, Box, Button, Select, Tooltip } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
@@ -188,7 +188,7 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { handleSetVisible, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
+  const { layout, handleSetAsEmbedded, handleSetVisible, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
 
  const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -277,9 +277,9 @@ const MuiMenuButton = withTheme(({
           startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}
           className={classes.toolboxButton}>
             Switch sides
-      </Button>}
+        </Button>}
 
-      {!lo.asEmbedded
+        {!lo.asEmbedded
           ? <Button
             onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })}
             variant="outlined"
@@ -296,6 +296,16 @@ const MuiMenuButton = withTheme(({
             variant="outlined" className={classes.toolboxButton}>
               Promote
           </Button>}
+
+        {!lo.asEmbedded && !lo.asGroup && <Select
+          fullWidth
+          disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
+          onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
+            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
+              <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
+            </MenuItem>)}
+        </Select>}
+
         </Box>
       </Popover>
     </>
