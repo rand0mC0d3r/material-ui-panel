@@ -9,7 +9,7 @@ function MuiPanelProvider(props) {
 
     const [layout, setLayout] = useState(initialLayout);
 
-    const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
         setLayout(layout => [
             ...layout,
@@ -26,6 +26,7 @@ function MuiPanelProvider(props) {
                 index: layout.length,
                 showBadge: false,
                 notificationCount,
+                notificationColor,
                 variant: 'standard',
                 index: layout.length,
                 subTitle,
@@ -53,9 +54,9 @@ function MuiPanelProvider(props) {
             : layoutObject));
     }
 
-    const handlePanelAlerts = ({ uniqueId, notificationCount }) => {
+    const handlePanelAlerts = ({ uniqueId, notificationCount, notificationColor }) => {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, notificationCount }
+            ? { ...layoutObject, notificationCount, notificationColor }
             : layoutObject));
     }
 

@@ -11,8 +11,8 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider from '../../MuiPanelStore';
 import MuiPanelSettings from '../../MuiPanelSettings';
+import DataProvider from '../../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -229,7 +229,7 @@ const MuiMenuButton = withTheme(({
           <Badge
             anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
             badgeContent={lo.notificationCount}
-            color="primary"
+            color={lo.notificationColor}
             variant={lo.variant}
           >
             <Box display="flex" alignItems="center" flexDirection="column">

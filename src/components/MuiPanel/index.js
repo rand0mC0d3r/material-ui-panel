@@ -9,7 +9,7 @@ const MuiPanel = ({
   icon, iconInHeader = true,
   title, subTitle,
   notificationCount = 0,
-
+  notificationColor = 'primary',
   noPadding = false,
 
   children,
@@ -41,8 +41,8 @@ const MuiPanel = ({
   }, [layoutObject])
 
   useEffect(() => {
-    if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount }); }
-  }, [notificationCount, receivedUniqueId]);
+    if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount, notificationColor }); }
+  }, [notificationCount, notificationColor, receivedUniqueId]);
 
   return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<div style={{
     order: layoutObject.parentId ? '' : '-1',
