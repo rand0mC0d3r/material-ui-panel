@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
     "grid-auto-flow": "row",
     backgroundColor: theme.palette.background.default,
   },
-        toolboxButton: {
-      },
+  toolboxButton: {
+  },
   shortText: {
     fontSize: '10px',
     width: '40px',
@@ -91,15 +91,22 @@ const useStyles = makeStyles(theme => ({
   iconButton: {
     fontSize: "26px",
 
-    "&:hover": {
-      color: theme.palette.primary.main,
-    }
+    // "&:hover": {
+    //   color: theme.palette.text.primary,
+    //   opacity: "0.95",
+    // }
   },
   buttonMenu: {
     border: "0px none",
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
+    opacity: "0.45",
     minWidth: "initial",
+
+    "&:hover": {
+      color: theme.palette.text.primary,
+      opacity: "0.95",
+    }
   },
   rightGroupButtonMenu: {
     position: 'relative',
@@ -147,10 +154,12 @@ const useStyles = makeStyles(theme => ({
     borderLeft: "3px solid transparent"
   },
   rightActiveButtonMenu: {
-    borderRight: `3px solid ${theme.palette.primary.main}`,
+    borderRight: `3px solid ${theme.palette.text.primary}`,
+    opacity: "0.95",
   },
   leftActiveButtonMenu: {
-    borderLeft: `3px solid ${theme.palette.primary.main}`,
+    borderLeft: `3px solid ${theme.palette.text.primary}`,
+    opacity: "0.95",
   },
   panelWrapper: {
     display: 'flex',
@@ -224,7 +233,7 @@ const MuiMenuButton = withTheme(({
             variant={lo.variant}
           >
             <Box display="flex" alignItems="center" flexDirection="column">
-              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "primary" : "action" })}
+              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "action" : "action" })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
             </Box>
           </Badge>

@@ -22,6 +22,12 @@ const useStyles = makeStyles(theme => ({
     minWidth: '28px',
     lineHeight: '0px'
   },
+  collapseButton: {
+    padding: "0px",
+    width: theme.spacing(2.5),
+    minWidth: theme.spacing(2.5),
+    lineHeight: '0px'
+  },
   headerContainer: {
     gap: theme.spacing(1),
   },
@@ -36,21 +42,11 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     gap: theme.spacing(1),
     userSelect: "none",
-    padding: theme.spacing(1.5, 2.5),
+    padding: theme.spacing(1.5, 2, 1.5, 1),
     borderTop: `1px solid ${theme.palette.divider}`,
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: theme.palette.background.paper,
     backdropFilter: "blur(4px)",
-  },
-  headerInList: {
-    cursor: "pointer",
-    position: "relative",
-    gap: theme.spacing(1),
-    userSelect: "none",
-    padding: theme.spacing(0.5, 1, 0.5, 0),
-    border: `0px none transparent`,
-    backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
-    boxShadow: theme.shadows[0]
   },
 }));
 
@@ -68,13 +64,21 @@ const MuiPanel = withTheme(({
       display="flex"
       className={`${classes.header}`}
     >
-      <Box display="flex" alignItems="center" style={{gap: theme.spacing(1)}}>
+    <Box display="flex" alignItems="center" style={{ gap: theme.spacing(1) }}>
+
+        <Tooltip arrow title="Click to toggle collapse">
+          <Button disableRipple disableElevation onClick={() => handleToggleCollapse({ uniqueId })} className={classes.collapseButton}>
+            {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
+          </Button>
+        </Tooltip>
+
         {iconInHeader
           && icon !== undefined
           && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
 
         <Box className={classes.headerContainer} flexWrap={true} display="flex" alignItems="center">
           <Typography
+            color="textPrimary"
             className={classes.panelTitle}
             style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
             variant={asEmbedded ? 'caption' : 'button'}
@@ -93,13 +97,13 @@ const MuiPanel = withTheme(({
       </Box>
       <Box display="flex" className={classes.toolbox}>
 
-        <Tooltip arrow title="Click to toggle collapse">
+        {/* <Tooltip arrow title="Click to toggle collapse">
           <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
             {isCollapsed
               ? <ChevronRightIcon style={{ fontSize }} />
               : <ExpandMoreIcon style={{ fontSize }} />}
           </Button>
-        </Tooltip>
+        </Tooltip> */}
 
         {/* {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
             <SwapHorizIcon style={{ fontSize }} />
