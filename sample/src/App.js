@@ -1,10 +1,12 @@
 import { Box } from '@material-ui/core';
+import { createTheme, ThemeOptions, ThemeProvider } from '@material-ui/core/styles';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useMemo } from 'react';
 import './App.css';
 import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
@@ -13,7 +15,10 @@ import MuiPanelManager from './components/MuiPanelManager';
 import NotificationPanel from './parts/NotificationPanel';
 
 function App() {
+  const theme = useMemo(() => createTheme({ palette: { type: 'dark' } }), [])
+
   return (
+    <ThemeProvider {...{ theme }}>
     <DataContextProvider>
       <MuiPanelManager>
         <MuiDivider icon={<GitHubIcon />} />
@@ -72,7 +77,8 @@ function App() {
           {/* content */}
         </div>
       </MuiPanelManager>
-    </DataContextProvider>
+      </DataContextProvider>
+    </ThemeProvider>
   );
 }
 
