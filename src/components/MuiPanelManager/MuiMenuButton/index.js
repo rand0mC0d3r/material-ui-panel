@@ -100,12 +100,12 @@ const useStyles = makeStyles(theme => ({
     border: "0px none",
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
-    opacity: "0.45",
+    opacity: "0.55",
     minWidth: "initial",
 
     "&:hover": {
       color: theme.palette.text.primary,
-      opacity: "0.95",
+      opacity: "0.9",
     }
   },
   rightGroupButtonMenu: {
@@ -155,11 +155,11 @@ const useStyles = makeStyles(theme => ({
   },
   rightActiveButtonMenu: {
     borderRight: `3px solid ${theme.palette.text.primary}`,
-    opacity: "0.95",
+    opacity: "1",
   },
   leftActiveButtonMenu: {
     borderLeft: `3px solid ${theme.palette.text.primary}`,
-    opacity: "0.95",
+    opacity: "1",
   },
   panelWrapper: {
     display: 'flex',
@@ -227,7 +227,7 @@ const MuiMenuButton = withTheme(({
         `}
         >
           <Badge
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
             badgeContent={lo.notificationCount}
             color="primary"
             variant={lo.variant}
@@ -256,11 +256,7 @@ const MuiMenuButton = withTheme(({
     >
       <div className={ classes.modalTitle}>{lo.tooltip}</div>
       <Box
-        style={{
-          gap: '8px',
-          padding: '8px',
-
-        }}
+        style={{ gap: '8px', padding: '8px'}}
         display="flex"
         flexDirection="column"
         alignItems="center">

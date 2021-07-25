@@ -42,7 +42,7 @@ function App() {
             <Skeleton variant="rect" width={'100%'} height={300} />
           </MuiPanel>
 
-          <MuiPanel title="Complex panel long long text with many details" icon={<ChromeReaderModeIcon />} initialSide="left">
+          <MuiPanel title="Complex panel long long text with many details" subTitle="Sample sub-title text" icon={<ChromeReaderModeIcon />} initialSide="left">
             <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
               <div>
                 <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />

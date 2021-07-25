@@ -35,7 +35,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '265px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    lineHeight: "initial"
   },
   header: {
     cursor: "default",
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     gap: theme.spacing(1),
     userSelect: "none",
     padding: theme.spacing(1.5, 2, 1.5, 1),
-    borderTop: `1px solid ${theme.palette.divider}`,
+    borderTop: `1px solid transparent`,
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: theme.palette.background.paper,
     backdropFilter: "blur(4px)",
@@ -81,7 +82,7 @@ const MuiPanel = withTheme(({
             color="textPrimary"
             className={classes.panelTitle}
             style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
-            variant={asEmbedded ? 'caption' : 'button'}
+            variant='subtitle2'
           >{title}</Typography>
           {subTitle && <Tooltip
             title={subTitle}
