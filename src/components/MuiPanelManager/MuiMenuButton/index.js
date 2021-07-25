@@ -287,7 +287,7 @@ const MuiMenuButton = withTheme(({
             fullWidth
             startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
             className={classes.toolboxButton}>
-              Grouping
+              {lo.asGroup ? 'as Individual' : 'as Group' }
             </Button>
           : <Button
             onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}

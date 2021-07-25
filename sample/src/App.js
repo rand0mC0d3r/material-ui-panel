@@ -14,37 +14,37 @@ function App() {
 
   return (
     <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider>
-          <MuiDivider icon={<GitHub />} />
-          <MuiDivider tooltip="Default separator" />
-          <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
+      <MuiPanelProvider showCollapseButton={true}>
+        <MuiDivider icon={<GitHub />} />
+        <MuiDivider tooltip="Default separator" />
+        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
-          <NotificationPanel />
+        <NotificationPanel />
 
-          <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
-            {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
-          </MuiPanel>
+        <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+          {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
+        </MuiPanel>
 
-          <MuiPanel title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} width="80%" />
-          </MuiPanel>
+        <MuiPanel title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+          <Skeleton animation="wave" height={10} width="80%" />
+        </MuiPanel>
 
-          <MuiPanel title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStories />}>
-            <Skeleton variant="rect" width={'100%'} height={300} />
-          </MuiPanel>
+        <MuiPanel title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStories />}>
+          <Skeleton variant="rect" width={'100%'} height={300} />
+        </MuiPanel>
 
-          <ComplexPanel />
+        <ComplexPanel />
 
-          <div>
-            <iframe
-              title="sample"
-              style={{ width: "100%", height: "100%", border: '0px none' }}
-              src="https://material-ui.com"
-            />
-          </div>
+        <div>
+          <iframe
+            title="sample"
+            style={{ width: "100%", height: "100%", border: '0px none' }}
+            src="https://en.wikipedia.org/wiki/Special:Random"
+          />
+        </div>
       </MuiPanelProvider>
     </ThemeProvider>
   );

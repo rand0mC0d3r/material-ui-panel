@@ -6,8 +6,12 @@ const DataContext = createContext(null);
 
 function MuiPanelProvider(props) {
     const initialLayout = get(props, 'layout', []);
+    const initialSettings = get(props, 'settings', {
+        isCollapsed: false,
+    });
 
     const [layout, setLayout] = useState(initialLayout);
+    const [settings, setSettings] = useState(initialSettings);
 
     const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         const uniqueId = Math.random().toString(36).substring(7);
@@ -92,6 +96,10 @@ function MuiPanelProvider(props) {
         );
     }
 
+    const toggleIsCollapsed = () => {
+        setSettings({...settings, isCollapsed: !settings.isCollapsed });
+    }
+
     const handleSetVisible = ({ uniqueId }) => {
         const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
         if (foundObject) {
@@ -123,12 +131,15 @@ function MuiPanelProvider(props) {
     }, [layout]);
 
     useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    useEffect(() => { console.log('settings', settings) }, [settings]);
 
     return <DataContext.Provider
         value={{
             layout, setLayout,
+            settings, setSettings,
 
             handleUnSetAsEmbedded,
+            toggleIsCollapsed,
             handleSetAsGroup,
             handleSetVisible,
             handlePanelAlerts,
@@ -137,7 +148,9 @@ function MuiPanelProvider(props) {
             handleSetAsEmbedded,
             handlePanelAnnouncement
         }}>
-        <MuiPanelManager>
+        <MuiPanelManager
+            allowRightClick={props.allowRightClick}
+            showCollapseButton={props.showCollapseButton}>
             {props.children}
         </MuiPanelManager>
     </DataContext.Provider>

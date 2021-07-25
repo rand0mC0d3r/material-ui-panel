@@ -1,9 +1,11 @@
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
+import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
 import MuiPanelSettings from '../MuiPanelSettings';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 import MuiMenuButton from './MuiMenuButton';
 
+const menuWidth = '54px';
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100%",
@@ -19,19 +21,19 @@ const useStyles = makeStyles(theme => ({
 
 
   bothGrid: {
-    "grid-template-columns": `54px auto 1fr auto 54px`,
+    "grid-template-columns": `auto auto 1fr auto auto`,
     "grid-template-areas":`
       "leftMenu leftPanel main rightPanel rightMenu"
     `
   },
   leftGrid: {
-    "grid-template-columns": `54px auto 1fr`,
+    "grid-template-columns": `auto auto 1fr`,
     "grid-template-areas":`
       "leftMenu leftPanel main"
     `
   },
   rightRight: {
-    "grid-template-columns": `1fr auto 54px`,
+    "grid-template-columns": `1fr auto auto`,
     "grid-template-areas":`
       "leftMenu leftPanel main rightPanel rightMenu"
     `
@@ -40,13 +42,16 @@ const useStyles = makeStyles(theme => ({
   bothMenus: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative',
   },
   leftMenu: {
     "grid-area": "leftMenu",
+    width: '54px',
     borderRight: `1px solid ${theme.palette.divider}`
   },
   rightMenu: {
+    width: '54px',
     "grid-area": "rightMenu",
     borderLeft: `1px solid ${theme.palette.divider}`
   },
@@ -135,6 +140,20 @@ const useStyles = makeStyles(theme => ({
   },
   rightPanelWrapper: {
     borderRight: `3px solid ${theme.palette.primary.main}`,
+  },
+  menuOpen: {
+    width: menuWidth,
+  },
+  menuCollapsed: {
+    width: '8px',
+    backgroundColor: theme.palette.background.default,
+    transition: "100ms 300ms background-color",
+    cursor: 'pointer',
+
+    "&:hover": {
+      transition: "1000ms 300ms background-color",
+      backgroundColor: theme.palette.divider,
+    }
   }
 }));
 
@@ -143,10 +162,11 @@ const MuiPanelManager = withTheme(({
   children,
   theme,
   allowRightClick = false,
+  showCollapseButton = true,
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { layout } = useContext(DataProvider);
+  const { settings, toggleIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
@@ -172,16 +192,20 @@ const MuiPanelManager = withTheme(({
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
+          onClick={() => {settings.isCollapsed && toggleIsCollapsed() } }
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-          className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
+          className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed ? classes.menuCollapsed : classes.menuOpen}`}
         >
-          <div>
+          {!settings.isCollapsed && <div>
             {layout
               .filter(lo => lo.side === side)
               .filter(lo => !lo.asEmbedded)
               .map(lo => <MuiMenuButton {...{ lo, side }} />)}
-          </div>
-          {index === 0 && <div><MuiPanelSettings /></div>}
+          </div>}
+          {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
+          {index === 0 && <div>
+            {!settings.isCollapsed && <MuiPanelSettings />}
+          </div>}
         </div>}
     </Fragment>)}
 
