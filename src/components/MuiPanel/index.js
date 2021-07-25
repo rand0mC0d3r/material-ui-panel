@@ -1,8 +1,8 @@
 import TextureIcon from '@material-ui/icons/Texture';
 import React, { cloneElement, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import DataProvider from '../MuiContextStore';
 import MuiPanelHeader from '../MuiPanelHeader';
+import DataProvider from '../MuiPanelStore';
 
 const MuiPanel = ({
   initialSide = 'left',

@@ -1,6 +1,6 @@
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider from '../MuiContextStore';
+import DataProvider, { DataContextProvider } from '../MuiPanelStore';
 import MuiPanelSettings from '../MuiPanelSettings';
 import MuiMenuButton from './MuiMenuButton';
 
@@ -186,6 +186,7 @@ const MuiPanelManager = withTheme(({
     </Fragment>)}
 
     {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: "main"}}))}
-  </div>
+      </div>
 })
+
 export default MuiPanelManager;

@@ -9,10 +9,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo } from 'react';
 import './App.css';
-import { DataContextProvider } from './components/MuiContextStore';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import MuiPanelManager from './components/MuiPanelManager';
+import { DataContextProvider } from './components/MuiPanelStore';
 import ComplexPanel from './parts/ComplexPanel';
 import NotificationPanel from './parts/NotificationPanel';
 
@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider {...{ theme }}>
       <DataContextProvider>
-        <MuiPanelManager>
+        {/* <MuiPanelManager> */}
           <MuiDivider icon={<GitHubIcon />} />
           <MuiDivider tooltip="Default separator" />
           <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
@@ -53,7 +53,7 @@ function App() {
               src="https://material-ui.com"
             />
           </div>
-        </MuiPanelManager>
+        {/* </MuiPanelManager> */}
       </DataContextProvider>
     </ThemeProvider>
   );

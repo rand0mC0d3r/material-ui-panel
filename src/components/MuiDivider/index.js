@@ -1,7 +1,7 @@
 import { withTheme } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import React, { useContext, useEffect } from 'react';
-import DataProvider from '../MuiContextStore';
+import DataProvider from '../MuiPanelStore';
 
 const MuiDivider = withTheme(({
   defaultSide = 'left',

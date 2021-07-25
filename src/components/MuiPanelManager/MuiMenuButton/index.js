@@ -11,7 +11,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider from '../../MuiContextStore';
+import DataProvider from '../../MuiPanelStore';
 import MuiPanelSettings from '../../MuiPanelSettings';
 
 const useStyles = makeStyles(theme => ({

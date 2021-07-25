@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
+import MuiPanelManager from '../MuiPanelManager';
 
 const DataContext = createContext(null);
 
@@ -15,8 +16,6 @@ function DataContextProvider(props) {
             {
                 uniqueId,
                 side,
-
-
                 isVisible: false,
                 asGroup: false,
                 asEmbedded: false,
@@ -136,7 +135,11 @@ function DataContextProvider(props) {
             handleToggleCollapse,
             handleSetAsEmbedded,
             handlePanelAnnouncement
-    }}>{props.children}</DataContext.Provider>
+        }}>
+        <MuiPanelManager>
+            {props.children}
+        </MuiPanelManager>
+    </DataContext.Provider>
 }
 
 export default DataContext;

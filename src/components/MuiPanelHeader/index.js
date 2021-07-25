@@ -8,7 +8,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext } from 'react';
-import DataProvider from '../MuiContextStore';
+import DataProvider from '../MuiPanelStore';
 const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
