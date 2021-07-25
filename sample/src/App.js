@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
@@ -50,7 +50,7 @@ function App() {
             <iframe
               title="sample"
               style={{ width: "100%", height: "100%", border: '0px none' }}
-              src="https://material-ui.com/customization/default-theme/"
+              src="https://material-ui.com"
             />
           </div>
         </MuiPanelManager>

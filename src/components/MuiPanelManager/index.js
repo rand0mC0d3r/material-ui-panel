@@ -16,19 +16,8 @@ const useStyles = makeStyles(theme => ({
     "grid-auto-flow": "row",
     backgroundColor: theme.palette.background.default,
   },
-  shortText: {
-    fontSize: '10px',
-    width: '40px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
-  },
-  badge: {
-      right: -3,
-      top: 13,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: '0 4px',
-  },
+
+
   bothGrid: {
     "grid-template-columns": `54px auto 1fr auto 54px`,
     "grid-template-areas":`
@@ -164,22 +153,28 @@ const MuiPanelManager = withTheme(({
     setSides(foundSides.length === 1 ? foundSides[0] : 'both')
   }, [layout]);
 
-  return <div onContextMenu={(e) => { !allowRightClick && e.preventDefault() }} className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+  return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
     {availableSides
-      .map(side => <div className={`${classes.panelContainerWrapper} ${side === 'left' ? classes.leftPanel : classes.rightPanel}`}>
+      .map(side => <div
+        onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
+        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
+      >
         <div
         id={`${side}-panel`} key={`${side}-panel`}
         className={`${classes.panelContainer}`}
         style={{
           gridArea: `${side}Panel`,
           overflow: 'hidden auto',
-          width: `${layout.find(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
+          width: `${layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
         }}
       /></div>)}
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
-        {layout.filter(lo => lo.side === side).length > 0 && <div className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}>
+        {layout.filter(lo => lo.side === side).length > 0 && <div
+          onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
+          className={`${classes[`${side}Menu`]} ${classes.bothMenus}`}
+        >
           <div>
             {layout
               .filter(lo => lo.side === side)
