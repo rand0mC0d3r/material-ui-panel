@@ -15,7 +15,7 @@ function MuiPanelProvider(props) {
 
     const handlePanelAnnouncement = ({ id, ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         setLayout(layout => [
-            ...layout,
+            ...layout.filter(lo => lo.uniqueId !== id),
             {
                 uniqueId: id,
                 side,
@@ -128,8 +128,8 @@ function MuiPanelProvider(props) {
         )
     }, [layout]);
 
-    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
-    useEffect(() => { console.log('settings', settings) }, [settings]);
+    // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    // useEffect(() => { console.log('settings', settings) }, [settings]);
 
     return <DataContext.Provider
         value={{

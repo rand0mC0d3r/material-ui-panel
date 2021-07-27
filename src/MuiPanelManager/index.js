@@ -201,7 +201,7 @@ const MuiPanelManager = withTheme(({
             {layout
               .filter(lo => lo.side === side)
               .filter(lo => !lo.asEmbedded)
-              .map(lo => <MuiMenuButton {...{ lo, side }} />)}
+              .map(lo => <MuiMenuButton key={lo.uniqueId} {...{ lo, side }} />)}
           </div>}
           {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
           {index === 0 && <div>

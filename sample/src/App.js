@@ -15,17 +15,18 @@ function App() {
   return (
     <ThemeProvider {...{ theme }}>
       <MuiPanelProvider showCollapseButton={true}>
-        <MuiDivider icon={<GitHub />} />
-        <MuiDivider tooltip="Default separator" />
-        <MuiDivider showIcon={false} shortText={"MENU"} tooltip="Default separator" />
+        <MuiDivider id="logo" icon={<GitHub />} />
+        <MuiDivider id="test" icon={<GitHub />}  shortText="TEST" />
+        <MuiDivider id="test33" tooltip="Default separator" />
+        <MuiDivider id="sample" showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
         <NotificationPanel />
 
-        <MuiPanel id="randomText" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
-        <MuiPanel id="skeletonPanel" title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
+        <MuiPanel id="randomText" title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />

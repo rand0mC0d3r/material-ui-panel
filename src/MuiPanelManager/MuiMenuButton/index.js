@@ -243,7 +243,7 @@ const MuiMenuButton = withTheme(({
             variant={lo.variant}
           >
             <Box display="flex" alignItems="center" flexDirection="column">
-              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "action" : "initial" })}
+              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "action" : "disabled" })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
             </Box>
           </Badge>

@@ -8,8 +8,6 @@ const NotificationPanel = () => {
   const [color, setColor] = useState('primary');
   const [auto, setAuto] = useState(false);
 
-  useEffect(() => { console.log(alerts) }, [alerts]);
-
   const handleChangeAuto = (event) => {
     setAuto(!auto);
   };

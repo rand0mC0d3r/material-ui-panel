@@ -21,24 +21,20 @@ const MuiPanel = ({
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {
-    if (!receivedUniqueId) {
-      if (!id) {
-        console.error(`MuiPanel: missing attr:id for panel with title+subTitle:`, title, subTitle);
-      } else {
-        handlePanelAnnouncement({ iconInHeader, id, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon : <TextureIcon /> })
-        setReceivedUniqueId(id);
-      }
+    if (!id) {
+      console.error(`MuiPanel: missing attr:id for panel with title+subTitle:`, title, subTitle);
+    } else {
+      console.log(`MuiPanel: panel with id:${id} has been added`);
+      handlePanelAnnouncement({ iconInHeader, id, subTitle, side, title, tooltip: title, icon: icon || <TextureIcon /> })
     }
-  }, [receivedUniqueId]);
+  }, [id]);
 
   useEffect(() => {
-    if (receivedUniqueId) {
-      const findObject = layout.find(lo => lo.uniqueId === receivedUniqueId)
-      if (findObject) {
-        setLayoutObject(findObject);
-      }
+    const findObject = layout.find(lo => lo.uniqueId === id)
+    if (findObject) {
+      setLayoutObject(findObject);
     }
-  }, [receivedUniqueId, layout]);
+  }, [layout]);
 
   useEffect(() => {
     if (layoutObject) {
@@ -47,10 +43,12 @@ const MuiPanel = ({
   }, [layoutObject])
 
   useEffect(() => {
-    if (receivedUniqueId) { handlePanelAlerts({ uniqueId: receivedUniqueId, notificationCount, notificationColor }); }
-  }, [notificationCount, notificationColor, receivedUniqueId]);
+    if(notificationCount > 0) {
+      handlePanelAlerts({ uniqueId: id, notificationCount, notificationColor });
+    }
+  }, [notificationCount, notificationColor, id]);
 
-  return layoutObject && layoutObject.isVisible && receivedUniqueId ? createPortal(<div style={{
+  return layoutObject && layoutObject.isVisible && !!id ? createPortal(<div style={{
     order: layoutObject.parentId ? '' : '-1',
     flex: !layoutObject.parentId  ? '1 1 auto' : '0 0 auto'
   }} >

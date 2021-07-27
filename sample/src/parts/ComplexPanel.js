@@ -9,6 +9,7 @@ const NotificationPanel = () => {
   const handleChange = event => { setValue(event.target.value) };
 
   return <MuiPanel
+    id="complexityPanel"
     title="Complex panel long long text with many details"
     subTitle="Sample sub-title text"
     icon={<ChromeReaderMode />}
