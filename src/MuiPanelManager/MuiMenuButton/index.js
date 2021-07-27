@@ -31,9 +31,11 @@ const useStyles = makeStyles(theme => ({
   shortText: {
     fontSize: '10px',
     width: '40px',
+    textAlign: 'center',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    color: theme.palette.text.primary,
   },
   badge: {
     "& .MuiBadge-badge": {
@@ -226,10 +228,10 @@ const MuiMenuButton = withTheme(({
           variant="text"
           fullWidth
           className={`
-          ${classes.buttonMenu}
-          ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
-          ${classes[`${side}ButtonMenu`]}
-          ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+            ${classes.buttonMenu}
+            ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
+            ${!lo.noPanel && classes[`${side}ButtonMenu`]}
+            ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
         `}
         >
           <Badge

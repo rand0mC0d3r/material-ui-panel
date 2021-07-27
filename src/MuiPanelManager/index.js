@@ -117,16 +117,16 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden auto',
   },
   rightButtonMenu: {
-    borderRight: "3px solid transparent",
+    borderRight: "4px solid transparent",
   },
   leftButtonMenu: {
-    borderLeft: "3px solid transparent"
+    borderLeft: "4px solid transparent"
   },
   rightActiveButtonMenu: {
-    borderRight: `3px solid ${theme.palette.primary.main}`,
+    borderRight: `4px solid ${theme.palette.primary.main}`,
   },
   leftActiveButtonMenu: {
-    borderLeft: `3px solid ${theme.palette.primary.main}`,
+    borderLeft: `4px solid ${theme.palette.primary.main}`,
   },
   panelWrapper: {
     display: 'flex',
@@ -136,23 +136,24 @@ const useStyles = makeStyles(theme => ({
     padding: "16px",
   },
   leftPanelWrapper: {
-    borderLeft: `3px solid ${theme.palette.primary.main}`,
+    borderLeft: `4px solid ${theme.palette.primary.main}`,
   },
   rightPanelWrapper: {
-    borderRight: `3px solid ${theme.palette.primary.main}`,
+    borderRight: `4px solid ${theme.palette.primary.main}`,
   },
   menuOpen: {
     width: menuWidth,
   },
   menuCollapsed: {
-    width: '8px',
+    width: '6px',
     backgroundColor: theme.palette.background.default,
-    transition: "100ms 300ms background-color",
+    transition: "all 350ms ease-out 100ms",
+    opacity: 1,
     cursor: 'pointer',
 
     "&:hover": {
-      transition: "1000ms 300ms background-color",
-      backgroundColor: theme.palette.divider,
+      backgroundColor: theme.palette.primary.main,
+      opacity: 0.75
     }
   }
 }));
@@ -185,7 +186,7 @@ const MuiPanelManager = withTheme(({
         style={{
           gridArea: `${side}Panel`,
           overflow: 'hidden auto',
-          width: `${layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'}`
+          width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset')
         }}
       /></div>)}
     {availableSides
