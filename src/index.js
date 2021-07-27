@@ -1,3 +1,7 @@
-import MuiPanel from './components/MuiPanel'
-
-export default MuiPanel
+export { default as MuiDivider } from './components/MuiDivider'
+export { default as MuiMenuCollapseButton } from './components/MuiMenuCollapseButton'
+export { default as MuiPanel } from './components/MuiPanel'
+export { default as MuiPanelHeader } from './components/MuiPanelHeader'
+export { default as MuiPanelManager } from './components/MuiPanelManager'
+export { default as MuiPanelSettings } from './components/MuiPanelSettings'
+export { default as MuiPanelStore } from './components/MuiPanelStore'

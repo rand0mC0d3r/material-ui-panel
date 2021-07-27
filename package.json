@@ -1,5 +1,5 @@
 {
-  "name": "material-ui-panel",
+  "name": "material-ui-panel-manager",
   "version": "0.0.2",
   "description": "<MuiPanel> component for material-ui",
   "main": "lib/index.js",
@@ -44,7 +44,8 @@
     "test": "react-scripts test",
     "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/components/* sample/src/components/",
     "copy.component": "copy-and-watch src/components/* sample/src/components/ --watch",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "tag": "git pull && npm version patch && git push && git push --tags"
   },
   "eslintConfig": {
     "extends": "react-app"
