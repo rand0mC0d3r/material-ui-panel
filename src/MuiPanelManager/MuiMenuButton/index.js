@@ -156,17 +156,17 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.divider,
   },
   rightButtonMenu: {
-    borderLeft: "3px solid transparent",
+    borderRight: "4px solid transparent",
   },
   leftButtonMenu: {
-    borderRight: "3px solid transparent"
+    borderLeft: "4px solid transparent"
   },
   rightActiveButtonMenu: {
-    borderLeft: `3px solid ${theme.palette.text.primary}`,
+    borderRight: `4px solid ${theme.palette.text.primary}`,
     opacity: "1",
   },
   leftActiveButtonMenu: {
-    borderRight: `3px solid ${theme.palette.text.primary}`,
+    borderLeft: `4px solid ${theme.palette.text.primary}`,
     opacity: "1",
   },
   panelWrapper: {
@@ -177,10 +177,10 @@ const useStyles = makeStyles(theme => ({
     padding: "16px",
   },
   leftPanelWrapper: {
-    borderRight: `3px solid ${theme.palette.primary.main}`,
+    borderLeft: `3px solid ${theme.palette.primary.main}`,
   },
   rightPanelWrapper: {
-    borderLeft: `3px solid ${theme.palette.primary.main}`,
+    borderRight: `3px solid ${theme.palette.primary.main}`,
   }
 }));
 
@@ -243,7 +243,12 @@ const MuiMenuButton = withTheme(({
             variant={lo.variant}
           >
             <Box display="flex" alignItems="center" flexDirection="column">
-              {lo.showIcon && cloneElement(lo.icon, { className: classes.iconButton, color: lo.isVisible ? "action" : "disabled" })}
+              {lo.showIcon && cloneElement(
+                lo.icon, {
+                  style: side === 'right' ? { marginRight: '-4px' } : { marginLeft: '-4px' },
+                  className: classes.iconButton,
+                  color: lo.isVisible ? "action" : "disabled"
+              })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
             </Box>
           </Badge>
