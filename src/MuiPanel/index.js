@@ -5,6 +5,7 @@ import MuiPanelHeader from '../MuiPanelHeader';
 import DataProvider from '../MuiPanelStore';
 
 const MuiPanel = ({
+  id,
   initialSide = 'left',
   icon, iconInHeader = true,
   title, subTitle,
@@ -21,7 +22,12 @@ const MuiPanel = ({
 
   useEffect(() => {
     if (!receivedUniqueId) {
-      setReceivedUniqueId(handlePanelAnnouncement({ iconInHeader, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon: <TextureIcon /> }))
+      if (!id) {
+        console.error(`MuiPanel: missing attr:id for panel with title+subTitle:`, title, subTitle);
+      } else {
+        handlePanelAnnouncement({ iconInHeader, id, subTitle, side: initialSide, title, tooltip: title, icon: icon ? icon : <TextureIcon /> })
+        setReceivedUniqueId(id);
+      }
     }
   }, [receivedUniqueId]);
 

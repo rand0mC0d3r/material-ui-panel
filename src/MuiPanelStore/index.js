@@ -13,12 +13,11 @@ function MuiPanelProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
     const [settings, setSettings] = useState(initialSettings);
 
-    const handlePanelAnnouncement = ({ ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
-        const uniqueId = Math.random().toString(36).substring(7);
+    const handlePanelAnnouncement = ({ id, ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         setLayout(layout => [
             ...layout,
             {
-                uniqueId,
+                uniqueId: id,
                 side,
                 isVisible: false,
                 asGroup: false,
@@ -43,7 +42,6 @@ function MuiPanelProvider(props) {
                 children,
             }
         ]);
-        return uniqueId
     }
 
     const handleSetAsGroup = ({ uniqueId }) => {
@@ -96,7 +94,7 @@ function MuiPanelProvider(props) {
         );
     }
 
-    const toggleIsCollapsed = () => {
+    const toggleSettingIsCollapsed = () => {
         setSettings({...settings, isCollapsed: !settings.isCollapsed });
     }
 
@@ -139,7 +137,7 @@ function MuiPanelProvider(props) {
             settings, setSettings,
 
             handleUnSetAsEmbedded,
-            toggleIsCollapsed,
+            toggleSettingIsCollapsed,
             handleSetAsGroup,
             handleSetVisible,
             handlePanelAlerts,

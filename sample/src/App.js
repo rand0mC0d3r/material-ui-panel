@@ -21,18 +21,18 @@ function App() {
 
         <NotificationPanel />
 
-        <MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MuiPanel id="randomText" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
-        <MuiPanel title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
+        <MuiPanel id="skeletonPanel" title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" />
         </MuiPanel>
 
-        <MuiPanel title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStories />}>
+        <MuiPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} subTitle="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 

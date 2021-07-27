@@ -20,19 +20,19 @@ const useStyles = makeStyles(theme => ({
     left: '-24px',
 	},
 	icon: {
-		fontSize: "16",
+		fontSize: "16px",
 	}
 }));
 
 const MuiMenuCollapseButton = withTheme(({ side = 'right', theme }) => {
 	const classes = useStyles(theme)
-	const { settings, toggleIsCollapsed } = useContext(DataProvider);
+	const { settings, toggleSettingIsCollapsed } = useContext(DataProvider);
 
   return <div>
 		<Tooltip placement={side} arrow title={settings.isCollapsed ? 'Expand Panel' : 'Minimize Panel'}>
 			<IconButton
 				size="small"
-				onClick={toggleIsCollapsed}
+				onClick={toggleSettingIsCollapsed}
 				className={`${classes.buttonMenu} ${classes[side]}`}
 			>
 				{side === 'right' && (settings.isCollapsed
@@ -45,4 +45,5 @@ const MuiMenuCollapseButton = withTheme(({ side = 'right', theme }) => {
 		</Tooltip>
   </div>
 })
+
 export default MuiMenuCollapseButton;

@@ -166,7 +166,7 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme)
   const [sides, setSides] = useState('both')
-  const { settings, toggleIsCollapsed, layout } = useContext(DataProvider);
+  const { settings, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
     const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
@@ -192,7 +192,7 @@ const MuiPanelManager = withTheme(({
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
-          onClick={() => {settings.isCollapsed && toggleIsCollapsed() } }
+          onClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
           className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed ? classes.menuCollapsed : classes.menuOpen}`}
         >
