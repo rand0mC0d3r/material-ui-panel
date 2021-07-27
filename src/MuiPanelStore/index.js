@@ -2,9 +2,13 @@ import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
 
+const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
 
 function MuiPanelProvider(props) {
+
+    // const cachedLayout = localStorage.getItem(localStorageKey);
+
     const initialLayout = get(props, 'layout', []);
     const initialSettings = get(props, 'settings', {
         isCollapsed: false,
@@ -17,6 +21,7 @@ function MuiPanelProvider(props) {
         setLayout(layout => [
             ...layout.filter(lo => lo.uniqueId !== id),
             {
+                id,
                 uniqueId: id,
                 side,
                 isVisible: false,
@@ -40,7 +45,7 @@ function MuiPanelProvider(props) {
                 noPanel,
                 icon,
                 children,
-            }
+                }
         ]);
     }
 
@@ -123,12 +128,12 @@ function MuiPanelProvider(props) {
 
     useEffect(() => {
         localStorage.setItem(
-            'material-ui-panel.layout',
-            JSON.stringify(layout.map(l => ({ ...l, children: null, icon: null }))    )
+            localStorageKey,
+            JSON.stringify(layout.map(l => ({ ...l, children: undefined, icon: undefined }))    )
         )
     }, [layout]);
 
-    // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
     // useEffect(() => { console.log('settings', settings) }, [settings]);
 
     return <DataContext.Provider
