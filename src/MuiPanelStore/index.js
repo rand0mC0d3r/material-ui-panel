@@ -61,9 +61,9 @@ function MuiPanelProvider(props) {
             : layoutObject));
     }
 
-    const handlePanelAlerts = ({ id, notificationCount, notificationColor }) => {
+    const handlePanelAlerts = ({ id, count, color }) => {
         setLayout(layout.map(layoutObject => layoutObject.uniqueId === id
-            ? { ...layoutObject, notificationCount, notificationColor }
+            ? { ...layoutObject, notificationCount: count, notificationColor: color }
             : layoutObject));
     }
 

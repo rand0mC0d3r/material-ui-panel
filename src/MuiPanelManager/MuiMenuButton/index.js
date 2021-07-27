@@ -1,17 +1,12 @@
 import { Badge, Box, Button, Select, Tooltip } from '@material-ui/core';
-import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
-import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import MuiPanelSettings from '../../MuiPanelSettings';
+import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({

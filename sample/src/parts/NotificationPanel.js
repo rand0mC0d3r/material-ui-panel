@@ -24,8 +24,10 @@ const NotificationPanel = () => {
     return () => timer && clearInterval(timer);
   }, [auto])
 
-  return <MuiPanel id="notificationsPanel" title="Notifications Panel"
-    notificationCount={alerts} notificationColor={color}
+  return <MuiPanel
+    id="notificationsPanel"
+    title="Notifications Panel"
+    notifications={{color, count: alerts}}
     icon={<NotificationsIcon />}>
     <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
       <Box display="flex" flexDirection="row" justifyContent="space-between" style={{ gap: '16px' }}>

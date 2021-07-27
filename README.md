@@ -87,3 +87,20 @@ Self organizing manager wrapper that renders all children given
 	</MuiPanel>
 </MuiPanelManager>
 ```
+
+
+### TODO
+
+- Make panels support and document
+	MuiPanel - config: {
+		id,
+		title,
+		hint
+		tooltip,
+		icon,
+		notification: { count, color },
+		disabled,
+		ignoreHierarchy,
+		header: { noIcon },
+		content: { noPadding },
+	}

@@ -6,25 +6,44 @@ import DataProvider from '../MuiPanelStore';
 
 const MuiPanel = ({
   id,
-  initialSide = 'left',
-  icon, iconInHeader = true,
-  title, subTitle,
-  notificationCount = 0,
-  notificationColor = 'primary',
-  noPadding = false,
 
+  title,
+  hint,
+  tooltip,
+  icon,
+
+  notifications = {
+    count: 0,
+    color: 'primary',
+  },
+
+  disabled,
+
+
+  //ignoreHierarchy
+  // header = {
+  //   noIcon: false,
+  // },
+  // content: {
+  //   noPadding: false,
+  // },
+
+  iconInHeader = true,
+
+
+  noPadding = false,
   children,
 }) => {
   const { layout, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
-  const [side, setSide] = useState(initialSide);
+  const [side, setSide] = useState('left');
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {
     if (!id) {
-      console.error(`MuiPanel: missing attr:id for panel with title+subTitle:`, title, subTitle);
+      console.error(`MuiPanel: missing attr:id for panel with title+hint:`, title, hint);
     } else {
       console.log(`MuiPanel: panel with id:${id} has been added`);
-      handlePanelAnnouncement({ iconInHeader, id, subTitle, side, title, tooltip: title, icon: icon || <TextureIcon /> })
+      handlePanelAnnouncement({ iconInHeader, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
     }
   }, [id]);
 
@@ -38,8 +57,8 @@ const MuiPanel = ({
   }, [layoutObject])
 
   useEffect(() => {
-    if(notificationCount > 0) { handlePanelAlerts({ id, notificationCount, notificationColor });}
-  }, [notificationCount, notificationColor, id]);
+    if(notifications.count > 0) { handlePanelAlerts({ id, count: notifications.count, color: notifications.color });}
+  }, [notifications.count, notifications.color, id]);
 
   return layoutObject && layoutObject.isVisible && !!id ? createPortal(
     <div style={{
