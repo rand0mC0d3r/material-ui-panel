@@ -17,10 +17,10 @@
     "npm-check-updates": "^11.8.3"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.2",
-    "@material-ui/icons": "^4.11.2",
-    "lodash.get": "^4.4.2",
-    "react": "^17.0.2"
+    "@material-ui/core": ">=4.12.2",
+    "@material-ui/icons": ">=4.11.2",
+    "lodash.get": ">=4.4.2",
+    "react": ">=17.0.2"
   },
   "files": [
     "LICENSE",
@@ -39,7 +39,8 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "ncu -u && npm audit fix",
-    "start": "concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
+    "dev": "concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
+    "start": "serve -s build",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
     "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/components/* sample/src/components/",
