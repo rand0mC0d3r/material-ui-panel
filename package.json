@@ -42,8 +42,8 @@
     "start": "serve -s build",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
-    "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/components/* sample/src/components/",
-    "copy.component": "copy-and-watch src/components/* sample/src/components/ --watch",
+    "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/* sample/src/components/",
+    "copy.component": "copy-and-watch src/* sample/src/components/ --watch",
     "serve": "serve -s build",
     "tag": "git pull && npm version patch && git push && git push --tags",
     "ship": "npm run build && npm publish"

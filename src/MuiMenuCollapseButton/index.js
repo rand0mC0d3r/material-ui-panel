@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import { ArrowLeft, ArrowRight } from '@material-ui/icons';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
 	right: {
 		borderRadius: `${theme.shape.borderRadius}px 0px 0px ${theme.shape.borderRadius}px`,
     left: '-24px',
+	},
+	icon: {
+		fontSize: "16",
 	}
 }));
 
@@ -26,14 +29,18 @@ const MuiMenuCollapseButton = withTheme(({ side = 'right', theme }) => {
 	const { settings, toggleIsCollapsed } = useContext(DataProvider);
 
   return <div>
-		<Tooltip placement={side} arrow title={`Toggle Minimize Panel`}>
+		<Tooltip placement={side} arrow title={settings.isCollapsed ? 'Expand Panel' : 'Minimize Panel'}>
 			<IconButton
 				size="small"
 				onClick={toggleIsCollapsed}
 				className={`${classes.buttonMenu} ${classes[side]}`}
 			>
-				{side === 'right' && (settings.isCollapsed ? <ArrowLeft style={{ fontSize: 16 }} /> : <ArrowRight style={{ fontSize: 16 }} />)}
-				{side === 'left' && (settings.isCollapsed ? <ArrowRight style={{ fontSize: 16 }} /> : <ArrowLeft style={{ fontSize: 16 }} />)}
+				{side === 'right' && (settings.isCollapsed
+					? <ArrowLeft className={classes.icon} />
+					: <ArrowRight className={classes.icon} />)}
+				{side === 'left' && (settings.isCollapsed
+					? <ArrowRight className={classes.icon} />
+					: <ArrowLeft className={classes.icon} />)}
 			</IconButton>
 		</Tooltip>
   </div>
