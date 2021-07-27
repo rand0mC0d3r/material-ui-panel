@@ -38,15 +38,15 @@
   "author": "rand0mC0d3r",
   "license": "MIT",
   "scripts": {
-    "postinstall": "ncu -u && npm audit fix",
-    "dev": "concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
+    "dev": "ncu -u && concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
     "start": "serve -s build",
     "build": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
     "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/components/* sample/src/components/",
     "copy.component": "copy-and-watch src/components/* sample/src/components/ --watch",
     "serve": "serve -s build",
-    "tag": "git pull && npm version patch && git push && git push --tags"
+    "tag": "git pull && npm version patch && git push && git push --tags",
+    "ship": "npm run build && npm publish"
   },
   "eslintConfig": {
     "extends": "react-app"
