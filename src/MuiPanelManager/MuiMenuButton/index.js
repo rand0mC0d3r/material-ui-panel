@@ -222,7 +222,7 @@ const MuiMenuButton = withTheme(({
       key={lo.index}
       placement={lo.side}
       enterDelay={1000}
-      title={`${lo.hint || lo.title} ${lo.notificationCount > 0 ? ` - Notifications: ${lo.notificationCount}` : ''}`}
+      title={!lo.isVisible ? (lo.hint || lo.title) : ''}
     >
       <span>
         <Button
