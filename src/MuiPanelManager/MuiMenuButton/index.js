@@ -1,13 +1,26 @@
 import { Badge, Box, Button, Select, Tooltip } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
+
+const icons = theme => ({
+  iconButton: {
+    fontSize: "24px",
+    color: theme.palette.text.primary
+  },
+  iconButtonRight: {
+    marginLeft: '4px'
+  },
+  iconButtonLeft: {
+    marginRight: '4px'
+  },
+})
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,14 +104,10 @@ const useStyles = makeStyles(theme => ({
     borderLeft: `1px solid ${theme.palette.divider}`,
   },
   main: { "grid-area": "main" },
-  iconButton: {
-    fontSize: "26px",
 
-    // "&:hover": {
-    //   color: theme.palette.text.primary,
-    //   opacity: "0.95",
-    // }
-  },
+  ...icons(theme),
+
+
   buttonMenu: {
     border: "0px none",
     padding: theme.spacing(2, 0),
@@ -179,6 +188,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const ContentContainerBox = styled(Box) (({ theme }) => ({
+	gap: theme.spacing(1),
+}));
+
 const MuiMenuButton = withTheme(({
   lo,
   side,
@@ -238,19 +251,14 @@ const MuiMenuButton = withTheme(({
             color={lo.notificationColor}
             variant={lo.variant}
           >
-            <Box display="flex" alignItems="center" flexDirection="column">
+            <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  style: {
-                    fontSize: '24px',
-                    marginLeft: (!lo.noPanel && side === 'right') && '4px',
-                    marginRight: (!lo.noPanel && side === 'left') && '4px'
-                  },
-                  className: classes.iconButton,
+                  className: `${classes.iconButton} ${!lo.noPanel && classes[`iconButton${side}`]}`,
                   color: lo.isVisible ? "action" : "action"
               })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
-            </Box>
+            </ContentContainerBox>
           </Badge>
         </Button>
       </span>

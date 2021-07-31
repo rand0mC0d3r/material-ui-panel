@@ -6,20 +6,8 @@ import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '54px';
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: "100%",
-    position: "absolute",
-    width: "100%",
-    overflow: "hidden",
-    display: "grid",
-    "grid-template-rows": "1fr",
-    "gap": "0px 0px",
-    "grid-auto-flow": "row",
-    backgroundColor: theme.palette.background.default,
-  },
 
-
+const styledGrid = {
   bothGrid: {
     "grid-template-columns": `auto auto 1fr auto auto`,
     "grid-template-areas":`
@@ -38,7 +26,9 @@ const useStyles = makeStyles(theme => ({
       "main rightPanel rightMenu"
     `
   },
+}
 
+const styledMenus = theme => ({
   bothMenus: {
     display: 'flex',
     flexDirection: 'column',
@@ -55,22 +45,48 @@ const useStyles = makeStyles(theme => ({
     "grid-area": "rightMenu",
     borderLeft: `1px solid ${theme.palette.divider}`
   },
+})
 
-
+const styledPanel = theme => ({
+    panelContainerWrapper: {
+    position: 'relative',
+    overflow: 'hidden auto',
+    display: 'none'
+  },
   panelContainer: {
     position: "relative",
-
     display: 'flex',
     flexDirection: 'column',
-
     justifyContent: 'flex-end'
   },
   leftPanel: {
+    gridArea: "leftPanel",
     borderRight: `1px solid ${theme.palette.divider}`,
+    display: 'unset'
   },
   rightPanel: {
     borderLeft: `1px solid ${theme.palette.divider}`,
+    display: 'unset',
+    gridArea: "rightPanel",
   },
+})
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+    overflow: "hidden",
+    display: "grid",
+    "grid-template-rows": "1fr",
+    "gap": "0px 0px",
+    "grid-auto-flow": "row",
+    backgroundColor: theme.palette.background.default,
+  },
+  ...styledGrid,
+  ...styledMenus(theme),
+  ...styledPanel(theme),
+
   main: { "grid-area": "main" },
   iconButton: {
     fontSize: "26px",
@@ -113,10 +129,7 @@ const useStyles = makeStyles(theme => ({
       right: 2,
     },
   },
-  panelContainerWrapper: {
-    position: 'relative',
-    overflow: 'hidden auto',
-  },
+
   rightButtonMenu: {
     borderRight: "4px solid transparent",
   },
