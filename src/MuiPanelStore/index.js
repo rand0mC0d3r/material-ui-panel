@@ -11,151 +11,150 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
 
 		const initialLayout = get(props, 'layout', []);
 		const initialSettings = get(props, 'settings', {
-				isCollapsed: false,
+			isCollapsed: false,
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
 		const [settings, setSettings] = useState(initialSettings);
 
 		const handlePanelAnnouncement = ({ id, ref, children, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
-				setLayout(layout => [
-						...layout.filter(lo => lo.uniqueId !== id),
-						{
-								id,
-								uniqueId: id,
-								side: initialSide,
-								isVisible: false,
-								asGroup: false,
-								asEmbedded: false,
-								parentId: null,
-								iconInHeader,
-								isCollapsed: false,
-								ref,
-								index: layout.length,
-								showBadge: false,
-								notifications: {
-										count: 0,
-										color: "primary",
-										...notifications,
-								},
-								variant: 'standard',
-								index: layout.length,
-								subTitle,
-								title,
-								showIcon,
-								shortText,
-								tooltip,
-								noPanel,
-								icon,
-								children,
-								}
-				]);
+			setLayout(layout => [
+				...layout.filter(lo => lo.uniqueId !== id),
+				{
+					id,
+					uniqueId: id,
+					side: initialSide,
+					isVisible: false,
+					asGroup: false,
+					asEmbedded: false,
+					parentId: null,
+					iconInHeader,
+					isCollapsed: false,
+					ref,
+					index: layout.length,
+					showBadge: false,
+					notifications: {
+						count: 0,
+						color: "primary",
+						...notifications,
+					},
+					variant: 'standard',
+					index: layout.length,
+					subTitle,
+					title,
+					showIcon,
+					shortText,
+					tooltip,
+					noPanel,
+					icon,
+					children,
+					}
+			]);
 		}
 
 		const handleSetAsGroup = ({ uniqueId }) => {
-				setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-						? { ...layoutObject, asGroup: !layoutObject.asGroup }
-						: layoutObject));
+			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+				? { ...layoutObject, asGroup: !layoutObject.asGroup }
+				: layoutObject));
 		}
 
 		const handleUnSetAsEmbedded = ({ uniqueId }) => {
-				setLayout(layout.map(layoutObject =>
-						layoutObject.uniqueId === uniqueId
-								? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
-								: layoutObject
-				));
+			setLayout(layout.map(layoutObject =>
+				layoutObject.uniqueId === uniqueId
+					? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
+					: layoutObject
+			));
 		}
 
 		const handlePanelAlerts = ({ id, count, color }) => {
-				setLayout(layout => layout.map(layoutObject =>
-						(layoutObject.id === id && layoutObject.notifications.count !== count)
-								? { ...layoutObject, notifications: { count, color } }
-								: layoutObject
-				));
+			setLayout(layout => layout.map(layoutObject =>
+				(layoutObject.uniqueId === id && layoutObject.notifications.count !== count)
+					? { ...layoutObject, notifications: { count, color } }
+					: layoutObject
+			));
 		}
 
 		const handleToggleCollapse = ({ uniqueId }) => {
-				setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-						? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
-						: layoutObject));
+			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+				? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
+				: layoutObject));
 		}
 
 		const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
-				const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
-				if (findParent) {
-						const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-						? { ...layoutObject, parentId, isVisible: true, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
-						: layoutObject);
-						const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
-								? { ...layoutObject, isVisible: true }
-								: layoutObject
-						);
-						setLayout(activateParent);
-				}
+			const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
+			if (findParent) {
+				const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+					? { ...layoutObject, parentId, isVisible: true, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
+					: layoutObject);
+				const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
+					? { ...layoutObject, isVisible: true }
+					: layoutObject);
+				setLayout(activateParent);
+			}
 		}
 
 		const handleSetSide = ({ uniqueId }) => {
-				setLayout(layout
-						.map(layoutObject => (layoutObject.uniqueId === uniqueId || layoutObject.parentId === uniqueId)
-								? {
-										...layoutObject,
-										isVisible: true,
-										side: layoutObject.side === 'right' ? "left" : 'right'
-								}
-								: { ...layoutObject, isVisible: false })
-				);
+			setLayout(layout
+				.map(layoutObject => (layoutObject.uniqueId === uniqueId || layoutObject.parentId === uniqueId)
+					? {
+						...layoutObject,
+						isVisible: true,
+						side: layoutObject.side === 'right' ? "left" : 'right'
+					}
+					: { ...layoutObject, isVisible: false })
+			);
 		}
 
 		const toggleSettingIsCollapsed = () => {
-				setSettings({...settings, isCollapsed: !settings.isCollapsed });
+			setSettings({...settings, isCollapsed: !settings.isCollapsed });
 		}
 
 		const handleSetVisible = ({ uniqueId }) => {
-				const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
-				if (foundObject) {
-						setLayout(layout => ([...layout.map(lo => {
-								if (lo.side === foundObject.side) {
-										if (lo.uniqueId === foundObject.uniqueId) {
-												return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0 }}
-										} else if (lo.parentId === foundObject.uniqueId) {
-												return { ...lo, isVisible: true }
-										} else {
-												return { ...lo, isVisible: false }
-										}
-								}
-								return lo
-						})]));
-				}
+			const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
+			if (foundObject) {
+				setLayout(layout => ([...layout.map(lo => {
+					if (lo.side === foundObject.side) {
+						if (lo.uniqueId === foundObject.uniqueId) {
+							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0 }}
+						} else if (lo.parentId === foundObject.uniqueId) {
+							return { ...lo, isVisible: true }
+						} else {
+							return { ...lo, isVisible: false }
+						}
+					}
+					return lo
+				})]));
+			}
 		}
 
 		useEffect(() => {
-				localStorage.setItem(
-						localStorageKey,
-						JSON.stringify(layout.map(l => ({ ...l, children: undefined, icon: undefined }))    )
-				)
+			localStorage.setItem(
+				localStorageKey,
+				JSON.stringify(layout.map(l => ({ ...l, children: undefined, icon: undefined }))    )
+			)
 		}, [layout]);
 
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
 
 		return <DataContext.Provider
-				value={{
-						layout, setLayout,
-						settings, setSettings,
+			value={{
+				layout, setLayout,
+				settings, setSettings,
 
-						handleUnSetAsEmbedded,
-						toggleSettingIsCollapsed,
-						handleSetAsGroup,
-						handleSetVisible,
-						handlePanelAlerts,
-						handleSetSide,
-						handleToggleCollapse,
-						handleSetAsEmbedded,
-						handlePanelAnnouncement
-				}}>
-				<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
-						{props.children}
-				</MuiPanelManager>
+				handleUnSetAsEmbedded,
+				toggleSettingIsCollapsed,
+				handleSetAsGroup,
+				handleSetVisible,
+				handlePanelAlerts,
+				handleSetSide,
+				handleToggleCollapse,
+				handleSetAsEmbedded,
+				handlePanelAnnouncement
+			}}>
+			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
+				{props.children}
+			</MuiPanelManager>
 		</DataContext.Provider>
 }
 

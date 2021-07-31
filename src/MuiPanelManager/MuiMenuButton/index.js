@@ -15,12 +15,16 @@ const icons = theme => ({
   iconButton: {
     fontSize: "24px",
     opacity: "0.55",
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
 
     "&:hover": {
       color: theme.palette.text.primary,
       opacity: "0.9",
     }
+  },
+  activeIconButton: {
+    color: theme.palette.text.primary,
+    opacity: "0.9",
   },
   rightIconButton: {
     marginLeft: '4px'
@@ -181,8 +185,11 @@ const MuiMenuButton = withTheme(({
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  className: `${classes.iconButton} ${!lo.noPanel && classes[`${side}IconButton`]}`,
-                  color: lo.isVisible ? "action" : "action"
+                  className: `
+                    ${classes.iconButton}
+                    ${!lo.noPanel && classes[`${side}IconButton`]}
+                    ${lo.isVisible && classes.activeIconButton}
+                  `,
               })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
             </ContentContainerBox>
