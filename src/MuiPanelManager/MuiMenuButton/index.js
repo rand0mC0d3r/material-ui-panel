@@ -23,7 +23,6 @@ const icons = theme => ({
   },
 })
 
-// ...side !== 'left' ? { left: '-10px' } : { right: '-10px' },
 const styledBadge = ({ theme, side }) => ({
   badge: {
     "& .MuiBadge-badge": {
@@ -32,6 +31,7 @@ const styledBadge = ({ theme, side }) => ({
       height: '16px',
       minWidth: '22px',
       bottom: '12px',
+      ...side !== 'left' ? { left: '-10px' } : { right: '-10px' },
     },
   },
 })
@@ -250,11 +250,12 @@ const MuiMenuButton = withTheme(({
             max={99}
             className={classes.badge}
             anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
-            // badgeContent={Math.max(0, Math.min(99, lo.notificationCount || 0))}
-            badgeContent={lo.notificationCount}
-            color={lo.notificationColor}
+            badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
+            // badgeContent={lo.notifications.count}
+            color={lo.notifications.color}
             variant={lo.variant}
           >
+            {/* {lo.notifications.count} */}
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {

@@ -17,7 +17,7 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
     const [layout, setLayout] = useState(initialLayout);
     const [settings, setSettings] = useState(initialSettings);
 
-    const handlePanelAnnouncement = ({ id, ref, children, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ id, ref, children, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         setLayout(layout => [
             ...layout.filter(lo => lo.uniqueId !== id),
             {
@@ -33,8 +33,11 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
                 ref,
                 index: layout.length,
                 showBadge: false,
-                notificationCount,
-                notificationColor,
+                notifications: {
+                    count: 0,
+                    color: "primary",
+                    ...notifications,
+                },
                 variant: 'standard',
                 index: layout.length,
                 subTitle,
@@ -64,12 +67,13 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
     }
 
     const handlePanelAlerts = ({ id, count, color }) => {
-        console.log(`Panel ${id} has ${count} new alerts`);
-        setLayout(layout.map(layoutObject =>
-            layoutObject.uniqueId === id
-                ? { ...layoutObject, notificationCount: count, notificationColor: color }
+        const foundObject = layout.find(layoutObject => layoutObject.id === id);
+        if (foundObject && foundObject.notifications.count !== count) {
+            setLayout(layout => layout.map(layoutObject => layoutObject.id === id
+                ? { ...layoutObject, notifications: { count, color } }
                 : layoutObject
-        ));
+            ));
+        }
     }
 
     const handleToggleCollapse = ({ uniqueId }) => {
@@ -138,7 +142,7 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
         )
     }, [layout]);
 
-    useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+    // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
     // useEffect(() => { console.log('settings', settings) }, [settings]);
 
     return <DataContext.Provider

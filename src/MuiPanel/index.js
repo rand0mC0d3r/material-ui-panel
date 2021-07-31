@@ -14,7 +14,7 @@ const MuiPanel = ({
 
   notifications = {
     count: null,
-    color: 'primary',
+    color: null,
   },
 
   disabled,
@@ -57,12 +57,9 @@ const MuiPanel = ({
   }, [layoutObject])
 
   useEffect(() => {
-    if (notifications.count > 0) {
-      console.log(id, notifications)
+    if (notifications.count !== null && !!notifications.color) {
+      console.log('[MuiPanel]:useEffect = panel Notification', notifications);
       handlePanelAlerts({ id, count: Math.min(99, Math.max(notifications.count, 0)), color: notifications.color });
-      // handlePanelAlerts({ id, count: notifications.count, color: notifications.color });
-    } else if(notifications.count === 0) {
-      console.log('cancel count', id, notifications)
     }
   }, [notifications.count, notifications.color, id]);
 
