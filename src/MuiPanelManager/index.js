@@ -32,10 +32,10 @@ const useStyles = makeStyles(theme => ({
       "leftMenu leftPanel main"
     `
   },
-  rightRight: {
+  rightGrid: {
     "grid-template-columns": `1fr auto auto`,
     "grid-template-areas":`
-      "leftMenu leftPanel main rightPanel rightMenu"
+      "main rightPanel rightMenu"
     `
   },
 
@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     "grid-area": "rightMenu",
     borderLeft: `1px solid ${theme.palette.divider}`
   },
+
 
   panelContainer: {
     position: "relative",
@@ -166,12 +167,15 @@ const MuiPanelManager = withTheme(({
   showCollapseButton = true,
 }) => {
   const classes = useStyles(theme)
-  const [sides, setSides] = useState('both')
+  const [sides, setSides] = useState()
+
   const { settings, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
-    const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-    setSides(foundSides.length === 1 ? foundSides[0] : 'both')
+    if (layout.length > 0) {
+      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
+      setSides(foundSides.length === 1 ? foundSides[0] : 'both')
+    }
   }, [layout]);
 
   return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>

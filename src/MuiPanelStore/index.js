@@ -5,7 +5,7 @@ import MuiPanelManager from '../MuiPanelManager';
 const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
 
-function MuiPanelProvider(props) {
+function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseButton, ...props } = props) {
 
     // const cachedLayout = localStorage.getItem(localStorageKey);
 
@@ -17,13 +17,13 @@ function MuiPanelProvider(props) {
     const [layout, setLayout] = useState(initialLayout);
     const [settings, setSettings] = useState(initialSettings);
 
-    const handlePanelAnnouncement = ({ id, ref, children, side, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+    const handlePanelAnnouncement = ({ id, ref, children, notificationCount = 0, notificationColor, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
         setLayout(layout => [
             ...layout.filter(lo => lo.uniqueId !== id),
             {
                 id,
                 uniqueId: id,
-                side,
+                side: initialSide,
                 isVisible: false,
                 asGroup: false,
                 asEmbedded: false,
@@ -151,9 +151,7 @@ function MuiPanelProvider(props) {
             handleSetAsEmbedded,
             handlePanelAnnouncement
         }}>
-        <MuiPanelManager
-            allowRightClick={props.allowRightClick}
-            showCollapseButton={props.showCollapseButton}>
+        <MuiPanelManager {...{allowRightClick, showCollapseButton}}>
             {props.children}
         </MuiPanelManager>
     </DataContext.Provider>

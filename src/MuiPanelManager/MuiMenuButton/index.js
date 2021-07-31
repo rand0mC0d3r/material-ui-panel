@@ -210,12 +210,13 @@ const MuiMenuButton = withTheme(({
       key={lo.index}
       placement={lo.side}
       enterDelay={1000}
-      title={`${lo.tooltip} ${lo.notificationCount > 0 ? ` - Notifications: ${lo.notificationCount}` : ''}`}
+      title={`${lo.hint || lo.title} ${lo.notificationCount > 0 ? ` - Notifications: ${lo.notificationCount}` : ''}`}
     >
       <span>
         <Button
-          aria-describedby={id}
           disableRipple
+          disableFocusRipple
+          disableTouchRipple
           onContextMenu={(e) => handleClick(e)}
           disableElevation
           disabled={lo.noPanel}
@@ -240,9 +241,13 @@ const MuiMenuButton = withTheme(({
             <Box display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  style: side === 'right' ? { marginRight: '-4px' } : { marginLeft: '-4px' },
+                  style: {
+                    fontSize: '24px',
+                    marginLeft: (!lo.noPanel && side === 'right') && '4px',
+                    marginRight: (!lo.noPanel && side === 'left') && '4px'
+                  },
                   className: classes.iconButton,
-                  color: lo.isVisible ? "action" : "disabled"
+                  color: lo.isVisible ? "action" : "action"
               })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
             </Box>

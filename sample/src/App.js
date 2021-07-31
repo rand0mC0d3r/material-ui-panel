@@ -1,27 +1,45 @@
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import './App.css';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import ComplexPanel from './parts/ComplexPanel';
 import NotificationPanel from './parts/NotificationPanel';
+import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
-  const theme = useMemo(() => createTheme({ palette: { type: 'light' } }), [])
+  const [darkMode, setDarkMode] = useState(false);
+  const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
 
-  return (
+  const toggleDarkMode = () => {
+    console.log("ere");
+    setDarkMode(!darkMode);
+  }
+
+  return <>
     <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider showCollapseButton={true}>
+      <ToggleTheme {...{ toggleDarkMode, darkMode }} />
+
+      <MuiPanelProvider initialSide='right' showCollapseButton={true}>
+
+        {/* divider variations */}
         <MuiDivider id="logo" icon={<GitHub />} />
-        <MuiDivider id="test" icon={<GitHub />}  shortText="TEST" />
+
+        <MuiDivider id="test" icon={<GitHub />} shortText="TEST" />
+
         <MuiDivider id="test33" tooltip="Default separator" />
+
         <MuiDivider id="sample" showIcon={false} shortText={"MENU"} tooltip="Default separator" />
 
+        {/* deep nested panel */}
         <NotificationPanel />
 
+        <ComplexPanel />
+
+        {/* panel variations */}
         <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
@@ -37,18 +55,23 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
-        <ComplexPanel />
+        <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
+          <Skeleton variant="rect" width={'100%'} height={300} />
+        </MuiPanel>
 
+
+        {/* app main content */}
         <div>
           <iframe
-            title="sample"
-            style={{ width: "100%", height: "100%", border: '0px none' }}
+            title="Random Wiki article"
+            style={{ width: "100%", opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
           />
         </div>
       </MuiPanelProvider>
+
     </ThemeProvider>
-  );
+  </>;
 }
 
 export default App;
