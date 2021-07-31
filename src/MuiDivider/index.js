@@ -3,13 +3,12 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiPanelStore';
 
-const MuiDivider = withTheme(({
+const MuiDivider = ({
   id,
   tooltip,
   shortText,
   icon,
   showIcon = true,
-  theme,
 }) => {
   const { handlePanelAnnouncement } = useContext(DataProvider);
   useEffect(() => {
@@ -22,6 +21,6 @@ const MuiDivider = withTheme(({
   }, [id]);
 
   return null
-})
+}
 
 export default MuiDivider;

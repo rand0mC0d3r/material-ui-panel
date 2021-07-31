@@ -17,9 +17,11 @@ const StyledIconButton = styled(IconButton) (({ theme, side }) => ({
 		? `${theme.shape.borderRadius}px 0px 0px ${theme.shape.borderRadius}px`
 		: `0px ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0px`,
 }));
+
 const StyledArrowLeft = styled(ArrowLeft) ({
 	fontSize: "16px",
 });
+
 const StyledArrowRight = styled(ArrowRight) ({
 	fontSize: "16px",
 });

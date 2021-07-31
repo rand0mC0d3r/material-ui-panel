@@ -14,7 +14,13 @@ import MuiMenuOptions from '../MuiMenuOptions';
 const icons = theme => ({
   iconButton: {
     fontSize: "24px",
-    color: theme.palette.text.primary
+    opacity: "0.55",
+    color: theme.palette.text.primary,
+
+    "&:hover": {
+      color: theme.palette.text.primary,
+      opacity: "0.9",
+    }
   },
   rightIconButton: {
     marginLeft: '4px'
@@ -59,12 +65,13 @@ const useStyles = makeStyles((theme, side) => ({
     border: "0px none",
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
-    opacity: "0.55",
+    // opacity: "0.55",
+    color: theme.palette.text.hint,
     minWidth: "initial",
 
     "&:hover": {
       color: theme.palette.text.primary,
-      opacity: "0.9",
+      // opacity: "0.9",
     }
   },
   rightGroupButtonMenu: {

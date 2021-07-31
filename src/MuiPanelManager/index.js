@@ -224,7 +224,7 @@ const MuiPanelManager = withTheme(({
               .filter(lo => !lo.asEmbedded)
               .map(lo => <MuiMenuButton key={lo.uniqueId} {...{ lo, side }} />)}
             <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
-            {index === 0 && <MuiPanelSettings />}
+            {/* {index === 0 && <MuiPanelSettings />} */}
           </>}
         </div>}
     </Fragment>)}
