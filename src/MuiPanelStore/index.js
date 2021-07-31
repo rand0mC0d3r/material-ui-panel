@@ -67,13 +67,11 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
     }
 
     const handlePanelAlerts = ({ id, count, color }) => {
-        const foundObject = layout.find(layoutObject => layoutObject.id === id);
-        if (foundObject && foundObject.notifications.count !== count) {
-            setLayout(layout => layout.map(layoutObject => layoutObject.id === id
+        setLayout(layout => layout.map(layoutObject =>
+            (layoutObject.id === id && layoutObject.notifications.count !== count)
                 ? { ...layoutObject, notifications: { count, color } }
                 : layoutObject
-            ));
-        }
+        ));
     }
 
     const handleToggleCollapse = ({ uniqueId }) => {

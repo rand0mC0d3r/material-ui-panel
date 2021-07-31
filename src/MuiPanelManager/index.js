@@ -5,7 +5,7 @@ import MuiPanelSettings from '../MuiPanelSettings';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 import MuiMenuButton from './MuiMenuButton';
 
-const menuWidth = '54px';
+const menuWidth = '56px';
 
 const styledGrid = {
   bothGrid: {
@@ -37,11 +37,11 @@ const styledMenus = theme => ({
   },
   leftMenu: {
     "grid-area": "leftMenu",
-    width: '54px',
+    width: menuWidth,
     borderRight: `1px solid ${theme.palette.divider}`
   },
   rightMenu: {
-    width: '54px',
+    width: menuWidth,
     "grid-area": "rightMenu",
     borderLeft: `1px solid ${theme.palette.divider}`
   },
@@ -159,15 +159,14 @@ const useStyles = makeStyles(theme => ({
     width: menuWidth,
   },
   menuCollapsed: {
-    width: '6px',
-    backgroundColor: theme.palette.background.default,
+    width: '8px',
+    backgroundColor: theme.palette.background.paper,
     transition: "background-color 350ms ease-out 100ms",
     opacity: 1,
     cursor: 'pointer',
 
     "&:hover": {
-      backgroundColor: theme.palette.text.disabled,
-      opacity: 0.75
+      backgroundColor: theme.palette.background.default,
     }
   },
   emptySpace: {
@@ -213,7 +212,7 @@ const MuiPanelManager = withTheme(({
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
-          onClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
+          onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
 
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
           className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed ? classes.menuCollapsed : classes.menuOpen}`}

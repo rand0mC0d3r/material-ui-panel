@@ -7,6 +7,7 @@ import DataProvider from '../MuiPanelStore';
 const StyledIconButton = styled(IconButton) (({ theme, side }) => ({
 	position: 'absolute',
 	bottom: '16px',
+	boxShadow: `inset -1px 0px 1px 0px ${theme.palette.divider}`,
 	border: `1px solid ${theme.palette.divider}`,
 	backgroundColor: theme.palette.background.paper,
 	right: side === 'left' && '-24px',

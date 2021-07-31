@@ -36,20 +36,19 @@ const styledBadge = ({ theme, side }) => ({
   },
 })
 
-const useStyles = makeStyles((theme, side) => ({
-  root: {
-    height: "100%",
-    position: "absolute",
-    width: "100%",
-    overflow: "hidden",
-    display: "grid",
-    "grid-template-rows": "1fr",
-    "gap": "0px 0px",
-    "grid-auto-flow": "row",
-    backgroundColor: theme.palette.background.default,
+const styledModal = ({ theme }) => ({
+  modalTitle: {
+    width: '200px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    padding: '8px',
+    fontSize: '12px',
+    backgroundColor: theme.palette.divider,
   },
-  toolboxButton: {
-  },
+})
+
+const styledText = ({ theme }) => ({
   shortText: {
     fontSize: '10px',
     width: '40px',
@@ -59,57 +58,14 @@ const useStyles = makeStyles((theme, side) => ({
     textOverflow: 'ellipsis',
     color: theme.palette.text.primary,
   },
+})
+
+
+const useStyles = makeStyles((theme, side) => ({
+  ...styledText({theme}),
   ...styledBadge({ theme, side }),
-  bothGrid: {
-    "grid-template-columns": `54px auto 1fr auto 54px`,
-    "grid-template-areas":`
-      "leftMenu leftPanel main rightPanel rightMenu"
-    `
-  },
-  leftGrid: {
-    "grid-template-columns": `54px auto 1fr`,
-    "grid-template-areas":`
-      "leftMenu leftPanel main"
-    `
-  },
-  rightRight: {
-    "grid-template-columns": `1fr auto 54px`,
-    "grid-template-areas":`
-      "leftMenu leftPanel main rightPanel rightMenu"
-    `
-  },
-
-  bothMenus: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  leftMenu: {
-    "grid-area": "leftMenu",
-    borderRight: `1px solid ${theme.palette.divider}`
-  },
-  rightMenu: {
-    "grid-area": "rightMenu",
-    borderLeft: `1px solid ${theme.palette.divider}`
-  },
-
-  panelContainer: {
-    position: "relative",
-    overflow: 'scroll',
-
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  leftPanel: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-  rightPanel: {
-    borderLeft: `1px solid ${theme.palette.divider}`,
-  },
-  main: { "grid-area": "main" },
-
+  ...styledModal({theme}),
   ...icons(theme),
-
 
   buttonMenu: {
     border: "0px none",
@@ -153,15 +109,6 @@ const useStyles = makeStyles((theme, side) => ({
       fontSize: '4px'
     },
   },
-  modalTitle: {
-    width: '200px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    padding: '8px',
-    fontSize: '12px',
-    backgroundColor: theme.palette.divider,
-  },
   rightButtonMenu: {
     borderRight: "4px solid transparent",
   },
@@ -176,19 +123,6 @@ const useStyles = makeStyles((theme, side) => ({
     borderLeft: `4px solid ${theme.palette.text.primary}`,
     opacity: "1",
   },
-  panelWrapper: {
-    display: 'flex',
-    // alignItems: 'stretch'
-  },
-  panelContent: {
-    padding: "16px",
-  },
-  leftPanelWrapper: {
-    borderLeft: `3px solid ${theme.palette.primary.main}`,
-  },
-  rightPanelWrapper: {
-    borderRight: `3px solid ${theme.palette.primary.main}`,
-  }
 }));
 
 const ContentContainerBox = styled(Box) (({ theme }) => ({
@@ -294,8 +228,7 @@ const MuiMenuButton = withTheme(({
           fullWidth
           onClick={() => handleSetSide({ uniqueId: lo.uniqueId })}
           variant="outlined"
-          startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}
-          className={classes.toolboxButton}>
+          startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}>
             Switch sides
         </Button>}
 
@@ -305,15 +238,14 @@ const MuiMenuButton = withTheme(({
             variant="outlined"
             size="small"
             fullWidth
-            startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }
-            className={classes.toolboxButton}>
+            startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }>
               {lo.asGroup ? 'as Individual' : 'as Group' }
             </Button>
           : <Button
             onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}
             size="small"
             startIcon={<AddToHomeScreenIcon />}
-            variant="outlined" className={classes.toolboxButton}>
+            variant="outlined">
               Promote
           </Button>}
 
