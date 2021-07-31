@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Select, Tooltip } from '@material-ui/core';
+import { Badge, Box, Button, Select, Tooltip, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
@@ -23,7 +23,8 @@ const icons = theme => ({
   },
 })
 
-const styledBadge = ({ theme, side }) => ({
+
+const badge = theme => ({
   badge: {
     "& .MuiBadge-badge": {
       width: '22px',
@@ -31,21 +32,10 @@ const styledBadge = ({ theme, side }) => ({
       height: '16px',
       minWidth: '22px',
       bottom: '12px',
-      ...side !== 'left' ? { left: '-10px' } : { right: '-10px' },
     },
   },
-})
-
-const styledModal = ({ theme }) => ({
-  modalTitle: {
-    width: '200px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    padding: '8px',
-    fontSize: '12px',
-    backgroundColor: theme.palette.divider,
-  },
+  rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
+  leftBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-10px' } },
 })
 
 const styledText = ({ theme }) => ({
@@ -60,11 +50,9 @@ const styledText = ({ theme }) => ({
   },
 })
 
-
 const useStyles = makeStyles((theme, side) => ({
-  ...styledText({theme}),
-  ...styledBadge({ theme, side }),
-  ...styledModal({theme}),
+  ...styledText({ theme }),
+  ...badge({ theme }),
   ...icons(theme),
 
   buttonMenu: {
@@ -164,11 +152,7 @@ const MuiMenuButton = withTheme(({
     >
       <span>
         <Button
-          disableRipple
-          disableFocusRipple
-          disableTouchRipple
           onContextMenu={(e) => handleClick(e)}
-          disableElevation
           disabled={lo.noPanel}
           onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
           variant="text"
@@ -181,15 +165,12 @@ const MuiMenuButton = withTheme(({
         `}
         >
           <Badge
-            max={99}
-            className={classes.badge}
+            className={`${classes.badge} ${classes[`${side}Badge`]}`}
             anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
             badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
-            // badgeContent={lo.notifications.count}
             color={lo.notifications.color}
             variant={lo.variant}
           >
-            {/* {lo.notifications.count} */}
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
@@ -216,7 +197,6 @@ const MuiMenuButton = withTheme(({
         horizontal: side !== 'right' ? 'left' : 'right',
       }}
     >
-      <div className={ classes.modalTitle}>{lo.tooltip}</div>
       <Box
         style={{ gap: '8px', padding: '8px'}}
         display="flex"
