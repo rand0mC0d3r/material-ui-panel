@@ -161,14 +161,17 @@ const useStyles = makeStyles(theme => ({
   menuCollapsed: {
     width: '6px',
     backgroundColor: theme.palette.background.default,
-    transition: "all 350ms ease-out 100ms",
+    transition: "background-color 350ms ease-out 100ms",
     opacity: 1,
     cursor: 'pointer',
 
     "&:hover": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.text.disabled,
       opacity: 0.75
     }
+  },
+  emptySpace: {
+    flex: '1 1 auto'
   }
 }));
 
@@ -211,19 +214,19 @@ const MuiPanelManager = withTheme(({
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           onClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
+
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
           className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed ? classes.menuCollapsed : classes.menuOpen}`}
         >
-          {!settings.isCollapsed && <div>
+          {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
+          {!settings.isCollapsed && <>
             {layout
               .filter(lo => lo.side === side)
               .filter(lo => !lo.asEmbedded)
               .map(lo => <MuiMenuButton key={lo.uniqueId} {...{ lo, side }} />)}
-          </div>}
-          {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
-          {index === 0 && <div>
-            {!settings.isCollapsed && <MuiPanelSettings />}
-          </div>}
+            <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
+            {index === 0 && <MuiPanelSettings />}
+          </>}
         </div>}
     </Fragment>)}
 

@@ -14,10 +14,10 @@ const icons = theme => ({
     fontSize: "24px",
     color: theme.palette.text.primary
   },
-  iconButtonRight: {
+  rightIconButton: {
     marginLeft: '4px'
   },
-  iconButtonLeft: {
+  leftIconButton: {
     marginRight: '4px'
   },
 })
@@ -52,9 +52,8 @@ const useStyles = makeStyles(theme => ({
       fontSize: '11px',
       height: '16px',
       minWidth: '24px',
-      right: '2px',
-      top: '0%',
-      bottom: 'unset',
+      left: '-10px',
+      bottom: '12px',
     },
   },
   bothGrid: {
@@ -254,7 +253,7 @@ const MuiMenuButton = withTheme(({
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  className: `${classes.iconButton} ${!lo.noPanel && classes[`iconButton${side}`]}`,
+                  className: `${classes.iconButton} ${!lo.noPanel && classes[`${side}IconButton`]}`,
                   color: lo.isVisible ? "action" : "action"
               })}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}

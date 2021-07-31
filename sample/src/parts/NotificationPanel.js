@@ -1,5 +1,5 @@
 import { Box, Button, Switch, Typography } from '@material-ui/core';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useEffect, useState } from 'react';
 import MuiPanel from '../components/MuiPanel';
 
@@ -28,7 +28,7 @@ const NotificationPanel = () => {
     id="notificationsPanel"
     title="Notifications Panel"
     notifications={{color, count: alerts}}
-    icon={<NotificationsIcon />}>
+    icon={<AccessAlarmIcon />}>
     <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
       <Box display="flex" flexDirection="row" justifyContent="space-between" style={{ gap: '16px' }}>
         <Typography variant="h6" color={color}>Alerts: {alerts}</Typography>
