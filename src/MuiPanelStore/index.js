@@ -56,15 +56,20 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
     }
 
     const handleUnSetAsEmbedded = ({ uniqueId }) => {
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-            ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
-            : layoutObject));
+        setLayout(layout.map(layoutObject =>
+            layoutObject.uniqueId === uniqueId
+                ? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
+                : layoutObject
+        ));
     }
 
     const handlePanelAlerts = ({ id, count, color }) => {
-        setLayout(layout.map(layoutObject => layoutObject.uniqueId === id
-            ? { ...layoutObject, notificationCount: count, notificationColor: color }
-            : layoutObject));
+        console.log(`Panel ${id} has ${count} new alerts`);
+        setLayout(layout.map(layoutObject =>
+            layoutObject.uniqueId === id
+                ? { ...layoutObject, notificationCount: count, notificationColor: color }
+                : layoutObject
+        ));
     }
 
     const handleToggleCollapse = ({ uniqueId }) => {

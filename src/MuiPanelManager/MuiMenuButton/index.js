@@ -9,6 +9,7 @@ import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
 
+
 const icons = theme => ({
   iconButton: {
     fontSize: "24px",
@@ -22,7 +23,20 @@ const icons = theme => ({
   },
 })
 
-const useStyles = makeStyles(theme => ({
+// ...side !== 'left' ? { left: '-10px' } : { right: '-10px' },
+const styledBadge = ({ theme, side }) => ({
+  badge: {
+    "& .MuiBadge-badge": {
+      width: '22px',
+      fontSize: '11px',
+      height: '16px',
+      minWidth: '22px',
+      bottom: '12px',
+    },
+  },
+})
+
+const useStyles = makeStyles((theme, side) => ({
   root: {
     height: "100%",
     position: "absolute",
@@ -45,17 +59,7 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis',
     color: theme.palette.text.primary,
   },
-  badge: {
-    "& .MuiBadge-badge": {
-      border: `2px solid ${theme.palette.background.paper}`,
-      width: '24px',
-      fontSize: '11px',
-      height: '16px',
-      minWidth: '24px',
-      left: '-10px',
-      bottom: '12px',
-    },
-  },
+  ...styledBadge({ theme, side }),
   bothGrid: {
     "grid-template-columns": `54px auto 1fr auto 54px`,
     "grid-template-areas":`
@@ -196,7 +200,7 @@ const MuiMenuButton = withTheme(({
   side,
   theme,
 }) => {
-  const classes = useStyles(theme)
+  const classes = useStyles(theme, side)
   const { layout, handleSetAsEmbedded, handleSetVisible, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
 
  const [anchorEl, setAnchorEl] = React.useState(null);
@@ -243,9 +247,10 @@ const MuiMenuButton = withTheme(({
         `}
         >
           <Badge
-            max={9}
+            max={99}
             className={classes.badge}
             anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
+            // badgeContent={Math.max(0, Math.min(99, lo.notificationCount || 0))}
             badgeContent={lo.notificationCount}
             color={lo.notificationColor}
             variant={lo.variant}

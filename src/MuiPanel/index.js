@@ -13,7 +13,7 @@ const MuiPanel = ({
   icon,
 
   notifications = {
-    count: 0,
+    count: null,
     color: 'primary',
   },
 
@@ -57,7 +57,13 @@ const MuiPanel = ({
   }, [layoutObject])
 
   useEffect(() => {
-    if(notifications.count > 0) { handlePanelAlerts({ id, count: notifications.count, color: notifications.color });}
+    if (notifications.count > 0) {
+      console.log(id, notifications)
+      handlePanelAlerts({ id, count: Math.min(99, Math.max(notifications.count, 0)), color: notifications.color });
+      // handlePanelAlerts({ id, count: notifications.count, color: notifications.color });
+    } else if(notifications.count === 0) {
+      console.log('cancel count', id, notifications)
+    }
   }, [notifications.count, notifications.color, id]);
 
   return layoutObject && layoutObject.isVisible && !!id ? createPortal(
