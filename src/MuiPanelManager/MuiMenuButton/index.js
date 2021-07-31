@@ -8,6 +8,7 @@ import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
+import MuiMenuOptions from '../MuiMenuOptions';
 
 
 const icons = theme => ({
@@ -22,7 +23,6 @@ const icons = theme => ({
     marginRight: '4px'
   },
 })
-
 
 const badge = theme => ({
   badge: {
@@ -183,63 +183,7 @@ const MuiMenuButton = withTheme(({
         </Button>
       </span>
     </Tooltip>
-    <Popover
-      id={id}
-      open={open}
-      anchorEl={anchorEl}
-      onClose={handleClose}
-      anchorOrigin={{
-        vertical: 'center',
-        horizontal: side !== 'right' ? 'right' : 'left',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: side !== 'right' ? 'left' : 'right',
-      }}
-    >
-      <Box
-        style={{ gap: '8px', padding: '8px'}}
-        display="flex"
-        flexDirection="column"
-        alignItems="center">
-
-        {!lo.asEmbedded && <Button
-          size="small"
-          fullWidth
-          onClick={() => handleSetSide({ uniqueId: lo.uniqueId })}
-          variant="outlined"
-          startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}>
-            Switch sides
-        </Button>}
-
-        {!lo.asEmbedded
-          ? <Button
-            onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })}
-            variant="outlined"
-            size="small"
-            fullWidth
-            startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }>
-              {lo.asGroup ? 'as Individual' : 'as Group' }
-            </Button>
-          : <Button
-            onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}
-            size="small"
-            startIcon={<AddToHomeScreenIcon />}
-            variant="outlined">
-              Promote
-          </Button>}
-
-        {!lo.asEmbedded && !lo.asGroup && <Select
-          fullWidth
-          disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
-          onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
-            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
-            </MenuItem>)}
-        </Select>}
-
-        </Box>
-      </Popover>
+    <MuiMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
     </>
 })
 export default MuiMenuButton;

@@ -1,6 +1,7 @@
 import { IconButton, Tooltip } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import { ArrowLeft, ArrowRight } from '@material-ui/icons';
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import DataProvider from '../MuiPanelStore';
 
@@ -23,7 +24,7 @@ const StyledArrowRight = styled(ArrowRight) ({
 	fontSize: "16px",
 });
 
-const MuiMenuCollapseButton = ({ side = 'right' }) => {
+const MuiMenuCollapseButton = ({ side }) => {
 	const { settings, toggleSettingIsCollapsed } = useContext(DataProvider);
 
   return <Tooltip placement={side} arrow title={settings.isCollapsed ? 'Expand Panel' : 'Minimize Panel'}>
@@ -32,6 +33,14 @@ const MuiMenuCollapseButton = ({ side = 'right' }) => {
 				{side === 'left' && (settings.isCollapsed ? <StyledArrowRight /> : <StyledArrowLeft />)}
 			</StyledIconButton>
 		</Tooltip>
+}
+
+MuiMenuCollapseButton.defaultProps = {
+	side: 'right',
+}
+
+MuiMenuCollapseButton.propTypes = {
+	side: PropTypes.oneOf(['left', 'right']),
 }
 
 export default MuiMenuCollapseButton;
