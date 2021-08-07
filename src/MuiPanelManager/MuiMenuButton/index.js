@@ -5,7 +5,6 @@ import DataProvider from '../../MuiPanelStore';
 import { oppositeSide } from '../../utils';
 import MuiMenuOptions from '../MuiMenuOptions';
 
-
 const icons = theme => ({
   iconButton: {
     fontSize: "24px",
@@ -182,9 +181,9 @@ const MuiMenuButton = withTheme(({
             className={`
               ${classes.badge}
               ${classes[`${side}Badge`]}
-              ${settings.inverseMarkers && classes[`${side}FixBadge`]}
+              ${!settings.inverseMarkers && classes[`${side}FixBadge`]}
               `}
-            anchorOrigin={{ vertical: 'bottom', horizontal: side === 'left' ? 'right' : 'left' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: oppositeSide(side, 'left')}}
             badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
             color={lo.notifications.color}
             variant={lo.variant}

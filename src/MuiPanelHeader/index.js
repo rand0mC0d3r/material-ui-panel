@@ -1,6 +1,7 @@
 import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -15,6 +16,13 @@ const useStyles = makeStyles(theme => ({
   toolbox: {
     gap: theme.spacing(1),
     height: "32px"
+  },
+  groupIcon: {
+    transform: 'rotateZ(90deg)',
+    background: theme.palette.divider,
+    borderRadius: '4px',
+    padding: '4px 2px',
+    color: theme.palette.background.paper,
   },
   toolboxButton: {
     padding: "0px",
@@ -92,7 +100,7 @@ const MuiPanel = withTheme(({
           {asGroup && <Tooltip
             title="As group..."
             placement='bottom'>
-            <WebAssetIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
+            <AmpStoriesIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
           </Tooltip>}
         </Box>
       </Box>

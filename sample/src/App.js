@@ -57,7 +57,7 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
-        <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
+        <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
