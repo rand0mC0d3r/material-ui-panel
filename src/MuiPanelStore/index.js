@@ -32,21 +32,23 @@ function MuiPanelProvider({
 				{
 					id,
 					uniqueId: id,
+					asGroup: false,
+					notifications: {
+						count: 0,
+						summary: 0,
+						color: "primary",
+						...notifications,
+					},
+					asEmbedded: false,
 					side: initialSide,
 					isVisible: false,
-					asGroup: false,
-					asEmbedded: false,
 					parentId: null,
 					iconInHeader,
 					isCollapsed: false,
 					ref,
 					index: layout.length,
 					showBadge: false,
-					notifications: {
-						count: 0,
-						color: "primary",
-						...notifications,
-					},
+
 					variant: 'standard',
 					index: layout.length,
 					subTitle,
@@ -76,11 +78,35 @@ function MuiPanelProvider({
 		}
 
 		const handlePanelAlerts = ({ id, count, color }) => {
-			setLayout(layout => layout.map(layoutObject =>
-				(layoutObject.uniqueId === id && layoutObject.notifications.count !== count)
-					? { ...layoutObject, notifications: { count, color } }
-					: layoutObject
-			));
+
+			const updateObject = (layout) => {
+				return layout.map(layoutObject =>
+					(layoutObject.uniqueId === id && layoutObject.notifications.count !== count)
+						? { ...layoutObject, notifications: { count, color } }
+						: layoutObject
+				)
+			}
+
+			const updateParent = (layout) => {
+			return layout.map(layoutObject =>
+					(layoutObject.parentId === null)
+						? {
+							...layoutObject,
+							notifications: {
+								...layoutObject.notifications,
+								summary: layout.reduce((acc, value) => {
+									if (value.parentId === layoutObject.uniqueId) {
+										acc = acc + value.notifications.count;
+									}
+									return acc;
+								}, 0) + layoutObject.notifications.count,
+							}
+						}
+						: layoutObject
+				)
+			}
+
+			setLayout(layout => updateParent(updateObject(layout)));
 		}
 
 		const handleToggleCollapse = ({ uniqueId }) => {
@@ -144,7 +170,7 @@ function MuiPanelProvider({
 		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
-		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+		useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
 
 		return <DataContext.Provider

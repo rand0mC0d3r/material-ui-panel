@@ -39,6 +39,8 @@ function App() {
         {/* deep nested panel */}
         <NotificationPanel />
 
+        <NotificationPanel identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
+
         <ComplexPanel />
 
         {/* panel variations */}

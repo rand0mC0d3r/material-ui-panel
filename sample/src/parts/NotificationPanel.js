@@ -3,7 +3,7 @@ import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useEffect, useState } from 'react';
 import MuiPanel from '../components/MuiPanel';
 
-const NotificationPanel = () => {
+const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notifications Panel" }) => {
   const [alerts, setAlerts] = useState(0);
   const [color, setColor] = useState('primary');
   const [auto, setAuto] = useState(false);
@@ -25,8 +25,8 @@ const NotificationPanel = () => {
   }, [auto])
 
   return <MuiPanel
-    id="notificationsPanel"
-    title="Notifications Panel"
+    id={identifier}
+    title={title}
     notifications={{color, count: alerts}}
     icon={<AccessAlarmIcon />}>
     <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
@@ -55,7 +55,7 @@ const NotificationPanel = () => {
           </Box>
       </Box>
       <Button color={color} variant="outlined" onClick={() => { setAlerts(alerts => alerts + 1); }}>Add</Button>
-      <Button color={color} variant="outlined" onClick={() => setAlerts(alerts => Math.max(0, alerts - 1)) }>Remove</Button>
+      <Button color={color} variant="outlined" onClick={() => setAlerts(alerts => Math.max(0, alerts - 1)) }>Subtract</Button>
       <Button color={color} variant="outlined" onClick={() => setAlerts(0) }>To 0</Button>
     </Box>
   </MuiPanel>
