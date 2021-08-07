@@ -87,9 +87,9 @@ const MuiPanel = withTheme(({
 
         <Box className={classes.headerContainer} flexWrap='wrap' display="flex" alignItems="center">
           <Typography
-            color="textPrimary"
+            color={asEmbedded ? 'textSecondary' : 'textPrimary'}
             className={classes.panelTitle}
-            style={{ fontWeight: asEmbedded ? 'bold' : 'normal' }}
+            style={{ fontWeight: asEmbedded ? 'bold' : 'bold' }}
             variant='subtitle2'
           >{title}</Typography>
           {subTitle && <Tooltip
