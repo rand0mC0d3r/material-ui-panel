@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
 		border: `1px solid ${theme.palette.divider}`,
 		borderRadius: "8px",
 		padding: '16px',
-    left: '30%',
-    right: '30%',
+    left: '35%',
+    right: '35%',
     top: '32px',
-		height: '900px',
+		height: '875px',
 		overflow: "auto"
 	},
 

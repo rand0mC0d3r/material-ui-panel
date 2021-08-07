@@ -16,7 +16,7 @@ const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
   toolbox: {
-    gap: theme.spacing(1),
+    gap: theme.spacing(2),
     height: "32px"
   },
   groupIcon: {
@@ -108,17 +108,19 @@ const MuiPanel = withTheme(({
             placement='bottom'>
             <InfoOutlinedIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
           </Tooltip>}
-          {asGroup && <Tooltip
-            title="As group..."
-            placement='bottom'>
-            <AmpStoriesIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
-          </Tooltip>}
+
         </Box>
       </Box>
-    <Box display="flex" className={classes.toolbox}>
+    <Box display="flex" alignItems="center" className={classes.toolbox}>
+      {asGroup && <Tooltip
+        arrow
+          title="As group..."
+          placement='bottom'>
+          <AmpStoriesIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
+        </Tooltip>}
       <Tooltip title="More options for the panel" arrow>
-        <Button size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
-          <MoreHorizIcon color={'inherit'} />
+        <Button className={classes.collapseButton} size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
+          <MoreHorizIcon color="action" />
         </Button>
       </Tooltip>
       </Box>

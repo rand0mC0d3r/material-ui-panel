@@ -39,7 +39,11 @@ const badge = theme => ({
       boxShadow: `0px 0px 0px 2px ${theme.palette.background.paper}`,
     },
   },
-  groupBadge: { "& .MuiBadge-badge": { boxShadow: '0px 3px 0px -1px yellow, 0px 4px 0px 0px blue' } },
+  groupBadge: {
+    "& .MuiBadge-badge": {
+      boxShadow: '0px 2px 0px -1px yellow, 0px 3px 0px 0px blue, 0px 5px 0px -1px yellow, 0px 6px 0px 0px blue'
+    }
+  },
   rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
   leftBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-10px' } },
   rightFixBadge: { "& .MuiBadge-badge": { left: '-14px', right: 'unset' } },
@@ -80,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '4px',
       lineHeight: "12px",
       width: '8px',
-      top: 24,
+      top: 22,
       borderRadius: "0px 4px 4px 0px",
       left: -4,
     },
@@ -93,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.divider,
       position: 'absolute',
       width: '8px',
-      top: 24,
+      top: 22,
       borderRadius: "4px 0px 0px 4px",
       right: -4,
       lineHeight: '12px',
@@ -168,7 +172,7 @@ const MuiMenuButton = withTheme(({
           }}
           className={`
             ${classes.buttonMenu}
-            ${lo.asGroup && classes[`${settings.inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
+            ${lo.asGroup && classes[`${oppositeSide(side)}GroupButtonMenu`]}
             ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
             ${lo.isVisible && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
         `}
