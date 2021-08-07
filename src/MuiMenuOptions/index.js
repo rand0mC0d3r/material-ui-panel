@@ -1,17 +1,25 @@
-import { Box, Button, Select, Typography } from '@material-ui/core';
+import { Box, Button, Select, Tooltip, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
   box: { gap: `${theme.spacing(1)}px`, padding: '8px' },
-  groupsBox: { gap: `${theme.spacing(2)}px`},
+  groupsBox: { gap: `${theme.spacing(2)}px` },
+  groupIcon: {
+    transform: 'rotateZ(90deg)',
+  },
+  popover: {
+    "& .MuiPopover-paper": {
+      border: `1px solid ${theme.palette.divider}`
+    }
+  }
 }));
 
 const MuiMenuOptions = withTheme(({
@@ -19,6 +27,7 @@ const MuiMenuOptions = withTheme(({
   anchorEl,
   setAnchorEl,
   side,
+  underMenu = false,
   theme,
 }) => {
   const { layout, handleSetAsEmbedded, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
@@ -28,20 +37,27 @@ const MuiMenuOptions = withTheme(({
 
   useEffect(() => { setAnchorEl(null); }, [lo])
 
-  return <Popover {...{open, anchorEl, onClose}}
-    anchorOrigin={{ vertical: 'center', horizontal: side !== 'right' ? 'right' : 'left'}}
-    transformOrigin={{ vertical: 'top', horizontal: side !== 'right' ? 'left' : 'right' }}>
-      <Box className={classes.box} display="flex" flexDirection="column" alignItems="center">
+  return <Popover className={classes.popover} marginThreshold={0} elevation={0} {...{open, anchorEl, onClose}}
+    anchorOrigin={underMenu
+      ? { vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }
+      : { vertical: 'center', horizontal: side !== 'right' ? 'right' : 'left' }
+    }
+    transformOrigin={underMenu
+      ? { vertical: 'top', horizontal: 'center' }
+      : { vertical: 'center', horizontal: side !== 'right' ? 'left' : 'right' }
+    }>
+      <Box className={classes.box} display="flex" flexDirection="row" alignItems="center">
 
-        {!lo.asEmbedded && <Button size="small" fullWidth variant="outlined"
-          onClick={() => handleSetSide({ uniqueId: lo.uniqueId })}
-          startIcon={<SwapHorizIcon style={{ fontSize: 20 }} />}>Switch sides</Button>}
+        {!lo.asEmbedded && <Tooltip arrow title="Swap sides"><SwapHorizIcon onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} style={{ fontSize: 20 }} /></Tooltip>}
 
         {!lo.asEmbedded
-          ? <Button variant="outlined" size="small" fullWidth
-              onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })}
-              startIcon={ lo.asGroup ? <ViewStreamIcon /> : <WebAssetIcon /> }>{lo.asGroup ? 'as Individual' : 'as Group' }</Button>
-          : <Button variant="outlined" size="small" fullWidth
+        ? <>{lo.asGroup
+          ? <ViewStreamIcon onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
+          : <Tooltip arrow title="Promote as group">
+              <AmpStoriesIcon className={classes.groupIcon} onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
+            </Tooltip>}
+          </>
+          : <Button  size="small" fullWidth
               startIcon={<AddToHomeScreenIcon />}
               onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}>Promote</Button>}
 

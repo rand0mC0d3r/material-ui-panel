@@ -5,10 +5,12 @@ import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext } from 'react';
+import MuiMenuOptions from '../MuiMenuOptions';
 import DataProvider from '../MuiPanelStore';
 const fontSize = 20;
 
@@ -60,19 +62,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MuiPanel = withTheme(({
-  layoutObject: { uniqueId, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
+  layoutObject: { uniqueId, side, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
+  layoutObject,
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { layout, handleSetAsEmbedded, handleToggleCollapse, handleUnSetAsEmbedded, handleSetAsGroup, handleSetSide } = useContext(DataProvider);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { handleToggleCollapse } = useContext(DataProvider);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
 
   return <Box
-      justifyContent="space-between"
-      onDoubleClick={() => handleToggleCollapse({ uniqueId })}
-      alignItems="center"
+    justifyContent="space-between"
+    onDoubleClick={() => handleToggleCollapse({ uniqueId })}
+    alignItems="center"
+    onContextMenu={(e) => { e.preventDefault(); handleClick(e) }}
       display="flex"
       className={`${classes.header}`}
-    >
+  >
+    <MuiMenuOptions underMenu={true} {...{lo: layoutObject, side, anchorEl, setAnchorEl}} />
     <Box display="flex" alignItems="center" style={{ gap: theme.spacing(1) }}>
 
         <Tooltip arrow title="Click to toggle collapse">
@@ -104,8 +115,10 @@ const MuiPanel = withTheme(({
           </Tooltip>}
         </Box>
       </Box>
-      <Box display="flex" className={classes.toolbox}>
-
+    <Box display="flex" className={classes.toolbox}>
+      <Button size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
+        <MoreHorizIcon color={'inherit'} />
+        </Button>
         {/* <Tooltip arrow title="Click to toggle collapse">
           <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
             {isCollapsed
