@@ -1,9 +1,9 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useContext, useEffect } from 'react';
+import MuiMenuOptions from '../../MuiMenuOptions';
 import DataProvider from '../../MuiPanelStore';
 import { oppositeSide } from '../../utils';
-import MuiMenuOptions from '../MuiMenuOptions';
 
 const icons = theme => ({
   iconButton: {

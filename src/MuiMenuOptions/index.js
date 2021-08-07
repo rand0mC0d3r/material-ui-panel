@@ -7,7 +7,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { useContext, useEffect } from 'react';
-import DataProvider from '../../MuiPanelStore';
+import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
   box: { gap: `${theme.spacing(1)}px`, padding: '8px' },
