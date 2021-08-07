@@ -48,16 +48,20 @@ const styledMenus = theme => ({
 })
 
 const styledPanel = theme => ({
-    panelContainerWrapper: {
+  panelContainerWrapper: {
     position: 'relative',
     overflow: 'hidden auto',
-    display: 'none'
+    display: 'none',
+
+    "&::-webkit-scrollbar" : {
+      display: 'none'
+    }
   },
   panelContainer: {
     position: "relative",
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   leftPanel: {
     gridArea: "leftPanel",
@@ -141,19 +145,6 @@ const useStyles = makeStyles(theme => ({
   },
   leftActiveButtonMenu: {
     borderLeft: `4px solid ${theme.palette.primary.main}`,
-  },
-  panelWrapper: {
-    display: 'flex',
-    // alignItems: 'stretch'
-  },
-  panelContent: {
-    padding: "16px",
-  },
-  leftPanelWrapper: {
-    borderLeft: `4px solid ${theme.palette.primary.main}`,
-  },
-  rightPanelWrapper: {
-    borderRight: `4px solid ${theme.palette.primary.main}`,
   },
   menuOpen: {
     width: menuWidth,
