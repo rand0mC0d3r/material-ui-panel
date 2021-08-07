@@ -12,18 +12,19 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [collapseMode, setCollapseMode] = useState(true);
+  const [inverseMarkers, setInverseMarkers] = useState(false);
   const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
 
-  const toggleDarkMode = () => {
-    console.log("ere");
-    setDarkMode(!darkMode);
-  }
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleCollapseMode = () => setCollapseMode(!collapseMode);
+  const toggleInverseMarkers = () => setInverseMarkers(!inverseMarkers);
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <ToggleTheme {...{ toggleDarkMode, darkMode }} />
+      <ToggleTheme {...{ toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers }} />
 
-      <MuiPanelProvider initialSide='right' showCollapseButton={true}>
+      <MuiPanelProvider initialSide='right' inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
         <MuiDivider id="logo" icon={<GitHub />} />
@@ -64,7 +65,7 @@ function App() {
         <div>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
+            style={{ width: "100%", filter: 'blur(5px)', opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
           />
         </div>

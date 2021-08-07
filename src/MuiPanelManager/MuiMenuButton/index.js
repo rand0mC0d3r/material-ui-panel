@@ -8,6 +8,7 @@ import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
+import { oppositeSide } from '../../utils';
 import MuiMenuOptions from '../MuiMenuOptions';
 
 
@@ -42,10 +43,13 @@ const badge = theme => ({
       height: '16px',
       minWidth: '22px',
       bottom: '12px',
+      boxShadow: `0px 0px 0px 2px ${theme.palette.background.paper}`,
     },
   },
   rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
   leftBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-10px' } },
+  rightFixBadge: { "& .MuiBadge-badge": { left: '-14px', right: 'unset' } },
+  leftFixBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-14px' } },
 })
 
 const styledText = ({ theme }) => ({
@@ -60,9 +64,9 @@ const styledText = ({ theme }) => ({
   },
 })
 
-const useStyles = makeStyles((theme, side) => ({
+const useStyles = makeStyles((theme) => ({
   ...styledText({ theme }),
-  ...badge({ theme }),
+  ...badge(theme),
   ...icons(theme),
 
   buttonMenu: {
@@ -134,7 +138,7 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme, side)
-  const { layout, handleSetAsEmbedded, handleSetVisible, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
+  const { inverseMarkers, handleSetVisible } = useContext(DataProvider);
 
  const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -142,16 +146,12 @@ const MuiMenuButton = withTheme(({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     setAnchorEl(null);
   }, [lo])
 
   const open = Boolean(anchorEl);
-  const id = open ? `simple-popover-${lo.uniqueId}` : undefined;
 
   return <>
     <Tooltip
@@ -170,14 +170,18 @@ const MuiMenuButton = withTheme(({
           fullWidth
           className={`
             ${classes.buttonMenu}
-            ${lo.asGroup && classes[`${side}GroupButtonMenu`]}
-            ${!lo.noPanel && classes[`${side}ButtonMenu`]}
-            ${lo.isVisible && classes[`${side}ActiveButtonMenu`]}
+            ${lo.asGroup && classes[`${inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
+            ${!lo.noPanel && classes[`${inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
+            ${lo.isVisible && classes[`${inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
         `}
         >
           <Badge
-            className={`${classes.badge} ${classes[`${side}Badge`]}`}
-            anchorOrigin={{ vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }}
+            className={`
+              ${classes.badge}
+              ${classes[`${side}Badge`]}
+              ${inverseMarkers && classes[`${side}FixBadge`]}
+              `}
+            anchorOrigin={{ vertical: 'bottom', horizontal: side === 'left' ? 'right' : 'left' }}
             badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
             color={lo.notifications.color}
             variant={lo.variant}
@@ -187,7 +191,7 @@ const MuiMenuButton = withTheme(({
                 lo.icon, {
                   className: `
                     ${classes.iconButton}
-                    ${!lo.noPanel && classes[`${side}IconButton`]}
+                    ${!lo.noPanel && classes[`${inverseMarkers ? oppositeSide(side) :side}IconButton`]}
                     ${lo.isVisible && classes.activeIconButton}
                   `,
               })}

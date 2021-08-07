@@ -1,17 +1,24 @@
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
+import { oppositeSide } from '../utils';
 
 const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
 
-function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseButton, ...props } = props) {
+function MuiPanelProvider({
+	allowRightClick,
+	initialSide = 'left',
+	inverseMarkers,
+	showCollapseButton,
+	...props } = props) {
 
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
 		const initialLayout = get(props, 'layout', []);
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
+			inverseMarkers: false,
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
@@ -99,15 +106,13 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
 					? {
 						...layoutObject,
 						isVisible: true,
-						side: layoutObject.side === 'right' ? "left" : 'right'
+						side: oppositeSide(layoutObject.side)
 					}
 					: { ...layoutObject, isVisible: false })
 			);
 		}
 
-		const toggleSettingIsCollapsed = () => {
-			setSettings({...settings, isCollapsed: !settings.isCollapsed });
-		}
+	const toggleSettingIsCollapsed = () => setSettings(settings => ({ ...settings, isCollapsed: !settings.isCollapsed }));
 
 		const handleSetVisible = ({ uniqueId }) => {
 			const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
@@ -134,6 +139,8 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
 			)
 		}, [layout]);
 
+		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
+
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
 
@@ -141,6 +148,7 @@ function MuiPanelProvider({ allowRightClick, initialSide = 'left', showCollapseB
 			value={{
 				layout, setLayout,
 				settings, setSettings,
+				inverseMarkers,
 
 				handleUnSetAsEmbedded,
 				toggleSettingIsCollapsed,
