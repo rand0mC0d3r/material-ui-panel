@@ -150,7 +150,7 @@ function MuiPanelProvider({
 				setLayout(layout => ([...layout.map(lo => {
 					if (lo.side === foundObject.side) {
 						if (lo.uniqueId === foundObject.uniqueId) {
-							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0 }}
+							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 }}
 						} else if (lo.parentId === foundObject.uniqueId) {
 							return { ...lo, isVisible: !lo.isVisible }
 						} else {

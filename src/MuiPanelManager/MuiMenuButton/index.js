@@ -193,10 +193,10 @@ const MuiMenuButton = withTheme(({
               {lo.showIcon && cloneElement(
                 lo.icon, {
                   style: {
-                    color: lo.isVisible && determineColor(),
+                    color: lo.isVisible && lo.noPanel && determineColor(),
                   },
                   className: `
-                    ${classes.iconButton}
+                    ${!lo.noPanel && classes.iconButton}
                     ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconButton`]}
                     ${lo.isVisible && classes.activeIconButton}
                   `,

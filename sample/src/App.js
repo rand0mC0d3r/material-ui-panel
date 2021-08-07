@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddIcCallIcon from '@material-ui/icons/AddIcCall';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
@@ -32,13 +33,13 @@ function App() {
       <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
-        <MuiDivider id="logo" icon={<GitHub />} />
+        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
 
-        <MuiDivider id="test" icon={<GitHub />} shortText="TEST ABCDEF" />
+        <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
 
-        <MuiDivider id="test33" tooltip="Default separator" />
+        {/* <MuiDivider id="test33" tooltip="Default separator" />
 
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
 
         {/* deep nested panel */}
         <NotificationPanel />
