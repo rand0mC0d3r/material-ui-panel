@@ -12,7 +12,7 @@ const icons = theme => ({
     color: theme.palette.text.secondary,
 
     "&:hover": {
-      color: theme.palette.text.primary,
+      color: theme.palette.augmentColor({ main: theme.palette.text.secondary }).dark,
       opacity: "0.9",
     }
   },
@@ -39,6 +39,7 @@ const badge = theme => ({
       boxShadow: `0px 0px 0px 2px ${theme.palette.background.paper}`,
     },
   },
+  groupBadge: { "& .MuiBadge-badge": { boxShadow: '0px 3px 0px -1px yellow, 0px 4px 0px 0px blue' } },
   rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
   leftBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-10px' } },
   rightFixBadge: { "& .MuiBadge-badge": { left: '-14px', right: 'unset' } },
@@ -66,14 +67,8 @@ const useStyles = makeStyles((theme) => ({
     border: "0px none",
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
-    // opacity: "0.55",
-    // color: theme.palette.text.hint,
     minWidth: "initial",
 
-    "&:hover": {
-      color: theme.palette.text.primary,
-      // opacity: "0.9",
-    }
   },
   rightGroupButtonMenu: {
     position: 'relative',
@@ -183,9 +178,10 @@ const MuiMenuButton = withTheme(({
               ${classes.badge}
               ${classes[`${side}Badge`]}
               ${!settings.inverseMarkers && classes[`${side}FixBadge`]}
+              ${lo.notifications.summary > lo.notifications.count && classes.groupBadge}
               `}
             anchorOrigin={{ vertical: 'bottom', horizontal: oppositeSide(side, 'left')}}
-            badgeContent={Math.max(0, Math.min(99, lo.notifications.summary ? lo.notifications.summary : (lo.notifications.count || 0)))}
+            badgeContent={Math.max(0, Math.min(99, Math.max(lo.notifications.summary, lo.notifications.count) || 0))}
             color={lo.notifications.color}
             variant={lo.variant}
           >

@@ -12,29 +12,31 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
   const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleDebugMode = () => setDebugMode(!debugMode);
   const toggleCollapseMode = () => setCollapseMode(!collapseMode);
   const toggleInverseMarkers = () => setInverseMarkers(!inverseMarkers);
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <ToggleTheme {...{ toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
+      <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
-      <MuiPanelProvider initialSide='right' markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
-        <MuiDivider id="logo" icon={<GitHub />} />
+        {/* <MuiDivider id="logo" icon={<GitHub />} />
 
         <MuiDivider id="test" icon={<GitHub />} shortText="TEST ABCDEF" />
 
         <MuiDivider id="test33" tooltip="Default separator" />
 
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
 
         {/* deep nested panel */}
         <NotificationPanel />
@@ -44,7 +46,7 @@ function App() {
         <ComplexPanel />
 
         {/* panel variations */}
-        <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        {/* <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
@@ -61,7 +63,7 @@ function App() {
 
         <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
+        </MuiPanel> */}
 
 
         {/* app main content */}

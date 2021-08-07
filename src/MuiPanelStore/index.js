@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
 import { oppositeSide } from '../utils';
+import MuiDebug from './MuiDebug';
 
 const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
@@ -11,6 +12,7 @@ function MuiPanelProvider({
 	initialSide = 'left',
 	markerColor,
 	inverseMarkers,
+	debugMode,
 	showCollapseButton,
 	...props } = props) {
 
@@ -21,6 +23,7 @@ function MuiPanelProvider({
 			isCollapsed: false,
 			inverseMarkers: false,
 			markerColor: 'textPrimary',
+			debugMode: false,
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
@@ -48,7 +51,6 @@ function MuiPanelProvider({
 					ref,
 					index: layout.length,
 					showBadge: false,
-
 					variant: 'standard',
 					index: layout.length,
 					subTitle,
@@ -61,6 +63,25 @@ function MuiPanelProvider({
 					children,
 					}
 			]);
+		}
+
+		const updateParentSummary = (layout) => {
+			return layout.map(layoutObject =>
+				(layoutObject.parentId === null)
+					? {
+						...layoutObject,
+						notifications: {
+							...layoutObject.notifications,
+							summary: layout.reduce((acc, value) => {
+								if (value.parentId === layoutObject.uniqueId) {
+									acc = acc + value.notifications.count;
+								}
+								return acc;
+							}, 0) + layoutObject.notifications.count,
+						}
+					}
+					: layoutObject
+			)
 		}
 
 		const handleSetAsGroup = ({ uniqueId }) => {
@@ -77,8 +98,8 @@ function MuiPanelProvider({
 			));
 		}
 
-		const handlePanelAlerts = ({ id, count, color }) => {
-
+	const handlePanelAlerts = ({ id, count, color }) => {
+			console.log("trigered")
 			const updateObject = (layout) => {
 				return layout.map(layoutObject =>
 					(layoutObject.uniqueId === id && layoutObject.notifications.count !== count)
@@ -87,26 +108,7 @@ function MuiPanelProvider({
 				)
 			}
 
-			const updateParent = (layout) => {
-			return layout.map(layoutObject =>
-					(layoutObject.parentId === null)
-						? {
-							...layoutObject,
-							notifications: {
-								...layoutObject.notifications,
-								summary: layout.reduce((acc, value) => {
-									if (value.parentId === layoutObject.uniqueId) {
-										acc = acc + value.notifications.count;
-									}
-									return acc;
-								}, 0) + layoutObject.notifications.count,
-							}
-						}
-						: layoutObject
-				)
-			}
-
-			setLayout(layout => updateParent(updateObject(layout)));
+			setLayout(layout => updateParentSummary(updateObject(layout)));
 		}
 
 		const handleToggleCollapse = ({ uniqueId }) => {
@@ -118,13 +120,14 @@ function MuiPanelProvider({
 		const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
 			const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
 			if (findParent) {
-				const updateEmbedded = layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+				const updateEmbedded = layout => layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 					? { ...layoutObject, parentId, isVisible: true, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
 					: layoutObject);
-				const activateParent = updateEmbedded.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
+				const activateParent = layout =>  layout.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
 					? { ...layoutObject, isVisible: true }
 					: layoutObject);
-				setLayout(activateParent);
+
+				setLayout(layout => updateParentSummary(activateParent(updateEmbedded(layout))));
 			}
 		}
 
@@ -168,9 +171,10 @@ function MuiPanelProvider({
 		}, [layout]);
 
 		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
+		useEffect(() => setSettings(settings => ({...settings, debugMode: !settings.debugMode })), [debugMode]);
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
-		useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
 
 		return <DataContext.Provider
@@ -191,6 +195,7 @@ function MuiPanelProvider({
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
 				{props.children}
 			</MuiPanelManager>
+			<MuiDebug />
 		</DataContext.Provider>
 }
 

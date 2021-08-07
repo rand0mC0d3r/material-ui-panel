@@ -10,8 +10,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
     left: '40%',
     right: '40%',
-    top: '40%',
-    bottom: '40%',
+    bottom: '16px',
   },
   container: {
     border: '2px dotted #555',
@@ -36,6 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const ToggleTheme = withTheme(({
   toggleDarkMode, darkMode,
+  toggleDebugMode, debugMode,
   toggleCollapseMode, collapseMode,
   toggleInverseMarkers, inverseMarkers,
   setMarkerColor, markerColor,
@@ -43,6 +43,15 @@ const ToggleTheme = withTheme(({
   const classes = useStyles(theme)
 
   const toggles = [
+    {
+      title: 'Debug Mode',
+      component: <Switch
+        className={classes.switch}
+          color="primary"
+          checked={debugMode}
+          onChange={toggleDebugMode}
+        />
+    },
     {
       title: 'Dark Mode',
       component: <Switch

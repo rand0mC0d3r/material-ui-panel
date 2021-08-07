@@ -42,7 +42,7 @@ const MuiPanel = ({
     if (!id) {
       console.error(`MuiPanel: missing attr:id for panel with title+hint:`, title, hint);
     } else {
-      console.log(`MuiPanel: panel with id:${id} has been added`);
+      // console.log(`MuiPanel: panel with id:${id} has been added`);
       handlePanelAnnouncement({ iconInHeader, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
     }
   }, [id]);
