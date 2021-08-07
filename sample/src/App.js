@@ -1,5 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
+import AddIcCallIcon from '@material-ui/icons/AddIcCall';
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
@@ -30,23 +32,23 @@ function App() {
       <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
-        {/* <MuiDivider id="logo" icon={<GitHub />} />
+        <MuiDivider id="logo" icon={<GitHub />} />
 
         <MuiDivider id="test" icon={<GitHub />} shortText="TEST ABCDEF" />
 
         <MuiDivider id="test33" tooltip="Default separator" />
 
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
 
         {/* deep nested panel */}
         <NotificationPanel />
 
-        <NotificationPanel identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
+        <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
         <ComplexPanel />
 
         {/* panel variations */}
-        {/* <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
@@ -63,7 +65,7 @@ function App() {
 
         <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel> */}
+        </MuiPanel>
 
 
         {/* app main content */}

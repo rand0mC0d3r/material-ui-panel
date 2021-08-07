@@ -99,10 +99,9 @@ function MuiPanelProvider({
 		}
 
 	const handlePanelAlerts = ({ id, count, color }) => {
-			console.log("trigered")
 			const updateObject = (layout) => {
 				return layout.map(layoutObject =>
-					(layoutObject.uniqueId === id && layoutObject.notifications.count !== count)
+					(layoutObject.uniqueId === id && (layoutObject.notifications.count !== count || layoutObject.notifications.color !== color))
 						? { ...layoutObject, notifications: { count, color } }
 						: layoutObject
 				)
