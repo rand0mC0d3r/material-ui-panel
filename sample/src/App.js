@@ -30,11 +30,11 @@ function App() {
         {/* divider variations */}
         <MuiDivider id="logo" icon={<GitHub />} />
 
-        <MuiDivider id="test" icon={<GitHub />} shortText="TEST" />
+        <MuiDivider id="test" icon={<GitHub />} shortText="TEST ABCDEF" />
 
         <MuiDivider id="test33" tooltip="Default separator" />
 
-        <MuiDivider id="sample" showIcon={false} shortText={"MENU"} tooltip="Default separator" />
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
 
         {/* deep nested panel */}
         <NotificationPanel />

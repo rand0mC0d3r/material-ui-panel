@@ -1,11 +1,5 @@
-import { Badge, Box, Button, Select, Tooltip, Typography } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import Popover from '@material-ui/core/Popover';
+import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
-import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import DataProvider from '../../MuiPanelStore';
 import { oppositeSide } from '../../utils';
@@ -74,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 0),
     borderRadius: "0px",
     // opacity: "0.55",
-    color: theme.palette.text.hint,
+    // color: theme.palette.text.hint,
     minWidth: "initial",
 
     "&:hover": {
@@ -138,7 +132,7 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme, side)
-  const { settings, markerColor, handleSetVisible } = useContext(DataProvider);
+  const { settings, handleSetVisible } = useContext(DataProvider);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -155,13 +149,9 @@ const MuiMenuButton = withTheme(({
     return colorMap.find(({ id }) => id === settings.markerColor).value
   }
 
-
-
   useEffect(() => {
     setAnchorEl(null);
   }, [lo])
-
-  const open = Boolean(anchorEl);
 
   return <>
     <Tooltip
@@ -169,7 +159,7 @@ const MuiMenuButton = withTheme(({
       key={lo.index}
       placement={lo.side}
       enterDelay={1000}
-      title={!lo.isVisible ? (lo.hint || lo.title) : ''}
+      title={(lo.title?.length > 0 || lo.shortText?.length > 0 || lo.hint?.length > 0 || lo.tooltip?.length > 0)  ? (lo.tooltip || lo.hint || lo.title || lo.shortText) : ''}
     >
       <span>
         <Button
@@ -202,13 +192,16 @@ const MuiMenuButton = withTheme(({
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
+                  style: {
+                    color: lo.isVisible && determineColor(),
+                  },
                   className: `
                     ${classes.iconButton}
                     ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconButton`]}
                     ${lo.isVisible && classes.activeIconButton}
                   `,
               })}
-              {lo.shortText && <div className={classes.shortText}>{lo.shortText}</div>}
+              {lo.shortText && <div className={classes.shortText}>{lo.shortText.substr(0,4)}</div>}
             </ContentContainerBox>
           </Badge>
         </Button>
