@@ -75,6 +75,7 @@ export default (): JSX.Element => {
 | *allowRightClick* | boolean | ```false``` | Determines if the panel allows opening the default browser context menu on right click |
 | *initialSide* | string | ```left``` | A side option to define for a new user the preference of the menu. Options ```left``` and ```right``` |
 | *inverseMarkers* | boolean | ```false``` | Determines is the highlight markers are oriented towards the outer borders of the screen, or towards the main content of the screen |
+| *markerColor* | string | ```textPrimary``` | Sets on of the material-UI ```Typography``` range of available colors. Options ```textPrimary```, ```textSecondary```, ```primary```, ```secondary``` |
 
 ---
 ## < MuiPanelManager >

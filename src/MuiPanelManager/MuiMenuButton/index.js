@@ -138,13 +138,23 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme, side)
-  const { inverseMarkers, handleSetVisible } = useContext(DataProvider);
-
- const [anchorEl, setAnchorEl] = React.useState(null);
+  const { settings, markerColor, handleSetVisible } = useContext(DataProvider);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const determineColor = () => {
+    const colorMap = [
+      { id: 'primary', value: theme.palette.primary.main },
+      { id: 'secondary', value: theme.palette.secondary.main },
+      { id: 'textPrimary', value: theme.palette.text.primary },
+      { id: 'textSecondary', value: theme.palette.text.secondary }
+    ]
+    return colorMap.find(({ id }) => id === settings.markerColor).value
+  }
+
 
 
   useEffect(() => {
@@ -168,18 +178,21 @@ const MuiMenuButton = withTheme(({
           onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
           variant="text"
           fullWidth
+          style={{
+            borderColor: lo.isVisible && determineColor()
+          }}
           className={`
             ${classes.buttonMenu}
-            ${lo.asGroup && classes[`${inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
-            ${!lo.noPanel && classes[`${inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
-            ${lo.isVisible && classes[`${inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
+            ${lo.asGroup && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
+            ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
+            ${lo.isVisible && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
         `}
         >
           <Badge
             className={`
               ${classes.badge}
               ${classes[`${side}Badge`]}
-              ${inverseMarkers && classes[`${side}FixBadge`]}
+              ${settings.inverseMarkers && classes[`${side}FixBadge`]}
               `}
             anchorOrigin={{ vertical: 'bottom', horizontal: side === 'left' ? 'right' : 'left' }}
             badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
@@ -191,7 +204,7 @@ const MuiMenuButton = withTheme(({
                 lo.icon, {
                   className: `
                     ${classes.iconButton}
-                    ${!lo.noPanel && classes[`${inverseMarkers ? oppositeSide(side) :side}IconButton`]}
+                    ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconButton`]}
                     ${lo.isVisible && classes.activeIconButton}
                   `,
               })}

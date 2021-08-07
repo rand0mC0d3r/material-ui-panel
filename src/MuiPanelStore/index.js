@@ -9,6 +9,7 @@ const DataContext = createContext(null);
 function MuiPanelProvider({
 	allowRightClick,
 	initialSide = 'left',
+	markerColor,
 	inverseMarkers,
 	showCollapseButton,
 	...props } = props) {
@@ -19,6 +20,7 @@ function MuiPanelProvider({
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
 			inverseMarkers: false,
+			markerColor: 'textPrimary',
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
@@ -140,6 +142,7 @@ function MuiPanelProvider({
 		}, [layout]);
 
 		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
+		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
@@ -148,7 +151,6 @@ function MuiPanelProvider({
 			value={{
 				layout, setLayout,
 				settings, setSettings,
-				inverseMarkers,
 
 				handleUnSetAsEmbedded,
 				toggleSettingIsCollapsed,

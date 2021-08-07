@@ -13,6 +13,7 @@ import ToggleTheme from './parts/ToggleTheme';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
+  const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
   const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
 
@@ -22,9 +23,9 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <ToggleTheme {...{ toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers }} />
+      <ToggleTheme {...{ toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
-      <MuiPanelProvider initialSide='right' inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider initialSide='right' markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
         <MuiDivider id="logo" icon={<GitHub />} />
