@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
@@ -116,36 +116,11 @@ const MuiPanel = withTheme(({
         </Box>
       </Box>
     <Box display="flex" className={classes.toolbox}>
-      <Button size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
-        <MoreHorizIcon color={'inherit'} />
+      <Tooltip title="More options for the panel" arrow>
+        <Button size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
+          <MoreHorizIcon color={'inherit'} />
         </Button>
-        {/* <Tooltip arrow title="Click to toggle collapse">
-          <Button onClick={() => handleToggleCollapse({ uniqueId })} className={classes.toolboxButton}>
-            {isCollapsed
-              ? <ChevronRightIcon style={{ fontSize }} />
-              : <ExpandMoreIcon style={{ fontSize }} />}
-          </Button>
-        </Tooltip> */}
-
-        {/* {!asEmbedded && <Button onClick={() => handleSetSide({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-            <SwapHorizIcon style={{ fontSize }} />
-        </Button>} */}
-
-        {/* {!asEmbedded && !asGroup && <Select
-          disabled={asGroup || !layout.some(lo => lo.asGroup)}
-          onChange={(event) => { handleSetAsEmbedded({ uniqueId: uniqueId, parentId: event.target.value }) }}>
-            {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" style={{gap: "16px"}}>{lo.icon} {lo.title}</Box>
-            </MenuItem>)}
-        </Select>} */}
-
-        {/* {!asEmbedded
-          ? <Button onClick={() => handleSetAsGroup({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-              {asGroup ? <ViewStreamIcon /> : <WebAssetIcon />}
-            </Button>
-          : <Button onClick={() => handleUnSetAsEmbedded({ uniqueId })} disableElevation variant="text" className={classes.toolboxButton}>
-              <AddToHomeScreenIcon />
-            </Button>} */}
+      </Tooltip>
       </Box>
     </Box>
 })

@@ -39,7 +39,7 @@ const MuiMenuOptions = withTheme(({
 
   return <Popover className={classes.popover} marginThreshold={0} elevation={0} {...{open, anchorEl, onClose}}
     anchorOrigin={underMenu
-      ? { vertical: 'bottom', horizontal: side !== 'right' ? 'right' : 'left' }
+      ? { vertical: 'bottom', horizontal: 'center' }
       : { vertical: 'center', horizontal: side !== 'right' ? 'right' : 'left' }
     }
     transformOrigin={underMenu
