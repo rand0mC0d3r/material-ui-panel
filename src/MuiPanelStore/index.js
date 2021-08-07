@@ -124,7 +124,7 @@ function MuiPanelProvider({
 						if (lo.uniqueId === foundObject.uniqueId) {
 							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0 }}
 						} else if (lo.parentId === foundObject.uniqueId) {
-							return { ...lo, isVisible: true }
+							return { ...lo, isVisible: !lo.isVisible }
 						} else {
 							return { ...lo, isVisible: false }
 						}

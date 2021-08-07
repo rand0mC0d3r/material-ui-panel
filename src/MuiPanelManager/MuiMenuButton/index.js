@@ -84,10 +84,10 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       fontSize: '4px',
       lineHeight: "12px",
-      width: '4px',
+      width: '8px',
       top: 24,
       borderRadius: "0px 4px 4px 0px",
-      left: 0,
+      left: -4,
     },
   },
   leftGroupButtonMenu: {
@@ -97,10 +97,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.divider,
       color: theme.palette.divider,
       position: 'absolute',
-      width: '4px',
+      width: '8px',
       top: 24,
       borderRadius: "4px 0px 0px 4px",
-      right: 0,
+      right: -4,
       lineHeight: '12px',
       fontSize: '4px'
     },
@@ -130,8 +130,9 @@ const MuiMenuButton = withTheme(({
   side,
   theme,
 }) => {
-  const classes = useStyles(theme, side)
+  const classes = useStyles(theme)// const classes = useStyles(theme)
   const { settings, handleSetVisible } = useContext(DataProvider);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -172,7 +173,7 @@ const MuiMenuButton = withTheme(({
           }}
           className={`
             ${classes.buttonMenu}
-            ${lo.asGroup && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
+            ${lo.asGroup && classes[`${settings.inverseMarkers ? oppositeSide(side) :side}GroupButtonMenu`]}
             ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
             ${lo.isVisible && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
         `}
