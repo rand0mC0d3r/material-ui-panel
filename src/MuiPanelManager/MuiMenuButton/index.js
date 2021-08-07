@@ -185,7 +185,7 @@ const MuiMenuButton = withTheme(({
               ${!settings.inverseMarkers && classes[`${side}FixBadge`]}
               `}
             anchorOrigin={{ vertical: 'bottom', horizontal: oppositeSide(side, 'left')}}
-            badgeContent={Math.max(0, Math.min(99, lo.notifications.count || 0))}
+            badgeContent={Math.max(0, Math.min(99, lo.notifications.summary ? lo.notifications.summary : (lo.notifications.count || 0)))}
             color={lo.notifications.color}
             variant={lo.variant}
           >
