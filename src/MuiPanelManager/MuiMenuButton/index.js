@@ -41,7 +41,7 @@ const badge = theme => ({
   },
   groupBadge: {
     "& .MuiBadge-badge": {
-      boxShadow: '0px 2px 0px -1px yellow, 0px 3px 0px 0px blue, 0px 5px 0px -1px yellow, 0px 6px 0px 0px blue'
+      boxShadow: `0px 2px 0px -1px ${theme.palette.background.paper}, 0px 3px 0px 0px ${theme.palette.divider}, 0px 5px 0px -1px ${theme.palette.background.paper}, 0px 6px 0px 0px ${theme.palette.divider}`
     }
   },
   rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
@@ -193,7 +193,7 @@ const MuiMenuButton = withTheme(({
               {lo.showIcon && cloneElement(
                 lo.icon, {
                   style: {
-                    color: lo.isVisible && lo.noPanel && determineColor(),
+                    color: lo.isVisible && !lo.noPanel && determineColor(),
                   },
                   className: `
                     ${!lo.noPanel && classes.iconButton}
