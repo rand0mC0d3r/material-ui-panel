@@ -3,6 +3,7 @@ import React, { cloneElement, Fragment, useContext, useEffect, useState } from '
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
 import MuiPanelSettings from '../MuiPanelSettings';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
+import MuiSplitter from '../MuiSplitter';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '56px';
@@ -185,6 +186,7 @@ const MuiPanelManager = withTheme(({
   }, [layout]);
 
   return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+
     {availableSides
       .map(side => <div
         onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
@@ -198,15 +200,17 @@ const MuiPanelManager = withTheme(({
           overflow: 'hidden auto',
           width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset')
         }}
-      /></div>)}
+        /></div>)}
+
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
         {layout.filter(lo => lo.side === side).length > 0 && <div
           onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
-
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-          className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed ? classes.menuCollapsed : classes.menuOpen}`}
+          className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
+            ? classes.menuCollapsed
+            : classes.menuOpen}`}
         >
           {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
           {!settings.isCollapsed && <>
@@ -215,13 +219,14 @@ const MuiPanelManager = withTheme(({
               .filter(lo => !lo.asEmbedded)
               .map(lo => <MuiMenuButton key={lo.uniqueId} {...{ lo, side }} />)}
             <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
-            {/* {index === 0 && <MuiPanelSettings />} */}
           </>}
         </div>}
     </Fragment>)}
 
-    {children.map((child, i) => cloneElement(child, { key: i, style: { gridArea: "main"}}))}
-      </div>
+    {/* <MuiSplitter> */}
+      {children}
+    {/* </MuiSplitter> */}
+  </div>
 })
 
 export default MuiPanelManager;

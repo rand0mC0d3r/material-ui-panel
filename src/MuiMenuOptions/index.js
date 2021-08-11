@@ -57,9 +57,9 @@ const MuiMenuOptions = withTheme(({
               <AmpStoriesIcon className={classes.groupIcon} onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
             </Tooltip>}
           </>
-          : <Button  size="small" fullWidth
-              startIcon={<AddToHomeScreenIcon />}
-              onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}>Promote</Button>}
+        : <Tooltip arrow title="Detach as individual">
+            <AddToHomeScreenIcon onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}/>
+          </Tooltip>}
 
         {!lo.asEmbedded && !lo.asGroup && <Select fullWidth
           disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}

@@ -1,5 +1,7 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import MuiMenuOptions from '../../MuiMenuOptions';
 import DataProvider from '../../MuiPanelStore';
@@ -15,6 +17,30 @@ const icons = theme => ({
       color: theme.palette.augmentColor({ main: theme.palette.text.secondary }).dark,
       opacity: "0.9",
     }
+  },
+  iconExtraButton: {
+    fontSize: "10px",
+    opacity: "0.55",
+    color: theme.palette.text.hint,
+    backgroundColor: theme.palette.divider,
+    padding: '1px 2px',
+    borderRadius: '0px 4px 4px 0px',
+    left: '-16px',
+    position: 'absolute',
+  },
+  iconExtraButton0: {
+    top: '-10px',
+  },
+  iconExtraButton1: {
+    top: '4px',
+  },
+  iconExtraButton2: {
+    top: '18px',
+  },
+  iconExtraButton3: {
+    left: '-14px',
+    top: '30px',
+    position: 'absolute',
   },
   activeIconButton: {
     color: theme.palette.text.primary,
@@ -126,6 +152,7 @@ const ContentContainerBox = styled(Box) (({ theme }) => ({
 
 const MuiMenuButton = withTheme(({
   lo,
+  extraIcons = [<AddShoppingCartIcon />, <AddToHomeScreenIcon />, <AddShoppingCartIcon />],
   side,
   theme,
 }) => {
@@ -201,6 +228,21 @@ const MuiMenuButton = withTheme(({
                     ${lo.isVisible && classes.activeIconButton}
                   `,
               })}
+              {extraIcons && extraIcons.map((extraIcon, i) => <>
+
+              {i <= 4 && cloneElement(
+                extraIcon, {
+                style: {
+                  color: lo.isVisible && !lo.noPanel && determineColor(),
+                },
+                className: `
+                    ${classes.iconExtraButton}
+                    ${classes[`iconExtraButton${i}`]}
+                    ${classes[`${!settings.inverseMarkers ? oppositeSide(side) : side}IconButton`]}
+                  `,
+                })}
+
+              </>)}
               {lo.shortText && <div className={classes.shortText}>{lo.shortText.substr(0,4)}</div>}
             </ContentContainerBox>
           </Badge>

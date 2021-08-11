@@ -19,6 +19,17 @@ function MuiPanelProvider({
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
 		const initialLayout = get(props, 'layout', []);
+		const initialSections = get(props, 'sections', {
+			direction: 'vertical',
+			order: 'normal',
+			zoneA: 'content',
+			zoneB: {
+				direction: 'horizontal',
+				order: 'normal',
+				zoneA: 'panelNotifications',
+				zoneB: 'panelAlerts',
+			},
+		});
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
 			inverseMarkers: false,
@@ -27,6 +38,7 @@ function MuiPanelProvider({
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
+		const [sections, setSections] = useState(initialSections);
 		const [settings, setSettings] = useState(initialSettings);
 
 		const handlePanelAnnouncement = ({ id, ref, children, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {

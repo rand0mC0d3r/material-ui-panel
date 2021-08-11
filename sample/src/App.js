@@ -69,13 +69,11 @@ function App() {
 
 
         {/* app main content */}
-        <div>
           <iframe
             title="Random Wiki article"
             style={{ width: "100%", filter: 'blur(5px)', opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
           />
-        </div>
       </MuiPanelProvider>
 
     </ThemeProvider>
