@@ -14,7 +14,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(true);
+  const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);

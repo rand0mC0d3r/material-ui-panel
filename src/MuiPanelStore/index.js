@@ -251,7 +251,7 @@ function MuiPanelProvider({
 		}, [layout]);
 
 		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
-		useEffect(() => setSettings(settings => ({...settings, debugMode: !settings.debugMode })), [debugMode]);
+		useEffect(() => setSettings(settings => ({...settings, debugMode: debugMode })), [debugMode]);
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
