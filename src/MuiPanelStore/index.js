@@ -18,18 +18,87 @@ function MuiPanelProvider({
 
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
-		const initialLayout = get(props, 'layout', []);
-		const initialSections = get(props, 'sections', {
-			direction: 'vertical',
+		const var1 = {
+			direction: 'horizontal',
 			order: 'normal',
-			zoneA: 'content',
-			zoneB: {
+			zones: [
+				{
+					type: 'panel',
+					panelId: "panel123"
+				},
+				{
+					type: 'panel',
+					panelId: 'panel31233',
+				},
+			]
+		}
+
+		const var2 = {
 				direction: 'horizontal',
 				order: 'normal',
-				zoneA: 'panelNotifications',
-				zoneB: 'panelAlerts',
-			},
-		});
+				zones: [
+					{
+						type: 'panel',
+						panelId: "panel123"
+					},
+					{
+						type: 'list',
+						direction: 'vertical',
+						order: 'normal',
+						zones: [
+							{
+								type: 'panel',
+								panelId: "panel123"
+							},
+							{
+								type: 'list',
+								direction: 'horizontal',
+								order: 'normal',
+								zones: [
+									{
+										type: 'panel',
+										panelId: "panel123"
+									},
+									{
+										type: 'content',
+										panelId: "content"
+									}
+								]
+							},
+						]
+					},
+					{
+						type: 'content',
+						panelId: "content"
+					},
+					{
+						type: 'list',
+						direction: 'vertical',
+						order: 'normal',
+						zones: [
+							{
+								type: 'panel',
+								panelId: "panel123"
+							},
+							{
+								type: 'content',
+								panelId: "content"
+							},
+							{
+								type: 'panel',
+								panelId: "panel123"
+							},
+							{
+								type: 'content',
+								panelId: "content"
+							}
+						]
+					},
+				]
+			}
+
+		const initialLayout = get(props, 'layout', []);
+		const initialSections = get(props, 'sections', var2);
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
 			inverseMarkers: false,
@@ -192,6 +261,7 @@ function MuiPanelProvider({
 			value={{
 				layout, setLayout,
 				settings, setSettings,
+				sections, setSections,
 
 				handleUnSetAsEmbedded,
 				toggleSettingIsCollapsed,

@@ -176,7 +176,7 @@ const MuiPanelManager = withTheme(({
   const classes = useStyles(theme)
   const [sides, setSides] = useState()
 
-  const { settings, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
+  const { settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
     if (layout.length > 0) {
@@ -223,9 +223,14 @@ const MuiPanelManager = withTheme(({
         </div>}
     </Fragment>)}
 
-    {/* <MuiSplitter> */}
-      {children}
-    {/* </MuiSplitter> */}
+
+    {/* {JSON.stringify(sections)} */}
+    <div style={{ gridArea: "main" }}>
+    <MuiSplitter>
+      {sections}
+      </MuiSplitter>
+    </div>
+    {children}
   </div>
 })
 
