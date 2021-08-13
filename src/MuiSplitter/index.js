@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     // border: '1px solid red',
     height: "100%",
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
     gridArea: "main",
     position: 'relative',
   },
@@ -23,17 +23,18 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    border: '1px solid red',
+    border: `1px solid ${theme.palette.divider}`,
     height: "100%",
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
     gridArea: "main",
     position: 'relative',
   },
   header: {
-    minHeight: "48px",
+    minHeight: "56px",
     display: "flex",
     flexDirection: "row",
-    backgroundColor: theme.palette.divider,
+    padding: "0px 12px",
+    backgroundColor: theme.palette.background.default,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -77,7 +78,7 @@ const MuiSplitter = withTheme(({
   // }, [sections])
 
   return <div className={ classes.wrapper}>
-    <div className={classes.header}>
+    <div className={classes.header} style={{backgroundColor: section.background}}>
       {`panel ID: ${section.id} - ${section.direction} - ${section.type}`}
       <div className={classes.buttonsWrapper}>
         {section.type === 'list' && <>{section.direction === 'vertical'

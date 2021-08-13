@@ -7,6 +7,8 @@ import MuiDebug from './MuiDebug';
 const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
 
+const getRandomColor = () => '#' + Math.random().toString(16).substr(-6)
+
 function MuiPanelProvider({
 	allowRightClick,
 	initialSide = 'left',
@@ -103,6 +105,7 @@ function MuiPanelProvider({
 			direction: 'horizontal',
 			order: 'normal',
 			type: 'list',
+			background: getRandomColor(),
 			zones: [ ]
 		},
 		// {
@@ -156,6 +159,7 @@ function MuiPanelProvider({
 		const [layout, setLayout] = useState(initialLayout);
 		const [sections, setSections] = useState(initialSections);
 		const [settings, setSettings] = useState(initialSettings);
+
 
 		const handlePanelAnnouncement = ({ id, ref, children, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
@@ -251,6 +255,7 @@ function MuiPanelProvider({
 				id: randomString,
 				direction: 'horizontal',
 				order: 'normal',
+				background: getRandomColor(),
 				parentId: sectionId,
 				type: 'list',
 				zones: [ ]
