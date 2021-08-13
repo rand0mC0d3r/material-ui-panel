@@ -97,8 +97,55 @@ function MuiPanelProvider({
 				]
 			}
 
+	const var3 = [
+		{
+			id: (Math.random() + 1).toString(36).substring(7),
+			direction: 'horizontal',
+			order: 'normal',
+			type: 'list',
+			zones: [ ]
+		},
+		// {
+		// 	id: 'abcdX12',
+		// 	direction: 'horizontal',
+		// 	order: 'normal',
+		// 	zones: [ "xxxx", 'abcdX12sub']
+		// },
+		// {
+		// 	id: 'abcdX12sub',
+		// 	parentId: 'abcd',
+		// 	direction: 'horizontal',
+		// 	order: 'normal',
+		// 	zones: [ "ytr"]
+		// },
+		// {
+		// 	id: "ytr",
+		// 	parentId: 'abcd',
+		// 	type: 'panel',
+		// 	panelId: "panel123"
+		// },
+		// {
+		// 	id: "xxxx",
+		// 	parentId: 'abcd',
+		// 	type: 'panel',
+		// 	panelId: "panel123"
+		// },
+		// {
+		// 	id: "sfsdfsd",
+		// 	parentId: 'abcd',
+		// 	type: 'panel',
+		// 	panelId: "panel123"
+		// },
+		// {
+		// 	id: "sdfdsfsdf3",
+		// 	parentId: 'abcd',
+		// 	type: 'panel',
+		// 	panelId: 'panel31233',
+		// },
+	]
+
 		const initialLayout = get(props, 'layout', []);
-		const initialSections = get(props, 'sections', var2);
+		const initialSections = get(props, 'sections', var3);
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
 			inverseMarkers: false,
@@ -179,6 +226,60 @@ function MuiPanelProvider({
 			));
 		}
 
+	const toggleSectionDirection = ({ sectionId }) => {
+		setSections(sections => sections.map(section => {
+			if (section.id === sectionId) {
+				return {
+					...section,
+					direction: section.direction === 'vertical' ? 'horizontal' : 'vertical'
+				}
+			}
+			return section
+		}))
+	}
+
+	const addZoneToSection = ({ sectionId }) => {
+		const randomString = (Math.random() + 1).toString(36).substring(7)
+		setSections(sections => [
+			...sections.map(section => {
+				if (section.id === sectionId) {
+					return { ...section, zones: [...section.zones, randomString] }
+				}
+				return section
+			}),
+			{
+				id: randomString,
+				direction: 'horizontal',
+				order: 'normal',
+				parentId: sectionId,
+				type: 'list',
+				zones: [ ]
+		},])
+	}
+	const addPanelToSection = ({ sectionId, panelId }) => {
+		setSections(sections => sections.map(section => {
+			if (section.id === sectionId) {
+				return {
+					...section,
+					panelId
+				}
+			}
+			return section
+		}))
+	}
+
+	const chooseTypeForSection = ({ panelId, isList = false }) => {
+		setSections(sections => sections.map(section => {
+			if (section.id === panelId) {
+				return {
+					...section,
+					type: isList ? 'list' : 'panel'
+				}
+			}
+			return section
+		}))
+	}
+
 	const handlePanelAlerts = ({ id, count, color }) => {
 			const updateObject = (layout) => {
 				return layout.map(layoutObject =>
@@ -256,12 +357,19 @@ function MuiPanelProvider({
 
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
+		useEffect(() => { console.log('sections', sections) }, [sections]);
 
 		return <DataContext.Provider
 			value={{
 				layout, setLayout,
 				settings, setSettings,
 				sections, setSections,
+
+
+				addZoneToSection,
+				toggleSectionDirection,
+				chooseTypeForSection,
+				addPanelToSection,
 
 				handleUnSetAsEmbedded,
 				toggleSettingIsCollapsed,

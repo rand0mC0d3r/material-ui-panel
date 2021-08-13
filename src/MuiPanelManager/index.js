@@ -225,10 +225,10 @@ const MuiPanelManager = withTheme(({
 
 
     {/* {JSON.stringify(sections)} */}
-    <div style={{ gridArea: "main" }}>
-    <MuiSplitter>
-      {sections}
-      </MuiSplitter>
+    <div style={{ gridArea: "main", display: 'flex' }}>
+    {/* <MuiSplitter> */}
+      {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} />)}
+      {/* // </MuiSplitter> */}
     </div>
     {children}
   </div>

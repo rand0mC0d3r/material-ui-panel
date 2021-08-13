@@ -1,7 +1,11 @@
+import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import AppsIcon from '@material-ui/icons/Apps';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import WebIcon from '@material-ui/icons/Web';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 
@@ -9,12 +13,29 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     width: "100%",
-    padding: "1px",
+    // border: '1px solid red',
+    height: "100%",
+    backgroundColor: theme.palette.background.default,
+    gridArea: "main",
+    position: 'relative',
+  },
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
     border: '1px solid red',
     height: "100%",
     backgroundColor: theme.palette.background.default,
     gridArea: "main",
     position: 'relative',
+  },
+  header: {
+    minHeight: "48px",
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: theme.palette.divider,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   horizontal: {
     flexDirection: "row",
@@ -23,51 +44,98 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
   },
   zone: {
-    border: '1px solid blue',
-    padding: "1px",
+    // border: '1px solid blue',
     flex: "1 1 auto",
     position: 'relative',
-  },
-  splitButton: {
-    backgroundColor: "green",
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    // left: 0,
-    // bottom: 0,
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flex: '0 0 50%',
   },
+  splitButton: {
 
+  },
+  buttonsWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "16px",
+    flex: "0 0 auto"
+  }
 }));
 
 const MuiSplitter = withTheme(({
-  children,
+  section,
   theme,
 }) => {
   const classes = useStyles(theme)
+  // const [currentPanel = useState()
+  const { layout, settings, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
-  return <div className={`
-    ${classes.root}
-    ${children.direction === 'horizontal'
-    ? classes.horizontal
-    : classes.vertical}
-  `}>
-    {/* {children.direction} {children.order} */}
+  // useEffect(() => {
+  //   effect
+  //   return () => {
+  //     cleanup
+  //   }
+  // }, [sections])
 
-    {children.zones.map(zone => <div className={classes.zone}>
-      {zone.type !== 'list' && <>
+  return <div className={ classes.wrapper}>
+    <div className={classes.header}>
+      {`panel ID: ${section.id} - ${section.direction} - ${section.type}`}
+      <div className={classes.buttonsWrapper}>
+        {section.type === 'list' && <>{section.direction === 'vertical'
+          ? <SwapHorizIcon onClick={() => toggleSectionDirection({ sectionId: section.id })} />
+          : <ImportExportIcon onClick={() => toggleSectionDirection({ sectionId: section.id })} />}</>}
 
-        <div className={classes.splitButton}><CallSplitIcon/></div>
-        {zone.panelId}
-      </>}
-      {zone.type === 'list' && <>
-        {zone.direction === 'vertical' ? <SwapHorizIcon/> : <ImportExportIcon/>}
-        <MuiSplitter>{zone}</MuiSplitter>
+        {section.type === 'list' && <div onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.splitButton}>
+          <PlaylistAddIcon />
+        </div>}
+
+        {section.type === 'list' && section.zones.length === 0 && <div
+          onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+          className={classes.splitButton}
+        >
+            <AppsIcon />
+        </div>}
+
+        {section.type !== 'list' && <>
+          <Select
+            fullWidth
+            value={section.panelId || ''}
+            onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
+          >
+            {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
+              <Box display="flex" className={classes.groupsBox}>
+                {lo.icon}
+                <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
+              </Box>
+            </MenuItem>)}
+          </Select>
+
+          <div
+            onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
+            className={classes.splitButton}
+          ><WebIcon /></div>
+
         </>}
-    </div>)}
+
+
+      </div>
+    </div>
+    <div className={`
+        ${classes.root}
+        ${section.direction === 'horizontal'
+        ? classes.horizontal
+        : classes.vertical}
+      `}>
+      {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) && <>select mode</>}
+      {section.type !== 'list' && <>
+        {section.panelId && `panelId: ${section.panelId}`}
+      </>}
+      {section.type === 'list' && section.zones && section.zones.map(zone => <div className={classes.zone}>
+        {/* <div className={classes.header}>
+          {`zone ID: ${zone}`}
+        </div> */}
+        <MuiSplitter section={sections.find(s => s.id === zone)} />
+      </div>)}
+    </div>
   </div>
 })
 
