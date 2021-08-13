@@ -23,19 +23,25 @@ const icons = theme => ({
     opacity: "0.55",
     color: theme.palette.text.hint,
     backgroundColor: theme.palette.divider,
-    padding: '1px 2px',
-    borderRadius: '0px 4px 4px 0px',
-    left: '-16px',
+    padding: '1px 1px',
     position: 'absolute',
   },
+  leftIconExtraButton: {
+    left: '-12px',
+    borderRadius: '0px 4px 4px 0px',
+  },
+  rightIconExtraButton: {
+    right: '-12px',
+    borderRadius: '4px 0px 0px 4px',
+  },
   iconExtraButton0: {
-    top: '-10px',
+    top: '-8px',
   },
   iconExtraButton1: {
-    top: '4px',
+    top: '7px',
   },
   iconExtraButton2: {
-    top: '18px',
+    top: '22px',
   },
   iconExtraButton3: {
     left: '-14px',
@@ -152,7 +158,7 @@ const ContentContainerBox = styled(Box) (({ theme }) => ({
 
 const MuiMenuButton = withTheme(({
   lo,
-  extraIcons = [<AddShoppingCartIcon />, <AddToHomeScreenIcon />, <AddShoppingCartIcon />],
+  extraIcons = [],
   side,
   theme,
 }) => {
@@ -199,7 +205,6 @@ const MuiMenuButton = withTheme(({
           }}
           className={`
             ${classes.buttonMenu}
-            ${lo.asGroup && classes[`${oppositeSide(side)}GroupButtonMenu`]}
             ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ButtonMenu`]}
             ${lo.isVisible && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}ActiveButtonMenu`]}
         `}
@@ -228,7 +233,7 @@ const MuiMenuButton = withTheme(({
                     ${lo.isVisible && classes.activeIconButton}
                   `,
               })}
-              {extraIcons && extraIcons.map((extraIcon, i) => <>
+              {!lo.noPanel && extraIcons && extraIcons.map((extraIcon, i) => <>
 
               {i <= 4 && cloneElement(
                 extraIcon, {
@@ -237,8 +242,8 @@ const MuiMenuButton = withTheme(({
                 },
                 className: `
                     ${classes.iconExtraButton}
+                    ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconExtraButton`]}
                     ${classes[`iconExtraButton${i}`]}
-                    ${classes[`${!settings.inverseMarkers ? oppositeSide(side) : side}IconButton`]}
                   `,
                 })}
 

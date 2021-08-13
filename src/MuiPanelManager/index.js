@@ -217,7 +217,7 @@ const MuiPanelManager = withTheme(({
             {layout
               .filter(lo => lo.side === side)
               .filter(lo => !lo.asEmbedded)
-              .map(lo => <MuiMenuButton key={lo.uniqueId} {...{ lo, side }} />)}
+              .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
             <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
           </>}
         </div>}
