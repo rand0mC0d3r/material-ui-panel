@@ -1,5 +1,7 @@
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
+import ImportExportIcon from '@material-ui/icons/ImportExport';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
 
@@ -57,10 +59,14 @@ const MuiSplitter = withTheme(({
 
     {children.zones.map(zone => <div className={classes.zone}>
       {zone.type !== 'list' && <>
+
         <div className={classes.splitButton}><CallSplitIcon/></div>
         {zone.panelId}
       </>}
-      {zone.type === 'list' && <MuiSplitter>{zone}</MuiSplitter>}
+      {zone.type === 'list' && <>
+        {zone.direction === 'vertical' ? <SwapHorizIcon/> : <ImportExportIcon/>}
+        <MuiSplitter>{zone}</MuiSplitter>
+        </>}
     </div>)}
   </div>
 })
