@@ -204,7 +204,8 @@ function MuiPanelProvider({
 				previousPanel = section.panelId
 				return {
 					...section,
-					panelId
+					panelId,
+					isCollapsed: true,
 				}
 			}
 			if (section.panelId === panelId) {
@@ -218,10 +219,10 @@ function MuiPanelProvider({
 			return section
 		}))
 		setLayout(layout => layout
-			.map(layoutObject => layoutObject.uniqueId === panelId
+			.map(layoutObject => layoutObject.uniqueId === panelId || layoutObject.parentId === panelId
 			? { ...layoutObject, asSection: true, isVisible: true }
 				: layoutObject)
-			.map(layoutObject => layoutObject.uniqueId === previousPanel
+			.map(layoutObject => layoutObject.uniqueId === previousPanel || layoutObject.parentId === previousPanel
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}

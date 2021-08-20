@@ -64,7 +64,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   headerCollapsed: {
-    minHeight: "15px",
+    minHeight: "8px",
+    opacity: "0.75",
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
@@ -106,7 +107,7 @@ const useStyles = makeStyles(theme => ({
     // border: '1px solid blue',
     flex: "1 1 auto",
     position: 'relative',
-    width: '0px',
+    // width: '0px',
     alignItems: "center",
     justifyContent: "center",
   },
@@ -138,16 +139,16 @@ const MuiSplitter = withTheme(({
   // }, [sections])
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : { }}>
+    <Tooltip title="Double-Click to collapse" arrow>
     <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
       onDoubleClick={() => toggleCollapseSection({sectionId: section.id})}
       style={isRoot
         ? { border: `0px none` }
         : section.isCollapsed
           ? { backgroundColor: section.background }
-          : { borderBottom: `1px solid ${section.background}` }
+          : { borderBottom: `4px solid ${section.background}` }
       }
     >
-      {/* {section.isCollapsed ? <>isCollapsed</> : <>is not Collapsed</>} */}
       {!section.isCollapsed && <>
       <div className={classes.title}>
         {section.type === 'list'
@@ -212,6 +213,7 @@ const MuiSplitter = withTheme(({
       </Box>
       </>}
     </div>
+    </Tooltip>
     <div className={`
         ${classes.root}
         ${section.direction === 'horizontal'
@@ -231,7 +233,9 @@ const MuiSplitter = withTheme(({
         </>}
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
-        <div className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}>
+        <div
+          className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}
+          style={section.direction === 'horizontal' ? { width: '0px'} : {}}>
           <MuiSplitter section={sections.find(s => s.id === zone)} />
       </div>)}
     </div>
