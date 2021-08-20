@@ -88,6 +88,13 @@ const useStyles = makeStyles(theme => ({
   wrapperRepeat: {
     boxShadow: 'inset 1px 1px 0px 0px #CCC',
   },
+  rootController: {
+    position: "absolute",
+    left: "50%",
+    padding: "8px 16px",
+    backgroundColor: theme.palette.divider,
+    zIndex: "1",
+  },
   groupsBox: {
     gap: "8px"
   },
@@ -137,107 +144,117 @@ const MuiSplitter = withTheme(({
   //   }
   // }, [sections])
 
-  return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : { }}>
-    <Tooltip title="Double-Click to collapse" arrow>
-    <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
-      onDoubleClick={() => toggleCollapseSection({sectionId: section.id})}
-      style={isRoot
-        ? { border: `0px none`, backgroundColor: theme.palette.background.paper }
-        : section.isCollapsed
-          ? { backgroundColor: section.background }
-          : { borderBottom: `4px solid ${section.background}` }
-      }
-    >
-      {!section.isCollapsed && <>
-      <div className={classes.title}>
-      {!isRoot && <>
-        {section.type === 'list' && <AppsIcon color="action" />}
-        {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
-        {section.type === 'content' && <BlurOnIcon color="disabled" />}
-        <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
-          {section.type === 'list' && 'Add sub-sections ...'}
-          {section.type === 'panel' &&'Select panel ...'}
-          {section.type === 'content' && 'Main content'}
-        </Typography>
-      </>}
-      </div>
-      <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
-        {section.type === 'list' && <Tooltip
-          arrow
-          title="Current orientation"
-          placement='bottom'>
-          {section.direction !== 'vertical'
-            ? <SwapHorizIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
-            : <ImportExportIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />}
-        </Tooltip>}
+  return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : {}}>
 
-        {section.type === 'list' && <Tooltip arrow title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
-          <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
-            {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
-          </Button>
-        </Tooltip>}
-
-        {section.type === 'list' &&
-          <Tooltip arrow title="Add a new section...">
-          <Button disableRipple disableElevation onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.smallButton}>
-            <LibraryAddOutlinedIcon color="action" />
-        </Button></Tooltip>}
-
-        {section.type === 'list' && section.zones.length === 0 && <div
-          onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
-          className={classes.splitButton}
+    {section.type === 'content'
+      ? <div className={classes.rootController}> <div
+                onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+                className={classes.splitButton}
+              >
+                <AppsIcon />
+              </div></div>
+      : <>
+      <Tooltip title="Double-Click to collapse" arrow>
+        <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
+          onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
+          style={isRoot
+            ? { border: `0px none`, backgroundColor: theme.palette.background.paper }
+            : section.isCollapsed
+              ? { backgroundColor: section.background }
+              : { borderBottom: `4px solid ${section.background}` }
+          }
         >
-            <AppsIcon />
-        </div>}
-
-        {section.type === 'panel' && <Box display="flex" alignItems="center" className={classes.buttonsWrapper}>
-          <Select
-            fullWidth
-            value={section.panelId || ''}
-            onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
-          >
-            {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" alignItems="center" className={classes.groupsBox}>
-                {lo.icon && cloneElement(lo.icon, { color: "disabled" })}
-                <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
-              </Box>
-            </MenuItem>)}
-          </Select>
-
-          {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
-
-          <div
-            onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
-            className={classes.splitButton}
-          ><WebIcon /></div>
-
-            </Box>}
-
-            {section.type !== 'content' ?
-              <Button
-                className={classes.smallButton}
-                onClick={() => { showContent({ sectionId: section.id }) }}
-                disabled={section.type === 'content'}>
-                <AspectRatioIcon />
-              </Button> : <>
-                <Button className={classes.smallButton}
-                  onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
-                >
-                <AppsIcon color={section.type !== 'list' ? 'disabled' : 'primary' } />
-              </Button>
+          {!section.isCollapsed && <>
+            <div className={classes.title}>
+              {!isRoot && <>
+                {section.type === 'list' && <AppsIcon color="action" />}
+                {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
+                {section.type === 'content' && <BlurOnIcon color="disabled" />}
+                <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
+                  {section.type === 'list' && 'Add sub-sections ...'}
+                  {section.type === 'panel' && 'Select panel ...'}
+                  {section.type === 'content' && 'Main content'}
+                </Typography>
               </>}
+            </div>
+            <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
+              {section.type === 'list' && <Tooltip
+                arrow
+                title="Current orientation"
+                placement='bottom'>
+                {section.direction !== 'vertical'
+                  ? <SwapHorizIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
+                  : <ImportExportIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />}
+              </Tooltip>}
 
-            {section.type !== 'content' && <Tooltip arrow title="Remove section">
-              <span>
-                <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }) }} className={classes.smallButton}>
-                  <CancelPresentationOutlinedIcon />
+              {section.type === 'list' && <Tooltip arrow title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
+                <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
+                  {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
                 </Button>
-              </span>
-            </Tooltip>}
-      </Box>
-      </>}
-    </div>
-    </Tooltip>
+              </Tooltip>}
+
+              {section.type === 'list' &&
+                <Tooltip arrow title="Add a new section...">
+                  <Button disableRipple disableElevation onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.smallButton}>
+                    <LibraryAddOutlinedIcon color="action" />
+                  </Button></Tooltip>}
+
+              {section.type === 'list' && section.zones.length === 0 && <div
+                onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+                className={classes.splitButton}
+              >
+                <AppsIcon />
+              </div>}
+
+              {section.type === 'panel' && <Box display="flex" alignItems="center" className={classes.buttonsWrapper}>
+                <Select
+                  fullWidth
+                  value={section.panelId || ''}
+                  onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
+                >
+                  {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
+                    <Box display="flex" alignItems="center" className={classes.groupsBox}>
+                      {lo.icon && cloneElement(lo.icon, { color: "disabled" })}
+                      <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
+                    </Box>
+                  </MenuItem>)}
+                </Select>
+
+                {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
+
+                <div
+                  onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
+                  className={classes.splitButton}
+                ><WebIcon /></div>
+
+              </Box>}
+
+              {section.type !== 'content' ?
+                <Button
+                  className={classes.smallButton}
+                  onClick={() => { showContent({ sectionId: section.id }) }}
+                  disabled={section.type === 'content'}>
+                  <AspectRatioIcon />
+                </Button> : <>
+                  <Button className={classes.smallButton}
+                    onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
+                  >
+                    <AppsIcon color={section.type !== 'list' ? 'disabled' : 'primary'} />
+                  </Button>
+                </>}
+
+              {section.type !== 'content' && <Tooltip arrow title="Remove section">
+                <span>
+                  <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }) }} className={classes.smallButton}>
+                    <CancelPresentationOutlinedIcon />
+                  </Button>
+                </span>
+              </Tooltip>}
+            </Box>
+          </>}
+        </div>
+      </Tooltip>
+    </>}
     <div className={`
         ${classes.root}
         ${section.direction === 'horizontal'

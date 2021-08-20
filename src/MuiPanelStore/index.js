@@ -18,56 +18,20 @@ function MuiPanelProvider({
 	debugMode,
 	showCollapseButton,
 	...props } = props) {
-
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
-
-	const initialSeed = getRandomId()
-	const child1Seed = getRandomId()
-	const child2Seed = getRandomId()
-	const child3Seed = getRandomId()
-	const var3 = [
+		const initialLayout = get(props, 'layout', []);
+		const initialSections = get(props, 'sections', [
 		{
-			id: initialSeed,
+			id: getRandomId(),
 			direction: 'horizontal',
 			order: 'normal',
-			type: 'list',
-			background: getRandomColor(),
-			isCollapsed: true,
-			zones: [ child1Seed, child2Seed, child3Seed ]
-		},
-		{
-			id: child1Seed,
-			background: getRandomColor(),
-			parentId: initialSeed,
-			direction: 'vertical',
-			order: 'normal',
-			type: 'list',
-			isCollapsed: false,
-			zones: [ ]
-		},
-		{
-			id: child2Seed,
-			background: getRandomColor(),
-			parentId: initialSeed,
-			direction: 'vertical',
 			type: 'content',
-			isCollapsed: true,
-			order: 'normal',
-			zones: [ ]
-		},
-		{
-			id: child3Seed,
 			background: getRandomColor(),
-			parentId: initialSeed,
-			type: 'panel',
-			isCollapsed: false,
-			zones: [ ]
+			isCollapsed: true,
+			zones: [  ]
 		},
-	]
-
-		const initialLayout = get(props, 'layout', []);
-		const initialSections = get(props, 'sections', var3);
+	]);
 		const initialSettings = get(props, 'settings', {
 			isCollapsed: false,
 			inverseMarkers: false,
@@ -78,7 +42,6 @@ function MuiPanelProvider({
 		const [layout, setLayout] = useState(initialLayout);
 		const [sections, setSections] = useState(initialSections);
 		const [settings, setSettings] = useState(initialSettings);
-
 
 		const handlePanelAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
@@ -324,6 +287,7 @@ function MuiPanelProvider({
 				return {
 					...section,
 					type: isList ? 'list' : 'panel',
+					isCollapsed: false,
 					panelId: undefined
 				}
 			}
