@@ -1,14 +1,10 @@
 import { Box, Button, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
 import React, { cloneElement, useContext } from 'react';
 import MuiMenuOptions from '../MuiMenuOptions';
 import DataProvider from '../MuiPanelStore';

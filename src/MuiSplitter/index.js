@@ -7,15 +7,12 @@ import CallSplitIcon from '@material-ui/icons/CallSplit';
 import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import ViewColumnOutlinedIcon from '@material-ui/icons/ViewColumnOutlined';
 import WebIcon from '@material-ui/icons/Web';
-import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
-import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
+import React, { cloneElement, useContext } from 'react';
+import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({
   root: {

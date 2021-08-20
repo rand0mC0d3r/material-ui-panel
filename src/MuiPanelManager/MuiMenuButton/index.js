@@ -1,7 +1,5 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import MuiMenuOptions from '../../MuiMenuOptions';
 import DataProvider from '../../MuiPanelStore';

@@ -1,9 +1,7 @@
 import { Typography } from '@material-ui/core';
-import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
-import React, { cloneElement, useContext, useEffect } from 'react';
-import MuiMenuOptions from '../../MuiMenuOptions';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
+import React, { useContext } from 'react';
 import DataProvider from '../../MuiPanelStore';
-import { oppositeSide } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

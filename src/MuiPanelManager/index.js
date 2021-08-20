@@ -1,8 +1,7 @@
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
-import MuiPanelSettings from '../MuiPanelSettings';
-import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
+import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
 import MuiMenuButton from './MuiMenuButton';
 
