@@ -58,6 +58,7 @@ function MuiPanelProvider({
 			background: getRandomColor(),
 			parentId: initialSeed,
 			type: 'panel',
+			zones: [ ]
 		},
 	]
 

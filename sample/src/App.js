@@ -48,7 +48,7 @@ function App() {
         <ComplexPanel />
 
         {/* panel variations */}
-        {/* <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
@@ -65,7 +65,15 @@ function App() {
 
         <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel> */}
+        </MuiPanel>
+
+        <MuiPanel id="tralalaPanel33" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
+          <Skeleton variant="rect" width={'100%'} height={300} />
+        </MuiPanel>
+
+        <MuiPanel id="tralalaPanel2344" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
+          <Skeleton variant="rect" width={'100%'} height={300} />
+        </MuiPanel>
 
 
         {/* app main content */}
