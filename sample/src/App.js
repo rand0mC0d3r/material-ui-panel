@@ -8,6 +8,7 @@ import './App.css';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
+import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import IframePanel from './parts/IframePanel';
 import NotificationPanel from './parts/NotificationPanel';
@@ -48,6 +49,7 @@ function App() {
 
         <ComplexPanel />
         <IframePanel/>
+        <AnotherIframePanel/>
         {/* panel variations */}
         <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}

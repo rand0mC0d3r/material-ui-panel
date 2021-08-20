@@ -151,13 +151,14 @@ const MuiSplitter = withTheme(({
     >
       {!section.isCollapsed && <>
       <div className={classes.title}>
+      {!isRoot && <>
         {section.type === 'list'
           ? <AppsIcon color="action" />
           : <ChromeReaderModeIcon color="disabled" />}
         <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
-          {isRoot && 'Root - '}
           {section.type === 'list' ? 'Add sub-sections ...' : 'Select panel ...'}
         </Typography>
+      </>}
       </div>
       <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
         {section.type === 'list' && <Tooltip
@@ -223,7 +224,17 @@ const MuiSplitter = withTheme(({
       {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) &&
         <div className={classes.selectMode}>
         <Tooltip title="Select a mode to continue..." arrow>
-          <CallSplitIcon className={classes.selectIcon} color="disabled" style={{ fontSize: 40 }} />
+          <Box display="flex" alignItems="center" style={{ gap: '8px'}}>
+            <div onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })} className={classes.splitButton}>
+              <AppsIcon style={{ fontSize: 48 }} color={section.type === 'list' ? 'disabled' : 'primary' } />
+            </div>
+
+            <CallSplitIcon color="disabled" />
+
+            <div onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })} className={classes.splitButton} >
+              <WebIcon style={{ fontSize: 48 }} color={section.type === 'list' ? 'primary' : 'disabled' } />
+            </div>
+          </Box>
         </Tooltip>
         </div>
       }

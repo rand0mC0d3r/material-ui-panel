@@ -34,7 +34,7 @@ function MuiPanelProvider({
 			order: 'normal',
 			type: 'list',
 			background: getRandomColor(),
-			isCollapsed: false,
+			isCollapsed: true,
 			zones: [ child1Seed, child2Seed, child3Seed ]
 		},
 		{
@@ -310,7 +310,7 @@ function MuiPanelProvider({
 			const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
 			if (foundObject) {
 				setLayout(layout => ([...layout.map(lo => {
-					if (lo.side === foundObject.side) {
+					if (lo.side === foundObject.side && !lo.asSection) {
 						if (lo.uniqueId === foundObject.uniqueId) {
 							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 }}
 						} else if (lo.parentId === foundObject.uniqueId) {
