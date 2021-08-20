@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     // border: '1px solid red',
     height: "100%",
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     gridArea: "main",
     position: 'relative',
   },
@@ -26,29 +26,44 @@ const useStyles = makeStyles(theme => ({
     minWidth: theme.spacing(3),
     lineHeight: '0px'
   },
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    // border: `1px solid ${theme.palette.divider}`,
-    height: "100%",
-    backgroundColor: theme.palette.background.paper,
-    gridArea: "main",
-    position: 'relative',
+  selectMode: {
+    width: '100%',
+    display: 'flex',
+    flex: '1 1 auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectIcon: {
+    "&:hover": {
+      color: `${theme.palette.text.secondary} !important`
+    }
   },
   header: {
     minHeight: "57px",
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
-    backgroundColor: theme.palette.background.default,
+    // backgroundColor: theme.palette.background.default,
     alignItems: "center",
     justifyContent: "space-between",
 
     "&:hover": {
       backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
-    }
+    },
   },
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    // backgroundColor: theme.palette.background.paper,
+    gridArea: "main",
+    position: 'relative',
+  },
+  wrapperRepeat: {
+    boxShadow: 'inset 1px 1px 0px 0px #CCC',
+  },
+
   title: {
     alignItems: "center",
     display: "flex",
@@ -79,6 +94,7 @@ const useStyles = makeStyles(theme => ({
 
 const MuiSplitter = withTheme(({
   section,
+  isRoot = false,
   theme,
 }) => {
   const classes = useStyles(theme)
@@ -92,8 +108,12 @@ const MuiSplitter = withTheme(({
   //   }
   // }, [sections])
 
-  return <div className={ classes.wrapper}>
-    <div className={classes.header} style={{borderBottom: `1px solid ${section.background}`}}>
+  return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : { }}>
+    <div className={classes.header}
+      style={isRoot
+        ? { border: `0px none` }
+        : { borderBottom: `1px solid ${section.background}` }}
+    >
       <div className={classes.title}>
         {section.type === 'list' && <AppsIcon color="action" />}
       {`panel ID: ${section.id} - ${section.direction} - ${section.type}`}
@@ -149,14 +169,20 @@ const MuiSplitter = withTheme(({
         ? classes.horizontal
         : classes.vertical}
       `}>
-      {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) && <>select mode</>}
+      {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) &&
+        <div className={classes.selectMode}>
+        <CallSplitIcon className={classes.selectIcon} color="disabled" style={{ fontSize: 40 }} />
+        </div>
+      }
       {section.type !== 'list' && <>
-        {section.panelId && `panelId: ${section.panelId}`}
-        <div id={`${section.panelId}-section`} />
+        {section.panelId && <>
+          {/* {`panelId: ${section.panelId}`} */}
+          <div style={{ width: '100%' }} id={`${section.panelId}-section`} />
+        </>}
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
-        <div className={classes.zone}>
-        <MuiSplitter section={sections.find(s => s.id === zone)} />
+        <div className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}>
+          <MuiSplitter section={sections.find(s => s.id === zone)} />
       </div>)}
     </div>
   </div>

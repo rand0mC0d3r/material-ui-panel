@@ -203,7 +203,7 @@ function MuiPanelProvider({
 			return section
 		}))
 		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
-			? { ...layoutObject, asSection: false }
+			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}
 

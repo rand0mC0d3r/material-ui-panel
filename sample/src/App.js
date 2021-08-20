@@ -43,9 +43,9 @@ function App() {
         {/* deep nested panel */}
         <NotificationPanel />
 
-        {/* <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" /> */}
+        <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
-        {/* <ComplexPanel /> */}
+        <ComplexPanel />
 
         {/* panel variations */}
         {/* <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>

@@ -216,7 +216,7 @@ const MuiPanelManager = withTheme(({
           {!settings.isCollapsed && <>
             {layout
               .filter(lo => lo.side === side)
-              .filter(lo => !lo.asEmbedded)
+              .filter(lo => !lo.asEmbedded && !lo.asSection)
               .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
             <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
           </>}
@@ -227,7 +227,7 @@ const MuiPanelManager = withTheme(({
     {/* {JSON.stringify(sections)} */}
     <div style={{ gridArea: "main", display: 'flex' }}>
     {/* <MuiSplitter> */}
-      {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} />)}
+      {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} isRoot />)}
       {/* // </MuiSplitter> */}
     </div>
     {children}

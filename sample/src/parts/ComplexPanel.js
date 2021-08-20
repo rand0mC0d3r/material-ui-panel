@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 import { useState } from 'react';
 import MuiPanel from '../components/MuiPanel';
 
-const NotificationPanel = () => {
+const ComplexPanel = () => {
   const [value, setValue] = useState('Sample persisten text...');
   const handleChange = event => { setValue(event.target.value) };
 
@@ -43,4 +43,4 @@ const NotificationPanel = () => {
   </MuiPanel>
 }
 
-export default NotificationPanel;
+export default ComplexPanel;
