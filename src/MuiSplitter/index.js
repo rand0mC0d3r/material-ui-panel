@@ -58,7 +58,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
-    // backgroundColor: theme.palette.background.default,
     alignItems: "center",
     justifyContent: "space-between",
 
@@ -68,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   },
   headerCollapsed: {
     minHeight: "8px",
-    opacity: "0.75",
+    opacity: "0.5",
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
@@ -146,7 +145,7 @@ const MuiSplitter = withTheme(({
     <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
       onDoubleClick={() => toggleCollapseSection({sectionId: section.id})}
       style={isRoot
-        ? { border: `0px none` }
+        ? { border: `0px none`, backgroundColor: theme.palette.background.paper }
         : section.isCollapsed
           ? { backgroundColor: section.background }
           : { borderBottom: `4px solid ${section.background}` }
@@ -159,7 +158,9 @@ const MuiSplitter = withTheme(({
         {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
         {section.type === 'content' && <BlurOnIcon color="disabled" />}
         <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
-          {section.type === 'list' ? 'Add sub-sections ...' : 'Select panel ...'}
+          {section.type === 'list' && 'Add sub-sections ...'}
+          {section.type === 'panel' &&'Select panel ...'}
+          {section.type === 'content' && 'Main content'}
         </Typography>
       </>}
       </div>
@@ -200,7 +201,7 @@ const MuiSplitter = withTheme(({
           >
             {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
               <Box display="flex" alignItems="center" className={classes.groupsBox}>
-                {cloneElement(lo.icon, { color: "disabled" })}
+                {lo.icon && cloneElement(lo.icon, { color: "disabled" })}
                 <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
               </Box>
             </MenuItem>)}
@@ -229,13 +230,13 @@ const MuiSplitter = withTheme(({
               </Button>
               </>}
 
-        <Tooltip arrow title="Remove section">
-          <span>
-            <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }) }} className={classes.smallButton}>
-              <CancelPresentationOutlinedIcon />
-            </Button>
-          </span>
-        </Tooltip>
+            {section.type !== 'content' && <Tooltip arrow title="Remove section">
+              <span>
+                <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }) }} className={classes.smallButton}>
+                  <CancelPresentationOutlinedIcon />
+                </Button>
+              </span>
+            </Tooltip>}
       </Box>
       </>}
     </div>
@@ -246,7 +247,7 @@ const MuiSplitter = withTheme(({
         ? classes.horizontal
         : classes.vertical}
       `}>
-      {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) &&
+      {((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId)) &&
         <div className={classes.selectMode}>
         <Tooltip title="Select a mode to continue..." arrow>
           <Box display="flex" alignItems="center" style={{ gap: '8px'}}>
@@ -263,10 +264,11 @@ const MuiSplitter = withTheme(({
         </Tooltip>
         </div>
       }
-      {section.type !== 'list' && <>
-        {section.panelId && <>
+      {section.type === 'panel' && section.panelId && <>
           <div style={{ width: '100%', height: '100%' }} id={`${section.panelId}-section`} />
-        </>}
+      </>}
+      {section.type === 'content' && <>
+          <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: "stretch" }} id={`content-section`} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div

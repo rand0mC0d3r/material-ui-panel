@@ -191,7 +191,7 @@ const MuiPanelManager = withTheme(({
     {availableSides
       .map(side => <div
         onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && !l.asSection && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
+        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
       >
         <div
         id={`${side}-panel`} key={`${side}-panel`}
@@ -207,7 +207,7 @@ const MuiPanelManager = withTheme(({
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
       .map((side, index) => <Fragment key={index}>
-        {layout.filter(lo => lo.side === side && !lo.asSection).length > 0 && <div
+        {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <div
           onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
           className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
@@ -218,19 +218,15 @@ const MuiPanelManager = withTheme(({
           {!settings.isCollapsed && <>
             {layout
               .filter(lo => lo.side === side)
-              .filter(lo => !lo.asEmbedded && !lo.asSection)
+              .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
               .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
             <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
           </>}
         </div>}
     </Fragment>)}
 
-
-    {/* {JSON.stringify(sections)} */}
     <div style={{ gridArea: "main", display: 'flex' }}>
-    {/* <MuiSplitter> */}
       {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} isRoot />)}
-      {/* // </MuiSplitter> */}
     </div>
     {children}
   </div>

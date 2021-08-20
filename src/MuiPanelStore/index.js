@@ -53,7 +53,7 @@ function MuiPanelProvider({
 			parentId: initialSeed,
 			direction: 'vertical',
 			type: 'content',
-			isCollapsed: false,
+			isCollapsed: true,
 			order: 'normal',
 			zones: [ ]
 		},
@@ -86,6 +86,44 @@ function MuiPanelProvider({
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
 					uniqueId: id,
+					asContent: false,
+					asGroup: false,
+					notifications: {
+						count: 0,
+						summary: 0,
+						color: "primary",
+						...notifications,
+					},
+					asEmbedded: false,
+					asSection: false,
+					side: initialSide,
+					isVisible: false,
+					parentId: null,
+					iconInHeader,
+					isCollapsed: false,
+					ref,
+					index: layout.length,
+					showBadge: false,
+					variant: 'standard',
+					index: layout.length,
+					subTitle,
+					title,
+					placement,
+					showIcon,
+					shortText,
+					tooltip,
+					noPanel,
+					icon,
+					children,
+					}
+			]);
+		}
+		const handleContentAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+			setLayout(layout => [
+				...layout.filter(lo => lo.uniqueId !== id),
+				{
+					uniqueId: id,
+					asContent: true,
 					asGroup: false,
 					notifications: {
 						count: 0,
@@ -395,7 +433,7 @@ function MuiPanelProvider({
 				handleSetSide,
 				handleToggleCollapse,
 				handleSetAsEmbedded,
-				handlePanelAnnouncement
+				handlePanelAnnouncement, handleContentAnnouncement,
 			}}>
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
 				{props.children}

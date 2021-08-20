@@ -2,9 +2,11 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import CallToActionIcon from '@material-ui/icons/CallToAction';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
+import MuiContent from './components/MuiContent';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
@@ -33,24 +35,18 @@ function App() {
 
       <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        {/* divider variations */}
-        {/* <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} /> */}
+        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
+        <MuiDivider id="test33" tooltip="Default separator" />
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
 
-        {/* <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" /> */}
-
-        {/* <MuiDivider id="test33" tooltip="Default separator" />
-
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
-
-        {/* deep nested panel */}
         <NotificationPanel />
-
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
         <ComplexPanel />
         <IframePanel/>
-        <AnotherIframePanel/>
-        {/* panel variations */}
+        <AnotherIframePanel />
+
         <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
@@ -78,15 +74,14 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
-
-        {/* app main content */}
-          {/* <iframe
+        <MuiContent>
+          <iframe
             title="Random Wiki article"
-            style={{ width: "100%", filter: 'blur(5px)', opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
+            style={{ width: "100%", filter: 'saturate(10) blur(0px)', opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
-          /> */}
+            />
+        </MuiContent>
       </MuiPanelProvider>
-
     </ThemeProvider>
   </>;
 }
