@@ -75,6 +75,12 @@ const MuiPanel = ({
           {children}
         </div>}
     </div>,
-    document.getElementById(`${side}-panel`)) : null
+    (() => {
+      console.log(layoutObject)
+      return layoutObject.asSection && layoutObject.uniqueId
+      ? document.getElementById(`${layoutObject.uniqueId}-section`)
+      : document.getElementById(`${side}-panel`)
+    })())
+    : null
 }
 export default MuiPanel;

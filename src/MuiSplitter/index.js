@@ -152,12 +152,10 @@ const MuiSplitter = withTheme(({
       {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) && <>select mode</>}
       {section.type !== 'list' && <>
         {section.panelId && `panelId: ${section.panelId}`}
+        <div id={`${section.panelId}-section`} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div className={classes.zone}>
-        {/* <div className={classes.header}>
-          {`zone ID: ${zone}`}
-        </div> */}
         <MuiSplitter section={sections.find(s => s.id === zone)} />
       </div>)}
     </div>

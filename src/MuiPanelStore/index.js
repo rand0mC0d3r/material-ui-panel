@@ -79,7 +79,6 @@ function MuiPanelProvider({
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
-					id,
 					uniqueId: id,
 					asGroup: false,
 					notifications: {
@@ -189,7 +188,7 @@ function MuiPanelProvider({
 			return section
 		}))
 		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
-			? { ...layoutObject, asSection: true, isVisible: false }
+			? { ...layoutObject, asSection: true, isVisible: true }
 			: layoutObject));
 	}
 	const removePanelFromSection = ({ sectionId, panelId }) => {
@@ -204,7 +203,7 @@ function MuiPanelProvider({
 			return section
 		}))
 		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
-			? { ...layoutObject, asSection: false, isVisible: false }
+			? { ...layoutObject, asSection: false }
 			: layoutObject));
 	}
 

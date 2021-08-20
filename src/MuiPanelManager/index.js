@@ -190,7 +190,7 @@ const MuiPanelManager = withTheme(({
     {availableSides
       .map(side => <div
         onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
+        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && !l.asSection && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
       >
         <div
         id={`${side}-panel`} key={`${side}-panel`}
