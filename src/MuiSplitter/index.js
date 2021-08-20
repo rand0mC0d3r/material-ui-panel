@@ -64,7 +64,9 @@ const useStyles = makeStyles(theme => ({
   wrapperRepeat: {
     boxShadow: 'inset 1px 1px 0px 0px #CCC',
   },
-
+  groupsBox: {
+    gap: "8px"
+  },
   title: {
     alignItems: "center",
     display: "flex",
@@ -143,20 +145,20 @@ const MuiSplitter = withTheme(({
         </div>}
 
         {section.type !== 'list' && <Box display="flex" alignItems="center" className={classes.buttonsWrapper}>
-          {section.panelId && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
-
           <Select
             fullWidth
             value={section.panelId || ''}
             onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
           >
             {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" className={classes.groupsBox}>
-                {lo.icon}
+              <Box display="flex" alignItems="center" className={classes.groupsBox}>
+                {cloneElement(lo.icon, { color: "disabled" })}
                 <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
               </Box>
             </MenuItem>)}
           </Select>
+
+          {section.panelId && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
 
           <div
             onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}

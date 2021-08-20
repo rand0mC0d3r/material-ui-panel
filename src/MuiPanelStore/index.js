@@ -178,17 +178,31 @@ function MuiPanelProvider({
 	}
 
 	const addPanelToSection = ({ sectionId, panelId }) => {
+		let previousPanel = null
 		setSections(sections => sections.map(section => {
 			if (section.id === sectionId) {
+				previousPanel = section.panelId
 				return {
 					...section,
 					panelId
 				}
 			}
+			if (section.panelId === panelId) {
+				previousPanel = section.panelId
+				return {
+					...section,
+					panelId: null,
+				}
+			}
+
 			return section
 		}))
-		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
+		setLayout(layout => layout
+			.map(layoutObject => layoutObject.uniqueId === panelId
 			? { ...layoutObject, asSection: true, isVisible: true }
+				: layoutObject)
+			.map(layoutObject => layoutObject.uniqueId === previousPanel
+			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}
 	const removePanelFromSection = ({ sectionId, panelId }) => {
