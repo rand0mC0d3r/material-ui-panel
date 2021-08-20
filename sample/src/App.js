@@ -76,7 +76,7 @@ function App() {
         <MuiContent>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", filter: 'saturate(10) blur(0px)', opacity: 0.45, pointerEvents: 'none', height: "100%", border: '0px none' }}
+            style={{ width: "100%", filter: 'saturate(10) blur(0px)', opacity: 0.45, height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MuiContent>

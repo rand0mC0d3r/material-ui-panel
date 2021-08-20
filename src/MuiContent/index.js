@@ -17,7 +17,7 @@ const MuiContent = ({
     if (findObject) { setLayoutObject(findObject);}
   }, [layout]);
 
-  return layoutObject ? createPortal(
+  return layoutObject && document.getElementById(`content-section`) ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',

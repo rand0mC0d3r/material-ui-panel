@@ -234,14 +234,15 @@ function MuiPanelProvider({
 		},])
 	}
 	const removeZoneFromSection = ({ sectionId }) => {
+		console.log("clicked remove section")
 		setSections(sections => [
 			...sections
 				.filter(section => section.id !== sectionId)
 				.map(section => {
-					if (section.zones.some(sz => sz === sectionId)) {
-						return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] }
-					}
-					return section
+						if (section.zones.some(sz => sz === sectionId)) {
+							return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] }
+						}
+						return section
 			}),
 		])
 	}
@@ -296,6 +297,7 @@ function MuiPanelProvider({
 	const showContent = ({ sectionId }) => {
 		let foundPanelId = null
 		setSections(sections => sections.map(section => {
+			foundPanelId = section.panelId
 			if (section.type === 'content') {
 				return {
 					...section,
