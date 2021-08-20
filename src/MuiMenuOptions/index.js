@@ -4,6 +4,7 @@ import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
+import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import React, { useContext, useEffect } from 'react';
@@ -11,7 +12,10 @@ import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
   box: { gap: `${theme.spacing(1)}px`, padding: '8px' },
-  groupsBox: { gap: `${theme.spacing(2)}px` },
+  groupsBox: {
+    gap: theme.spacing(14),
+    alignItems: 'center',
+  },
   groupIcon: {
     transform: 'rotateZ(90deg)',
   },
@@ -65,7 +69,7 @@ const MuiMenuOptions = withTheme(({
           disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
           onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
             {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" className={classes.groupsBox}>
+              <Box display="flex" alignItems="center" className={classes.groupsBox}>
                 {lo.icon}
                 <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
               </Box>

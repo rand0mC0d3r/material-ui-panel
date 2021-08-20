@@ -3,6 +3,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
+import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import WebIcon from '@material-ui/icons/Web';
@@ -82,7 +83,7 @@ const MuiSplitter = withTheme(({
 }) => {
   const classes = useStyles(theme)
   // const [currentPanel = useState()
-  const { layout, settings, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, settings, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   // useEffect(() => {
   //   effect
@@ -116,7 +117,9 @@ const MuiSplitter = withTheme(({
             <AppsIcon />
         </div>}
 
-        {section.type !== 'list' && <>
+        {section.type !== 'list' && <Box display="flex" alignItems="center" className={classes.buttonsWrapper}>
+          {section.panelId && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
+
           <Select
             fullWidth
             value={section.panelId || ''}
@@ -135,7 +138,7 @@ const MuiSplitter = withTheme(({
             className={classes.splitButton}
           ><WebIcon /></div>
 
-        </>}
+        </Box>}
 
 
       </div>

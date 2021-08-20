@@ -32,9 +32,9 @@ function App() {
       <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* divider variations */}
-        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        {/* <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} /> */}
 
-        <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
+        {/* <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" /> */}
 
         {/* <MuiDivider id="test33" tooltip="Default separator" />
 
@@ -43,12 +43,12 @@ function App() {
         {/* deep nested panel */}
         <NotificationPanel />
 
-        <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
+        {/* <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" /> */}
 
-        <ComplexPanel />
+        {/* <ComplexPanel /> */}
 
         {/* panel variations */}
-        <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        {/* <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
@@ -65,7 +65,7 @@ function App() {
 
         <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
+        </MuiPanel> */}
 
 
         {/* app main content */}

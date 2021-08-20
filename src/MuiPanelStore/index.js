@@ -58,7 +58,6 @@ function MuiPanelProvider({
 			background: getRandomColor(),
 			parentId: initialSeed,
 			type: 'panel',
-			panelId: "panel123"
 		},
 	]
 
@@ -90,6 +89,7 @@ function MuiPanelProvider({
 						...notifications,
 					},
 					asEmbedded: false,
+					asSection: false,
 					side: initialSide,
 					isVisible: false,
 					parentId: null,
@@ -177,6 +177,7 @@ function MuiPanelProvider({
 				zones: [ ]
 		},])
 	}
+
 	const addPanelToSection = ({ sectionId, panelId }) => {
 		setSections(sections => sections.map(section => {
 			if (section.id === sectionId) {
@@ -187,6 +188,24 @@ function MuiPanelProvider({
 			}
 			return section
 		}))
+		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
+			? { ...layoutObject, asSection: true, isVisible: false }
+			: layoutObject));
+	}
+	const removePanelFromSection = ({ sectionId, panelId }) => {
+		console.log('here', panelId);
+		setSections(sections => sections.map(section => {
+			if (section.id === sectionId) {
+				return {
+					...section,
+					panelId: null
+				}
+			}
+			return section
+		}))
+		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
+			? { ...layoutObject, asSection: false, isVisible: false }
+			: layoutObject));
 	}
 
 	const chooseTypeForSection = ({ panelId, isList = false }) => {
@@ -290,7 +309,7 @@ function MuiPanelProvider({
 				addZoneToSection,
 				toggleSectionDirection,
 				chooseTypeForSection,
-				addPanelToSection,
+				addPanelToSection, removePanelFromSection,
 
 				handleUnSetAsEmbedded,
 				toggleSettingIsCollapsed,
