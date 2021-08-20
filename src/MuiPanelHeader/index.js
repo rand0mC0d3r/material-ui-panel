@@ -52,6 +52,7 @@ const useStyles = makeStyles(theme => ({
     cursor: "default",
     position: "relative",
     gap: theme.spacing(1),
+    height: '30px',
     userSelect: "none",
     padding: theme.spacing(1.5, 2, 1.5, 1),
     borderTop: `1px solid transparent`,

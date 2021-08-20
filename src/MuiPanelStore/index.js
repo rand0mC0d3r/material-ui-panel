@@ -217,21 +217,27 @@ function MuiPanelProvider({
 			}
 			return section
 		}))
-		setLayout(layout.map(layoutObject => layoutObject.uniqueId === panelId
+		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === panelId
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}
 
 	const chooseTypeForSection = ({ panelId, isList = false }) => {
+		let foundPanelId = null
 		setSections(sections => sections.map(section => {
 			if (section.id === panelId) {
+				foundPanelId = section.panelId
 				return {
 					...section,
-					type: isList ? 'list' : 'panel'
+					type: isList ? 'list' : 'panel',
+					panelId: undefined
 				}
 			}
 			return section
 		}))
+		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
+			? { ...layoutObject, asSection: false, isVisible: false }
+			: layoutObject));
 	}
 
 	const handlePanelAlerts = ({ id, count, color }) => {

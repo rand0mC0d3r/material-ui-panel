@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   header: {
-    minHeight: "57px",
+    minHeight: "55px",
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
@@ -93,6 +93,7 @@ const useStyles = makeStyles(theme => ({
     // border: '1px solid blue',
     flex: "1 1 auto",
     position: 'relative',
+    width: '0px',
     alignItems: "center",
     justifyContent: "center",
   },
@@ -139,14 +140,14 @@ const MuiSplitter = withTheme(({
         </Typography>
       </div>
       <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
-        <Tooltip
-        arrow
+        {section.type === 'list' && <Tooltip
+          arrow
           title="Current orientation"
           placement='bottom'>
           {section.direction !== 'vertical'
             ? <SwapHorizIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
             : <ImportExportIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />}
-        </Tooltip>
+        </Tooltip>}
 
         {section.type === 'list' && <Tooltip arrow title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
           <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
@@ -181,7 +182,7 @@ const MuiSplitter = withTheme(({
             </MenuItem>)}
           </Select>
 
-          {section.panelId && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
+          {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
 
           <div
             onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
