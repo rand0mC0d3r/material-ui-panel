@@ -19,24 +19,38 @@ const useStyles = makeStyles(theme => ({
     gridArea: "main",
     position: 'relative',
   },
+  smallButton: {
+    padding: "0px",
+    width: theme.spacing(3),
+    minWidth: theme.spacing(3),
+    lineHeight: '0px'
+  },
   wrapper: {
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    border: `1px solid ${theme.palette.divider}`,
+    // border: `1px solid ${theme.palette.divider}`,
     height: "100%",
     backgroundColor: theme.palette.background.paper,
     gridArea: "main",
     position: 'relative',
   },
   header: {
-    minHeight: "56px",
+    minHeight: "57px",
     display: "flex",
     flexDirection: "row",
     padding: "0px 12px",
     backgroundColor: theme.palette.background.default,
     alignItems: "center",
     justifyContent: "space-between",
+
+    "&:hover": {
+      backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
+    }
+  },
+  title: {
+    alignItems: "center",
+    display: "flex",
   },
   horizontal: {
     flexDirection: "row",
@@ -78,16 +92,22 @@ const MuiSplitter = withTheme(({
   // }, [sections])
 
   return <div className={ classes.wrapper}>
-    <div className={classes.header} style={{backgroundColor: section.background}}>
+    <div className={classes.header} style={{borderBottom: `1px solid ${section.background}`}}>
+      <div className={classes.title}>
+        {section.type === 'list' && <AppsIcon color="action" />}
       {`panel ID: ${section.id} - ${section.direction} - ${section.type}`}
+      </div>
       <div className={classes.buttonsWrapper}>
-        {section.type === 'list' && <>{section.direction === 'vertical'
-          ? <SwapHorizIcon onClick={() => toggleSectionDirection({ sectionId: section.id })} />
-          : <ImportExportIcon onClick={() => toggleSectionDirection({ sectionId: section.id })} />}</>}
+        {section.type === 'list' && <Tooltip arrow title="Toggle list direction">
+          <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
+            {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
+          </Button>
+        </Tooltip>}
 
-        {section.type === 'list' && <div onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.splitButton}>
-          <PlaylistAddIcon />
-        </div>}
+        {section.type === 'list' &&
+          <Button disableRipple disableElevation onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.smallButton}>
+            <PlaylistAddIcon color="action" />
+        </Button>}
 
         {section.type === 'list' && section.zones.length === 0 && <div
           onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
@@ -130,7 +150,8 @@ const MuiSplitter = withTheme(({
       {section.type !== 'list' && <>
         {section.panelId && `panelId: ${section.panelId}`}
       </>}
-      {section.type === 'list' && section.zones && section.zones.map(zone => <div className={classes.zone}>
+      {section.type === 'list' && section.zones && section.zones.map(zone =>
+        <div className={classes.zone}>
         {/* <div className={classes.header}>
           {`zone ID: ${zone}`}
         </div> */}

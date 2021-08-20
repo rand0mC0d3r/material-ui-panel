@@ -12,6 +12,8 @@ const MuiPanel = ({
   tooltip,
   icon,
 
+  placement = 'top',
+
   notifications = {
     count: null,
     color: null,
@@ -43,7 +45,7 @@ const MuiPanel = ({
       console.error(`MuiPanel: missing attr:id for panel with title+hint:`, title, hint);
     } else {
       // console.log(`MuiPanel: panel with id:${id} has been added`);
-      handlePanelAnnouncement({ iconInHeader, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
+      handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
     }
   }, [id]);
 

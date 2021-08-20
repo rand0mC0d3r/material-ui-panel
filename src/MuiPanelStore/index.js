@@ -8,6 +8,7 @@ const localStorageKey = 'material-ui-panel.layout'
 const DataContext = createContext(null);
 
 const getRandomColor = () => '#' + Math.random().toString(16).substr(-6)
+const getRandomId = () => (Math.random() + 1).toString(36).substring(7)
 
 function MuiPanelProvider({
 	allowRightClick,
@@ -20,131 +21,45 @@ function MuiPanelProvider({
 
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
-		const var1 = {
-			direction: 'horizontal',
-			order: 'normal',
-			zones: [
-				{
-					type: 'panel',
-					panelId: "panel123"
-				},
-				{
-					type: 'panel',
-					panelId: 'panel31233',
-				},
-			]
-		}
 
-		const var2 = {
-				direction: 'horizontal',
-				order: 'normal',
-				zones: [
-					{
-						type: 'panel',
-						panelId: "panel123"
-					},
-					{
-						type: 'list',
-						direction: 'vertical',
-						order: 'normal',
-						zones: [
-							{
-								type: 'panel',
-								panelId: "panel123"
-							},
-							{
-								type: 'list',
-								direction: 'horizontal',
-								order: 'normal',
-								zones: [
-									{
-										type: 'panel',
-										panelId: "panel123"
-									},
-									{
-										type: 'content',
-										panelId: "content"
-									}
-								]
-							},
-						]
-					},
-					{
-						type: 'content',
-						panelId: "content"
-					},
-					{
-						type: 'list',
-						direction: 'vertical',
-						order: 'normal',
-						zones: [
-							{
-								type: 'panel',
-								panelId: "panel123"
-							},
-							{
-								type: 'content',
-								panelId: "content"
-							},
-							{
-								type: 'panel',
-								panelId: "panel123"
-							},
-							{
-								type: 'content',
-								panelId: "content"
-							}
-						]
-					},
-				]
-			}
-
+	const initialSeed = getRandomId()
+	const child1Seed = getRandomId()
+	const child2Seed = getRandomId()
+	const child3Seed = getRandomId()
 	const var3 = [
 		{
-			id: (Math.random() + 1).toString(36).substring(7),
+			id: initialSeed,
 			direction: 'horizontal',
 			order: 'normal',
 			type: 'list',
 			background: getRandomColor(),
+			zones: [ child1Seed, child2Seed, child3Seed ]
+		},
+		{
+			id: child1Seed,
+			background: getRandomColor(),
+			parentId: initialSeed,
+			direction: 'horizontal',
+			order: 'normal',
+			type: 'list',
 			zones: [ ]
 		},
-		// {
-		// 	id: 'abcdX12',
-		// 	direction: 'horizontal',
-		// 	order: 'normal',
-		// 	zones: [ "xxxx", 'abcdX12sub']
-		// },
-		// {
-		// 	id: 'abcdX12sub',
-		// 	parentId: 'abcd',
-		// 	direction: 'horizontal',
-		// 	order: 'normal',
-		// 	zones: [ "ytr"]
-		// },
-		// {
-		// 	id: "ytr",
-		// 	parentId: 'abcd',
-		// 	type: 'panel',
-		// 	panelId: "panel123"
-		// },
-		// {
-		// 	id: "xxxx",
-		// 	parentId: 'abcd',
-		// 	type: 'panel',
-		// 	panelId: "panel123"
-		// },
-		// {
-		// 	id: "sfsdfsd",
-		// 	parentId: 'abcd',
-		// 	type: 'panel',
-		// 	panelId: "panel123"
-		// },
-		// {
-		// 	id: "sdfdsfsdf3",
-		// 	parentId: 'abcd',
-		// 	type: 'panel',
-		// 	panelId: 'panel31233',
-		// },
+		{
+			id: child2Seed,
+			background: getRandomColor(),
+			parentId: initialSeed,
+			direction: 'horizontal',
+			type: 'content',
+			order: 'normal',
+			zones: [ ]
+		},
+		{
+			id: child3Seed,
+			background: getRandomColor(),
+			parentId: initialSeed,
+			type: 'panel',
+			panelId: "panel123"
+		},
 	]
 
 		const initialLayout = get(props, 'layout', []);
@@ -161,7 +76,7 @@ function MuiPanelProvider({
 		const [settings, setSettings] = useState(initialSettings);
 
 
-		const handlePanelAnnouncement = ({ id, ref, children, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+		const handlePanelAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
@@ -187,6 +102,7 @@ function MuiPanelProvider({
 					index: layout.length,
 					subTitle,
 					title,
+					placement,
 					showIcon,
 					shortText,
 					tooltip,

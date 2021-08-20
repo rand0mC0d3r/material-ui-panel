@@ -32,7 +32,9 @@ const MuiDebug = withTheme(({
   return <>
 		debug {settings.debugMode ? 'debug' : 'deactivated'}
 		{settings.debugMode && <div className={classes.root}>
-			{layout.map(layoutObject => <pre>{JSON.stringify({ ...layoutObject, icon: null }, null, 4)}</pre>)}
+			{layout.map(layoutObject => <Typography color="textPrimary">
+				<pre>{JSON.stringify({ ...layoutObject, icon: null }, null, 4)}</pre>
+			</Typography>)}
 		</div>}
     </>
 })

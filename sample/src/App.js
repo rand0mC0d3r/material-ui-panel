@@ -48,7 +48,7 @@ function App() {
         <ComplexPanel />
 
         {/* panel variations */}
-        <MuiPanel id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
