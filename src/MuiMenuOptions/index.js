@@ -1,4 +1,4 @@
-import { Box, Button, Select, Tooltip, Typography } from '@material-ui/core';
+import { Box, Select, Tooltip, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';

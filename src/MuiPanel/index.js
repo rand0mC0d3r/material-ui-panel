@@ -20,19 +20,7 @@ const MuiPanel = ({
   },
 
   disabled,
-
-
-  //ignoreHierarchy
-  // header = {
-  //   noIcon: false,
-  // },
-  // content: {
-  //   noPadding: false,
-  // },
-
   iconInHeader = true,
-
-
   noPadding = false,
   children,
 }) => {

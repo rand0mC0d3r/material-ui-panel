@@ -2,7 +2,6 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import CallToActionIcon from '@material-ui/icons/CallToAction';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';

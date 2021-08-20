@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useContext, useEffect } from 'react';
 import MuiMenuOptions from '../../MuiMenuOptions';
@@ -22,11 +22,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MuiDebug = withTheme(({
-  lo,
-  side,
   theme,
 }) => {
-  const classes = useStyles(theme)// const classes = useStyles(theme)
+  const classes = useStyles(theme)
   const { settings, layout } = useContext(DataProvider);
 
   return <>

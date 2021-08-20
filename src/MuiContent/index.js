@@ -1,13 +1,11 @@
-import TextureIcon from '@material-ui/icons/Texture';
 import React, { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import MuiPanelHeader from '../MuiPanelHeader';
 import DataProvider from '../MuiPanelStore';
 
 const MuiContent = ({
   children,
 }) => {
-  const { layout, handlePanelAlerts, handleContentAnnouncement } = useContext(DataProvider);
+  const { layout, handleContentAnnouncement } = useContext(DataProvider);
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {

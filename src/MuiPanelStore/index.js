@@ -1,4 +1,3 @@
-import { CollectionsBookmarkRounded } from '@material-ui/icons';
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
