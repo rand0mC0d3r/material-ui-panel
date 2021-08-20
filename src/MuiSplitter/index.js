@@ -2,6 +2,7 @@ import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
+import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
@@ -67,6 +68,7 @@ const useStyles = makeStyles(theme => ({
   title: {
     alignItems: "center",
     display: "flex",
+    gap: "8px"
   },
   horizontal: {
     flexDirection: "row",
@@ -115,8 +117,11 @@ const MuiSplitter = withTheme(({
         : { borderBottom: `1px solid ${section.background}` }}
     >
       <div className={classes.title}>
-        {section.type === 'list' && <AppsIcon color="action" />}
-      {`panel ID: ${section.id} - ${section.direction} - ${section.type}`}
+        {section.type === 'list'
+          ? <AppsIcon color="action" />
+          : <ChromeReaderModeIcon color="disabled" />}
+        <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>{section.id}</Typography>
+      {/* {`${section.id} - ${section.direction} - ${section.type}`} */}
       </div>
       <div className={classes.buttonsWrapper}>
         {section.type === 'list' && <Tooltip arrow title="Toggle list direction">
