@@ -9,6 +9,7 @@ import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import ViewColumnOutlinedIcon from '@material-ui/icons/ViewColumnOutlined';
 import WebIcon from '@material-ui/icons/Web';
 import React, { cloneElement, Fragment, useContext, useEffect, useState } from 'react';
 import DataProvider, { MuiPanelProvider } from '../MuiPanelStore';
@@ -22,6 +23,14 @@ const useStyles = makeStyles(theme => ({
     // backgroundColor: theme.palette.background.paper,
     gridArea: "main",
     position: 'relative',
+  },
+  groupIcon: {
+    // transform: 'rotateZ(90deg)',
+    minWidth: theme.spacing(3),
+    background: theme.palette.divider,
+    borderRadius: '4px',
+    padding: '4px 2px',
+    color: theme.palette.background.paper,
   },
   smallButton: {
     padding: "0px",
@@ -129,8 +138,17 @@ const MuiSplitter = withTheme(({
           {section.type === 'list' ? 'Add sub-sections ...' : 'Select panel ...'}
         </Typography>
       </div>
-      <div className={classes.buttonsWrapper}>
-        {section.type === 'list' && <Tooltip arrow title="Toggle list direction">
+      <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
+        <Tooltip
+        arrow
+          title="Current orientation"
+          placement='bottom'>
+          {section.direction !== 'vertical'
+            ? <SwapHorizIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
+            : <ImportExportIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />}
+        </Tooltip>
+
+        {section.type === 'list' && <Tooltip arrow title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
           <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
             {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
           </Button>
@@ -173,7 +191,7 @@ const MuiSplitter = withTheme(({
         </Box>}
 
 
-      </div>
+      </Box>
     </div>
     <div className={`
         ${classes.root}
