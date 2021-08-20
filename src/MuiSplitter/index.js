@@ -4,6 +4,8 @@ import AppsIcon from '@material-ui/icons/Apps';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -122,8 +124,10 @@ const MuiSplitter = withTheme(({
         {section.type === 'list'
           ? <AppsIcon color="action" />
           : <ChromeReaderModeIcon color="disabled" />}
-        <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>{section.id}</Typography>
-      {/* {`${section.id} - ${section.direction} - ${section.type}`} */}
+        <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
+          {isRoot && 'Root - '}
+          {section.type === 'list' ? 'Add sub-sections ...' : 'Select panel ...'}
+        </Typography>
       </div>
       <div className={classes.buttonsWrapper}>
         {section.type === 'list' && <Tooltip arrow title="Toggle list direction">
@@ -133,9 +137,10 @@ const MuiSplitter = withTheme(({
         </Tooltip>}
 
         {section.type === 'list' &&
+          <Tooltip arrow title="Add a new section...">
           <Button disableRipple disableElevation onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.smallButton}>
-            <PlaylistAddIcon color="action" />
-        </Button>}
+            <LibraryAddOutlinedIcon color="action" />
+        </Button></Tooltip>}
 
         {section.type === 'list' && section.zones.length === 0 && <div
           onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
@@ -178,7 +183,9 @@ const MuiSplitter = withTheme(({
       `}>
       {((section.type === 'list' && section.zones.length === 0) || (section.type !== 'list' && !section.panelId)) &&
         <div className={classes.selectMode}>
-        <CallSplitIcon className={classes.selectIcon} color="disabled" style={{ fontSize: 40 }} />
+        <Tooltip title="Select a mode to continue..." arrow>
+          <CallSplitIcon className={classes.selectIcon} color="disabled" style={{ fontSize: 40 }} />
+        </Tooltip>
         </div>
       }
       {section.type !== 'list' && <>
