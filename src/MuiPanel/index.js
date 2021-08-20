@@ -70,6 +70,7 @@ const MuiPanel = ({
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
       display: 'flex',
+      height:  layoutObject.parentId ? 'unset' :"100%",
       flexDirection: 'column'
     }}>
       <MuiPanelHeader {...{ layoutObject }} />

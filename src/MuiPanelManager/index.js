@@ -63,7 +63,7 @@ const styledPanel = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    height: '100%',
+    // height: '100%',
   },
   leftPanel: {
     gridArea: "leftPanel",
@@ -199,7 +199,8 @@ const MuiPanelManager = withTheme(({
         style={{
           gridArea: `${side}Panel`,
           overflow: 'hidden auto',
-          width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset')
+          width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'),
+          height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
         }}
         /></div>)}
 

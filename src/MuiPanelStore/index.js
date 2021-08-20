@@ -1,3 +1,4 @@
+import { CollectionsBookmarkRounded } from '@material-ui/icons';
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
@@ -33,6 +34,7 @@ function MuiPanelProvider({
 			order: 'normal',
 			type: 'list',
 			background: getRandomColor(),
+			isCollapsed: false,
 			zones: [ child1Seed, child2Seed, child3Seed ]
 		},
 		{
@@ -42,6 +44,7 @@ function MuiPanelProvider({
 			direction: 'horizontal',
 			order: 'normal',
 			type: 'list',
+			isCollapsed: false,
 			zones: [ ]
 		},
 		{
@@ -50,6 +53,7 @@ function MuiPanelProvider({
 			parentId: initialSeed,
 			direction: 'horizontal',
 			type: 'content',
+			isCollapsed: false,
 			order: 'normal',
 			zones: [ ]
 		},
@@ -58,6 +62,7 @@ function MuiPanelProvider({
 			background: getRandomColor(),
 			parentId: initialSeed,
 			type: 'panel',
+			isCollapsed: false,
 			zones: [ ]
 		},
 	]
@@ -158,6 +163,19 @@ function MuiPanelProvider({
 		}))
 	}
 
+	const toggleCollapseSection = ({ sectionId }) => {
+		console.log("i am here", sectionId);
+		setSections(sections => sections.map(section => {
+			if (section.id === sectionId) {
+				return {
+					...section,
+					isCollapsed: !section.isCollapsed
+				}
+			}
+			return section
+		}))
+	}
+
 	const addZoneToSection = ({ sectionId }) => {
 		const randomString = (Math.random() + 1).toString(36).substring(7)
 		setSections(sections => [
@@ -173,6 +191,7 @@ function MuiPanelProvider({
 				order: 'normal',
 				background: getRandomColor(),
 				parentId: sectionId,
+				isCollapsed: false,
 				type: 'list',
 				zones: [ ]
 		},])
@@ -329,6 +348,7 @@ function MuiPanelProvider({
 				addZoneToSection,
 				toggleSectionDirection,
 				chooseTypeForSection,
+				toggleCollapseSection,
 				addPanelToSection, removePanelFromSection,
 
 				handleUnSetAsEmbedded,

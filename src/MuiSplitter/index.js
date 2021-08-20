@@ -63,6 +63,19 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     },
   },
+  headerCollapsed: {
+    minHeight: "15px",
+    display: "flex",
+    flexDirection: "row",
+    padding: "0px 12px",
+    // backgroundColor: theme.palette.background.default,
+    alignItems: "center",
+    justifyContent: "space-between",
+
+    "&:hover": {
+      backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
+    },
+  },
   wrapper: {
     display: "flex",
     flexDirection: "column",
@@ -115,7 +128,7 @@ const MuiSplitter = withTheme(({
 }) => {
   const classes = useStyles(theme)
   // const [currentPanel = useState()
-  const { layout, settings, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, settings, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   // useEffect(() => {
   //   effect
@@ -125,11 +138,17 @@ const MuiSplitter = withTheme(({
   // }, [sections])
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : { }}>
-    <div className={classes.header}
+    <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
+      onDoubleClick={() => toggleCollapseSection({sectionId: section.id})}
       style={isRoot
         ? { border: `0px none` }
-        : { borderBottom: `1px solid ${section.background}` }}
+        : section.isCollapsed
+          ? { backgroundColor: section.background }
+          : { borderBottom: `1px solid ${section.background}` }
+      }
     >
+      {/* {section.isCollapsed ? <>isCollapsed</> : <>is not Collapsed</>} */}
+      {!section.isCollapsed && <>
       <div className={classes.title}>
         {section.type === 'list'
           ? <AppsIcon color="action" />
@@ -190,9 +209,8 @@ const MuiSplitter = withTheme(({
           ><WebIcon /></div>
 
         </Box>}
-
-
       </Box>
+      </>}
     </div>
     <div className={`
         ${classes.root}
@@ -209,8 +227,7 @@ const MuiSplitter = withTheme(({
       }
       {section.type !== 'list' && <>
         {section.panelId && <>
-          {/* {`panelId: ${section.panelId}`} */}
-          <div style={{ width: '100%' }} id={`${section.panelId}-section`} />
+          <div style={{ width: '100%', height: '100%' }} id={`${section.panelId}-section`} />
         </>}
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>

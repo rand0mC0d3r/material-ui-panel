@@ -235,7 +235,7 @@ const MuiMenuButton = withTheme(({
               })}
               {!lo.noPanel && extraIcons && extraIcons.map((extraIcon, i) => <>
 
-              {i <= 4 && cloneElement(
+              {i <= 2 && cloneElement(
                 extraIcon, {
                 style: {
                   color: lo.isVisible && !lo.noPanel && determineColor(),
