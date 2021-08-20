@@ -68,10 +68,18 @@ const MuiPanel = ({
   return layoutObject && layoutObject.isVisible && !!id ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
-      flex: !layoutObject.parentId  ? '1 1 auto' : '0 0 auto'
+      flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
+      display: 'flex',
+      flexDirection: 'column'
     }}>
       <MuiPanelHeader {...{ layoutObject }} />
-      {!layoutObject.isCollapsed && <div style={{ padding: noPadding ? null : '16px' }}>
+      {!layoutObject.isCollapsed && <div
+        style={{
+          padding: noPadding ? null : '16px',
+          alignSelf: 'stretch',
+          overflow: 'scroll',
+          flex: '1 1 auto'
+        }}>
           {children}
         </div>}
     </div>,

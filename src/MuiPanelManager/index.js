@@ -63,6 +63,7 @@ const styledPanel = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
+    height: '100%',
   },
   leftPanel: {
     gridArea: "leftPanel",

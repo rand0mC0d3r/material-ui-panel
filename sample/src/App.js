@@ -9,6 +9,7 @@ import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import ComplexPanel from './parts/ComplexPanel';
+import IframePanel from './parts/IframePanel';
 import NotificationPanel from './parts/NotificationPanel';
 import ToggleTheme from './parts/ToggleTheme';
 
@@ -46,7 +47,7 @@ function App() {
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
         <ComplexPanel />
-
+        <IframePanel/>
         {/* panel variations */}
         <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
