@@ -41,7 +41,7 @@ function MuiPanelProvider({
 			id: child1Seed,
 			background: getRandomColor(),
 			parentId: initialSeed,
-			direction: 'horizontal',
+			direction: 'vertical',
 			order: 'normal',
 			type: 'list',
 			isCollapsed: false,
@@ -51,7 +51,7 @@ function MuiPanelProvider({
 			id: child2Seed,
 			background: getRandomColor(),
 			parentId: initialSeed,
-			direction: 'horizontal',
+			direction: 'vertical',
 			type: 'content',
 			isCollapsed: false,
 			order: 'normal',
@@ -187,14 +187,26 @@ function MuiPanelProvider({
 			}),
 			{
 				id: randomString,
-				direction: 'horizontal',
+				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
 				parentId: sectionId,
 				isCollapsed: false,
-				type: 'list',
+				type: 'panel',
 				zones: [ ]
 		},])
+	}
+	const removeZoneFromSection = ({ sectionId }) => {
+		setSections(sections => [
+			...sections
+				.filter(section => section.id !== sectionId)
+				.map(section => {
+					if (section.zones.some(sz => sz === sectionId)) {
+						return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] }
+					}
+					return section
+			}),
+		])
 	}
 
 	const addPanelToSection = ({ sectionId, panelId }) => {
@@ -226,6 +238,8 @@ function MuiPanelProvider({
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}
+
+
 	const removePanelFromSection = ({ sectionId, panelId }) => {
 		console.log('here', panelId);
 		setSections(sections => sections.map(section => {
@@ -242,6 +256,27 @@ function MuiPanelProvider({
 			: layoutObject));
 	}
 
+	const showContent = ({ sectionId }) => {
+		let foundPanelId = null
+		setSections(sections => sections.map(section => {
+			if (section.type === 'content') {
+				return {
+					...section,
+					type: 'list',
+				}
+			}
+			if (section.id === sectionId) {
+				return {
+					...section,
+					type: 'content',
+				}
+			}
+			return section
+		}))
+		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
+			? { ...layoutObject, asSection: false, isVisible: false }
+			: layoutObject));
+	}
 	const chooseTypeForSection = ({ panelId, isList = false }) => {
 		let foundPanelId = null
 		setSections(sections => sections.map(section => {
@@ -345,8 +380,8 @@ function MuiPanelProvider({
 				settings, setSettings,
 				sections, setSections,
 
-
-				addZoneToSection,
+				showContent,
+				addZoneToSection, removeZoneFromSection,
 				toggleSectionDirection,
 				chooseTypeForSection,
 				toggleCollapseSection,
