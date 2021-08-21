@@ -6,6 +6,7 @@ import BlurOnIcon from '@material-ui/icons/BlurOn';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import FlipIcon from '@material-ui/icons/Flip';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
@@ -135,7 +136,7 @@ const MuiSplitter = withTheme(({
 }) => {
   const classes = useStyles(theme)
   // const [currentPanel = useState()
-  const { layout, settings, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, settings, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   // useEffect(() => {
   //   effect
@@ -148,10 +149,11 @@ const MuiSplitter = withTheme(({
 
     {section.type === 'content'
       ? <div className={classes.rootController}> <div
-                onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+                // onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
+                onClick={() => splitContent({ sectionId: section.id })}
                 className={classes.splitButton}
               >
-                <AppsIcon />
+                <FlipIcon />
               </div></div>
       : <>
       <Tooltip title="Double-Click to collapse" arrow>

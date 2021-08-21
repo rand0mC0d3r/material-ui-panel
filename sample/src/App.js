@@ -34,7 +34,7 @@ function App() {
 
       <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        {/* <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MuiDivider id="test33" tooltip="Default separator" />
         <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
@@ -71,7 +71,7 @@ function App() {
 
         <MuiPanel id="tralalaPanel2344" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
+        </MuiPanel> */}
 
         <MuiContent>
           <iframe

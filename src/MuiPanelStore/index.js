@@ -196,6 +196,7 @@ function MuiPanelProvider({
 				zones: [ ]
 		},])
 	}
+
 	const removeZoneFromSection = ({ sectionId }) => {
 		console.log("clicked remove section")
 		setSections(sections => [
@@ -279,6 +280,39 @@ function MuiPanelProvider({
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
 	}
+
+	const splitContent = ({ sectionId }) => {
+		const randomString = (Math.random() + 1).toString(36).substring(7)
+		const randomStringPanel = (Math.random() + 1).toString(36).substring(7)
+		setSections(sections => [
+			...sections.map(section => {
+				if (section.id === sectionId) {
+					return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' }
+				}
+				return section
+			}),
+			{
+				id: randomString,
+				direction: 'vertical',
+				order: 'normal',
+				background: getRandomColor(),
+				parentId: sectionId,
+				isCollapsed: false,
+				type: 'content',
+				zones: [ ]
+			},
+			{
+				id: randomStringPanel,
+				direction: 'vertical',
+				order: 'normal',
+				background: getRandomColor(),
+				parentId: sectionId,
+				isCollapsed: false,
+				type: 'panel',
+				zones: [ ]
+		},])
+	}
+
 	const chooseTypeForSection = ({ panelId, isList = false }) => {
 		let foundPanelId = null
 		setSections(sections => sections.map(section => {
@@ -384,7 +418,7 @@ function MuiPanelProvider({
 				sections, setSections,
 
 				showContent,
-				addZoneToSection, removeZoneFromSection,
+				addZoneToSection, removeZoneFromSection, splitContent,
 				toggleSectionDirection,
 				chooseTypeForSection,
 				toggleCollapseSection,
