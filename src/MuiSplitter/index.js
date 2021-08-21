@@ -93,7 +93,9 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     left: "50%",
     padding: "8px 16px",
-    backgroundColor: theme.palette.divider,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: '0px 0px 8px 8px',
+    border: `1px solid ${theme.palette.divider}`,
     zIndex: "1",
   },
   groupsBox: {
