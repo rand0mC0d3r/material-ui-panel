@@ -97,6 +97,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0px 0px 8px 8px',
     border: `1px solid ${theme.palette.divider}`,
     zIndex: "1",
+    top: "-30px",
+
+    "&:hover": {
+      top: "0px",
+    },
   },
   groupsBox: {
     gap: "8px"
@@ -149,14 +154,13 @@ const MuiSplitter = withTheme(({
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : {}}>
 
-    {section.type === 'content'
-      ? <div className={classes.rootController}> <div
-                // onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
-                onClick={() => splitContent({ sectionId: section.id })}
-                className={classes.splitButton}
-              >
-                <FlipIcon />
-              </div></div>
+    {section.type === 'content' ? <div className={classes.rootController}>
+        <Tooltip title="Divide the interface into panels" arrow placement="bottom">
+          <Button className={classes.smallButton} onClick={() => splitContent({ sectionId: section.id })}>
+            <FlipIcon />
+          </Button>
+        </Tooltip>
+      </div>
       : <>
       <Tooltip title="Double-Click to collapse" arrow>
         <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}

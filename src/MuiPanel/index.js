@@ -53,7 +53,9 @@ const MuiPanel = ({
     }
   }, [notifications.count, notifications.color, id]);
 
-  return layoutObject && layoutObject.isVisible && !!id ? createPortal(
+  return layoutObject && layoutObject.isVisible && (layoutObject.asSection && layoutObject.uniqueId
+      ? document.getElementById(`${layoutObject.uniqueId}-section`)
+      : document.getElementById(`${side}-panel`)) && !!id ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
