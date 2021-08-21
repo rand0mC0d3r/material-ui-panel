@@ -369,7 +369,6 @@ function MuiPanelProvider({
 				.map(layoutObject => (layoutObject.uniqueId === uniqueId || layoutObject.parentId === uniqueId)
 					? {
 						...layoutObject,
-						isVisible: true,
 						side: oppositeSide(layoutObject.side)
 					}
 					: { ...layoutObject, isVisible: false })

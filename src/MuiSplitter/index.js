@@ -98,9 +98,12 @@ const useStyles = makeStyles(theme => ({
     border: `1px solid ${theme.palette.divider}`,
     zIndex: "1",
     top: "-30px",
+    transition: 'top .05s ease-in-out',
 
     "&:hover": {
       top: "0px",
+      transition: 'top .15s ease-in-out'
+
     },
   },
   groupsBox: {

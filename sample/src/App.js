@@ -32,7 +32,7 @@ function App() {
     <ThemeProvider {...{ theme }}>
       {/* <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} /> */}
 
-      <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />

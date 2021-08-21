@@ -52,17 +52,22 @@ const MuiMenuOptions = withTheme(({
     }>
       <Box className={classes.box} display="flex" flexDirection="row" alignItems="center">
 
-        {!lo.asEmbedded && <Tooltip arrow title="Swap sides"><SwapHorizIcon onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} style={{ fontSize: 20 }} /></Tooltip>}
+      {!lo.asEmbedded &&
+        <Tooltip arrow title="Swap sides">
+          <SwapHorizIcon onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} style={{ fontSize: 20 }} />
+        </Tooltip>}
+
+      {!lo.noPanel && <>
 
         {!lo.asEmbedded
-        ? <>{lo.asGroup
-          ? <ViewStreamIcon onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
-          : <Tooltip arrow title="Promote as group">
+          ? <>{lo.asGroup
+            ? <ViewStreamIcon onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
+            : <Tooltip arrow title="Promote as group">
               <AmpStoriesIcon className={classes.groupIcon} onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
             </Tooltip>}
           </>
-        : <Tooltip arrow title="Detach as individual">
-            <AddToHomeScreenIcon onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })}/>
+          : <Tooltip arrow title="Detach as individual">
+            <AddToHomeScreenIcon onClick={() => handleUnSetAsEmbedded({ uniqueId: lo.uniqueId })} />
           </Tooltip>}
 
         {!lo.asEmbedded && !lo.asGroup && <Select fullWidth
@@ -75,6 +80,7 @@ const MuiMenuOptions = withTheme(({
               </Box>
             </MenuItem>)}
         </Select>}
+      </>}
 
       </Box>
   </Popover>
