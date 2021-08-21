@@ -1,3 +1,4 @@
+import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Popover, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
@@ -77,9 +78,22 @@ const styledPanel = theme => ({
 })
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  statusBar: {
+    padding: '2px 10px',
+    backgroundColor: theme.palette.primary.main,
+    color: `${theme.palette.background.default} !important`
+  },
+  wrapper: {
     height: "100%",
+    width: "100%",
+
     position: "absolute",
+
+  },
+  root: {
+    // height: "100%",
+    flex: '1 1 auto',
+    // position: "absolute",
     width: "100%",
     overflow: "hidden",
     display: "grid",
@@ -176,7 +190,7 @@ const MuiPanelManager = withTheme(({
   const classes = useStyles(theme)
   const [sides, setSides] = useState()
 
-  const { settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
+  const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
     if (layout.length > 0) {
@@ -185,7 +199,8 @@ const MuiPanelManager = withTheme(({
     }
   }, [layout]);
 
-  return <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+  return <Box display="flex" flexDirection="column" className={classes.wrapper}>
+    <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
     {availableSides
       .map(side => <div
@@ -228,7 +243,15 @@ const MuiPanelManager = withTheme(({
       {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} isRoot />)}
     </div>
     {children}
-  </div>
+    </div>
+
+    {status.length > 0 &&
+      <Box display="flex" className={classes.statusBar} justifyContent="space-between">
+        <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '28px' }} />
+        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '28px' }} />
+      </Box>
+    }
+  </Box>
 })
 
 export default MuiPanelManager;

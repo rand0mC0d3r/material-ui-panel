@@ -26,7 +26,6 @@ const MuiDebug = withTheme(({
   const { settings, layout } = useContext(DataProvider);
 
   return <>
-		debug {settings.debugMode ? 'debug' : 'deactivated'}
 		{settings.debugMode && <div className={classes.root}>
 			{layout.map(layoutObject => <Typography color="textPrimary">
 				<pre>{JSON.stringify({ ...layoutObject, icon: null, ref: null, children: null }, null, 4)}</pre>

@@ -2,6 +2,9 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import CameraIcon from '@material-ui/icons/Camera';
+import CastConnectedIcon from '@material-ui/icons/CastConnected';
+import CloudOffIcon from '@material-ui/icons/CloudOff';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
@@ -9,10 +12,12 @@ import MuiContent from './components/MuiContent';
 import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
+import MuiStatus from './components/MuiStatus';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import IframePanel from './parts/IframePanel';
 import NotificationPanel from './parts/NotificationPanel';
+import SaveStatus from './parts/SaveStatus';
 import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
@@ -72,6 +77,27 @@ function App() {
         <MuiPanel id="tralalaPanel2344" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
+
+
+        <MuiStatus id="statusA" side="left" tooltip="Sub Demo Panel TextMock" elements={[
+          { icon: <FormatIndentIncrease />, text: '2.34 GHz' },
+          { icon: <CameraIcon />, text: '1.8 Aperture' },
+          { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
+        ]}>
+          demo text
+        </MuiStatus>
+        <MuiStatus id="statusB" elements={[
+          { icon: <AmpStories />, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...' }
+        ]} tooltip="Sub Demo Panel TextMock">
+          demo text
+        </MuiStatus>
+        <MuiStatus id="statusC" elements={[
+          { icon: <CloudOffIcon />, text: 'Document not saved' }
+        ]} tooltip="Click to save document">
+          demo text
+        </MuiStatus>
+
+        <SaveStatus />
 
         <MuiContent>
           <iframe

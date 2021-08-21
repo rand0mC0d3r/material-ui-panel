@@ -21,6 +21,7 @@ function MuiPanelProvider({
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
 		const initialLayout = get(props, 'layout', []);
+		const initialStatus = get(props, 'status', []);
 		const initialSections = get(props, 'sections', [
 		{
 			id: getRandomId(),
@@ -40,9 +41,20 @@ function MuiPanelProvider({
 		});
 
 		const [layout, setLayout] = useState(initialLayout);
+		const [status, setStatus] = useState(initialStatus);
 		const [sections, setSections] = useState(initialSections);
 		const [settings, setSettings] = useState(initialSettings);
 
+		const handleStatusAnnouncement = ({ id, side, tooltip }) => {
+			setStatus(status => [
+				...status.filter(lo => lo.uniqueId !== id),
+				{
+					uniqueId: id,
+					side,
+					tooltip,
+					}
+			]);
+		}
 		const handlePanelAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
@@ -415,6 +427,7 @@ function MuiPanelProvider({
 				layout, setLayout,
 				settings, setSettings,
 				sections, setSections,
+				status,
 
 				showContent,
 				addZoneToSection, removeZoneFromSection, splitContent,
@@ -432,6 +445,7 @@ function MuiPanelProvider({
 				handleToggleCollapse,
 				handleSetAsEmbedded,
 				handlePanelAnnouncement, handleContentAnnouncement,
+				handleStatusAnnouncement
 			}}>
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
 				{props.children}
