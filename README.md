@@ -108,6 +108,8 @@ Self organizing manager wrapper that renders all children given
 ---
 ## Status Bar Component - ```<MupStatus>```
 
+todo: make callbacks clean right the GC
+
 **NOTE:** Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
 
 Add a section to either ```left``` or ```right``` side of the status bar.
@@ -116,16 +118,16 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
 
 ##### Available arguments
 
-| Mandatory | Argument | Default | Description |
-|-----|-----|----|--------|
-| ⭐ | id | _uuid_ | Give a unique identifier to the status element |
-| | side | ```left``` | Determines to which side the panel is bound |
-| | requestAttention | ```false``` | When truthy is swaps to the ```secondary``` color |
-| | tooltip | ```''``` | Provides a tooltip acting as a guide |
-| | focusOnClick | _null_ | Toggles visibility of panel known by ```material-ui-panel.<MuiPanelProvider>``` |
-| | onClick | ```() => {}``` | Issues callback when status section is clicked  |
-| | elements | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
-todo: make callbacks clean right the GC
+
+|  | Argument | Type | Default | Description |
+|--|-----|--|--|---|
+| ⭐ | id | ```string``` | ... |  Give a unique identifier to the status element |
+| ⭐	| elements | ```array```  | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
+|	| side | ```string``` | ```left``` | Determines to which side the panel is bound |
+| | requestAttention | ```bool``` | ```false``` | When truthy is swaps to the ```secondary``` color |
+| | tooltip | ```string``` | ```''``` | Provides a tooltip acting as a guide |
+| | focusOnClick | ```string``` | _null_ | Toggles visibility of panel known by ```material-ui-panel.<MuiPanelProvider>``` |
+| | onClick | ```func``` | ```() => {}``` | Issues callback when status section is clicked  |
 
 #### Code sample
 
@@ -133,14 +135,14 @@ todo: make callbacks clean right the GC
 ##### Simple example - static
 
 ```
-<MuiStatus
- id="sampleStatus"
- side="left"
- focusOnClick='anotherPanel'
- tooltip="Sample Status Tooltip"
- elements={[
-  { icon: <CameraIcon />, text: 'I got a new camera' },
-]}/>
+ <MuiStatus
+  id="sampleStatus"
+  side="left"
+  focusOnClick='anotherPanel'								// onClick will focus a panel known
+  tooltip="Sample Status Tooltip"
+  elements={[
+   { icon: <CameraIcon />, text: 'I got a new camera' },				// Add an icon + text
+ ]}/>
 ```
 
 ##### Dynamic example - updateable
@@ -148,20 +150,20 @@ todo: make callbacks clean right the GC
   ...
   const [open, setOpen] = useState(false);
   const [elements, setElements] = useState();
-  const [requestAttention, setRequestAttention] = useState(true);
+  const [requestAttention, setRequestAttention] = useState(true);			// Request attention state
 
   const someFunction = () => {
-   setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
-   setRequestAttention(true)
+   setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])		// Set an element
+   setRequestAttention(true)								// Update attention state
   }
 
   return <>
     <MuiStatus
-      id='statusSaveDoc'
-      requestAttention={requestAttention}
+      id='statusCustomElement'
+      requestAttention={requestAttention}						// Reference attention state
       onClick={() => setOpen(true)}
       tooltip="Save Document?"
-      elements={elements}
+      elements={elements}								// Initialize empty (won't show)
     />
 
 ```
