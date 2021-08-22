@@ -13,12 +13,12 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
+import MuiButton from './components/MuiButton';
 import MuiContent from './components/MuiContent';
-import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import MuiStatus from './components/MuiStatus';
-import ActDivider from './parts/ActDivider';
+import ActButton from './parts/ActButton';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import GalleryStatus from './parts/GalleryStatus';
@@ -42,16 +42,15 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
-
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        <MuiDivider id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
-        <MuiDivider id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
-        <MuiDivider id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
-        <MuiDivider id="defaultWIthTooltip" tooltip="Default separator" />
+        <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
-        <ActDivider />
+        <MuiButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
+        <MuiButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
+        <MuiButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
+
+        <ActButton />
         {/* <MuiDivider id="sample" showIcon={false} shortText="ACT" tooltip="Default separator with text" /> */}
 
         <NotificationPanel />

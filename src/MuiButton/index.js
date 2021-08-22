@@ -2,7 +2,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiPanelStore';
 
-const MuiDivider = ({
+const MuiButton = ({
   id,
   tooltip,
   shortText,
@@ -13,7 +13,7 @@ const MuiDivider = ({
   const { handlePanelAnnouncement } = useContext(DataProvider);
   useEffect(() => {
     if (!id) {
-      console.error(`MuiDivider: missing attr:id for divider with shortText+tooltip:`, shortText, tooltip);
+      console.error(`MuiButton: missing attr:id for divider with shortText+tooltip:`, shortText, tooltip);
     } else {
       handlePanelAnnouncement({ side: 'left', handleOnClick: onClick, id, shortText, showIcon, tooltip, icon: icon ? icon : <RemoveIcon />, noPanel: true })
     }
@@ -22,4 +22,4 @@ const MuiDivider = ({
   return null
 }
 
-export default MuiDivider;
+export default MuiButton;

@@ -1,15 +1,13 @@
 import { Box, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import TextureIcon from '@material-ui/icons/Texture';
+import { withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import MuiPanelHeader from '../MuiPanelHeader';
 import DataProvider from '../MuiPanelStore';
 
 const MuiStatus = withTheme(({
   id,
 
-  side = 'right',
+  side = 'left',
   focusOnClick,
   onClick = () => { },
 

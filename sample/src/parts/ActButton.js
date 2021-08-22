@@ -4,7 +4,7 @@ import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
 import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined';
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
 import { useEffect, useState } from 'react';
-import MuiDivider from '../components/MuiDivider';
+import MuiButton from '../components/MuiButton';
 
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ const SaveStatus = () => {
   }
 
   return <>
-    <MuiDivider onClick={() => setOpen(true)} icon={ <CachedIcon />} id="sample" shortText="LOAD" tooltip="Default separator with act clicker" />
+    <MuiButton onClick={() => setOpen(true)} icon={ <CachedIcon />} id="sample" shortText="LOAD" tooltip="Default separator with act clicker" />
     <Dialog
       open={open}
       onClose={handleClose}

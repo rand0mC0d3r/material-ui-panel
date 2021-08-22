@@ -2,6 +2,9 @@ import { Box, Switch, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import MuiStatus from '../components/MuiStatus';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +47,7 @@ const ToggleTheme = withTheme(({
   const toggles = [
     {
       title: 'Debug Mode',
+      status: debugMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -53,6 +57,7 @@ const ToggleTheme = withTheme(({
     },
     {
       title: 'Dark Mode',
+      status: darkMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -62,6 +67,7 @@ const ToggleTheme = withTheme(({
     },
     {
       title: 'Collapse Mode',
+      status: collapseMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -71,6 +77,7 @@ const ToggleTheme = withTheme(({
     },
     {
       title: 'Inverse Markers',
+      status: inverseMarkers,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -97,7 +104,18 @@ const ToggleTheme = withTheme(({
   ]
 
 
-  return <div className={classes.root}>
+  return <>
+    {toggles
+      .filter(toggle => toggle.status)
+      .map(toggle => <MuiStatus side="right" id={`toggle_${toggle.title}`} elements={[
+      {
+        icon: toggle.status
+          ? <CheckBoxOutlinedIcon />
+          : <CheckBoxOutlineBlankOutlinedIcon />,
+        text: toggle.title
+      }
+    ]} />)}
+    <div className={classes.root}>
     <div className={classes.container}>
       <Typography className={classes.header} color="textPrimary" variant="h6">Toggles</Typography>
       {toggles.map(toggle => <Box
@@ -110,7 +128,8 @@ const ToggleTheme = withTheme(({
         {toggle.component}
       </Box>)}
     </div>
-  </div>
+    </div>
+  </>
 })
 
 export default ToggleTheme;
