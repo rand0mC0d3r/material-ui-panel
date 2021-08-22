@@ -6,8 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import React, { cloneElement, useContext } from 'react';
-import MuiMenuOptions from '../MuiMenuOptions';
 import DataProvider from '../MuiPanelStore';
+import MupMenuOptions from '../MupMenuOptions';
 const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
@@ -80,7 +80,7 @@ const MuiPanel = withTheme(({
       display="flex"
       className={`${classes.header}`}
   >
-    <MuiMenuOptions underMenu={true} {...{lo: layoutObject, side, anchorEl, setAnchorEl}} />
+    <MupMenuOptions underMenu={true} {...{lo: layoutObject, side, anchorEl, setAnchorEl}} />
     <Box display="flex" alignItems="center" style={{ gap: theme.spacing(1) }}>
 
         <Tooltip arrow title="Click to toggle collapse">

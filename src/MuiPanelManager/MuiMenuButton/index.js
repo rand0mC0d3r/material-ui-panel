@@ -1,8 +1,8 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useContext, useEffect } from 'react';
-import MuiMenuOptions from '../../MuiMenuOptions';
 import DataProvider from '../../MuiPanelStore';
+import MupMenuOptions from '../../MupMenuOptions';
 import { oppositeSide } from '../../utils';
 
 const icons = theme => ({
@@ -259,7 +259,7 @@ const MuiMenuButton = withTheme(({
         </Button>
       </span>
     </Tooltip>
-    <MuiMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
+    <MupMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
     </>
 })
 export default MuiMenuButton;

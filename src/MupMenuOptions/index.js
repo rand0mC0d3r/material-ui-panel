@@ -17,7 +17,7 @@ const useStyles = makeStyles(( theme ) => ({
   }
 }));
 
-const MuiMenuOptions = withTheme(({
+const MupMenuOptions = withTheme(({
   lo,
   anchorEl,
   setAnchorEl,
@@ -84,4 +84,4 @@ const MuiMenuOptions = withTheme(({
   </Popover>
 })
 
-export default MuiMenuOptions;
+export default MupMenuOptions;
