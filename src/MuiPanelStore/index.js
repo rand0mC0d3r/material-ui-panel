@@ -74,13 +74,14 @@ function MuiPanelProvider({
 		// 	]);
 		// }
 
-		const handlePanelAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+		const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
 					uniqueId: id,
 					asContent: false,
 					asGroup: false,
+					handleOnClick,
 					notifications: {
 						count: 0,
 						summary: 0,

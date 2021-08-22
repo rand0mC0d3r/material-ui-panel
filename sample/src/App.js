@@ -1,12 +1,15 @@
 import { Box, Button, Switch, Typography } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
+import BathtubIcon from '@material-ui/icons/Bathtub';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
 import CloudOffIcon from '@material-ui/icons/CloudOff';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
@@ -15,6 +18,7 @@ import MuiDivider from './components/MuiDivider';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import MuiStatus from './components/MuiStatus';
+import ActDivider from './parts/ActDivider';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import GalleryStatus from './parts/GalleryStatus';
@@ -42,10 +46,13 @@ function App() {
 
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        {/* <MuiDivider id="logo" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
-        <MuiDivider id="test33" tooltip="Default separator" />
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
+        <MuiDivider id="testTub" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
+        <MuiDivider id="test33" tooltip="Default separator" /> */}
+
+        <ActDivider />
+        {/* <MuiDivider id="sample" showIcon={false} shortText="ACT" tooltip="Default separator with text" /> */}
 
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />

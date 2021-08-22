@@ -16,6 +16,12 @@ const icons = theme => ({
       opacity: "0.9",
     }
   },
+
+  activeButton: {
+    opacity: "0.9",
+    color: theme.palette.text.secondary,
+  },
+
   iconExtraButton: {
     fontSize: "10px",
     opacity: "0.55",
@@ -47,7 +53,7 @@ const icons = theme => ({
     position: 'absolute',
   },
   activeIconButton: {
-    color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
     opacity: "0.9",
   },
   rightIconButton: {
@@ -196,8 +202,7 @@ const MuiMenuButton = withTheme(({
           onContextMenu={(e) => handleClick(e)}
           disableRipple={lo.noPanel}
           disableElevation={lo.noPanel}
-          // disabled={lo.noPanel}
-          onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
+          onClick={() => !lo.noPanel ? handleSetVisible({ uniqueId: lo.uniqueId }) : lo.handleOnClick()}
           variant="text"
           fullWidth
           style={{
@@ -224,9 +229,9 @@ const MuiMenuButton = withTheme(({
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  style: {
-                    color: lo.isVisible && !lo.noPanel && determineColor(),
-                  },
+                  // style: {
+                    // color: !lo.noPanel ? determineColor() : 'unset',
+                  // },
                   className: `
                     ${!lo.noPanel && classes.iconButton}
                     ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconButton`]}
