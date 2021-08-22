@@ -4,7 +4,6 @@ import Popover from '@material-ui/core/Popover';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
-import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import React, { useContext, useEffect } from 'react';
