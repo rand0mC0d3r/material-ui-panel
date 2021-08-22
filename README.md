@@ -1,9 +1,11 @@
 # 📑 material-ui-panel
 
+**NOTE: not functional yet. WIP**
+
 A zero-maintenance/batteries-included panel manager inspired by VSCode style/aspect that adds via Material-UI elements a self populating/managed and state keeping organization of it's children panels.
 
 
-NOTE: comes bundled with ```prop-types```. No **Typescript** support. Help me by creating a *PR* 💌 .
+**NOTE:** comes bundled with ```prop-types```. No **Typescript** support. Help me by creating a *PR* 💌 .
 
 ---
 ## 🪄 Installation
