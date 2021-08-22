@@ -13,6 +13,7 @@ const MuiPanel = ({
   icon,
 
   placement = 'top',
+  alertsAcknowledged = () => { },
 
   notifications = {
     count: null,
@@ -39,7 +40,12 @@ const MuiPanel = ({
 
   useEffect(() => {
     const findObject = layout.find(lo => lo.uniqueId === id)
-    if (findObject) { setLayoutObject(findObject);}
+    if (findObject) {
+      setLayoutObject(findObject);
+      if (findObject.notifications?.count === 0) {
+        alertsAcknowledged()
+      }
+    }
   }, [layout]);
 
   useEffect(() => {

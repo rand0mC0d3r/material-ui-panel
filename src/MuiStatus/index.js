@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Popover, Tooltip, Typography } from '@material-ui/core';
+import { Box, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import TextureIcon from '@material-ui/icons/Texture';
 import React, { cloneElement, useContext, useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ const MuiStatus = withTheme(({
   tooltip = 'Tooltip',
   elements = [],
 }) => {
-  const { status, handleSetVisible, handleSetStatusElements, handleStatusAnnouncement } = useContext(DataProvider);
+  const { status, handleSetVisible, handleStatusAnnouncement } = useContext(DataProvider);
   const [statusObject, setStatusObject] = useState();
 
   useEffect(() => {
@@ -29,10 +29,6 @@ const MuiStatus = withTheme(({
       handleStatusAnnouncement({ id, elements, side, tooltip })
     }
   }, [id]);
-
-  useEffect(() => {
-    handleSetStatusElements({ uniqueId: id, elements })
-  }, [elements]);
 
   useEffect(() => {
     const findObject = status.find(lo => lo.uniqueId === id)
@@ -56,7 +52,7 @@ const MuiStatus = withTheme(({
           backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
         }}
       >
-        {statusObject.elements.map(element => <Box
+        {elements.map(element => <Box
           display="flex"
           alignItems="center"
           style={{ gap: '6px' }}

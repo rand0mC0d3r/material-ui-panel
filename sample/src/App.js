@@ -25,7 +25,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
@@ -38,19 +38,19 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      {/* <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} /> */}
+      <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        {/* <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MuiDivider id="test33" tooltip="Default separator" />
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
 
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
-        <ComplexPanel />
+        {/* <ComplexPanel />
         <IframePanel/>
         <AnotherIframePanel />
 
@@ -98,7 +98,7 @@ function App() {
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
         ]}>
           demo text
-        </MuiStatus>
+        </MuiStatus> */}
         {/* <MuiStatus id="statusB" elements={[
           { icon: <AllInboxIcon />, text: '3 Similar Documents (Last checked - 3 min ago)' }
         ]} tooltip="Sub Demo Panel TextMock">

@@ -7,13 +7,13 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		position: "absolute",
 		backgroundColor: theme.palette.background.default,
-		border: `1px solid ${theme.palette.divider}`,
+		border: `3px dotted ${theme.palette.divider}`,
 		borderRadius: "8px",
-		padding: '16px',
+		padding: '8px',
     left: '35%',
     right: '35%',
     top: '32px',
-		height: '875px',
+		height: '850px',
 		overflow: "auto"
 	},
 
