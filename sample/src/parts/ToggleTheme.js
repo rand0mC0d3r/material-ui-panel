@@ -48,6 +48,7 @@ const ToggleTheme = withTheme(({
     {
       title: 'Debug Mode',
       status: debugMode,
+      statusToggle: toggleDebugMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -58,6 +59,7 @@ const ToggleTheme = withTheme(({
     {
       title: 'Dark Mode',
       status: darkMode,
+      statusToggle: toggleDarkMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -68,6 +70,7 @@ const ToggleTheme = withTheme(({
     {
       title: 'Collapse Mode',
       status: collapseMode,
+      statusToggle: toggleCollapseMode,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -78,6 +81,7 @@ const ToggleTheme = withTheme(({
     {
       title: 'Inverse Markers',
       status: inverseMarkers,
+      statusToggle: toggleInverseMarkers,
       component: <Switch
         className={classes.switch}
           color="primary"
@@ -106,8 +110,13 @@ const ToggleTheme = withTheme(({
 
   return <>
     {toggles
-      .filter(toggle => toggle.status)
-      .map(toggle => <MuiStatus side="right" id={`toggle_${toggle.title}`} elements={[
+      .filter(toggle => toggle.status !== undefined)
+      .map(toggle => <MuiStatus
+        side="right"
+        id={`toggle_${toggle.title}`}
+        tooltip={`Toggle ${toggle.title}`}
+        onClick={ () => toggle.statusToggle() }
+        elements={[
       {
         icon: toggle.status
           ? <CheckBoxOutlinedIcon />
