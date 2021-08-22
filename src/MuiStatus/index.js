@@ -19,16 +19,20 @@ const MuiStatus = withTheme(({
   tooltip = 'Tooltip',
   elements = [],
 }) => {
-  const { status, handleStatusAnnouncement } = useContext(DataProvider);
+  const { status, handleSetVisible, handleSetStatusElements, handleStatusAnnouncement } = useContext(DataProvider);
   const [statusObject, setStatusObject] = useState();
 
   useEffect(() => {
     if (!id) {
       console.error(`MuiStatus: missing attr:id for status element`);
     } else {
-      handleStatusAnnouncement({ id, side, tooltip })
+      handleStatusAnnouncement({ id, elements, side, tooltip })
     }
   }, [id]);
+
+  useEffect(() => {
+    handleSetStatusElements({ uniqueId: id, elements })
+  }, [elements]);
 
   useEffect(() => {
     const findObject = status.find(lo => lo.uniqueId === id)
@@ -42,7 +46,7 @@ const MuiStatus = withTheme(({
       arrow
     >
       <Box
-        onClick={onClick}
+        onClick={() => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick()}
         display="flex"
         alignItems="center"
         style={{
@@ -52,7 +56,7 @@ const MuiStatus = withTheme(({
           backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
         }}
       >
-        {elements.map(element => <Box
+        {statusObject.elements.map(element => <Box
           display="flex"
           alignItems="center"
           style={{ gap: '6px' }}

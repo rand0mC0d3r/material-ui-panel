@@ -4,6 +4,7 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
 import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
+import MuiStatus from '../MuiStatus';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '56px';
@@ -248,9 +249,12 @@ const MuiPanelManager = withTheme(({
     {status.length > 0 &&
       <Box display="flex" className={classes.statusBar} justifyContent="space-between">
         <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '28px' }} />
-        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '28px' }} />
+        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '28px' }}>
+        </Box>
       </Box>
     }
+
+    {/* <MuiStatus id="notificationsPanel" elements={ [] } /> */}
   </Box>
 })
 

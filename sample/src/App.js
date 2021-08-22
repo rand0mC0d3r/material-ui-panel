@@ -1,3 +1,4 @@
+import { Box, Button, Switch, Typography } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -57,11 +58,21 @@ function App() {
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
         </MuiPanel>
 
-        <MuiPanel id="randomText" title="Sub Forms Panel Skeletons" icon={<FormatAlignLeft />}>
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" />
+        <MuiPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
+          <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>
+            <Skeleton variant="rect" animation="wave" height={10} />
+            <Skeleton variant="rect" animation="wave" height={30}  />
+            <Skeleton variant="rect" animation="wave" height={20}  />
+            <Skeleton variant="rect" animation="wave" height={10} width="80%" />
+            <iframe
+              title="Random Wiki article"
+              style={{ width: "100%", height: "600px", border: '1px dotted #CCC', borderRadius: '8px' }}
+              src={'https://en.wikipedia.org/wiki/Chromecast'}
+            />
+            <Skeleton variant="rect" animation="wave" height={55} />
+            <Skeleton variant="rect" animation="wave" height={70} />
+            <Skeleton variant="rect" animation="wave" height={10}  />
+          </Box>
         </MuiPanel>
 
         <MuiPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
@@ -81,7 +92,7 @@ function App() {
         </MuiPanel>
 
 
-        <MuiStatus id="statusA" side="left" tooltip="Sub Demo Panel TextMock" elements={[
+        <MuiStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
           { icon: <FormatIndentIncrease />, text: '2.34 GHz' },
           { icon: <CameraIcon />, text: '1.8 Aperture' },
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }

@@ -1,3 +1,4 @@
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
@@ -45,16 +46,34 @@ function MuiPanelProvider({
 		const [sections, setSections] = useState(initialSections);
 		const [settings, setSettings] = useState(initialSettings);
 
-		const handleStatusAnnouncement = ({ id, side, tooltip }) => {
+		const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {
 			setStatus(status => [
 				...status.filter(lo => lo.uniqueId !== id),
 				{
 					uniqueId: id,
 					side,
+					elements,
 					tooltip,
+					type: 'user'
 					}
 			]);
 		}
+
+		// const addOrUpdateNotificationStatus = () => {
+		// 	const notificationsObject = 	{
+		// 			uniqueId: 'notificationDong',
+		// 			side: 'right',
+		// 			elements: [{icon: <NotificationsActiveIcon />, text: 'Notifications'}],
+		// 			tooltip: 'Total notifications',
+		// 			type: 'system'
+		// 	}
+
+		// 	setStatus(status => [
+		// 		...status.filter(lo => lo.uniqueId !== 'notificationDong' && lo.type !== 'system'),
+		// 		notificationsObject
+		// 	]);
+		// }
+
 		const handlePanelAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
@@ -153,6 +172,13 @@ function MuiPanelProvider({
 			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 				? { ...layoutObject, asGroup: !layoutObject.asGroup }
 				: layoutObject));
+		}
+
+	const handleSetStatusElements = ({ uniqueId, elements }) => {
+		console.log(uniqueId, elements, status);
+			setStatus(status => status.map(statusObject => statusObject.uniqueId === uniqueId
+				? { ...statusObject, elements }
+				: statusObject));
 		}
 
 		const handleUnSetAsEmbedded = ({ uniqueId }) => {
@@ -389,7 +415,9 @@ function MuiPanelProvider({
 
 	const toggleSettingIsCollapsed = () => setSettings(settings => ({ ...settings, isCollapsed: !settings.isCollapsed }));
 
-		const handleSetVisible = ({ uniqueId }) => {
+	const handleSetVisible = ({ uniqueId }) => {
+		console.log("called", uniqueId)
+
 			const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
 			if (foundObject) {
 				setLayout(layout => ([...layout.map(lo => {
@@ -420,7 +448,8 @@ function MuiPanelProvider({
 
 		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
-		useEffect(() => { console.log('sections', sections) }, [sections]);
+		// useEffect(() => { console.log('sections', sections) }, [sections]);
+		useEffect(() => { console.log('status', status) }, [status]);
 
 		return <DataContext.Provider
 			value={{
@@ -428,6 +457,7 @@ function MuiPanelProvider({
 				settings, setSettings,
 				sections, setSections,
 				status,
+
 
 				showContent,
 				addZoneToSection, removeZoneFromSection, splitContent,
@@ -445,7 +475,9 @@ function MuiPanelProvider({
 				handleToggleCollapse,
 				handleSetAsEmbedded,
 				handlePanelAnnouncement, handleContentAnnouncement,
-				handleStatusAnnouncement
+
+				handleStatusAnnouncement,
+				handleSetStatusElements,
 			}}>
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
 				{props.children}
