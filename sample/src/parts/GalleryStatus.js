@@ -71,7 +71,7 @@ const GalleryStatus = () => {
         <Box style={{ position: 'absolute', gap: '16px' }} display="flex" flexDirection="row" alignItems="center">
 
 
-        {['sample1', 'sample2', 'sample3', 'sample4'].map(sample => <Card className={classes.root}>
+            {['sample1', 'sample2', 'sample3', 'sample4'].map(sample => <Card key={sample} className={classes.root}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={classes.avatar}>

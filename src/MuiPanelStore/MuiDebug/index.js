@@ -16,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
 		height: '850px',
 		overflow: "auto"
 	},
-
+	dumpText: {
+		color: theme.palette.text.primary,
+	}
 }));
 
 const MuiDebug = withTheme(({
@@ -27,9 +29,7 @@ const MuiDebug = withTheme(({
 
   return <>
 		{settings.debugMode && <div className={classes.root}>
-			{layout.map(layoutObject => <Typography color="textPrimary">
-				<pre>{JSON.stringify({ ...layoutObject, icon: null, ref: null, children: null }, null, 4)}</pre>
-			</Typography>)}
+			{layout.map(layoutObject => <pre className={classes.dumpText}>{JSON.stringify({ ...layoutObject, icon: null, ref: null, children: null }, null, 4)}</pre>)}
 		</div>}
     </>
 })

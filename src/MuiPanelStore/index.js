@@ -58,7 +58,8 @@ function MuiPanelProvider({
 			]);
 		}
 
-		const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+			console.log("registering", id, subTitle, shortText)
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
@@ -95,40 +96,16 @@ function MuiPanelProvider({
 					children,
 					}
 			]);
-		}
-		const handleContentAnnouncement = ({ id, ref, children, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+	}
+
+		const handleContentAnnouncement = ({ id, children }) => {
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
 					uniqueId: id,
 					asContent: true,
-					asGroup: false,
-					notifications: {
-						count: 0,
-						summary: 0,
-						color: "primary",
-						...notifications,
-					},
-					asEmbedded: false,
-					asSection: false,
 					side: initialSide,
-					isVisible: false,
-					parentId: null,
-					iconInHeader,
-					isCollapsed: false,
-					ref,
 					index: layout.length,
-					showBadge: false,
-					variant: 'standard',
-					index: layout.length,
-					subTitle,
-					title,
-					placement,
-					showIcon,
-					shortText,
-					tooltip,
-					noPanel,
-					icon,
 					children,
 					}
 			]);

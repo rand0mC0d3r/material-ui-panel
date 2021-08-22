@@ -8,15 +8,14 @@ import MupHeaderPanel from '../MupHeaderPanel';
 const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledged, notifications, disabled, iconInHeader, noPadding, children }) => {
   const { layout, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
   const [side, setSide] = useState('left');
+  const [isRegistered, setIsRegistered] = useState(false);
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {
-    if (!id) {
-      console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint);
-    } else {
-      handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
-    }
-  }, [id, title, hint, icon, placement, disabled, iconInHeader, side]);
+    (!id && !isRegistered)
+      ? console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint)
+      : handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
+  }, [id, isRegistered, ]);
 
   useEffect(() => {
     const findObject = layout.find(lo => lo.uniqueId === id)
