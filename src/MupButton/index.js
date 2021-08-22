@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 
-const MuiButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {
+const MupButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {
   const { handlePanelAnnouncement } = useContext(DataProvider);
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -22,12 +22,12 @@ const MuiButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {
   return null
 }
 
-MuiButton.defaultProps = {
+MupButton.defaultProps = {
   showIcon: true,
   onClick: () => { }
 }
 
-MuiButton.propTypes = {
+MupButton.propTypes = {
 	id: PropTypes.string,
 	tooltip: PropTypes.string,
 	shortText: PropTypes.string,
@@ -36,4 +36,4 @@ MuiButton.propTypes = {
 	onClick: PropTypes.func,
 }
 
-export default MuiButton;
+export default MupButton;

@@ -10,11 +10,11 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
-import MuiButton from './components/MuiButton';
-import MuiContent from './components/MuiContent';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import MuiStatus from './components/MuiStatus';
+import MupButton from './components/MupButton';
+import MupContent from './components/MupContent';
 import ActButton from './parts/ActButton';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
@@ -43,9 +43,9 @@ function App() {
 
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
-        <MuiButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
-        <MuiButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
-        <MuiButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
+        <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
+        <MupButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
+        <MupButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
 
         <ActButton />
 
@@ -95,13 +95,13 @@ function App() {
         <GalleryStatus />
         <SaveStatus />
 
-        <MuiContent>
+        <MupContent>
           <iframe
             title="Random Wiki article"
             style={{ width: "100%", height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
-        </MuiContent>
+        </MupContent>
 
       </MuiPanelProvider>
     </ThemeProvider>

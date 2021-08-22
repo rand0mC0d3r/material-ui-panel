@@ -1,14 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import CachedIcon from '@material-ui/icons/Cached';
 import { useState } from 'react';
-import MuiButton from '../components/MuiButton';
+import MupButton from '../components/MupButton';
 
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => { setOpen(false);};
 
   return <>
-    <MuiButton onClick={() => setOpen(true)} icon={ <CachedIcon />} id="sample" shortText="LOAD" tooltip="Default separator with act clicker" />
+    <MupButton onClick={() => setOpen(true)} icon={ <CachedIcon />} id="sample" shortText="LOAD" tooltip="Default separator with act clicker" />
     <Dialog
       open={open}
       onClose={handleClose}

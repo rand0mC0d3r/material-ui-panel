@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 
-const MuiContent = ({ children }) => {
+const MupContent = ({ children }) => {
   const { layout, handleContentAnnouncement } = useContext(DataProvider);
   const [layoutObject, setLayoutObject] = useState();
 
@@ -28,8 +28,8 @@ const MuiContent = ({ children }) => {
     : null
 }
 
-MuiContent.propTypes = {
+MupContent.propTypes = {
 	children: PropTypes.element,
 }
 
-export default MuiContent;
+export default MupContent;

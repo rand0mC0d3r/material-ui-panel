@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const MuiMenuCollapseButton = withTheme(({ theme, side }) => {
+const MupMenuCollapseButton = withTheme(({ theme, side }) => {
 	const { settings, toggleSettingIsCollapsed } = useContext(DataProvider);
 	const classes = useStyles(theme)
 
@@ -49,12 +49,12 @@ const MuiMenuCollapseButton = withTheme(({ theme, side }) => {
 	</Tooltip>
 })
 
-MuiMenuCollapseButton.defaultProps = {
+MupMenuCollapseButton.defaultProps = {
 	side: 'right',
 }
 
-MuiMenuCollapseButton.propTypes = {
+MupMenuCollapseButton.propTypes = {
 	side: PropTypes.oneOf(['left', 'right']),
 }
 
-export default MuiMenuCollapseButton;
+export default MupMenuCollapseButton;

@@ -1,9 +1,9 @@
 import { Box } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
 import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
+import MupMenuCollapseButton from '../MupMenuCollapseButton';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '56px';
@@ -230,7 +230,7 @@ const MuiPanelManager = withTheme(({
             ? classes.menuCollapsed
             : classes.menuOpen}`}
         >
-          {showCollapseButton && <MuiMenuCollapseButton {...{ side }} />}
+          {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
           {!settings.isCollapsed && <>
             {layout
               .filter(lo => lo.side === side)
