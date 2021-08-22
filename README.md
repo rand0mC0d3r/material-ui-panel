@@ -108,8 +108,6 @@ Self organizing manager wrapper that renders all children given
 ---
 ## Status Bar Component - ```<MupStatus>```
 
-todo: make callbacks clean right the GC
-
 **NOTE:** Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
 
 Add a section to either ```left``` or ```right``` side of the status bar.
@@ -135,7 +133,7 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
 ##### Simple example - static
 
 ```
- <MuiStatus
+ <MupStatus
   id="sampleStatus"
   side="left"
   focusOnClick='anotherPanel'								// onClick will focus a panel known
@@ -158,7 +156,7 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
   }
 
   return <>
-    <MuiStatus
+    <MupStatus
       id='statusCustomElement'
       requestAttention={requestAttention}						// Reference attention state
       onClick={() => setOpen(true)}
@@ -168,19 +166,35 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
 
 ```
 
+---
+## (Your) Content Component - ```<MupContent>```
 
+This is the observable wrapper of your entire application. This should be included as close to root as possible where content represents your view or a representation of your current application UI.
+
+##### Available arguments
+
+
+|  | Argument | Type | Default | Description |
+|--|-----|--|--|---|
+| ⭐ | children | ```ReactNode``` | ... |  Pass-thru for the current app UI |
+
+#### Code sample
+
+
+##### Simple example - static
+
+```
+ <MupContent>
+
+  ... your app
+  ... <ReactRouter>
+
+ </MupContent>
+```
+
+---
+---
+---
 ### TODO
 
-- Make panels support and document
-	MuiPanel - config: {
-		id,
-		title,
-		hint
-		tooltip,
-		icon,
-		notification: { count, color },
-		disabled,
-		ignoreHierarchy,
-		header: { noIcon },
-		content: { noPadding },
-	}
+- todo: make callbacks clean right the GC
