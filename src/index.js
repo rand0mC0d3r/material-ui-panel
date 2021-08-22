@@ -1,5 +1,4 @@
 export { default as MuiButton } from './MuiButton'
-export { default as MuiMenuCollapseButton } from './MuiMenuCollapseButton'
 export { default as MuiPanel } from './MuiPanel'
 export { default as MuiPanelHeader } from './MuiPanelHeader'
 export { default as MuiPanelSettings } from './MuiPanelSettings'
