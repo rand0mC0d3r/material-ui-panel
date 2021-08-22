@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import AllInboxIcon from '@material-ui/icons/AllInbox';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
 import CloudOffIcon from '@material-ui/icons/CloudOff';
@@ -15,6 +16,7 @@ import { MuiPanelProvider } from './components/MuiPanelStore';
 import MuiStatus from './components/MuiStatus';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
+import GalleryStatus from './parts/GalleryStatus';
 import IframePanel from './parts/IframePanel';
 import NotificationPanel from './parts/NotificationPanel';
 import SaveStatus from './parts/SaveStatus';
@@ -86,18 +88,16 @@ function App() {
         ]}>
           demo text
         </MuiStatus>
-        <MuiStatus id="statusB" elements={[
-          { icon: <AmpStories />, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...' }
+        {/* <MuiStatus id="statusB" elements={[
+          { icon: <AllInboxIcon />, text: '3 Similar Documents (Last checked - 3 min ago)' }
         ]} tooltip="Sub Demo Panel TextMock">
           demo text
-        </MuiStatus>
-        <MuiStatus id="statusC" elements={[
-          { icon: <CloudOffIcon />, text: 'Document not saved' }
-        ]} tooltip="Click to save document">
-          demo text
-        </MuiStatus>
+        </MuiStatus> */}
 
+
+        <GalleryStatus />
         <SaveStatus />
+
 
         <MuiContent>
           <iframe

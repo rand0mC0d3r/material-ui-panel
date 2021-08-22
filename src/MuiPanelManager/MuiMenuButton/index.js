@@ -194,6 +194,8 @@ const MuiMenuButton = withTheme(({
       <span>
         <Button
           onContextMenu={(e) => handleClick(e)}
+          disableRipple={lo.noPanel}
+          disableElevation={lo.noPanel}
           // disabled={lo.noPanel}
           onClick={() => !lo.noPanel && handleSetVisible({ uniqueId: lo.uniqueId })}
           variant="text"

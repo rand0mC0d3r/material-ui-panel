@@ -79,7 +79,7 @@ const styledPanel = theme => ({
 
 const useStyles = makeStyles(theme => ({
   statusBar: {
-    padding: '2px 10px',
+    padding: '0px 10px',
     backgroundColor: theme.palette.primary.main,
     color: `${theme.palette.background.default} !important`
   },
