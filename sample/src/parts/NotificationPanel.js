@@ -2,9 +2,8 @@ import { Box, Button, Switch, Typography } from '@material-ui/core';
 import AddIcCallIcon from '@material-ui/icons/AddIcCall';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import { useEffect, useState } from 'react';
-import MupPanel from '../components/MuiPanel';
+import MupPanel from '../components/MupPanel';
 import MupStatus from '../components/MupStatus';
-
 
 const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notifications Panel", icon = <AddIcCallIcon /> }) => {
   const [alerts, setAlerts] = useState(0);

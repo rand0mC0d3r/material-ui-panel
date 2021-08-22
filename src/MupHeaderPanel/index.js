@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MuiPanelHeader = withTheme(({
+const MupHeaderPanel = withTheme(({
   layoutObject: { uniqueId, side, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
   layoutObject,
   theme,
@@ -119,4 +119,4 @@ const MuiPanelHeader = withTheme(({
   </Box>
 })
 
-export default MuiPanelHeader;
+export default MupHeaderPanel;

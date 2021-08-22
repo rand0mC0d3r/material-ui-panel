@@ -2,8 +2,8 @@ import TextureIcon from '@material-ui/icons/Texture';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import MuiPanelHeader from '../MuiPanelHeader';
 import DataProvider from '../MuiPanelStore';
+import MupHeaderPanel from '../MupHeaderPanel';
 
 const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledged, notifications, disabled, iconInHeader, noPadding, children }) => {
   const { layout, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
@@ -46,7 +46,7 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
       height:  layoutObject.parentId ? 'unset' :"100%",
       flexDirection: 'column'
     }}>
-      <MuiPanelHeader {...{ layoutObject }} />
+      <MupHeaderPanel {...{ layoutObject }} />
       {!layoutObject.isCollapsed && <div
         style={{
           padding: noPadding ? null : '16px',
