@@ -46,10 +46,10 @@ function App() {
 
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        {/* <MuiDivider id="logo" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
+        <MuiDivider id="logo" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MuiDivider id="testTub" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
-        <MuiDivider id="test33" tooltip="Default separator" /> */}
+        <MuiDivider id="test33" tooltip="Default separator" />
 
         <ActDivider />
         {/* <MuiDivider id="sample" showIcon={false} shortText="ACT" tooltip="Default separator with text" /> */}

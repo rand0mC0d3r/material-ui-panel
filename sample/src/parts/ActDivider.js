@@ -1,4 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import CachedIcon from '@material-ui/icons/Cached';
 import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
 import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined';
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
@@ -32,7 +33,7 @@ const SaveStatus = () => {
   }
 
   return <>
-    <MuiDivider onClick={ () => setOpen(true) } id="sample" showIcon={false} shortText="ACT" tooltip="Default separator with act clicker" />
+    <MuiDivider onClick={() => setOpen(true)} icon={ <CachedIcon />} id="sample" shortText="LOAD" tooltip="Default separator with act clicker" />
     <Dialog
       open={open}
       onClose={handleClose}
