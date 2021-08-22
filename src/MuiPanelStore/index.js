@@ -1,4 +1,3 @@
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import get from 'lodash/get';
 import React, { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
@@ -58,21 +57,6 @@ function MuiPanelProvider({
 					}
 			]);
 		}
-
-		// const addOrUpdateNotificationStatus = () => {
-		// 	const notificationsObject = 	{
-		// 			uniqueId: 'notificationDong',
-		// 			side: 'right',
-		// 			elements: [{icon: <NotificationsActiveIcon />, text: 'Notifications'}],
-		// 			tooltip: 'Total notifications',
-		// 			type: 'system'
-		// 	}
-
-		// 	setStatus(status => [
-		// 		...status.filter(lo => lo.uniqueId !== 'notificationDong' && lo.type !== 'system'),
-		// 		notificationsObject
-		// 	]);
-		// }
 
 		const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [

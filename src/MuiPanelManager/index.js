@@ -4,7 +4,6 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
 import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
-import MuiStatus from '../MuiStatus';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '56px';
@@ -255,8 +254,6 @@ const MuiPanelManager = withTheme(({
         </Box>
       </Box>
     }
-
-    {/* <MuiStatus id="notificationsPanel" elements={ [] } /> */}
   </Box>
 })
 

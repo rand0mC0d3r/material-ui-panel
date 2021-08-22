@@ -1,14 +1,11 @@
-import { Box, Button, Switch, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { AmpStories, FormatAlignLeft, FormatIndentIncrease, GitHub } from '@material-ui/icons';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { AmpStories, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import AllInboxIcon from '@material-ui/icons/AllInbox';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
-import CloudOffIcon from '@material-ui/icons/CloudOff';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
@@ -51,7 +48,6 @@ function App() {
         <MuiButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
 
         <ActButton />
-        {/* <MuiDivider id="sample" showIcon={false} shortText="ACT" tooltip="Default separator with text" /> */}
 
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
@@ -82,19 +78,6 @@ function App() {
         <MuiPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
-{/*
-        <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
-          <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
-
-        <MuiPanel id="tralalaPanel33" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
-          <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
-
-        <MuiPanel id="tralalaPanel2344" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
-          <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel> */}
-
 
         <MuiStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
           { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },
@@ -102,21 +85,15 @@ function App() {
         ]}>
           demo text
         </MuiStatus>
+
         <MuiStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
         ]}>
           demo text
         </MuiStatus>
-        {/* <MuiStatus id="statusB" elements={[
-          { icon: <AllInboxIcon />, text: '3 Similar Documents (Last checked - 3 min ago)' }
-        ]} tooltip="Sub Demo Panel TextMock">
-          demo text
-        </MuiStatus> */}
-
 
         <GalleryStatus />
         <SaveStatus />
-
 
         <MuiContent>
           <iframe
@@ -125,6 +102,7 @@ function App() {
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MuiContent>
+
       </MuiPanelProvider>
     </ThemeProvider>
   </>;
