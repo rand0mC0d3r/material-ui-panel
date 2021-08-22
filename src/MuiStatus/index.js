@@ -14,7 +14,7 @@ const MuiStatus = withTheme(({
   theme,
 
   requestAttention = false,
-  tooltip = 'Tooltip',
+  tooltip = '',
   elements = [],
 }) => {
   const { status, handleSetVisible, handleStatusAnnouncement } = useContext(DataProvider);

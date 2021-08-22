@@ -105,6 +105,66 @@ Self organizing manager wrapper that renders all children given
 	</MuiPanel>
 </MuiPanelManager>
 ```
+---
+## Status Bar Component - ```<MupStatus>```
+
+**NOTE:** Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
+
+Add a section to either ```left``` or ```right``` side of the status bar.
+
+Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
+
+##### Available arguments
+
+| Mandatory | Argument | Default | Description |
+|-----|-----|----|--------|
+| ⭐ | id | _uuid_ | Give a unique identifier to the status element |
+| | side | ```left``` | Determines to which side the panel is bound |
+| | requestAttention | ```false``` | When truthy is swaps to the ```secondary``` color |
+| | tooltip | ```''``` | Provides a tooltip acting as a guide |
+| | focusOnClick | _null_ | Toggles visibility of panel known by ```material-ui-panel.<MuiPanelProvider>``` |
+| | onClick | ```() => {}``` | Issues callback when status section is clicked  |
+| | elements | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
+todo: make callbacks clean right the GC
+
+#### Code sample
+
+
+##### Simple example - static
+
+```
+<MuiStatus
+ id="sampleStatus"
+ side="left"
+ focusOnClick='anotherPanel'
+ tooltip="Sample Status Tooltip"
+ elements={[
+  { icon: <CameraIcon />, text: 'I got a new camera' },
+]}/>
+```
+
+##### Dynamic example - updateable
+```
+  ...
+  const [open, setOpen] = useState(false);
+  const [elements, setElements] = useState();
+  const [requestAttention, setRequestAttention] = useState(true);
+
+  const someFunction = () => {
+   setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
+   setRequestAttention(true)
+  }
+
+  return <>
+    <MuiStatus
+      id='statusSaveDoc'
+      requestAttention={requestAttention}
+      onClick={() => setOpen(true)}
+      tooltip="Save Document?"
+      elements={elements}
+    />
+
+```
 
 
 ### TODO
