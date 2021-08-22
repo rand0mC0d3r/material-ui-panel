@@ -1,42 +1,22 @@
 import TextureIcon from '@material-ui/icons/Texture';
+import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import MuiPanelHeader from '../MuiPanelHeader';
 import DataProvider from '../MuiPanelStore';
 
-const MuiPanel = ({
-  id,
-
-  title,
-  hint,
-  tooltip,
-  icon,
-
-  placement = 'top',
-  alertsAcknowledged = () => { },
-
-  notifications = {
-    count: null,
-    color: null,
-  },
-
-  disabled,
-  iconInHeader = true,
-  noPadding = false,
-  children,
-}) => {
+const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledged, notifications, disabled, iconInHeader, noPadding, children }) => {
   const { layout, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider);
   const [side, setSide] = useState('left');
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {
     if (!id) {
-      console.error(`MuiPanel: missing attr:id for panel with title+hint:`, title, hint);
+      console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint);
     } else {
-      // console.log(`MuiPanel: panel with id:${id} has been added`);
       handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
     }
-  }, [id]);
+  }, [id, title, hint, icon, placement, disabled, iconInHeader, side]);
 
   useEffect(() => {
     const findObject = layout.find(lo => lo.uniqueId === id)
@@ -46,15 +26,12 @@ const MuiPanel = ({
         alertsAcknowledged()
       }
     }
-  }, [layout]);
+  }, [layout, id, alertsAcknowledged]);
 
-  useEffect(() => {
-    if (layoutObject) { setSide(layoutObject.side); }
-  }, [layoutObject])
+  useEffect(() => { if (layoutObject) { setSide(layoutObject.side) } }, [layoutObject])
 
   useEffect(() => {
     if (notifications.count !== null && !!notifications.color) {
-      console.log('[MuiPanel]:useEffect = panel Notification', notifications);
       handlePanelAlerts({ id, count: Math.min(99, Math.max(notifications.count, 0)), color: notifications.color });
     }
   }, [notifications.count, notifications.color, id]);
@@ -81,11 +58,39 @@ const MuiPanel = ({
         </div>}
     </div>,
     (() => {
-      console.log(layoutObject)
       return layoutObject.asSection && layoutObject.uniqueId
       ? document.getElementById(`${layoutObject.uniqueId}-section`)
       : document.getElementById(`${side}-panel`)
     })())
     : null
 }
-export default MuiPanel;
+
+MupPanel.defaultProps = {
+  placement: 'top',
+  notifications: {
+    count: null,
+    color: null,
+  },
+  alertsAcknowledged: () => { },
+  noPadding: true,
+  iconInHeader: false,
+}
+
+MupPanel.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  hint: PropTypes.string,
+  tooltip: PropTypes.string,
+  icon: PropTypes.node,
+  placement: PropTypes.oneOf(['top', 'bottom']),
+  notifications: PropTypes.shape({
+    count: PropTypes.number,
+    color: PropTypes.string,
+  }),
+  disabled: PropTypes.bool,
+  iconInHeader: PropTypes.bool,
+  noPadding: PropTypes.bool,
+  children: PropTypes.element,
+}
+
+export default MupPanel;

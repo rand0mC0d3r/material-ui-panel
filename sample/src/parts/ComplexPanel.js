@@ -2,13 +2,13 @@ import { Box, TextField } from '@material-ui/core';
 import { ChromeReaderMode } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 import { useState } from 'react';
-import MuiPanel from '../components/MuiPanel';
+import MupPanel from '../components/MupPanel';
 
 const ComplexPanel = () => {
   const [value, setValue] = useState('Sample persisten text...');
   const handleChange = event => { setValue(event.target.value) };
 
-  return <MuiPanel
+  return <MupPanel
     id="complexityPanel"
     title="Complex panel long long text with many details"
     subTitle="Sample sub-title text"
@@ -40,7 +40,7 @@ const ComplexPanel = () => {
         />
       </div>
     </Box>
-  </MuiPanel>
+  </MupPanel>
 }
 
 export default ComplexPanel;

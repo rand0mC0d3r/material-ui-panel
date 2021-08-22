@@ -1,13 +1,23 @@
 import { Box, Tooltip, Typography } from '@material-ui/core';
-import { withTheme } from '@material-ui/core/styles';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    "&:hover": {
+      backgroundColor: `${theme.palette.augmentColor({main: theme.palette.divider}).dark} !important`
+    }
+  },
+}));
+
 const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAttention, tooltip, elements }) => {
   const { status, handleSetVisible, handleStatusAnnouncement } = useContext(DataProvider);
   const [statusObject, setStatusObject] = useState();
+  const classes = useStyles(theme)
 
   useEffect(() => {
     if (!id) {
@@ -26,6 +36,7 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
     <Box
       onClick={() => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick()}
       display="flex"
+      className={classes.root}
       alignItems="center"
       style={{
         gap: '16px',

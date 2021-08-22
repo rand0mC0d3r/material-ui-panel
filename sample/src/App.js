@@ -10,7 +10,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
 import './App.css';
-import MuiPanel from './components/MuiPanel';
+import MupPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
 import MupButton from './components/MupButton';
 import MupContent from './components/MupContent';
@@ -56,11 +56,11 @@ function App() {
         <IframePanel/>
         <AnotherIframePanel />
 
-        <MuiPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+        <MupPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
-        </MuiPanel>
+        </MupPanel>
 
-        <MuiPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
+        <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
           <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>
             <Skeleton variant="rect" animation="wave" height={10} />
             <Skeleton variant="rect" animation="wave" height={20}  />
@@ -73,11 +73,11 @@ function App() {
             <Skeleton variant="rect" animation="wave" height={25} />
             <Skeleton variant="rect" animation="wave" height={15}  />
           </Box>
-        </MuiPanel>
+        </MupPanel>
 
-        <MuiPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
+        <MupPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
+        </MupPanel>
 
         <MupStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
           { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },

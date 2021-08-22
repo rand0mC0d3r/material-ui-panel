@@ -1,7 +1,7 @@
 import FilledInput from '@material-ui/core/FilledInput';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { useState } from 'react';
-import MuiPanel from '../components/MuiPanel';
+import MupPanel from '../components/MupPanel';
 
 const IframePanel = () => {
   const [url, setUrl] = useState("https://material-ui.com/components/material-icons/");
@@ -10,7 +10,7 @@ const IframePanel = () => {
     setUrl(event.target.value);
   };
 
-  return <MuiPanel
+  return <MupPanel
     id="anotherIframePanel"
     title="AnotherIframePanel"
     subTitle="Sample sub-title text"
@@ -23,7 +23,7 @@ const IframePanel = () => {
       style={{ width: "100%", height: "95%", border: '0px none' }}
       src={url}
     />
-  </MuiPanel>
+  </MupPanel>
 }
 
 export default IframePanel;

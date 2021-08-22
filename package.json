@@ -1,7 +1,7 @@
 {
   "name": "material-ui-panel-manager",
   "version": "0.0.6",
-  "description": "<MuiPanel> component for material-ui",
+  "description": "<MupPanel> component for material-ui",
   "main": "lib/index.js",
   "private": false,
   "devDependencies": {

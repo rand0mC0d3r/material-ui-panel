@@ -2,7 +2,7 @@ import { Box, Button, Switch, Typography } from '@material-ui/core';
 import AddIcCallIcon from '@material-ui/icons/AddIcCall';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import { useEffect, useState } from 'react';
-import MuiPanel from '../components/MuiPanel';
+import MupPanel from '../components/MuiPanel';
 import MupStatus from '../components/MupStatus';
 
 
@@ -38,7 +38,7 @@ const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notific
       tooltip={`${alerts} ${title}`}
       requestAttention={color !== 'primary'}
       elements={[{ icon: <NotificationsActiveIcon />, text: `${alerts} ${title.substr(0,10)}...` }]} />}
-    <MuiPanel
+    <MupPanel
     id={identifier}
       title={title}
       alertsAcknowledged={handleDismissAlerts}
@@ -73,7 +73,7 @@ const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notific
         <Button color={color} variant="outlined" onClick={() => setAlerts(alerts => Math.max(0, alerts - 1)) }>Subtract</Button>
         <Button color={color} variant="outlined" onClick={() => setAlerts(0) }>To 0</Button>
       </Box>
-    </MuiPanel>
+    </MupPanel>
     </>
 }
 

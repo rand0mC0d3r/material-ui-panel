@@ -11,38 +11,11 @@ import MupMenuOptions from '../MupMenuOptions';
 const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
-  toolbox: {
-    gap: theme.spacing(2),
-    height: "32px"
-  },
-  groupIcon: {
-    transform: 'rotateZ(90deg)',
-    background: theme.palette.divider,
-    borderRadius: '4px',
-    padding: '4px 2px',
-    color: theme.palette.background.paper,
-  },
-  toolboxButton: {
-    padding: "0px",
-    width: '28px',
-    minWidth: '28px',
-    lineHeight: '0px'
-  },
   collapseButton: {
     padding: "0px",
     width: theme.spacing(2.5),
     minWidth: theme.spacing(2.5),
     lineHeight: '0px'
-  },
-  headerContainer: {
-    gap: theme.spacing(1),
-  },
-  panelTitle: {
-    maxWidth: '265px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    lineHeight: "initial"
   },
   header: {
     cursor: "default",
@@ -58,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MuiPanel = withTheme(({
+const MuiPanelHeader = withTheme(({
   layoutObject: { uniqueId, side, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
   layoutObject,
   theme,
@@ -67,61 +40,83 @@ const MuiPanel = withTheme(({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { handleToggleCollapse } = useContext(DataProvider);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
+  const handleClick = (event) => { setAnchorEl(event.currentTarget); };
 
   return <Box
     justifyContent="space-between"
     onDoubleClick={() => handleToggleCollapse({ uniqueId })}
     alignItems="center"
     onContextMenu={(e) => { e.preventDefault(); handleClick(e) }}
-      display="flex"
-      className={`${classes.header}`}
+    display="flex"
+    className={`${classes.header}`}
   >
     <MupMenuOptions underMenu={true} {...{lo: layoutObject, side, anchorEl, setAnchorEl}} />
     <Box display="flex" alignItems="center" style={{ gap: theme.spacing(1) }}>
-
-        <Tooltip arrow title="Click to toggle collapse">
-          <Button disableRipple disableElevation onClick={() => handleToggleCollapse({ uniqueId })} className={classes.collapseButton}>
-            {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
-          </Button>
-        </Tooltip>
-
-        {iconInHeader
-          && icon !== undefined
-          && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
-
-        <Box className={classes.headerContainer} flexWrap='wrap' display="flex" alignItems="center">
-          <Typography
-            color={asEmbedded ? 'textSecondary' : 'textPrimary'}
-            className={classes.panelTitle}
-            style={{ fontWeight: asEmbedded ? 'bold' : 'bold' }}
-            variant='subtitle2'
-          >{title}</Typography>
-          {subTitle && <Tooltip
-            title={subTitle}
-            placement='bottom'>
-            <InfoOutlinedIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
-          </Tooltip>}
-
-        </Box>
-      </Box>
-    <Box display="flex" alignItems="center" className={classes.toolbox}>
-      {asGroup && <Tooltip
-        arrow
-          title="As group..."
-          placement='bottom'>
-          <AmpStoriesIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
+      <Tooltip arrow title="Click to toggle collapse">
+        <Button disableRipple disableElevation onClick={() => handleToggleCollapse({ uniqueId })} className={classes.collapseButton}>
+          {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
+        </Button>
+      </Tooltip>
+      {iconInHeader && icon !== undefined && cloneElement(icon, { color: 'disabled', style: { fontSize: 20 } })}
+      <Box
+        style={{ gap: theme.spacing(1) }}
+        flexWrap='wrap'
+        display="flex"
+        alignItems="center"
+      >
+        <Typography
+          color={asEmbedded ? 'textSecondary' : 'textPrimary'}
+          style={{
+            maxWidth: '265px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            lineHeight: "initial",
+            fontWeight: 'bold'
+          }}
+          variant='subtitle2'
+        >
+          {title}
+        </Typography>
+        {subTitle && <Tooltip
+          title={subTitle}
+          placement='bottom'
+        >
+          <InfoOutlinedIcon style={{ fontSize: '16px', color: theme.palette.text.hint }} />
         </Tooltip>}
+      </Box>
+    </Box>
+    <Box
+      display="flex"
+      alignItems="center"
+      style={{
+        gap: theme.spacing(2),
+        height: "32px"
+      }}
+    >
+      {asGroup && <Tooltip arrow title="As group..." placement='bottom'>
+        <AmpStoriesIcon
+          style={{
+            fontSize: '16px',
+            color: theme.palette.background.default,
+            transform: 'rotateZ(90deg)',
+            background: theme.palette.divider,
+            borderRadius: '4px',
+            padding: '4px 2px',
+          }}
+        />
+      </Tooltip>}
       <Tooltip title="More options for the panel" arrow>
-        <Button className={classes.collapseButton} size="small" onClick={(e) => { e.preventDefault(); handleClick(e) }}>
+        <Button
+          className={classes.collapseButton}
+          size="small"
+          onClick={(e) => { e.preventDefault(); handleClick(e) }}
+        >
           <MoreHorizIcon color="action" />
         </Button>
       </Tooltip>
-      </Box>
     </Box>
+  </Box>
 })
 
-export default MuiPanel;
+export default MuiPanelHeader;

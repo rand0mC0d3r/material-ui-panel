@@ -1,8 +1,8 @@
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
-import MuiPanel from '../components/MuiPanel';
+import MupPanel from '../components/MupPanel';
 
 const IframePanel = () => {
-  return <MuiPanel
+  return <MupPanel
     id="iframePanel"
     title="IframePanel"
     subTitle="Sample sub-title text"
@@ -13,7 +13,7 @@ const IframePanel = () => {
       style={{ width: "100%", height: "100%", border: '0px none' }}
       src="https://en.wikipedia.org/wiki/Special:Random"
     />
-  </MuiPanel>
+  </MupPanel>
 }
 
 export default IframePanel;

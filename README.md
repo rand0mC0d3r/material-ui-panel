@@ -100,13 +100,13 @@ Self organizing manager wrapper that renders all children given
 
 	<NotificationPanel />
 
-	<MuiPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
+	<MupPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
 		{`Lorem ipsum dolor sit amet, ...`}
-	</MuiPanel>
+	</MupPanel>
 
-	<MuiPanel title="Sample Panel" icon={<FormatAlignLeftIcon />}>
+	<MupPanel title="Sample Panel" icon={<FormatAlignLeftIcon />}>
 		<Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-	</MuiPanel>
+	</MupPanel>
 </MuiPanelManager>
 ```
 ---
