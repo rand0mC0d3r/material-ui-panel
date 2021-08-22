@@ -124,7 +124,7 @@ const ToggleTheme = withTheme(({
         text: toggle.title
       }
     ]} />)}
-    <div className={classes.root}>
+    {/* <div className={classes.root}>
     <div className={classes.container}>
       <Typography className={classes.header} color="textPrimary" variant="h6">Toggles</Typography>
       {toggles.map(toggle => <Box
@@ -137,7 +137,7 @@ const ToggleTheme = withTheme(({
         {toggle.component}
       </Box>)}
     </div>
-    </div>
+    </div> */}
   </>
 })
 

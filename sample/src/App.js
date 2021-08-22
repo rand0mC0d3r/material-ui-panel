@@ -29,7 +29,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(true);
+  const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
@@ -67,7 +67,6 @@ function App() {
         <MuiPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
           <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>
             <Skeleton variant="rect" animation="wave" height={10} />
-            <Skeleton variant="rect" animation="wave" height={30}  />
             <Skeleton variant="rect" animation="wave" height={20}  />
             <Skeleton variant="rect" animation="wave" height={10} width="80%" />
             <iframe
@@ -75,16 +74,15 @@ function App() {
               style={{ width: "100%", height: "600px", border: '1px dotted #CCC', borderRadius: '8px' }}
               src={'https://en.wikipedia.org/wiki/Chromecast'}
             />
-            <Skeleton variant="rect" animation="wave" height={55} />
-            <Skeleton variant="rect" animation="wave" height={70} />
-            <Skeleton variant="rect" animation="wave" height={10}  />
+            <Skeleton variant="rect" animation="wave" height={25} />
+            <Skeleton variant="rect" animation="wave" height={15}  />
           </Box>
         </MuiPanel>
 
         <MuiPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
-
+{/*
         <MuiPanel id="tralalaPanel2" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
@@ -95,12 +93,16 @@ function App() {
 
         <MuiPanel id="tralalaPanel2344" title="Sub Demo Panel TextMock" hint="Icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MuiPanel>
+        </MuiPanel> */}
 
 
         <MuiStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
           { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },
           { icon: <CameraIcon />, text: '1.8 Aperture' },
+        ]}>
+          demo text
+        </MuiStatus>
+        <MuiStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
         ]}>
           demo text

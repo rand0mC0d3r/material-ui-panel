@@ -250,8 +250,8 @@ const MuiPanelManager = withTheme(({
 
     {status.length > 0 &&
       <Box display="flex" className={classes.statusBar} justifyContent="space-between">
-        <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '28px' }} />
-        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '28px' }}>
+        <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '24px' }} />
+        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '24px' }}>
         </Box>
       </Box>
     }

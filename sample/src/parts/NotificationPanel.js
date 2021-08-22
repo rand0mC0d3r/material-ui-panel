@@ -35,6 +35,7 @@ const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notific
   return <>
     {alerts > 0 && <MuiStatus
       id="notifStatus"
+      tooltip={`${alerts} ${title}`}
       requestAttention={color !== 'primary'}
       elements={[{ icon: <NotificationsActiveIcon />, text: `${alerts} ${title.substr(0,10)}...` }]} />}
     <MuiPanel

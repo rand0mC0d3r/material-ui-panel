@@ -38,21 +38,15 @@ const SaveStatus = () => {
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Save changes made to document?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{"Dummy Modal?"}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Your document is not yet synchronized with the server. Do you want to save your changes?
+          Lorem Ipsum
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Don't Save
-        </Button>
-        <Button onClick={handleAgree} color="primary">
-          Agree and Save
-        </Button>
-        <Button onClick={handleAgreeFail} color="secondary">
-          Agree and Fail
+          Close
         </Button>
       </DialogActions>
     </Dialog>
