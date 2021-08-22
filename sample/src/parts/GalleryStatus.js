@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 const GalleryStatus = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [elements, setElements] = useState([{ icon: <AllInboxIcon />, text: '4 Similar Documents (Last checked - 3 min ago)' }]);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -58,7 +57,7 @@ const GalleryStatus = () => {
       id='statusSimilarDocuments'
       onClick={handleClickOpen}
       tooltip="Save Document?"
-      elements={elements}
+      elements={[{ icon: <AllInboxIcon />, text: '4 Similar Documents (Last checked - 3 min ago)' }]}
     />
     <Dialog
       open={open}

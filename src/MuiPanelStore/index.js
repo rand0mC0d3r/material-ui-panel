@@ -408,10 +408,10 @@ function MuiPanelProvider({
 		useEffect(() => setSettings(settings => ({...settings, debugMode: debugMode })), [debugMode]);
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
-		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
-		useEffect(() => { console.log('settings', settings) }, [settings]);
+		useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+		// useEffect(() => { console.log('settings', settings) }, [settings]);
 		// useEffect(() => { console.log('sections', sections) }, [sections]);
-		useEffect(() => { console.log('status', status) }, [status]);
+		// useEffect(() => { console.log('status', status) }, [status]);
 
 		return <DataContext.Provider
 			value={{

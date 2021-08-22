@@ -11,6 +11,7 @@ const IframePanel = () => {
   };
 
   return <MupPanel
+    noPadding
     id="anotherIframePanel"
     title="AnotherIframePanel"
     subTitle="Sample sub-title text"

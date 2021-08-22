@@ -222,7 +222,7 @@ const MuiPanelManager = withTheme(({
 
     {availableSides
       .filter(side => layout.some(lo => lo.side === side))
-      .map((side, index) => <Fragment key={index}>
+      .map((side, index) => <Fragment key={`${side}_${index}`}>
         {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <div
           onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
           onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}

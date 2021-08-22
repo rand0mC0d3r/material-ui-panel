@@ -6,7 +6,7 @@ import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import React, { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
@@ -30,7 +30,7 @@ const MupMenuOptions = withTheme(({
   const classes = useStyles(theme)
   const onClose = () => { setAnchorEl(null); };
 
-  useEffect(() => { setAnchorEl(null); }, [lo])
+  // useEffect(() => { setAnchorEl(null); }, [lo])
 
   return <Popover className={classes.popover} marginThreshold={0} elevation={0} {...{open, anchorEl, onClose}}
     anchorOrigin={underMenu

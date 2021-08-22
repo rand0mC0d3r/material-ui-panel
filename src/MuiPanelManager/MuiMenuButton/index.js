@@ -185,9 +185,9 @@ const MuiMenuButton = withTheme(({
     return colorMap.find(({ id }) => id === settings.markerColor).value
   }
 
-  useEffect(() => {
-    setAnchorEl(null);
-  }, [lo])
+  // useEffect(() => {
+  //   setAnchorEl(null);
+  // }, [lo])
 
   return <>
     <Tooltip

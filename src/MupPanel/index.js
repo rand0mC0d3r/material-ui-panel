@@ -12,28 +12,35 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
   const [layoutObject, setLayoutObject] = useState();
 
   useEffect(() => {
-    (!id && !isRegistered)
-      ? console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint)
-      : handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
-  }, [id, isRegistered, ]);
+    if (!id) {
+      console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint)
+    } else {
+      if (!isRegistered) {
+        handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
+        setIsRegistered(true);
+      }
+    }
+  }, [id, isRegistered, side, handlePanelAnnouncement, iconInHeader, placement, disabled, title, hint, tooltip, icon]);
 
   useEffect(() => {
     const findObject = layout.find(lo => lo.uniqueId === id)
     if (findObject) {
       setLayoutObject(findObject);
-      if (findObject.notifications?.count === 0) {
-        alertsAcknowledged()
-      }
+      // if (findObject.notifications?.count === 0) {
+      //   alertsAcknowledged()
+      // }
     }
   }, [layout, id, alertsAcknowledged]);
 
   useEffect(() => { if (layoutObject) { setSide(layoutObject.side) } }, [layoutObject])
 
   useEffect(() => {
-    if (notifications.count !== null && !!notifications.color) {
-      handlePanelAlerts({ id, count: Math.min(99, Math.max(notifications.count, 0)), color: notifications.color });
+    if (id && layoutObject) {
+      if (notifications.count !== null && notifications.count !== layoutObject.notifications.count  && !!notifications.color) {
+        handlePanelAlerts({ id, count: Math.min(99, Math.max(notifications.count, 0)), color: notifications.color });
+      }
     }
-  }, [notifications.count, notifications.color, id]);
+  }, [notifications.count, notifications.color, id, layoutObject, handlePanelAlerts]);
 
   return layoutObject && layoutObject.isVisible && (layoutObject.asSection && layoutObject.uniqueId
       ? document.getElementById(`${layoutObject.uniqueId}-section`)
@@ -71,7 +78,7 @@ MupPanel.defaultProps = {
     color: null,
   },
   alertsAcknowledged: () => { },
-  noPadding: true,
+  noPadding: false,
   iconInHeader: false,
 }
 
@@ -89,7 +96,7 @@ MupPanel.propTypes = {
   disabled: PropTypes.bool,
   iconInHeader: PropTypes.bool,
   noPadding: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.node,
 }
 
 export default MupPanel;

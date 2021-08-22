@@ -1,7 +1,7 @@
 import { Box, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import React, { cloneElement, useCallback, useContext, useEffect, useState } from 'react';
+import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 
@@ -39,7 +39,7 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
       style={{
         gap: '16px',
         cursor: 'default',
-        padding: '1px 6px',
+        padding: '3px 6px',
         backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
       }}
     >

@@ -3,6 +3,7 @@ import MupPanel from '../components/MupPanel';
 
 const IframePanel = () => {
   return <MupPanel
+    noPadding
     id="iframePanel"
     title="IframePanel"
     subTitle="Sample sub-title text"
