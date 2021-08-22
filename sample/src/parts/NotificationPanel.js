@@ -3,7 +3,7 @@ import AddIcCallIcon from '@material-ui/icons/AddIcCall';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import { useEffect, useState } from 'react';
 import MuiPanel from '../components/MuiPanel';
-import MuiStatus from '../components/MuiStatus';
+import MupStatus from '../components/MupStatus';
 
 
 const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notifications Panel", icon = <AddIcCallIcon /> }) => {
@@ -33,7 +33,7 @@ const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notific
   }, [auto])
 
   return <>
-    {alerts > 0 && <MuiStatus
+    {alerts > 0 && <MupStatus
       id="notifStatus"
       tooltip={`${alerts} ${title}`}
       requestAttention={color !== 'primary'}

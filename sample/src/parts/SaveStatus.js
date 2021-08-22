@@ -3,7 +3,7 @@ import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
 import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined';
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
 import { useEffect, useState } from 'react';
-import MuiStatus from '../components/MuiStatus';
+import MupStatus from '../components/MupStatus';
 
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ const SaveStatus = () => {
   }
 
   return <>
-    <MuiStatus
+    <MupStatus
       id='statusSaveDoc'
       requestAttention={requestAttention}
       onClick={handleClickOpen}

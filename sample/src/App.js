@@ -12,9 +12,9 @@ import { useMemo, useState } from 'react';
 import './App.css';
 import MuiPanel from './components/MuiPanel';
 import { MuiPanelProvider } from './components/MuiPanelStore';
-import MuiStatus from './components/MuiStatus';
 import MupButton from './components/MupButton';
 import MupContent from './components/MupContent';
+import MupStatus from './components/MupStatus';
 import ActButton from './parts/ActButton';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
@@ -79,18 +79,18 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MuiPanel>
 
-        <MuiStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
+        <MupStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
           { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },
           { icon: <CameraIcon />, text: '1.8 Aperture' },
         ]}>
           demo text
-        </MuiStatus>
+        </MupStatus>
 
-        <MuiStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
+        <MupStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
         ]}>
           demo text
-        </MuiStatus>
+        </MupStatus>
 
         <GalleryStatus />
         <SaveStatus />

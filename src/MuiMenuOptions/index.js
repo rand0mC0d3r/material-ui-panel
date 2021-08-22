@@ -10,14 +10,6 @@ import React, { useContext, useEffect } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
-  box: { gap: `${theme.spacing(1)}px`, padding: '8px' },
-  groupsBox: {
-    gap: theme.spacing(14),
-    alignItems: 'center',
-  },
-  groupIcon: {
-    transform: 'rotateZ(90deg)',
-  },
   popover: {
     "& .MuiPopover-paper": {
       border: `1px solid ${theme.palette.divider}`
@@ -49,20 +41,28 @@ const MuiMenuOptions = withTheme(({
       ? { vertical: 'top', horizontal: 'center' }
       : { vertical: 'center', horizontal: side !== 'right' ? 'left' : 'right' }
     }>
-      <Box className={classes.box} display="flex" flexDirection="row" alignItems="center">
-
+    <Box
+      style={{
+        gap: theme.spacing(1),
+        padding: theme.spacing(1)
+      }}
+      display="flex"
+      flexDirection="row"
+      alignItems="center"
+    >
       {!lo.asEmbedded &&
         <Tooltip arrow title="Swap sides">
           <SwapHorizIcon onClick={() => handleSetSide({ uniqueId: lo.uniqueId })} style={{ fontSize: 20 }} />
         </Tooltip>}
-
       {!lo.noPanel && <>
-
         {!lo.asEmbedded
           ? <>{lo.asGroup
             ? <ViewStreamIcon onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
             : <Tooltip arrow title="Promote as group">
-              <AmpStoriesIcon className={classes.groupIcon} onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })} />
+              <AmpStoriesIcon
+                style={{ transform: 'rotateZ(90deg)' }}
+                onClick={() => handleSetAsGroup({ uniqueId: lo.uniqueId })}
+              />
             </Tooltip>}
           </>
           : <Tooltip arrow title="Detach as individual">
@@ -73,15 +73,14 @@ const MuiMenuOptions = withTheme(({
           disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
           onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
             {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
-              <Box display="flex" alignItems="center" className={classes.groupsBox}>
+              <Box display="flex" alignItems="center" style={{ gap: theme.spacing(14), alignItems: 'center' }}>
                 {lo.icon}
                 <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
               </Box>
             </MenuItem>)}
         </Select>}
       </>}
-
-      </Box>
+    </Box>
   </Popover>
 })
 

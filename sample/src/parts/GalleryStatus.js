@@ -16,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 import { useState } from 'react';
-import MuiStatus from '../components/MuiStatus';
+import MupStatus from '../components/MupStatus';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +54,7 @@ const GalleryStatus = () => {
   const handleClose = () => { setOpen(false); };
 
   return <>
-    <MuiStatus
+    <MupStatus
       id='statusSimilarDocuments'
       onClick={handleClickOpen}
       tooltip="Save Document?"

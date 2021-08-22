@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const MupButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {

@@ -4,7 +4,7 @@ import Select from '@material-ui/core/Select';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
-import MuiStatus from '../components/MuiStatus';
+import MupStatus from '../components/MupStatus';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -111,7 +111,7 @@ const ToggleTheme = withTheme(({
   return <>
     {toggles
       .filter(toggle => toggle.status !== undefined)
-      .map(toggle => <MuiStatus
+      .map(toggle => <MupStatus
         side="right"
         id={`toggle_${toggle.title}`}
         tooltip={`Toggle ${toggle.title}`}

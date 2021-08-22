@@ -1,24 +1,12 @@
 import { IconButton, Tooltip } from '@material-ui/core';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 import { ArrowLeft, ArrowRight } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import DataProvider from '../MuiPanelStore';
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		position: 'absolute',
-		zIndex: 1,
-		bottom: theme.spacing(4),
-		boxShadow: `inset -1px 0px 1px 0px ${theme.palette.divider}`,
-		border: `1px solid ${theme.palette.divider}`,
-		backgroundColor: theme.palette.background.paper,
-	},
-}))
-
 const MupMenuCollapseButton = withTheme(({ theme, side }) => {
 	const { settings, toggleSettingIsCollapsed } = useContext(DataProvider);
-	const classes = useStyles(theme)
 
 	return <Tooltip
 		placement={side}
@@ -28,9 +16,14 @@ const MupMenuCollapseButton = withTheme(({ theme, side }) => {
 			: 'Minimize Panel'}
 	>
 		<IconButton
-			className={classes.root}
 			size="small"
 			style={{
+				position: 'absolute',
+				zIndex: 1,
+				bottom: theme.spacing(4),
+				boxShadow: `inset -1px 0px 1px 0px ${theme.palette.divider}`,
+				border: `1px solid ${theme.palette.divider}`,
+				backgroundColor: theme.palette.background.paper,
 				right: side === 'left' && '-24px',
 				left: side === 'right' && '-24px',
 				borderRadius: side === 'right'
