@@ -42,15 +42,15 @@ function App() {
 
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        {/* <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
+        <MuiDivider id="logo" icon={<AddShoppingCartIcon color="primary" />} />
         <MuiDivider id="test" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MuiDivider id="test33" tooltip="Default separator" />
-        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" /> */}
+        <MuiDivider id="sample" showIcon={false} shortText="MENU" tooltip="Default separator with text" />
 
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
-        {/* <ComplexPanel />
+        <ComplexPanel />
         <IframePanel/>
         <AnotherIframePanel />
 
@@ -93,12 +93,12 @@ function App() {
 
 
         <MuiStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
-          { icon: <FormatIndentIncrease />, text: '2.34 GHz' },
+          { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },
           { icon: <CameraIcon />, text: '1.8 Aperture' },
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
         ]}>
           demo text
-        </MuiStatus> */}
+        </MuiStatus>
         {/* <MuiStatus id="statusB" elements={[
           { icon: <AllInboxIcon />, text: '3 Similar Documents (Last checked - 3 min ago)' }
         ]} tooltip="Sub Demo Panel TextMock">

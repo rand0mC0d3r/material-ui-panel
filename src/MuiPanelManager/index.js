@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Popover, Tooltip } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import MuiMenuCollapseButton from '../MuiMenuCollapseButton';
@@ -81,7 +81,9 @@ const styledPanel = theme => ({
 const useStyles = makeStyles(theme => ({
   statusBar: {
     padding: '0px 10px',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.type === 'light'
+      ? theme.palette.divider
+      : theme.palette.background.paper,
     color: `${theme.palette.background.default} !important`
   },
   wrapper: {

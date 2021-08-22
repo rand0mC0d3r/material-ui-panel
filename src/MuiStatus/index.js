@@ -48,7 +48,7 @@ const MuiStatus = withTheme(({
         style={{
           gap: '16px',
           cursor: 'default',
-          padding: '1px 4px',
+          padding: '1px 6px',
           backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
         }}
       >
@@ -57,8 +57,8 @@ const MuiStatus = withTheme(({
           alignItems="center"
           style={{ gap: '6px' }}
         >
-          {element.icon && cloneElement( element.icon, { style: { fontSize: 20}})}
-          <Typography variant="subtitle2">{element.text}</Typography>
+          {element.icon && cloneElement( element.icon, { color: "action", style: { fontSize: 20}})}
+          <Typography variant="subtitle2" color="textPrimary">{element.text}</Typography>
         </Box>)}
       </Box>
     </Tooltip>,
