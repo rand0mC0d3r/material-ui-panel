@@ -5,10 +5,10 @@ import React, { cloneElement, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     "&:hover": {
+      cursor: "pointer !important",
       backgroundColor: `${theme.palette.augmentColor({main: theme.palette.divider}).dark} !important`
     }
   },
@@ -20,11 +20,9 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
   const classes = useStyles(theme)
 
   useEffect(() => {
-    if (!id) {
-      console.error(`MupStatus: missing attr:id for status element`);
-    } else {
-      handleStatusAnnouncement({ id, elements, side, tooltip })
-    }
+    !id
+      ? console.error(`MupStatus: missing attr:id for status element`)
+      : handleStatusAnnouncement({ id, elements, side, tooltip })
   }, [id]);
 
   useEffect(() => {
@@ -34,9 +32,9 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
 
   return statusObject && !!id ? createPortal(<Tooltip title={tooltip} placement="top" arrow>
     <Box
-      onClick={() => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick()}
+      onClick={() => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick && onClick()}
       display="flex"
-      className={classes.root}
+      className={(focusOnClick || onClick) ? classes.root : ''}
       alignItems="center"
       style={{
         gap: '16px',
@@ -61,7 +59,7 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
 
 MupStatus.defaultProps = {
   side: 'left',
-  onClick: () => { },
+  onClick: null,
   requestAttention: false,
   tooltip: '',
   elements: [],

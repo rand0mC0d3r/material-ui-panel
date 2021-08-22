@@ -1,4 +1,4 @@
-import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
 import { useState } from 'react';
 import MupPanel from '../components/MupPanel';
@@ -16,7 +16,7 @@ const IframePanel = () => {
     subTitle="Sample sub-title text"
     icon={<LanguageOutlinedIcon />}
   >
-    <FilledInput fullWidth id="component-filled" value={url} onChange={handleChange} />
+    <OutlinedInput fullWidth value={url} onChange={handleChange} />
 
     <iframe
       title="Random Wiki article"

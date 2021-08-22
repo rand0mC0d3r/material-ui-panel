@@ -79,12 +79,10 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel>
 
-        <MupStatus id="statusA" side="left" focusOnClick='chromecastPanel' tooltip="Sub Demo Panel TextMock" elements={[
-          { icon: <FormatIndentIncrease color="action" />, text: '2.34 GHz' },
+        <MupStatus id="statusA" side="left" tooltip="Sub Demo Panel TextMock" elements={[
+          { icon: <FormatIndentIncrease color="action" />, text: '2.44 GHz' },
           { icon: <CameraIcon />, text: '1.8 Aperture' },
-        ]}>
-          demo text
-        </MupStatus>
+        ]} />
 
         <MupStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
           { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
@@ -98,7 +96,7 @@ function App() {
         <MupContent>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", height: "100%", filter: 'blur(20px)', border: '0px none' }}
+            style={{ width: "100%", height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MupContent>
