@@ -98,7 +98,7 @@ function App() {
         <MupContent>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", height: "100%", border: '0px none' }}
+            style={{ width: "100%", height: "100%", filter: 'blur(20px)', border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MupContent>

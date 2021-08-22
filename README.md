@@ -2,6 +2,8 @@
 
 **NOTE: not functional yet. WIP**
 
+![/media/preview.png](/media/preview.png)
+
 A zero-maintenance/batteries-included panel manager inspired by VSCode style/aspect that adds via Material-UI elements a self populating/managed and state keeping organization of it's children panels.
 
 
