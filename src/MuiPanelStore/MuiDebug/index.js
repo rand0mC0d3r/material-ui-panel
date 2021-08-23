@@ -25,10 +25,12 @@ const MuiDebug = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { settings, layout } = useContext(DataProvider);
+  const { settings, sections, layout } = useContext(DataProvider);
 
   return <>
 		{settings.debugMode && <div className={classes.root}>
+			{sections.map(sectionObject => <pre className={classes.dumpText}>{JSON.stringify({ ...sectionObject }, null, 4)}</pre>)}
+			<hr />
 			{layout.map(layoutObject => <pre className={classes.dumpText}>{JSON.stringify({ ...layoutObject, icon: null, ref: null, children: null }, null, 4)}</pre>)}
 		</div>}
     </>

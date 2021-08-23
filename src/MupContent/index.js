@@ -4,8 +4,9 @@ import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 
 const MupContent = ({ children }) => {
-  const { layout, handleContentAnnouncement } = useContext(DataProvider);
+  const { layout, sections,  handleContentAnnouncement } = useContext(DataProvider);
   const [layoutObject, setLayoutObject] = useState();
+  const [elemRef, setElemRef] = useState();
 
   useEffect(() => { handleContentAnnouncement({ children }) }, []);
 
@@ -14,7 +15,11 @@ const MupContent = ({ children }) => {
     if (findObject) { setLayoutObject(findObject);}
   }, [layout]);
 
-  return (layoutObject && document.getElementById(`content-section`)) ? createPortal(
+  useEffect(() => {
+    setElemRef(document.getElementById(`content-section`))
+  }, [sections]);
+
+  return (layoutObject && elemRef) ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
@@ -24,7 +29,7 @@ const MupContent = ({ children }) => {
     }}>
       {children}
     </div>,
-    document.getElementById(`content-section`))
+    elemRef)
     : null
 }
 

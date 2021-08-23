@@ -25,8 +25,8 @@ import SaveStatus from './parts/SaveStatus';
 import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const [debugMode, setDebugMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
@@ -96,8 +96,8 @@ function App() {
         <MupContent>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", height: "100%", border: '0px none' }}
-            src="https://material-ui.com/components/text-fields/"
+            style={{ width: "100%", filter: "sepia(1) brightness(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}
+            src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MupContent>
 

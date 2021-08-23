@@ -209,13 +209,21 @@ const MuiSplitter = withTheme(({
                 <AppsIcon />
               </div>}
 
-              {section.type === 'panel' && <Box display="flex" alignItems="center" className={classes.buttonsWrapper}>
-                <Select
+                {section.type === 'panel' && <Box
+                  key={`selectOptions_${section.id}`}
+                  display="flex"
+                  alignItems="center"
+                  className={classes.buttonsWrapper}
+                >
+                  <Select
                   fullWidth
                   value={section.panelId || ''}
                   onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
                 >
-                  {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem value={lo.uniqueId}>
+                  {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem
+                    key={`${section.id}_${lo.uniqueId}`}
+                    value={lo.uniqueId}
+                  >
                     <Box display="flex" alignItems="center" className={classes.groupsBox}>
                       {lo.icon && cloneElement(lo.icon, { color: "disabled" })}
                       <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
@@ -290,7 +298,7 @@ const MuiSplitter = withTheme(({
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div
           className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}
-          style={section.direction === 'horizontal' ? { width: '0px'} : {}}>
+          style={section.direction === 'horizontal' ? { width: '0px' } : {}}>
           <MuiSplitter section={sections.find(s => s.id === zone)} />
       </div>)}
     </div>

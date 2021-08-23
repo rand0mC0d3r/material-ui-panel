@@ -59,7 +59,6 @@ function MuiPanelProvider({
 		}
 
 	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
-			console.log("registering", id, subTitle, shortText)
 			setLayout(layout => [
 				...layout.filter(lo => lo.uniqueId !== id),
 				{
@@ -408,7 +407,7 @@ function MuiPanelProvider({
 		useEffect(() => setSettings(settings => ({...settings, debugMode: debugMode })), [debugMode]);
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
-		useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
+		// useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
 		// useEffect(() => { console.log('settings', settings) }, [settings]);
 		// useEffect(() => { console.log('sections', sections) }, [sections]);
 		// useEffect(() => { console.log('status', status) }, [status]);
