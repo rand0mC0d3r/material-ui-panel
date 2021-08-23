@@ -17,7 +17,7 @@ function MuiPanelProvider({
 	inverseMarkers,
 	debugMode,
 	showCollapseButton,
-	...props } = props) {
+	...props }) {
 		// const cachedLayout = localStorage.getItem(localStorageKey);
 
 		const initialLayout = get(props, 'layout', []);
@@ -83,7 +83,6 @@ function MuiPanelProvider({
 					index: layout.length,
 					showBadge: false,
 					variant: 'standard',
-					index: layout.length,
 					subTitle,
 					title,
 					placement,

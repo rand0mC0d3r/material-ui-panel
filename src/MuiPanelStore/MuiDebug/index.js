@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import React, { useContext } from 'react';
 import DataProvider from '../../MuiPanelStore';

@@ -145,7 +145,7 @@ const MuiSplitter = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)
-  const { layout, settings, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : {}}>
 

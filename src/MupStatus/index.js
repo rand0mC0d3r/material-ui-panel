@@ -23,12 +23,12 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
     !id
       ? console.error(`MupStatus: missing attr:id for status element`)
       : handleStatusAnnouncement({ id, elements, side, tooltip })
-  }, [id]);
+  }, [id, elements, side, tooltip]);
 
   useEffect(() => {
     const findObject = status.find(lo => lo.uniqueId === id)
     if (findObject) { setStatusObject(findObject);}
-  }, [status]);
+  }, [status, id]);
 
   return statusObject && !!id ? createPortal(<Tooltip title={tooltip} placement="top" arrow>
     <Box

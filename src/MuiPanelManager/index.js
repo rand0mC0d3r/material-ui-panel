@@ -204,56 +204,57 @@ const MuiPanelManager = withTheme(({
   return <Box display="flex" flexDirection="column" className={classes.wrapper}>
     <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
-    {availableSides
-      .map(side => <div
+      {availableSides.map(side => <div
+        key={`${side}_panels`}
         onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
         className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
       >
         <div
-        id={`${side}-panel`} key={`${side}-panel`}
-        className={`${classes.panelContainer}`}
-        style={{
-          gridArea: `${side}Panel`,
-          overflow: 'hidden auto',
-          width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'),
-          height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
-        }}
-        /></div>)}
+          id={`${side}-panel`} key={`${side}-panel`}
+          className={`${classes.panelContainer}`}
+          style={{
+            gridArea: `${side}Panel`,
+            overflow: 'hidden auto',
+            width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'),
+            height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
+          }}
+        />
+      </div>)}
 
-    {availableSides
-      .filter(side => layout.some(lo => lo.side === side))
-      .map((side, index) => <Fragment key={`${side}_${index}`}>
-        {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <div
-          onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
-          onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-          className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
-            ? classes.menuCollapsed
-            : classes.menuOpen}`}
-        >
-          {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
-          {!settings.isCollapsed && <>
-            {layout
-              .filter(lo => lo.side === side)
-              .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
-              .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
-            <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
-          </>}
-        </div>}
-    </Fragment>)}
+      {availableSides
+        .filter(side => layout.some(lo => lo.side === side))
+        .map(side => <div key={`${side}_menus`}>
+          {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <div
+            id={`${side}-menu`}
+            onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
+            onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
+            className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
+              ? classes.menuCollapsed
+              : classes.menuOpen}`}
+          >
+            {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
+            {!settings.isCollapsed && <>
+              {layout
+                .filter(lo => lo.side === side)
+                .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
+                .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
+              <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
+            </>}
+          </div>}
+      </div>)}
 
-    <div style={{ gridArea: "main", display: 'flex' }}>
-      {sections.filter(section => !section.parentId).map(section => <MuiSplitter section={section} isRoot />)}
+      <div style={{ gridArea: "main", display: 'flex' }}>
+          {sections.filter(section => !section.parentId).map(section => <MuiSplitter key={ section.id} section={section} isRoot />)}
+      </div>
+
+      {children}
+
     </div>
-    {children}
-    </div>
 
-    {status.length > 0 &&
-      <Box display="flex" className={classes.statusBar} justifyContent="space-between">
-        <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '24px' }} />
-        <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '24px' }}>
-        </Box>
-      </Box>
-    }
+    {status.length > 0 && <Box display="flex" className={classes.statusBar} justifyContent="space-between">
+      <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '24px' }} />
+      <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '24px' }} />
+    </Box>}
   </Box>
 })
 

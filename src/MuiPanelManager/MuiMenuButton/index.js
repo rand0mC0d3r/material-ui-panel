@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
-import React, { cloneElement, useContext, useEffect } from 'react';
+import React, { cloneElement, useContext } from 'react';
 import DataProvider from '../../MuiPanelStore';
 import MupMenuOptions from '../../MupMenuOptions';
 import { oppositeSide } from '../../utils';
