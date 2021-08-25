@@ -21,7 +21,8 @@
     "@material-ui/icons": ">=4.11.2",
     "lodash.get": ">=4.4.2",
     "prop-types": "^15.7.2",
-    "react": ">=17.0.2"
+    "react": ">=17.0.2",
+    "sample": "file:sample"
   },
   "files": [
     "LICENSE",
@@ -41,7 +42,7 @@
   "scripts": {
     "dev": "ncu -u && concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
     "start": "serve -s build",
-    "prebuild": "cd sample && yarn install",
+    "prebuild": "npm install ./sample",
     "build": "rm -rf ./build && cd sample && npx react-scripts build && mv ./build ../",
     "build.lib": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
