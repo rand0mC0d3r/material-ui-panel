@@ -42,12 +42,12 @@
   "scripts": {
     "dev": "ncu -u && concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
     "start": "serve -s build",
-    "prebuild": "npm install ./sample && npm run copy.component",
+    "prebuild": "npm install ./sample && npm run clone.component",
     "build": "rm -rf ./build && cd sample && npx react-scripts build && mv ./build ../",
     "build.lib": "babel ./src -d lib --copy-files",
     "test": "react-scripts test",
-    "precopy.component": "mkdir -p ./sample/src/components/ && cp -r src/* sample/src/components/",
-    "copy.component": "copy-and-watch src/* sample/src/components/ --watch",
+    "clone.component": "mkdir -p ./sample/src/components/ && cp -r src/* sample/src/components/",
+    "copy.component": "npm run clone.component && copy-and-watch src/* sample/src/components/ --watch",
     "tag": "git pull && npm version patch && git push && git push --tags",
     "ship": "npm run build && npm publish"
   },
