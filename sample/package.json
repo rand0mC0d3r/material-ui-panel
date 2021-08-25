@@ -2,9 +2,6 @@
   "name": "sample",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "npm-check-updates": "^11.8.3"
-  },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -18,7 +15,6 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "postinstall": "ncu -u",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"
