@@ -12,22 +12,22 @@ const fontSize = 20;
 
 const useStyles = makeStyles(theme => ({
   collapseButton: {
-    padding: "0px",
+    padding: '0px',
     width: theme.spacing(2.5),
     minWidth: theme.spacing(2.5),
     lineHeight: '0px'
   },
   header: {
-    cursor: "default",
-    position: "relative",
+    cursor: 'default',
+    position: 'relative',
     gap: theme.spacing(1),
     height: '30px',
-    userSelect: "none",
+    userSelect: 'none',
     padding: theme.spacing(1.5, 2, 1.5, 1),
-    borderTop: `1px solid transparent`,
+    borderTop: '1px solid transparent',
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundColor: theme.palette.background.paper,
-    backdropFilter: "blur(4px)",
+    backdropFilter: 'blur(4px)',
   },
 }));
 
@@ -36,7 +36,7 @@ const MupHeaderPanel = withTheme(({
   layoutObject,
   theme,
 }) => {
-  const classes = useStyles(theme)
+  const classes = useStyles(theme);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { handleToggleCollapse } = useContext(DataProvider);
 
@@ -46,7 +46,7 @@ const MupHeaderPanel = withTheme(({
     justifyContent="space-between"
     onDoubleClick={() => handleToggleCollapse({ uniqueId })}
     alignItems="center"
-    onContextMenu={(e) => { e.preventDefault(); handleClick(e) }}
+    onContextMenu={(e) => { e.preventDefault(); handleClick(e); }}
     display="flex"
     className={`${classes.header}`}
   >
@@ -71,7 +71,7 @@ const MupHeaderPanel = withTheme(({
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            lineHeight: "initial",
+            lineHeight: 'initial',
             fontWeight: 'bold'
           }}
           variant='subtitle2'
@@ -91,7 +91,7 @@ const MupHeaderPanel = withTheme(({
       alignItems="center"
       style={{
         gap: theme.spacing(2),
-        height: "32px"
+        height: '32px'
       }}
     >
       {asGroup && <Tooltip arrow title="As group..." placement='bottom'>
@@ -110,13 +110,13 @@ const MupHeaderPanel = withTheme(({
         <Button
           className={classes.collapseButton}
           size="small"
-          onClick={(e) => { e.preventDefault(); handleClick(e) }}
+          onClick={(e) => { e.preventDefault(); handleClick(e); }}
         >
           <MoreHorizIcon color="action" />
         </Button>
       </Tooltip>
     </Box>
-  </Box>
-})
+  </Box>;
+});
 
 export default MupHeaderPanel;

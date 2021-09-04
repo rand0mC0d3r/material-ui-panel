@@ -56,7 +56,7 @@ const GalleryStatus = () => {
     <MupStatus
       id='statusSimilarDocuments'
       onClick={handleClickOpen}
-      tooltip="Save Document?"
+      tooltip="View Documents ..."
       elements={[{ icon: <AllInboxIcon />, text: '4 Similar Documents (Last checked - 3 min ago)' }]}
     />
     <Dialog
@@ -64,7 +64,7 @@ const GalleryStatus = () => {
       maxWidth='md'
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Save changes made to document?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{"Gallery proposal?"}</DialogTitle>
       <DialogContent>
         <div style={{ width: '1000px', height: '500px',  overflow: 'auto', position: 'relative'}}>
         <Box style={{ position: 'absolute', gap: '16px' }} display="flex" flexDirection="row" alignItems="center">
@@ -82,7 +82,7 @@ const GalleryStatus = () => {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={`Shrimp and Chorizo Paella ${sample}`}
+            title={sample}
             subheader="September 14, 2016"
           />
           <CardMedia

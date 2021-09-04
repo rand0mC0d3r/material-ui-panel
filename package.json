@@ -5,16 +5,16 @@
   "main": "lib/index.js",
   "private": false,
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.14.5",
-    "@babel/types": "^7.15.0",
+    "@babel/types": "^7.15.4",
     "babel-eslint": "^10.0.3",
     "babel-loader": "8.2.2",
     "concurrently": "^6.2.1",
     "copy-and-watch": "^0.1.5",
-    "npm-check-updates": "^11.8.3"
+    "npm-check-updates": "^11.8.5"
   },
   "dependencies": {
     "@material-ui/core": ">=4.12.3",
@@ -22,7 +22,7 @@
     "lodash.get": ">=4.4.2",
     "prop-types": "^15.7.2",
     "react": ">=17.0.2",
-    "serve": "11.3.0"
+    "serve": "12.0.0"
   },
   "files": [
     "LICENSE",

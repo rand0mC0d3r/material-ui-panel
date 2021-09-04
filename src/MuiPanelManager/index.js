@@ -1,6 +1,6 @@
-import { Box } from '@material-ui/core';
+import { Box, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
 import MupMenuCollapseButton from '../MupMenuCollapseButton';
@@ -10,24 +10,24 @@ const menuWidth = '56px';
 
 const styledGrid = {
   bothGrid: {
-    "grid-template-columns": `auto auto 1fr auto auto`,
-    "grid-template-areas":`
+    'grid-template-columns': 'auto auto 1fr auto auto',
+    'grid-template-areas':`
       "leftMenu leftPanel main rightPanel rightMenu"
     `
   },
   leftGrid: {
-    "grid-template-columns": `auto auto 1fr`,
-    "grid-template-areas":`
+    'grid-template-columns': 'auto auto 1fr',
+    'grid-template-areas':`
       "leftMenu leftPanel main"
     `
   },
   rightGrid: {
-    "grid-template-columns": `1fr auto auto`,
-    "grid-template-areas":`
+    'grid-template-columns': '1fr auto auto',
+    'grid-template-areas':`
       "main rightPanel rightMenu"
     `
   },
-}
+};
 
 const styledMenus = theme => ({
   bothMenus: {
@@ -35,127 +35,135 @@ const styledMenus = theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     position: 'relative',
+    height: '100%',
   },
   leftMenu: {
-    "grid-area": "leftMenu",
+    'grid-area': 'leftMenu',
     width: menuWidth,
     borderRight: `1px solid ${theme.palette.divider}`
   },
   rightMenu: {
     width: menuWidth,
-    "grid-area": "rightMenu",
+    'grid-area': 'rightMenu',
     borderLeft: `1px solid ${theme.palette.divider}`
   },
-})
+});
 
 const styledPanel = theme => ({
   panelContainerWrapper: {
     position: 'relative',
     overflow: 'hidden auto',
-    display: 'none',
+    display: 'contents',
 
-    "&::-webkit-scrollbar" : {
+    '&::-webkit-scrollbar' : {
       display: 'none'
     }
   },
   panelContainer: {
-    position: "relative",
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     // height: '100%',
   },
   leftPanel: {
-    gridArea: "leftPanel",
+    gridArea: 'leftPanel',
     borderRight: `1px solid ${theme.palette.divider}`,
     display: 'unset'
   },
   rightPanel: {
     borderLeft: `1px solid ${theme.palette.divider}`,
     display: 'unset',
-    gridArea: "rightPanel",
+    gridArea: 'rightPanel',
   },
-})
+});
 
 const useStyles = makeStyles(theme => ({
   statusBar: {
     padding: '0px 10px',
+    gap: '32px',
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.divider
       : theme.palette.background.paper,
     color: `${theme.palette.background.default} !important`
   },
+  statusBarHalf: {
+    // flex: '1 1 50%',
+    overflow: 'hidden',
+    // width: '0px',
+    gap: '8px'
+  },
   wrapper: {
-    height: "100%",
-    width: "100%",
+    height: '100%',
+    width: '100%',
 
-    position: "absolute",
+    position: 'absolute',
 
   },
   root: {
     // height: "100%",
     flex: '1 1 auto',
     // position: "absolute",
-    width: "100%",
-    overflow: "hidden",
-    display: "grid",
-    "grid-template-rows": "1fr",
-    "gap": "0px 0px",
-    "grid-auto-flow": "row",
+    width: '100%',
+    overflow: 'hidden',
+    display: 'grid',
+    'grid-template-rows': '1fr',
+    'gap': '0px 0px',
+    'grid-auto-flow': 'row',
     backgroundColor: theme.palette.background.default,
   },
   ...styledGrid,
   ...styledMenus(theme),
   ...styledPanel(theme),
 
-  main: { "grid-area": "main" },
+  main: { 'grid-area': 'main' },
   iconButton: {
-    fontSize: "26px",
+    fontSize: '26px',
 
-    "&:hover": {
+    '&:hover': {
       color: theme.palette.primary.main,
     }
   },
   buttonMenu: {
-    border: "0px none",
+    border: '0px none',
     padding: theme.spacing(2, 0),
-    borderRadius: "0px",
-    minWidth: "initial",
+    borderRadius: '0px',
+    minWidth: 'initial',
   },
   rightGroupButtonMenu: {
     position: 'relative',
-    "&::after": {
+    '&::after': {
       content: '"G"',
-      backgroundColor: "#CCC",
+      backgroundColor: '#CCC',
       position: 'absolute',
-      fontSize: "8px",
-      lineHeight: "12px",
+      fontSize: '8px',
+      lineHeight: '12px',
       width: '12px',
       top: 2,
-      borderRadius: "4px",
+      borderRadius: '4px',
       left: 2,
     },
   },
   leftGroupButtonMenu: {
     position: 'relative',
-    "&::after": {
+    '&::after': {
       content: '"G"',
-      backgroundColor: "#CCC",
+      backgroundColor: '#CCC',
       position: 'absolute',
-      fontSize: "8px",
-      lineHeight: "12px",
+      fontSize: '8px',
+      lineHeight: '12px',
       width: '10px',
       top: 2,
-      borderRadius: "4px",
+      borderRadius: '4px',
       right: 2,
     },
   },
 
   rightButtonMenu: {
-    borderRight: "4px solid transparent",
+    borderRight: '4px solid transparent',
   },
   leftButtonMenu: {
-    borderLeft: "4px solid transparent"
+    borderLeft: '4px solid transparent'
   },
   rightActiveButtonMenu: {
     borderRight: `4px solid ${theme.palette.primary.main}`,
@@ -169,11 +177,11 @@ const useStyles = makeStyles(theme => ({
   menuCollapsed: {
     width: '8px',
     backgroundColor: theme.palette.background.paper,
-    transition: "background-color 350ms ease-out 100ms",
+    transition: 'background-color 350ms ease-out 100ms',
     opacity: 1,
     cursor: 'pointer',
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.background.default,
     }
   },
@@ -189,15 +197,15 @@ const MuiPanelManager = withTheme(({
   allowRightClick = false,
   showCollapseButton = true,
 }) => {
-  const classes = useStyles(theme)
-  const [sides, setSides] = useState()
+  const classes = useStyles(theme);
+  const [sides, setSides] = useState();
 
   const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
 
   useEffect(() => {
     if (layout.length > 0) {
-      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
-      setSides(foundSides.length === 1 ? foundSides[0] : 'both')
+      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc; }, []))];
+      setSides(foundSides.length === 1 ? foundSides[0] : 'both');
     }
   }, [layout]);
 
@@ -206,8 +214,15 @@ const MuiPanelManager = withTheme(({
 
       {availableSides.map(side => <div
         key={`${side}_panels`}
-        onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-        className={`${classes.panelContainerWrapper} ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) && (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
+        onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
+        className={`
+        ${classes.panelContainerWrapper}
+        ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) &&
+          (side === 'left'
+            ? classes.leftPanel
+            : classes.rightPanel
+          )
+        }`}
       >
         <div
           id={`${side}-panel`} key={`${side}-panel`}
@@ -224,26 +239,29 @@ const MuiPanelManager = withTheme(({
       {availableSides
         .filter(side => layout.some(lo => lo.side === side))
         .map(side => <div key={`${side}_menus`}>
-          {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <div
-            id={`${side}-menu`}
-            onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
-            onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
-            className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
-              ? classes.menuCollapsed
-              : classes.menuOpen}`}
-          >
-            {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
-            {!settings.isCollapsed && <>
-              {layout
-                .filter(lo => lo.side === side)
-                .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
-                .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
-              <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
-            </>}
-          </div>}
+          {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <Tooltip title={settings.isCollapsed ? 'DoubleClick to expand' : ''} arrow placement="left">
+            <div
+              id={`${side}-menu`}
+              onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed(); } }
+              onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
+              className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
+                ? classes.menuCollapsed
+                : classes.menuOpen}`}
+            >
+              {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
+              {!settings.isCollapsed && <>
+                {layout
+                  .filter(lo => lo.side === side)
+                  .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
+                  .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
+                <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed(); }} />
+              </>}
+            </div>
+            </Tooltip>
+          }
       </div>)}
 
-      <div style={{ gridArea: "main", display: 'flex' }}>
+      <div style={{ gridArea: 'main', display: 'flex' }}>
           {sections.filter(section => !section.parentId).map(section => <MuiSplitter key={ section.id} section={section} isRoot />)}
       </div>
 
@@ -251,11 +269,20 @@ const MuiPanelManager = withTheme(({
 
     </div>
 
-    {status.length > 0 && <Box display="flex" className={classes.statusBar} justifyContent="space-between">
-      <Box display="flex" id="material-ui-panel-statusBar-left" style={{ gap: '24px' }} />
-      <Box display="flex" id="material-ui-panel-statusBar-right" style={{ gap: '24px' }} />
+    {status.length > 0 && <Box
+      onContextMenu={(e) => { e.preventDefault(); }}
+      display="flex"
+      className={classes.statusBar}
+      justifyContent="space-between"
+    >
+      {availableSides.map(side => <Box
+        key={`${side}_status`}
+        display="flex"
+        justifyContent={side === 'left' ? 'flex-start' : 'flex-end'}
+        className={classes.statusBarHalf}
+        id={`material-ui-panel-statusBar-${side}`} />)}
     </Box>}
-  </Box>
-})
+  </Box>;
+});
 
 export default MuiPanelManager;

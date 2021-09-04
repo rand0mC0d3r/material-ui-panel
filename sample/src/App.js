@@ -18,6 +18,7 @@ import MupStatus from './components/MupStatus';
 import ActButton from './parts/ActButton';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
+import ConfigStatus from './parts/ConfigStatus';
 import GalleryStatus from './parts/GalleryStatus';
 import IframePanel from './parts/IframePanel';
 import NotificationPanel from './parts/NotificationPanel';
@@ -79,21 +80,24 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel>
 
-        <MupStatus id="statusA" side="left" tooltip="Sub Demo Panel TextMock" elements={[
-          { icon: <FormatIndentIncrease color="action" />, text: '2.44 GHz' },
-          { icon: <CameraIcon />, text: '1.8 Aperture' },
+        <MupStatus id="statusA" side="left" tooltip="Section Tooltip" elements={[
+          { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
+          { icon: <CameraIcon />, text: 'Ipsum' },
         ]} />
 
         <MupStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
-          { icon: <CastConnectedIcon />, text: 'Open Streaming Settings' }
+          { icon: <CastConnectedIcon />, text: 'Open Sample Panel' }
         ]}>
           demo text
         </MupStatus>
 
         <GalleryStatus />
+        <ConfigStatus />
         <SaveStatus />
 
         <MupContent>
+          <a class="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="Material UI Panels" title="Fork me on GitHub">Fork me on GitHub</a>
+
           <iframe
             title="Random Wiki article"
             style={{ width: "100%", filter: "sepia(1) brightness(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}

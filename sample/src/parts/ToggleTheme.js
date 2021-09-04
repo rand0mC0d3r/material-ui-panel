@@ -108,38 +108,20 @@ const ToggleTheme = withTheme(({
   ]
 
 
-  return <>
-    {toggles
-      .filter(toggle => toggle.status !== undefined)
-      .map(toggle => <MupStatus
-        side="right"
-        key={`toggle_${toggle.title}`}
-        id={`toggle_${toggle.title}`}
-        tooltip={`Toggle ${toggle.title}`}
-        onClick={ () => toggle.statusToggle() }
-        elements={[
-      {
-        icon: toggle.status
-          ? <CheckBoxOutlinedIcon />
-          : <CheckBoxOutlineBlankOutlinedIcon />,
-        text: toggle.title
-      }
-    ]} />)}
-    {/* <div className={classes.root}>
-    <div className={classes.container}>
-      <Typography className={classes.header} color="textPrimary" variant="h6">Toggles</Typography>
-      {toggles.map(toggle => <Box
-        className={classes.box}
-        key={toggle.title}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center">
-        <Typography color="textPrimary" variant="caption">{toggle.title}</Typography>
-        {toggle.component}
-      </Box>)}
-    </div>
-    </div> */}
-  </>
+  return <>{toggles
+    .filter(toggle => toggle.status !== undefined)
+    .map(toggle => <MupStatus
+      side="right"
+      key={`toggle_${toggle.title}`}
+      id={`toggle_${toggle.title}`}
+      tooltip={`Toggle ${toggle.title} ...`}
+      onClick={ () => toggle.statusToggle() }
+      elements={[
+    {
+      icon: toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />,
+      text: toggle.title
+    }
+  ]} />)}</>
 })
 
 export default ToggleTheme;

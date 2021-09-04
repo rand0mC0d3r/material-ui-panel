@@ -4,11 +4,11 @@ import MuiPanelManager from '../MuiPanelManager';
 import { oppositeSide } from '../utils';
 import MuiDebug from './MuiDebug';
 
-const localStorageKey = 'material-ui-panel.layout'
+const localStorageKey = 'material-ui-panel.layout';
 const DataContext = createContext(null);
 
-const getRandomColor = () => '#' + Math.random().toString(16).substr(-6)
-const getRandomId = () => (Math.random() + 1).toString(36).substring(7)
+const getRandomColor = () => '#' + Math.random().toString(16).substr(-6);
+const getRandomId = () => (Math.random() + 1).toString(36).substring(7);
 
 function MuiPanelProvider({
 	allowRightClick,
@@ -56,7 +56,7 @@ function MuiPanelProvider({
 					type: 'user'
 					}
 			]);
-		}
+		};
 
 	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
@@ -69,7 +69,7 @@ function MuiPanelProvider({
 					notifications: {
 						count: 0,
 						summary: 0,
-						color: "primary",
+						color: 'primary',
 						...notifications,
 					},
 					asEmbedded: false,
@@ -94,7 +94,7 @@ function MuiPanelProvider({
 					children,
 					}
 			]);
-	}
+	};
 
 		const handleContentAnnouncement = ({ id, children }) => {
 			setLayout(layout => [
@@ -107,7 +107,7 @@ function MuiPanelProvider({
 					children,
 					}
 			]);
-		}
+		};
 
 		const updateParentSummary = (layout) => {
 			return layout.map(layoutObject =>
@@ -125,21 +125,21 @@ function MuiPanelProvider({
 						}
 					}
 					: layoutObject
-			)
-		}
+			);
+		};
 
 		const handleSetAsGroup = ({ uniqueId }) => {
 			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 				? { ...layoutObject, asGroup: !layoutObject.asGroup }
 				: layoutObject));
-		}
+		};
 
 	const handleSetStatusElements = ({ uniqueId, elements }) => {
 		console.log(uniqueId, elements, status);
 			setStatus(status => status.map(statusObject => statusObject.uniqueId === uniqueId
 				? { ...statusObject, elements }
 				: statusObject));
-		}
+		};
 
 		const handleUnSetAsEmbedded = ({ uniqueId }) => {
 			setLayout(layout.map(layoutObject =>
@@ -147,7 +147,7 @@ function MuiPanelProvider({
 					? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
 					: layoutObject
 			));
-		}
+		};
 
 	const toggleSectionDirection = ({ sectionId }) => {
 		setSections(sections => sections.map(section => {
@@ -155,33 +155,33 @@ function MuiPanelProvider({
 				return {
 					...section,
 					direction: section.direction === 'vertical' ? 'horizontal' : 'vertical'
-				}
+				};
 			}
-			return section
-		}))
-	}
+			return section;
+		}));
+	};
 
 	const toggleCollapseSection = ({ sectionId }) => {
-		console.log("i am here", sectionId);
+		console.log('i am here', sectionId);
 		setSections(sections => sections.map(section => {
 			if (section.id === sectionId) {
 				return {
 					...section,
 					isCollapsed: !section.isCollapsed
-				}
+				};
 			}
-			return section
-		}))
-	}
+			return section;
+		}));
+	};
 
 	const addZoneToSection = ({ sectionId }) => {
-		const randomString = (Math.random() + 1).toString(36).substring(7)
+		const randomString = (Math.random() + 1).toString(36).substring(7);
 		setSections(sections => [
 			...sections.map(section => {
 				if (section.id === sectionId) {
-					return { ...section, zones: [...section.zones, randomString] }
+					return { ...section, zones: [...section.zones, randomString] };
 				}
-				return section
+				return section;
 			}),
 			{
 				id: randomString,
@@ -192,44 +192,44 @@ function MuiPanelProvider({
 				isCollapsed: false,
 				type: 'panel',
 				zones: [ ]
-		},])
-	}
+		}]);
+	};
 
 	const removeZoneFromSection = ({ sectionId }) => {
-		console.log("clicked remove section")
+		console.log('clicked remove section');
 		setSections(sections => [
 			...sections
 				.filter(section => section.id !== sectionId)
 				.map(section => {
 						if (section.zones.some(sz => sz === sectionId)) {
-							return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] }
+							return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] };
 						}
-						return section
+						return section;
 			}),
-		])
-	}
+		]);
+	};
 
 	const addPanelToSection = ({ sectionId, panelId }) => {
-		let previousPanel = null
+		let previousPanel = null;
 		setSections(sections => sections.map(section => {
 			if (section.id === sectionId) {
-				previousPanel = section.panelId
+				previousPanel = section.panelId;
 				return {
 					...section,
 					panelId,
 					isCollapsed: true,
-				}
+				};
 			}
 			if (section.panelId === panelId) {
-				previousPanel = section.panelId
+				previousPanel = section.panelId;
 				return {
 					...section,
 					panelId: null,
-				}
+				};
 			}
 
-			return section
-		}))
+			return section;
+		}));
 		setLayout(layout => layout
 			.map(layoutObject => layoutObject.uniqueId === panelId || layoutObject.parentId === panelId
 			? { ...layoutObject, asSection: true, isVisible: true }
@@ -237,7 +237,7 @@ function MuiPanelProvider({
 			.map(layoutObject => layoutObject.uniqueId === previousPanel || layoutObject.parentId === previousPanel
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
-	}
+	};
 
 
 	const removePanelFromSection = ({ sectionId, panelId }) => {
@@ -247,47 +247,47 @@ function MuiPanelProvider({
 				return {
 					...section,
 					panelId: null
-				}
+				};
 			}
-			return section
-		}))
+			return section;
+		}));
 		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === panelId
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
-	}
+	};
 
 	const showContent = ({ sectionId }) => {
-		let foundPanelId = null
+		let foundPanelId = null;
 		setSections(sections => sections.map(section => {
-			foundPanelId = section.panelId
+			foundPanelId = section.panelId;
 			if (section.type === 'content') {
 				return {
 					...section,
 					type: 'list',
-				}
+				};
 			}
 			if (section.id === sectionId) {
 				return {
 					...section,
 					type: 'content',
-				}
+				};
 			}
-			return section
-		}))
+			return section;
+		}));
 		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
-	}
+	};
 
 	const splitContent = ({ sectionId }) => {
-		const randomString = (Math.random() + 1).toString(36).substring(7)
-		const randomStringPanel = (Math.random() + 1).toString(36).substring(7)
+		const randomString = (Math.random() + 1).toString(36).substring(7);
+		const randomStringPanel = (Math.random() + 1).toString(36).substring(7);
 		setSections(sections => [
 			...sections.map(section => {
 				if (section.id === sectionId) {
-					return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' }
+					return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' };
 				}
-				return section
+				return section;
 			}),
 			{
 				id: randomString,
@@ -308,27 +308,27 @@ function MuiPanelProvider({
 				isCollapsed: false,
 				type: 'panel',
 				zones: [ ]
-		},])
-	}
+		}]);
+	};
 
 	const chooseTypeForSection = ({ panelId, isList = false }) => {
-		let foundPanelId = null
+		let foundPanelId = null;
 		setSections(sections => sections.map(section => {
 			if (section.id === panelId) {
-				foundPanelId = section.panelId
+				foundPanelId = section.panelId;
 				return {
 					...section,
 					type: isList ? 'list' : 'panel',
 					isCollapsed: false,
 					panelId: undefined
-				}
+				};
 			}
-			return section
-		}))
+			return section;
+		}));
 		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
 			? { ...layoutObject, asSection: false, isVisible: false }
 			: layoutObject));
-	}
+	};
 
 	const handlePanelAlerts = ({ id, count, color }) => {
 			const updateObject = (layout) => {
@@ -336,17 +336,17 @@ function MuiPanelProvider({
 					(layoutObject.uniqueId === id && (layoutObject.notifications.count !== count || layoutObject.notifications.color !== color))
 						? { ...layoutObject, notifications: { count, color } }
 						: layoutObject
-				)
-			}
+				);
+			};
 
 			setLayout(layout => updateParentSummary(updateObject(layout)));
-		}
+		};
 
 		const handleToggleCollapse = ({ uniqueId }) => {
 			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 				? { ...layoutObject, isCollapsed: !layoutObject.isCollapsed }
 				: layoutObject));
-		}
+		};
 
 		const handleSetAsEmbedded = ({ uniqueId, parentId }) => {
 			const findParent = layout.find(layoutObject => layoutObject.uniqueId === parentId);
@@ -360,7 +360,7 @@ function MuiPanelProvider({
 
 				setLayout(layout => updateParentSummary(activateParent(updateEmbedded(layout))));
 			}
-		}
+		};
 
 		const handleSetSide = ({ uniqueId }) => {
 			setLayout(layout
@@ -371,35 +371,35 @@ function MuiPanelProvider({
 					}
 					: { ...layoutObject, isVisible: false })
 			);
-		}
+		};
 
 	const toggleSettingIsCollapsed = () => setSettings(settings => ({ ...settings, isCollapsed: !settings.isCollapsed }));
 
 	const handleSetVisible = ({ uniqueId }) => {
-		console.log("called", uniqueId)
+		setSettings(settings => ({ ...settings, isCollapsed: false }));
 
-			const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
-			if (foundObject) {
-				setLayout(layout => ([...layout.map(lo => {
-					if (lo.side === foundObject.side && !lo.asSection) {
-						if (lo.uniqueId === foundObject.uniqueId) {
-							return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 }}
-						} else if (lo.parentId === foundObject.uniqueId) {
-							return { ...lo, isVisible: !lo.isVisible }
-						} else {
-							return { ...lo, isVisible: false }
-						}
+		const foundObject = layout.find(lo => lo.uniqueId === uniqueId);
+		if (foundObject) {
+			setLayout(layout => ([...layout.map(lo => {
+				if (lo.side === foundObject.side && !lo.asSection) {
+					if (lo.uniqueId === foundObject.uniqueId) {
+						return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 }};
+					} else if (lo.parentId === foundObject.uniqueId) {
+						return { ...lo, isVisible: !lo.isVisible };
+					} else {
+						return { ...lo, isVisible: false };
 					}
-					return lo
-				})]));
-			}
+				}
+				return lo;
+			})]));
 		}
+	};
 
 		useEffect(() => {
 			localStorage.setItem(
 				localStorageKey,
 				JSON.stringify(layout.map(l => ({ ...l, children: undefined, icon: undefined }))    )
-			)
+			);
 		}, [layout]);
 
 		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
@@ -443,7 +443,7 @@ function MuiPanelProvider({
 				{props.children}
 			</MuiPanelManager>
 			<MuiDebug />
-		</DataContext.Provider>
+		</DataContext.Provider>;
 }
 
 export default DataContext;
