@@ -13,17 +13,17 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
 
   useEffect(() => {
     if (!id) {
-      console.error(`MupPanel: missing attr:id for panel with title+hint:`, title, hint)
+      console.error('MupPanel: missing attr:id for panel with title+hint:', title, hint);
     } else {
       if (!isRegistered) {
-        handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
+        handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> });
         setIsRegistered(true);
       }
     }
   }, [id, isRegistered, side, handlePanelAnnouncement, iconInHeader, placement, disabled, title, hint, tooltip, icon]);
 
   useEffect(() => {
-    const findObject = layout.find(lo => lo.uniqueId === id)
+    const findObject = layout.find(lo => lo.uniqueId === id);
     if (findObject) {
       setLayoutObject(findObject);
       // if (findObject.notifications?.count === 0) {
@@ -32,7 +32,7 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
     }
   }, [layout, id, alertsAcknowledged]);
 
-  useEffect(() => { if (layoutObject) { setSide(layoutObject.side) } }, [layoutObject])
+  useEffect(() => { if (layoutObject) { setSide(layoutObject.side); } }, [layoutObject]);
 
   useEffect(() => {
     if (id && layoutObject) {
@@ -49,7 +49,7 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
       display: 'flex',
-      height:  layoutObject.parentId ? 'unset' :"100%",
+      height:  layoutObject.parentId ? 'unset' :'100%',
       flexDirection: 'column'
     }}>
       <MupHeaderPanel {...{ layoutObject }} />
@@ -66,10 +66,10 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
     (() => {
       return layoutObject.asSection && layoutObject.uniqueId
       ? document.getElementById(`${layoutObject.uniqueId}-section`)
-      : document.getElementById(`${side}-panel`)
+      : document.getElementById(`${side}-panel`);
     })())
-    : null
-}
+    : null;
+};
 
 MupPanel.defaultProps = {
   placement: 'top',
@@ -80,7 +80,7 @@ MupPanel.defaultProps = {
   alertsAcknowledged: () => { },
   noPadding: false,
   iconInHeader: false,
-}
+};
 
 MupPanel.propTypes = {
   id: PropTypes.string,
@@ -97,6 +97,6 @@ MupPanel.propTypes = {
   iconInHeader: PropTypes.bool,
   noPadding: PropTypes.bool,
   children: PropTypes.node,
-}
+};
 
 export default MupPanel;

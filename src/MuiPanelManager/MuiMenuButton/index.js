@@ -7,24 +7,24 @@ import { oppositeSide } from '../../utils';
 
 const icons = theme => ({
   iconButton: {
-    fontSize: "24px",
-    opacity: "0.55",
+    fontSize: '24px',
+    opacity: '0.55',
     color: theme.palette.text.secondary,
 
-    "&:hover": {
+    '&:hover': {
       color: theme.palette.augmentColor({ main: theme.palette.text.secondary }).dark,
-      opacity: "0.9",
+      opacity: '0.9',
     }
   },
 
   activeButton: {
-    opacity: "0.9",
+    opacity: '0.9',
     color: theme.palette.text.secondary,
   },
 
   iconExtraButton: {
-    fontSize: "10px",
-    opacity: "0.55",
+    fontSize: '10px',
+    opacity: '0.55',
     color: theme.palette.text.hint,
     backgroundColor: theme.palette.divider,
     padding: '1px 1px',
@@ -54,7 +54,7 @@ const icons = theme => ({
   },
   activeIconButton: {
     color: theme.palette.primary.main,
-    opacity: "0.9",
+    opacity: '0.9',
   },
   rightIconButton: {
     marginLeft: '4px'
@@ -62,11 +62,11 @@ const icons = theme => ({
   leftIconButton: {
     marginRight: '4px'
   },
-})
+});
 
 const badge = theme => ({
   badge: {
-    "& .MuiBadge-badge": {
+    '& .MuiBadge-badge': {
       width: '22px',
       fontSize: '11px',
       height: '16px',
@@ -76,15 +76,15 @@ const badge = theme => ({
     },
   },
   groupBadge: {
-    "& .MuiBadge-badge": {
+    '& .MuiBadge-badge': {
       boxShadow: `0px 2px 0px -1px ${theme.palette.background.paper}, 0px 3px 0px 0px ${theme.palette.divider}, 0px 5px 0px -1px ${theme.palette.background.paper}, 0px 6px 0px 0px ${theme.palette.divider}`
     }
   },
-  rightBadge: { "& .MuiBadge-badge": { left: '-10px', right: 'unset' } },
-  leftBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-10px' } },
-  rightFixBadge: { "& .MuiBadge-badge": { left: '-14px', right: 'unset' } },
-  leftFixBadge: { "& .MuiBadge-badge": { left: 'unset', right: '-14px' } },
-})
+  rightBadge: { '& .MuiBadge-badge': { left: '-10px', right: 'unset' } },
+  leftBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-10px' } },
+  rightFixBadge: { '& .MuiBadge-badge': { left: '-14px', right: 'unset' } },
+  leftFixBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-14px' } },
+});
 
 const styledText = ({ theme }) => ({
   shortText: {
@@ -96,7 +96,7 @@ const styledText = ({ theme }) => ({
     textOverflow: 'ellipsis',
     color: theme.palette.text.primary,
   },
-})
+});
 
 const useStyles = makeStyles((theme) => ({
   ...styledText({ theme }),
@@ -104,55 +104,55 @@ const useStyles = makeStyles((theme) => ({
   ...icons(theme),
 
   buttonMenu: {
-    border: "0px none",
+    border: '0px none',
     padding: theme.spacing(2, 0),
-    borderRadius: "0px",
-    minWidth: "initial",
+    borderRadius: '0px',
+    minWidth: 'initial',
 
   },
   rightGroupButtonMenu: {
     position: 'relative',
-    "&::after": {
+    '&::after': {
       content: '"."',
       backgroundColor: theme.palette.divider,
       color: theme.palette.divider,
       position: 'absolute',
       fontSize: '4px',
-      lineHeight: "12px",
+      lineHeight: '12px',
       width: '8px',
       top: 22,
-      borderRadius: "0px 4px 4px 0px",
+      borderRadius: '0px 4px 4px 0px',
       left: -4,
     },
   },
   leftGroupButtonMenu: {
     position: 'relative',
-    "&::after": {
+    '&::after': {
       content: '"."',
       backgroundColor: theme.palette.divider,
       color: theme.palette.divider,
       position: 'absolute',
       width: '8px',
       top: 22,
-      borderRadius: "4px 0px 0px 4px",
+      borderRadius: '4px 0px 0px 4px',
       right: -4,
       lineHeight: '12px',
       fontSize: '4px'
     },
   },
   rightButtonMenu: {
-    borderRight: "4px solid transparent",
+    borderRight: '4px solid transparent',
   },
   leftButtonMenu: {
-    borderLeft: "4px solid transparent"
+    borderLeft: '4px solid transparent'
   },
   rightActiveButtonMenu: {
     borderRight: `4px solid ${theme.palette.text.primary}`,
-    opacity: "1",
+    opacity: '1',
   },
   leftActiveButtonMenu: {
     borderLeft: `4px solid ${theme.palette.text.primary}`,
-    opacity: "1",
+    opacity: '1',
   },
 }));
 
@@ -166,7 +166,7 @@ const MuiMenuButton = withTheme(({
   side,
   theme,
 }) => {
-  const classes = useStyles(theme)// const classes = useStyles(theme)
+  const classes = useStyles(theme);// const classes = useStyles(theme)
   const { settings, handleSetVisible } = useContext(DataProvider);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -181,9 +181,9 @@ const MuiMenuButton = withTheme(({
       { id: 'secondary', value: theme.palette.secondary.main },
       { id: 'textPrimary', value: theme.palette.text.primary },
       { id: 'textSecondary', value: theme.palette.text.secondary }
-    ]
-    return colorMap.find(({ id }) => id === settings.markerColor).value
-  }
+    ];
+    return colorMap.find(({ id }) => id === settings.markerColor).value;
+  };
 
   // useEffect(() => {
   //   setAnchorEl(null);
@@ -260,6 +260,6 @@ const MuiMenuButton = withTheme(({
       </span>
     </Tooltip>
     <MupMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
-    </>
-})
+    </>;
+});
 export default MuiMenuButton;

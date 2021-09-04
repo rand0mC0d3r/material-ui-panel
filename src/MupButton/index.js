@@ -12,20 +12,20 @@ const MupButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {
       handleOnClick: onClick,
       noPanel: true,
       icon, id, shortText, showIcon, tooltip,
-    })
-  }, [handlePanelAnnouncement, icon, onClick, shortText, showIcon, tooltip])
+    });
+  }, [handlePanelAnnouncement, icon, onClick, shortText, showIcon, tooltip]);
 
   useEffect(() => {
-    if (id && icon && !isRegistered) { registerPanel(id); setIsRegistered(true) }
+    if (id && icon && !isRegistered) { registerPanel(id); setIsRegistered(true); }
   }, [isRegistered, id, icon, registerPanel]);
 
-  return null
-}
+  return null;
+};
 
 MupButton.defaultProps = {
   showIcon: true,
   onClick: () => { }
-}
+};
 
 MupButton.propTypes = {
 	id: PropTypes.string,
@@ -34,6 +34,6 @@ MupButton.propTypes = {
 	icon: PropTypes.node,
 	showIcon: PropTypes.bool,
 	onClick: PropTypes.func,
-}
+};
 
 export default MupButton;

@@ -1,5 +1,6 @@
 import { Box, Tooltip } from '@material-ui/core';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 import MuiSplitter from '../MuiSplitter';
@@ -199,8 +200,13 @@ const MuiPanelManager = withTheme(({
 }) => {
   const classes = useStyles(theme);
   const [sides, setSides] = useState();
-
+  const matches = useMediaQuery('(min-width:600px)');
   const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
+
+  useEffect(() => {
+    toggleSettingIsCollapsed(!matches);
+  }, [matches]);
+
 
   useEffect(() => {
     if (layout.length > 0) {
@@ -261,7 +267,7 @@ const MuiPanelManager = withTheme(({
           }
       </div>)}
 
-      <div style={{ gridArea: 'main', display: 'flex' }}>
+      <div style={{ gridArea: 'main', display: 'flex', minWidth: '500px' }}>
           {sections.filter(section => !section.parentId).map(section => <MuiSplitter key={ section.id} section={section} isRoot />)}
       </div>
 

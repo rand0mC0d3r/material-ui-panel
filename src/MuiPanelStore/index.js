@@ -373,7 +373,7 @@ function MuiPanelProvider({
 			);
 		};
 
-	const toggleSettingIsCollapsed = () => setSettings(settings => ({ ...settings, isCollapsed: !settings.isCollapsed }));
+	const toggleSettingIsCollapsed = (collapsed) => setSettings(settings => ({ ...settings, isCollapsed: collapsed ? collapsed : !settings.isCollapsed }));
 
 	const handleSetVisible = ({ uniqueId }) => {
 		setSettings(settings => ({ ...settings, isCollapsed: false }));
