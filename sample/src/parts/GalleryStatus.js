@@ -82,7 +82,7 @@ const GalleryStatus = () => {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={sample}
+            title={`Lorem ipsum dolor sit amet, ${sample}`}
             subheader="September 14, 2016"
           />
           <CardMedia

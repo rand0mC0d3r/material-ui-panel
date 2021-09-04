@@ -54,10 +54,10 @@ const SaveStatus = () => {
           Don't Save
         </Button>
         <Button onClick={handleAgree} color="primary">
-          Agree and Save
+          Success
         </Button>
         <Button onClick={handleAgreeFail} color="secondary">
-          Agree and Fail
+          Fail
         </Button>
       </DialogActions>
     </Dialog>

@@ -21,6 +21,7 @@ import ComplexPanel from './parts/ComplexPanel';
 import ConfigStatus from './parts/ConfigStatus';
 import GalleryStatus from './parts/GalleryStatus';
 import IframePanel from './parts/IframePanel';
+import MenuStatus from './parts/MenuStatus';
 import NotificationPanel from './parts/NotificationPanel';
 import SaveStatus from './parts/SaveStatus';
 import ToggleTheme from './parts/ToggleTheme';
@@ -93,6 +94,7 @@ function App() {
 
         <GalleryStatus />
         <ConfigStatus />
+        <MenuStatus />
         <SaveStatus />
 
         <MupContent>

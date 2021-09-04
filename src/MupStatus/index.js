@@ -50,7 +50,7 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
         style={{ gap: '6px' }}
       >
         {element.icon && cloneElement( element.icon, { color: 'action', style: { fontSize: 20}})}
-        <Typography variant="subtitle2" style={{whiteSpace: 'nowrap'}} color="textPrimary">{element.text}</Typography>
+        {element.text && <Typography variant="subtitle2" style={{ whiteSpace: 'nowrap' }} color="textPrimary">{element.text}</Typography>}
       </Box>)}
     </Box>
   </Tooltip>,

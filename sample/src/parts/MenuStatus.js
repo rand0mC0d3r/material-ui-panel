@@ -1,4 +1,4 @@
-import { Popover } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useState } from 'react';
 import MupStatus from '../components/MupStatus';
@@ -14,30 +14,24 @@ const ConfigStatus = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-
   return <>
     <MupStatus
-      id='statusSaveDoc'
+      id='statusSampleMenu'
       onClick={handleClick}
-      tooltip="Save Document?"
+      tooltip="Open Sample menu..."
       elements={[{ icon: <SettingsIcon />}]}
     />
-    <Popover
-      open={open}
+    <Menu
+      id="simple-menu"
       anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
       onClose={handleClose}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
     >
-      The content of the Popover.
-    </Popover>
+      <MenuItem onClick={handleClose}>Profile</MenuItem>
+      <MenuItem onClick={handleClose}>My account</MenuItem>
+      <MenuItem onClick={handleClose}>Logout</MenuItem>
+    </Menu>
   </>
 }
 
