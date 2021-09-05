@@ -8,6 +8,9 @@ import MupMenuCollapseButton from '../MupMenuCollapseButton';
 import MuiMenuButton from './MuiMenuButton';
 
 const menuWidth = '56px';
+const leftPanelWidth = '500px';
+const rightPanelWidth = '500px';
+
 
 const styledGrid = {
   bothGrid: {
@@ -216,6 +219,7 @@ const MuiPanelManager = withTheme(({
   }, [layout]);
 
   return <Box display="flex" flexDirection="column" className={classes.wrapper}>
+    {/* {leftPanelWidth} central {rightPanelWidth} */}
     <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
       {availableSides.map(side => <div
@@ -236,7 +240,13 @@ const MuiPanelManager = withTheme(({
           style={{
             gridArea: `${side}Panel`,
             overflow: 'hidden auto',
-            width: settings.isCollapsed ? '0px' : (layout.some(l => l.side === side && l.isVisible) ? '500px' : 'unset'),
+            width: settings.isCollapsed
+              ? '0px'
+              : (layout.some(l => l.side === side && l.isVisible)
+                ? (side === 'left'
+                  ? leftPanelWidth
+                  : rightPanelWidth)
+                : 'unset'),
             height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
           }}
         />
