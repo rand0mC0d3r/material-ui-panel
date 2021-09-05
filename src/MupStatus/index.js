@@ -30,7 +30,24 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
     if (findObject) { setStatusObject(findObject);}
   }, [status, id]);
 
-  return statusObject && !!id ? createPortal(<Tooltip title={tooltip} placement="top" arrow>
+  return statusObject && !!id ? createPortal(<Tooltip
+    title={typeof tooltip === 'string'
+      ? tooltip
+      : <div>
+        {tooltip.map(tooltipElement => <Box
+          display="flex"
+          key={`${tooltipElement.text}_${tooltipElement.icon}`}
+          alignItems="center"
+          style={{ gap: '6px' }}
+        >
+          {tooltipElement.icon && cloneElement( tooltipElement.icon, { style: { color: '#FFF', fontSize: 12}})}
+          <Typography variant="caption" key={tooltipElement.text}>{tooltipElement.text}</Typography>
+        </Box>)}
+      </div>
+    }
+    placement="top"
+    arrow
+  >
     <Box
       onClick={(e) => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick && onClick(e)}
       display="flex"
@@ -45,7 +62,7 @@ const MupStatus = withTheme(({ id, side, focusOnClick, onClick, theme, requestAt
     >
       {elements.map(element => <Box
         display="flex"
-        key={element.text}
+        key={`${element.text}_${element.icon}`}
         alignItems="center"
         style={{ gap: '6px' }}
       >

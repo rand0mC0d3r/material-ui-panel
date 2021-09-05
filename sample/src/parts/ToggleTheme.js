@@ -114,12 +114,12 @@ const ToggleTheme = withTheme(({
       side="right"
       key={`toggle_${toggle.title}`}
       id={`toggle_${toggle.title}`}
-      tooltip={`Toggle ${toggle.title} ...`}
+      tooltip={`Toggle the ${toggle.title} flag: ${toggle.status ? 'off' : 'on'}`}
       onClick={ () => toggle.statusToggle() }
       elements={[
     {
       icon: toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />,
-      text: toggle.title
+      text: `${toggle.title.substr(0, 8)}..`
     }
   ]} />)}</>
 })

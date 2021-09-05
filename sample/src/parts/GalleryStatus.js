@@ -56,8 +56,8 @@ const GalleryStatus = () => {
     <MupStatus
       id='statusSimilarDocuments'
       onClick={handleClickOpen}
-      tooltip="View Documents ..."
-      elements={[{ icon: <AllInboxIcon />, text: '4 Similar Documents (Last checked - 3 min ago)' }]}
+      tooltip="View Documents ... - (Last checked - 3 min ago)"
+      elements={[{ icon: <AllInboxIcon />, text: '4 Related' }]}
     />
     <Dialog
       open={open}

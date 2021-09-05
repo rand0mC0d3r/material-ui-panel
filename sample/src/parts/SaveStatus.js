@@ -51,7 +51,7 @@ const SaveStatus = () => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Don't Save
+          Exit
         </Button>
         <Button onClick={handleAgree} color="primary">
           Success

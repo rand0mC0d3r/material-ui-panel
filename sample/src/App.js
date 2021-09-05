@@ -81,13 +81,21 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel>
 
-        <MupStatus id="statusA" side="left" tooltip="Section Tooltip" elements={[
-          { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
-          { icon: <CameraIcon />, text: 'Ipsum' },
-        ]} />
+        <MupStatus
+          id="statusA"
+          side="left"
+          tooltip={[
+            { icon: <FormatIndentIncrease color="action" />, text: '33% frames left' },
+            { icon: <CameraIcon />, text: 'Ready for photo' },
+          ]}
+          elements={[
+            { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
+            { icon: <CameraIcon />, text: 'Ipsum' },
+          ]}
+        />
 
         <MupStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
-          { icon: <CastConnectedIcon />, text: 'Open Sample Panel' }
+          { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
         ]}>
           demo text
         </MupStatus>
@@ -98,7 +106,7 @@ function App() {
         <SaveStatus />
 
         <MupContent>
-          <a class="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="See M.UI Panels..." title="Fork me on GitHub">Fork me on GitHub</a>
+          <a className="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="See M.UI Panels..." title="Fork me on GitHub">Fork me on GitHub</a>
 
           <iframe
             title="Random Wiki article"
