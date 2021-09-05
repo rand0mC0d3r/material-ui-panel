@@ -63,7 +63,7 @@ const NotificationPanel = ({ identifier = 'NotificationsPanel', title = "Notific
             <Typography variant="caption" color='textPrimary'>Not</Typography>
             <Switch
               checked={auto}
-              color="primary"
+              color={ color !== 'primary' ? 'secondary' : 'primary'}
               onChange={handleChangeAuto}
             />
             <Typography variant="caption" color='textPrimary'>Every 1s</Typography>
