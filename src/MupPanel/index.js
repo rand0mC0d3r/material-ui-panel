@@ -52,7 +52,7 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
       height:  layoutObject.parentId ? 'unset' :'100%',
       flexDirection: 'column'
     }}>
-      <MupHeaderPanel {...{ layoutObject }} />
+      {!layoutObject.asSection && <MupHeaderPanel {...{ layoutObject }} />}
       {!layoutObject.isCollapsed && <div
         style={{
           padding: noPadding ? null : '16px',

@@ -242,7 +242,7 @@ const MuiPanelManager = withTheme(({
             overflow: 'hidden auto',
             width: settings.isCollapsed
               ? '0px'
-              : (layout.some(l => l.side === side && l.isVisible)
+              : (layout.some(l => l.side === side && l.isVisible && !l.asSection)
                 ? (side === 'left'
                   ? leftPanelWidth
                   : rightPanelWidth)

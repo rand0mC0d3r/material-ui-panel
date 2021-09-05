@@ -41,7 +41,7 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider initialSide='right' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
@@ -105,9 +105,9 @@ function App() {
         <MenuStatus />
         <SaveStatus />
 
-        <MupContent>
-          <a className="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="See M.UI Panels..." title="Fork me on GitHub">Fork me on GitHub</a>
+        <a className="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="See M.UI Panels..." title="Fork me on GitHub">Fork me on GitHub</a>
 
+        <MupContent>
           <iframe
             title="Random Wiki article"
             style={{ width: "100%", filter: "sepia(1) brightness(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}

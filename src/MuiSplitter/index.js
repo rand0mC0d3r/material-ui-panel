@@ -17,12 +17,12 @@ import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    width: "100%",
+    display: 'flex',
+    width: '100%',
     // border: '1px solid red',
-    height: "100%",
+    height: '100%',
     // backgroundColor: theme.palette.background.paper,
-    gridArea: "main",
+    gridArea: 'main',
     position: 'relative',
   },
   groupIcon: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.background.paper,
   },
   smallButton: {
-    padding: "0px",
+    padding: '0px',
     width: theme.spacing(3),
     minWidth: theme.spacing(3),
     lineHeight: '0px'
@@ -47,95 +47,95 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   selectIcon: {
-    "&:hover": {
+    '&:hover': {
       color: `${theme.palette.text.secondary} !important`
     }
   },
   header: {
-    minHeight: "55px",
-    display: "flex",
-    flexDirection: "row",
-    padding: "0px 12px",
-    alignItems: "center",
-    justifyContent: "space-between",
+    minHeight: '55px',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '0px 12px',
+    alignItems: 'center',
+    justifyContent: 'space-between',
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     },
   },
   headerCollapsed: {
-    minHeight: "8px",
-    opacity: "0.5",
-    display: "flex",
-    flexDirection: "row",
-    padding: "0px 12px",
+    minHeight: '8px',
+    opacity: '0.5',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '0px 12px',
     // backgroundColor: theme.palette.background.default,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
     },
   },
   wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
     // backgroundColor: theme.palette.background.paper,
-    gridArea: "main",
+    gridArea: 'main',
     position: 'relative',
   },
   wrapperRepeat: {
     boxShadow: 'inset 1px 1px 0px 0px #CCC',
   },
   rootController: {
-    position: "absolute",
-    left: "50%",
-    padding: "8px 16px",
+    position: 'absolute',
+    left: '50%',
+    padding: '8px 16px',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '0px 0px 8px 8px',
     border: `1px solid ${theme.palette.divider}`,
-    zIndex: "1",
-    top: "-30px",
+    zIndex: '1',
+    top: '-30px',
     transition: 'top .05s ease-in-out',
 
-    "&:hover": {
-      top: "0px",
+    '&:hover': {
+      top: '0px',
       transition: 'top .15s ease-in-out'
 
     },
   },
   groupsBox: {
-    gap: "8px"
+    gap: '8px'
   },
   title: {
-    alignItems: "center",
-    display: "flex",
-    gap: "8px"
+    alignItems: 'center',
+    display: 'flex',
+    gap: '8px'
   },
   horizontal: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   vertical: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   zone: {
     // border: '1px solid blue',
-    flex: "1 1 auto",
+    flex: '1 1 auto',
     position: 'relative',
     // width: '0px',
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   splitButton: {
 
   },
   buttonsWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    gap: "16px",
-    flex: "0 0 auto"
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '16px',
+    flex: '0 0 auto'
   }
 }));
 
@@ -144,10 +144,10 @@ const MuiSplitter = withTheme(({
   isRoot = false,
   theme,
 }) => {
-  const classes = useStyles(theme)
+  const classes = useStyles(theme);
   const { layout, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
-  return <div className={`${classes.wrapper}`} style={isRoot ? { border: `0px none` } : {}}>
+  return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
 
     {section.type === 'content' ? <div className={classes.rootController}>
         <Tooltip title="Divide the interface into panels" arrow placement="bottom">
@@ -161,7 +161,7 @@ const MuiSplitter = withTheme(({
         <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
           onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
           style={isRoot
-            ? { border: `0px none`, backgroundColor: theme.palette.background.paper }
+            ? { border: '0px none', backgroundColor: theme.palette.background.paper }
             : section.isCollapsed
               ? { backgroundColor: section.background }
               : { borderBottom: `4px solid ${section.background}` }
@@ -218,20 +218,20 @@ const MuiSplitter = withTheme(({
                   <Select
                   fullWidth
                   value={section.panelId || ''}
-                  onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
+                  onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }); }}
                 >
-                  {layout.filter(lo => !lo.noPanel).map(lo => <MenuItem
+                  {layout.filter(lo => !lo.noPanel && !lo.asContent).map(lo => <MenuItem
                     key={`${section.id}_${lo.uniqueId}`}
                     value={lo.uniqueId}
                   >
                     <Box display="flex" alignItems="center" className={classes.groupsBox}>
-                      {lo.icon && cloneElement(lo.icon, { color: "disabled" })}
+                      {lo.icon && cloneElement(lo.icon, { color: 'disabled' })}
                       <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
                     </Box>
                   </MenuItem>)}
                 </Select>
 
-                {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }} color="action" /></>}
+                {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }); }} color="action" /></>}
 
                 <div
                   onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
@@ -243,7 +243,7 @@ const MuiSplitter = withTheme(({
               {section.type !== 'content' ?
                 <Button
                   className={classes.smallButton}
-                  onClick={() => { showContent({ sectionId: section.id }) }}
+                  onClick={() => { showContent({ sectionId: section.id }); }}
                   disabled={section.type === 'content'}>
                   <AspectRatioIcon />
                 </Button> : <>
@@ -256,7 +256,7 @@ const MuiSplitter = withTheme(({
 
               {section.type !== 'content' && <Tooltip arrow title="Remove section">
                 <span>
-                  <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }) }} className={classes.smallButton}>
+                  <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }); }} className={classes.smallButton}>
                     <CancelPresentationOutlinedIcon />
                   </Button>
                 </span>
@@ -293,16 +293,17 @@ const MuiSplitter = withTheme(({
           <div style={{ width: '100%', height: '100%' }} id={`${section.panelId}-section`} />
       </>}
       {section.type === 'content' && <>
-          <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: "stretch" }} id={`content-section`} />
+          <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }} id={'content-section'} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div
+          key={`${section.id}_${zone}`}
           className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}
           style={section.direction === 'horizontal' ? { width: '0px' } : {}}>
           <MuiSplitter section={sections.find(s => s.id === zone)} />
       </div>)}
     </div>
-  </div>
-})
+  </div>;
+});
 
 export default MuiSplitter;
