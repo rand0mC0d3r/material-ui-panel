@@ -175,7 +175,7 @@ const MuiSplitter = withTheme(({
                 {section.type === 'content' && <BlurOnIcon color="disabled" />}
                 <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
                   {section.type === 'list' && 'Add sub-sections ...'}
-                  {section.type === 'panel' && 'Select panel ...'}
+                  {section.type === 'panel' && 'Select panel content ...'}
                   {section.type === 'content' && 'Main content'}
                 </Typography>
               </>}
