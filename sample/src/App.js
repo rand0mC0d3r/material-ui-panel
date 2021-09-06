@@ -105,8 +105,6 @@ function App() {
         <MenuStatus />
         <SaveStatus />
 
-        <a className="github-fork-ribbon" href="https://github.com/rand0mC0d3r/material-ui-panel" data-ribbon="See M.UI Panels..." title="Fork me on GitHub">Fork me on GitHub</a>
-
         <MupContent>
           <iframe
             title="Random Wiki article"

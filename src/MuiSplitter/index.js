@@ -12,7 +12,7 @@ import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import WebIcon from '@material-ui/icons/Web';
-import React, { cloneElement, useContext } from 'react';
+import { cloneElement, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(theme => ({
@@ -145,7 +145,15 @@ const MuiSplitter = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme);
+  const [layoutObject, setLayoutObject] = useState(null);
   const { layout, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+
+  useEffect(() => {
+    if (section.type === 'panel') {
+      const findLayoutObject = layout.find(l => l.uniqueId === section.panelId);
+      setLayoutObject(findLayoutObject);
+    }
+  }, [section]);
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
 
@@ -173,9 +181,12 @@ const MuiSplitter = withTheme(({
                 {section.type === 'list' && <AppsIcon color="action" />}
                 {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
                 {section.type === 'content' && <BlurOnIcon color="disabled" />}
-                <Typography style={{ fontWeight: 'bold' }} color="textPrimary" variant='subtitle2'>
+                  <Typography
+                    style={layoutObject?.title && { fontWeight: 'bold' }}
+                    color={layoutObject?.title ? 'textPrimary' : 'textSecondary'}
+                    variant='subtitle2'>
                   {section.type === 'list' && 'Add sub-sections ...'}
-                  {section.type === 'panel' && 'Select panel content ...'}
+                  {section.type === 'panel' && layoutObject?.title || 'Waiting for selection...'}
                   {section.type === 'content' && 'Main content'}
                 </Typography>
               </>}

@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
 import { oppositeSide } from '../utils';
 import MuiDebug from './MuiDebug';
@@ -217,7 +217,7 @@ function MuiPanelProvider({
 				return {
 					...section,
 					panelId,
-					isCollapsed: true,
+					isCollapsed: false,
 				};
 			}
 			if (section.panelId === panelId) {
