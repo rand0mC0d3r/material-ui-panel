@@ -1,5 +1,5 @@
 import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import BlurOnIcon from '@material-ui/icons/BlurOn';
@@ -139,11 +139,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MuiSplitter = withTheme(({
+const MuiSplitter = ({
   section,
   isRoot = false,
-  theme,
 }) => {
+    const theme = useTheme();
   const classes = useStyles(theme);
   const [layoutObject, setLayoutObject] = useState(null);
   const { layout, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
@@ -315,6 +315,6 @@ const MuiSplitter = withTheme(({
       </div>)}
     </div>
   </div>;
-});
+};
 
 export default MuiSplitter;

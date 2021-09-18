@@ -1,5 +1,5 @@
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import React, { useContext } from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Fragment, useContext } from 'react';
 import DataProvider from '../../MuiPanelStore';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,18 +20,34 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const MuiDebug = withTheme(({
-  theme,
-}) => {
-  const classes = useStyles(theme);
-  const { settings, sections, layout } = useContext(DataProvider);
+const MupDebug = () => {
+	const { settings, status, sections, layout } = useContext(DataProvider);
 
-  return <>
-		{settings.debugMode && <div className={classes.root}>
-			{sections.map(sectionObject => <pre key={sectionObject.uniqueId} className={classes.dumpText}>{JSON.stringify({ ...sectionObject }, null, 4)}</pre>)}
-			<hr />
-			{layout.map(layoutObject => <pre key={layoutObject.uniqueId} className={classes.dumpText}>{JSON.stringify({ ...layoutObject, icon: null, ref: null, children: null }, null, 4)}</pre>)}
-		</div>}
-    </>;
-});
-export default MuiDebug;
+	const theme = useTheme();
+	const classes = useStyles(theme);
+
+	const dumps = [{
+		title: 'Sections',
+		dataSource: sections.map(obj => <pre key={`section_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj }, null, 4)}</pre>)
+	}, {
+		title: 'Layout',
+		dataSource: layout.map(obj => <pre key={`layout_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)}</pre>)
+	}, {
+		title: 'Status',
+		dataSource: status.map(obj => <pre key={`settings_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj, elements: null }, null, 4)}</pre>)
+	}, {
+		title: 'Settings',
+		dataSource: Object.entries(settings).map(([key, val]) => <pre key={`settings_${key}`} className={classes.dumpText}>{key}: {JSON.stringify(val)}</pre>)
+	}];
+
+	return settings.debugMode
+		? <div key="MupDebug" className={classes.root}>
+			{dumps.map(dump => <Fragment key={dump.title}>
+				<div>{dump.title}</div>
+				{dump.dataSource}
+			</Fragment>)}
+		</div>
+	: null;
+};
+
+export default MupDebug;

@@ -29,7 +29,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
 
@@ -48,14 +48,14 @@ function App() {
 
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
+        <NotificationPanel />
+        <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
+
         {/* <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
         <MupButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MupButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
 
         <ActButton />
-
-        <NotificationPanel />
-        <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
         <ComplexPanel />
         <IframePanel/>
@@ -84,7 +84,7 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel> */}
 
-        <MupStatus
+        {/* <MupStatus
           id="statusA"
           side="left"
           tooltip='33% frames left / Ready for photo'
@@ -98,7 +98,7 @@ function App() {
           { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
         ]}>
           demo text
-        </MupStatus>
+        </MupStatus> */}
 
         {/* <GalleryStatus />
         <ConfigStatus />
@@ -106,11 +106,11 @@ function App() {
         <SaveStatus /> */}
 
         <MupContent>
-          <iframe
+          {/* <iframe
             title="Random Wiki article"
             style={{ width: "100%", filter: "opacity(0.3) grayscale(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
-            />
+            /> */}
         </MupContent>
 
       </MuiPanelProvider>

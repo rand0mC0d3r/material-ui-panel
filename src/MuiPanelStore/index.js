@@ -444,7 +444,7 @@ function MuiPanelProvider({
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
 				{props.children}
 			</MuiPanelManager>
-			<MuiDebug />
+			{settings.debugMode && <MuiDebug />}
 		</DataContext.Provider>;
 }
 

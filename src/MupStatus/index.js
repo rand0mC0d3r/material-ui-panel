@@ -19,35 +19,31 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
   const theme = useTheme();
   const classes = useStyles(theme);
 
-  const handleOnClick = useCallback(() => { if (onClick) { onClick(); } }, [onClick]);
+  const callbackOnClick = useCallback(
+    (e) => { if (onClick) { onClick(e); } },
+    [onClick]);
 
-  const callbackHandleStatusAnnouncement = useCallback((id) => {
-    console.log('[MupStatus]: Announcing bar object', id);
-    handleStatusAnnouncement({ id, elements, side, tooltip });
-  }, [side, tooltip, elements, handleStatusAnnouncement]);
-
+  const callbackHandleStatusAnnouncement = useCallback(
+    (id) => { handleStatusAnnouncement({ id, elements, side, tooltip }); },
+    [side, tooltip, elements, handleStatusAnnouncement]);
 
   useEffect(() => {
-    if (statusObject === null && !status.find(lo => lo.uniqueId === id)) {
-      console.log('[MupStatus]: Preparing to announce status object', id);
-      !id
-        ? console.error('[MupStatus]: missing attr:id for status element')
-        : callbackHandleStatusAnnouncement(id);
+    if (id && statusObject === null && !status.some(item => item.uniqueId === id)) {
+      callbackHandleStatusAnnouncement(id);
     }
   }, [id, statusObject, status, callbackHandleStatusAnnouncement]);
 
   useEffect(() => {
-    const findObject = status.find(lo => lo.uniqueId === id);
-    if (statusObject === null && findObject) {
-      console.log('[MupStatus]: Found status bar object', id);
-      setStatusObject(findObject.uniqueId);
+    if (statusObject === null) {
+    const findObject = status.find(item => item.uniqueId === id);
+      findObject && setStatusObject(findObject.uniqueId);
     }
   }, [status, id, statusObject]);
 
   return (statusObject !== null && !!id) ? createPortal(<Box
     key={`MupStatus_${id}_wrapper`}
     title={tooltip}
-    onClick={(e) => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : !!onClick && handleOnClick(e)}
+    onClick={(e) => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : !!onClick && callbackOnClick(e)}
     display="flex"
     alignItems="center"
     className={(focusOnClick || onClick) ? classes.root : ''}
@@ -64,9 +60,8 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
       alignItems="center"
       style={{ gap: '6px' }}
     >
-      {element.icon && <SvgIcon key={`MupStatus_${element.text}_icon`} style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
+      {element.icon && <SvgIcon style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
       {element.text && <Typography
-        key={`MupStatus_${element.text}_text`}
         variant="subtitle2"
         style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}
         color="textPrimary"

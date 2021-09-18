@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@material-ui/core';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
@@ -195,12 +195,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const availableSides = ['left', 'right'];
-const MuiPanelManager = withTheme(({
+const MuiPanelManager = ({
   children,
-  theme,
   allowRightClick = false,
   showCollapseButton = true,
 }) => {
+  const theme = useTheme();
   const classes = useStyles(theme);
   const [sides, setSides] = useState();
   const matches = useMediaQuery('(min-width:600px)');
@@ -221,8 +221,11 @@ const MuiPanelManager = withTheme(({
   return <Box id="MuiPanelManager" display="flex" flexDirection="column" className={classes.wrapper}>
     <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
-      {availableSides.map(side => <div
+      {availableSides
+        .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
+        .map(side => <div
         key={`${side}_panels`}
+        id={`MuiPanels_${side}Side`}
         onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
         className={`
         ${classes.panelContainerWrapper}
@@ -252,7 +255,7 @@ const MuiPanelManager = withTheme(({
       </div>)}
 
       {availableSides
-        .filter(side => layout.some(lo => lo.side === side))
+        .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
         .map(side => <div key={`${side}_menus`}>
           {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <Tooltip title={settings.isCollapsed ? 'DoubleClick to expand' : ''} arrow placement="left">
             <div
@@ -301,6 +304,6 @@ const MuiPanelManager = withTheme(({
         />)}
     </Box>}
   </Box>;
-});
+};
 
 export default MuiPanelManager;
