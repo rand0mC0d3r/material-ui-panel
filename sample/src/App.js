@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -30,8 +31,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
-  const [markerColor, setMarkerColor] = useState('primary');
   const [inverseMarkers, setInverseMarkers] = useState(false);
+
+  const [markerColor, setMarkerColor] = useState('primary');
+
   const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
@@ -45,7 +48,7 @@ function App() {
 
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
-        <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
+        {/* <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
         <MupButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MupButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
 
@@ -79,15 +82,12 @@ function App() {
 
         <MupPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MupPanel>
+        </MupPanel> */}
 
         <MupStatus
           id="statusA"
           side="left"
-          tooltip={[
-            { icon: <FormatIndentIncrease color="action" />, text: '33% frames left' },
-            { icon: <CameraIcon />, text: 'Ready for photo' },
-          ]}
+          tooltip='33% frames left / Ready for photo'
           elements={[
             { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
             { icon: <CameraIcon />, text: 'Ipsum' },
@@ -100,10 +100,10 @@ function App() {
           demo text
         </MupStatus>
 
-        <GalleryStatus />
+        {/* <GalleryStatus />
         <ConfigStatus />
         <MenuStatus />
-        <SaveStatus />
+        <SaveStatus /> */}
 
         <MupContent>
           <iframe

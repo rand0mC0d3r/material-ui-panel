@@ -1,7 +1,7 @@
 import { Switch, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import MupStatus from '../components/MupStatus';
@@ -35,13 +35,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ToggleTheme = withTheme(({
+const ToggleTheme = ({
   toggleDarkMode, darkMode,
   toggleDebugMode, debugMode,
   toggleCollapseMode, collapseMode,
   toggleInverseMarkers, inverseMarkers,
   setMarkerColor, markerColor,
-  theme }) => {
+}) => {
+  const theme = useTheme();
   const classes = useStyles(theme)
 
   const toggles = [
@@ -119,9 +120,9 @@ const ToggleTheme = withTheme(({
       elements={[
     {
       icon: toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />,
-      text: `${toggle.title.substr(0, 8)}..`
+      text: toggle.title
     }
   ]} />)}</>
-})
+}
 
 export default ToggleTheme;

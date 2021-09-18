@@ -42,9 +42,13 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
     }
   }, [notifications.count, notifications.color, id, layoutObject, handlePanelAlerts]);
 
-  return layoutObject && layoutObject.isVisible && (layoutObject.asSection && layoutObject.uniqueId
+  return layoutObject &&
+    layoutObject.isVisible &&
+    (layoutObject.asSection &&
+      layoutObject.uniqueId
       ? document.getElementById(`${layoutObject.uniqueId}-section`)
-      : document.getElementById(`${side}-panel`)) && !!id ? createPortal(
+      : document.getElementById(`${side}-panel`)) &&
+    !!id ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
       flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
@@ -63,11 +67,10 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
           {children}
         </div>}
     </div>,
-    (() => {
-      return layoutObject.asSection && layoutObject.uniqueId
+      layoutObject.asSection && layoutObject.uniqueId
       ? document.getElementById(`${layoutObject.uniqueId}-section`)
-      : document.getElementById(`${side}-panel`);
-    })())
+      : document.getElementById(`${side}-panel`)
+    )
     : null;
 };
 

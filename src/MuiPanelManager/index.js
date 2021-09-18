@@ -218,9 +218,8 @@ const MuiPanelManager = withTheme(({
     }
   }, [layout]);
 
-  return <Box display="flex" flexDirection="column" className={classes.wrapper}>
-    {/* {leftPanelWidth} central {rightPanelWidth} */}
-    <div className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+  return <Box id="MuiPanelManager" display="flex" flexDirection="column" className={classes.wrapper}>
+    <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
       {availableSides.map(side => <div
         key={`${side}_panels`}
@@ -286,17 +285,20 @@ const MuiPanelManager = withTheme(({
     </div>
 
     {status.length > 0 && <Box
+      id="MuiStatusBarList"
       onContextMenu={(e) => { e.preventDefault(); }}
       display="flex"
       className={classes.statusBar}
       justifyContent="space-between"
     >
-      {availableSides.map(side => <Box
-        key={`${side}_status`}
-        display="flex"
-        justifyContent={side === 'left' ? 'flex-start' : 'flex-end'}
-        className={classes.statusBarHalf}
-        id={`material-ui-panel-statusBar-${side}`} />)}
+      {availableSides
+        .map(side => <Box
+          id={`material-ui-panel-statusBar-${side}`}
+          key={`${side}_status`}
+          display="flex"
+          justifyContent={side === 'left' ? 'flex-start' : 'flex-end'}
+          className={classes.statusBarHalf}
+        />)}
     </Box>}
   </Box>;
 });

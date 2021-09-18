@@ -186,7 +186,7 @@ const MuiSplitter = withTheme(({
                     color={layoutObject?.title ? 'textPrimary' : 'textSecondary'}
                     variant='subtitle2'>
                   {section.type === 'list' && 'Add sub-sections ...'}
-                  {section.type === 'panel' && layoutObject?.title || 'Waiting for selection...'}
+                  {section.type === 'panel' && (layoutObject?.title || 'Waiting for selection...')}
                   {section.type === 'content' && 'Main content'}
                 </Typography>
               </>}
