@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip, elements }) => {
-  const { status, handleSetVisible, handleStatusAnnouncement } = useContext(DataProvider);
+  const { status, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider);
   const [statusObject, setStatusObject] = useState(null);
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -23,9 +23,20 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
     (e) => { if (onClick) { onClick(e); } },
     [onClick]);
 
-  const callbackHandleStatusAnnouncement = useCallback(
-    (id) => { handleStatusAnnouncement({ id, elements, side, tooltip }); },
-    [side, tooltip, elements, handleStatusAnnouncement]);
+  const callbackHandleStatusAnnouncement = useCallback((id) => {
+    handleStatusAnnouncement({ id, elements, side, tooltip });
+  }, [side, tooltip, elements, handleStatusAnnouncement]);
+
+  const callbackHandleStatusDestroy = useCallback((id) => {
+    handleStatusDestroy({ id });
+  },[]);
+
+  useEffect(() => {
+    return () => {
+      console.log('destroy');
+      callbackHandleStatusDestroy(id);
+    };
+  }, [id, callbackHandleStatusDestroy]);
 
   useEffect(() => {
     if (id && statusObject === null && !status.some(item => item.uniqueId === id)) {

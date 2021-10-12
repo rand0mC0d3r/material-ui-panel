@@ -20,6 +20,7 @@ import ActButton from './parts/ActButton';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import ConfigStatus from './parts/ConfigStatus';
+import DynamicStatus from './parts/DynamicStatus';
 import GalleryStatus from './parts/GalleryStatus';
 import IframePanel from './parts/IframePanel';
 import MenuStatus from './parts/MenuStatus';
@@ -29,7 +30,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(true);
+  const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
 
@@ -46,7 +47,14 @@ function App() {
     <ThemeProvider {...{ theme }}>
       <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
+        {/* // status section */}
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
+
+        <GalleryStatus />
+        <ConfigStatus />
+        <MenuStatus />
+        <SaveStatus />
+        <DynamicStatus />
 
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
@@ -100,17 +108,12 @@ function App() {
           demo text
         </MupStatus> */}
 
-        {/* <GalleryStatus />
-        <ConfigStatus />
-        <MenuStatus />
-        <SaveStatus /> */}
-
         <MupContent>
-          {/* <iframe
+          <iframe
             title="Random Wiki article"
             style={{ width: "100%", filter: "opacity(0.3) grayscale(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}
             src="https://en.wikipedia.org/wiki/Special:Random"
-            /> */}
+            />
         </MupContent>
 
       </MuiPanelProvider>

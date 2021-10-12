@@ -1,5 +1,5 @@
 import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import BlurOnIcon from '@material-ui/icons/BlurOn';
@@ -14,6 +14,7 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import WebIcon from '@material-ui/icons/Web';
 import { cloneElement, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
+import MupSectionsSplitter from './MupSectionsSplitter';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,22 +90,19 @@ const useStyles = makeStyles(theme => ({
   wrapperRepeat: {
     boxShadow: 'inset 1px 1px 0px 0px #CCC',
   },
+  rootWrapper: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  },
   rootController: {
     position: 'absolute',
-    left: '50%',
-    padding: '8px 16px',
+    padding: '4px 12px',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '0px 0px 8px 8px',
     border: `1px solid ${theme.palette.divider}`,
     zIndex: '1',
-    top: '-30px',
-    transition: 'top .05s ease-in-out',
-
-    '&:hover': {
-      top: '0px',
-      transition: 'top .15s ease-in-out'
-
-    },
   },
   groupsBox: {
     gap: '8px'
@@ -146,7 +144,7 @@ const MuiSplitter = ({
     const theme = useTheme();
   const classes = useStyles(theme);
   const [layoutObject, setLayoutObject] = useState(null);
-  const { layout, splitContent, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, splitContentNg, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   useEffect(() => {
     if (section.type === 'panel') {
@@ -157,12 +155,15 @@ const MuiSplitter = ({
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
 
-    {section.type === 'content' ? <div className={classes.rootController}>
+    {section.type === 'content' ? <div className={classes.rootWrapper}>
+      <div className={classes.rootController}>
         <Tooltip title="Divide the interface into panels" arrow placement="bottom">
-          <Button className={classes.smallButton} onClick={() => splitContent({ sectionId: section.id })}>
-            <FlipIcon />
-          </Button>
+          <span>
+          <MupSectionsSplitter createSection={({type, index}) =>
+              splitContentNg({ sectionId: section.id, type, index })} />
+          </span>
         </Tooltip>
+      </div>
       </div>
       : <>
       <Tooltip title="Double-Click to collapse" arrow>

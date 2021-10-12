@@ -57,6 +57,9 @@ function MuiPanelProvider({
 					}
 			]);
 		};
+		const handleStatusDestroy = ({ id }) => {
+			setStatus(status => [ ...status.filter(lo => lo.uniqueId !== id) ]);
+		};
 
 	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 			setLayout(layout => [
@@ -279,6 +282,40 @@ function MuiPanelProvider({
 			: layoutObject));
 	};
 
+	const splitContentNg = ({ sectionId, type, index }) => {
+		const randomString = (Math.random() + 1).toString(36).substring(7);
+		const randomStringPanel = (Math.random() + 1).toString(36).substring(7);
+		// console.log('split content', sectionId, type, index);
+		setSections(sections => [
+			...sections.map(section => {
+				if (section.id === sectionId) {
+					return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' };
+				}
+				return section;
+			}),
+			{
+				uniqueId: randomString,
+				id: randomString,
+				direction: type === 'vs' ? 'vertical' : 'horizontal',
+				order: 'normal',
+				background: getRandomColor(),
+				parentId: sectionId,
+				isCollapsed: false,
+				type: 'content',
+				zones: [ ]
+			},
+			{
+				uniqueId: randomStringPanel,
+				id: randomStringPanel,
+				direction: type === 'vs' ? 'vertical' : 'horizontal',
+				order: 'normal',
+				background: getRandomColor(),
+				parentId: sectionId,
+				isCollapsed: false,
+				type: 'panel',
+				zones: [ ]
+		}]);
+	};
 	const splitContent = ({ sectionId }) => {
 		const randomString = (Math.random() + 1).toString(36).substring(7);
 		const randomStringPanel = (Math.random() + 1).toString(36).substring(7);
@@ -291,6 +328,7 @@ function MuiPanelProvider({
 			}),
 			{
 				id: randomString,
+				uniqueId: randomString,
 				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
@@ -301,6 +339,7 @@ function MuiPanelProvider({
 			},
 			{
 				id: randomStringPanel,
+				uniqueId: randomStringPanel,
 				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
@@ -422,7 +461,11 @@ function MuiPanelProvider({
 
 
 				showContent,
-				addZoneToSection, removeZoneFromSection, splitContent,
+				addZoneToSection, removeZoneFromSection,
+
+				splitContent,
+				splitContentNg,
+
 				toggleSectionDirection,
 				chooseTypeForSection,
 				toggleCollapseSection,
@@ -439,6 +482,7 @@ function MuiPanelProvider({
 				handlePanelAnnouncement, handleContentAnnouncement,
 
 				handleStatusAnnouncement,
+				handleStatusDestroy,
 				handleSetStatusElements,
 			}}>
 			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
