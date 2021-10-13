@@ -19,11 +19,11 @@ function MuiPanelProvider({
 	debugMode,
 	showCollapseButton,
 	...props }) {
-		// const cachedLayout = localStorage.getItem(localStorageKey);
+	// const cachedLayout = localStorage.getItem(localStorageKey);
 
-		const initialLayout = get(props, 'layout', []);
-		const initialStatus = get(props, 'status', []);
-		const initialSections = get(props, 'sections', [
+	const initialLayout = get(props, 'layout', []);
+	const initialStatus = get(props, 'status', []);
+	const initialSections = get(props, 'sections', [
 		{
 			id: getRandomId(),
 			direction: 'horizontal',
@@ -31,127 +31,127 @@ function MuiPanelProvider({
 			type: 'content',
 			background: getRandomColor(),
 			isCollapsed: true,
-			zones: [  ]
+			zones: []
 		},
 	]);
-		const initialSettings = get(props, 'settings', {
-			isCollapsed: false,
-			inverseMarkers: false,
-			markerColor: 'textPrimary',
-			debugMode: false,
-		});
+	const initialSettings = get(props, 'settings', {
+		isCollapsed: false,
+		inverseMarkers: false,
+		markerColor: 'textPrimary',
+		debugMode: false,
+	});
 
-		const [layout, setLayout] = useState(initialLayout);
-		const [status, setStatus] = useState(initialStatus);
-		const [sections, setSections] = useState(initialSections);
-		const [settings, setSettings] = useState(initialSettings);
+	const [layout, setLayout] = useState(initialLayout);
+	const [status, setStatus] = useState(initialStatus);
+	const [sections, setSections] = useState(initialSections);
+	const [settings, setSettings] = useState(initialSettings);
 
-		const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {
-			setStatus(status => [
-				...status.filter(lo => lo.uniqueId !== id),
-				{
-					uniqueId: id,
-					side,
-					elements,
-					tooltip,
-					type: 'user'
-					}
-			]);
-		};
-		const handleStatusDestroy = ({ id }) => {
-			setStatus(status => [ ...status.filter(lo => lo.uniqueId !== id) ]);
-		};
-
-	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
-			setLayout(layout => [
-				...layout.filter(lo => lo.uniqueId !== id),
-				{
-					uniqueId: id,
-					asContent: false,
-					asGroup: false,
-					handleOnClick,
-					notifications: {
-						count: 0,
-						summary: 0,
-						color: 'primary',
-						...notifications,
-					},
-					asEmbedded: false,
-					asSection: false,
-					side: initialSide,
-					isVisible: false,
-					parentId: null,
-					iconInHeader,
-					isCollapsed: false,
-					ref,
-					index: layout.length,
-					showBadge: false,
-					variant: 'standard',
-					subTitle,
-					title,
-					placement,
-					showIcon,
-					shortText,
-					tooltip,
-					noPanel,
-					icon,
-					children,
-					}
-			]);
+	const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {
+		setStatus(status => [
+			...status.filter(lo => lo.uniqueId !== id),
+			{
+				uniqueId: id,
+				side,
+				elements,
+				tooltip,
+				type: 'user'
+			}
+		]);
+	};
+	const handleStatusDestroy = ({ id }) => {
+		setStatus(status => [...status.filter(lo => lo.uniqueId !== id)]);
 	};
 
-		const handleContentAnnouncement = ({ id, children }) => {
-			setLayout(layout => [
-				...layout.filter(lo => lo.uniqueId !== id),
-				{
-					uniqueId: id,
-					asContent: true,
-					side: initialSide,
-					index: layout.length,
-					children,
-					}
-			]);
-		};
+	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+		setLayout(layout => [
+			...layout.filter(lo => lo.uniqueId !== id),
+			{
+				uniqueId: id,
+				asContent: false,
+				asGroup: false,
+				handleOnClick,
+				notifications: {
+					count: 0,
+					summary: 0,
+					color: 'primary',
+					...notifications,
+				},
+				asEmbedded: false,
+				asSection: false,
+				side: initialSide,
+				isVisible: false,
+				parentId: null,
+				iconInHeader,
+				isCollapsed: false,
+				ref,
+				index: layout.length,
+				showBadge: false,
+				variant: 'standard',
+				subTitle,
+				title,
+				placement,
+				showIcon,
+				shortText,
+				tooltip,
+				noPanel,
+				icon,
+				children,
+			}
+		]);
+	};
 
-		const updateParentSummary = (layout) => {
-			return layout.map(layoutObject =>
-				(layoutObject.parentId === null)
-					? {
-						...layoutObject,
-						notifications: {
-							...layoutObject.notifications,
-							summary: layout.reduce((acc, value) => {
-								if (value.parentId === layoutObject.uniqueId) {
-									acc = acc + value.notifications.count;
-								}
-								return acc;
-							}, 0) + layoutObject.notifications.count,
-						}
-					}
-					: layoutObject
-			);
-		};
+	const handleContentAnnouncement = ({ id, children }) => {
+		setLayout(layout => [
+			...layout.filter(lo => lo.uniqueId !== id),
+			{
+				uniqueId: id,
+				asContent: true,
+				side: initialSide,
+				index: layout.length,
+				children,
+			}
+		]);
+	};
 
-		const handleSetAsGroup = ({ uniqueId }) => {
-			setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
-				? { ...layoutObject, asGroup: !layoutObject.asGroup }
-				: layoutObject));
-		};
+	const updateParentSummary = (layout) => {
+		return layout.map(layoutObject =>
+			(layoutObject.parentId === null)
+				? {
+					...layoutObject,
+					notifications: {
+						...layoutObject.notifications,
+						summary: layout.reduce((acc, value) => {
+							if (value.parentId === layoutObject.uniqueId) {
+								acc = acc + value.notifications.count;
+							}
+							return acc;
+						}, 0) + layoutObject.notifications.count,
+					}
+				}
+				: layoutObject
+		);
+	};
+
+	const handleSetAsGroup = ({ uniqueId }) => {
+		setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+			? { ...layoutObject, asGroup: !layoutObject.asGroup }
+			: layoutObject));
+	};
 
 	const handleSetStatusElements = ({ uniqueId, elements }) => {
 		console.log(uniqueId, elements, status);
-			setStatus(status => status.map(statusObject => statusObject.uniqueId === uniqueId
-				? { ...statusObject, elements }
-				: statusObject));
-		};
+		setStatus(status => status.map(statusObject => statusObject.uniqueId === uniqueId
+			? { ...statusObject, elements }
+			: statusObject));
+	};
 
-		const handleUnSetAsEmbedded = ({ uniqueId }) => {
-			setLayout(layout.map(layoutObject =>
-				layoutObject.uniqueId === uniqueId
-					? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
-					: layoutObject
-			));
-		};
+	const handleUnSetAsEmbedded = ({ uniqueId }) => {
+		setLayout(layout.map(layoutObject =>
+			layoutObject.uniqueId === uniqueId
+				? { ...layoutObject, asGroup: false, asEmbedded: false, isVisible: false, parentId: null }
+				: layoutObject
+		));
+	};
 
 	const toggleSectionDirection = ({ sectionId }) => {
 		setSections(sections => sections.map(section => {
@@ -195,8 +195,8 @@ function MuiPanelProvider({
 				parentId: sectionId,
 				isCollapsed: false,
 				type: 'panel',
-				zones: [ ]
-		}]);
+				zones: []
+			}]);
 	};
 
 	const removeZoneFromSection = ({ sectionId }) => {
@@ -205,11 +205,11 @@ function MuiPanelProvider({
 			...sections
 				.filter(section => section.id !== sectionId)
 				.map(section => {
-						if (section.zones.some(sz => sz === sectionId)) {
-							return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] };
-						}
-						return section;
-			}),
+					if (section.zones.some(sz => sz === sectionId)) {
+						return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] };
+					}
+					return section;
+				}),
 		]);
 	};
 
@@ -236,11 +236,11 @@ function MuiPanelProvider({
 		}));
 		setLayout(layout => layout
 			.map(layoutObject => layoutObject.uniqueId === panelId || layoutObject.parentId === panelId
-			? { ...layoutObject, asSection: true, isVisible: true }
+				? { ...layoutObject, asSection: true, isVisible: true }
 				: layoutObject)
 			.map(layoutObject => layoutObject.uniqueId === previousPanel || layoutObject.parentId === previousPanel
-			? { ...layoutObject, asSection: false, isVisible: false }
-			: layoutObject));
+				? { ...layoutObject, asSection: false, isVisible: false }
+				: layoutObject));
 	};
 
 
@@ -285,14 +285,25 @@ function MuiPanelProvider({
 
 	const splitContentNg = ({ sectionId, type, index, count }) => {
 		debugger;
-		const randomString = (Math.random() + 1).toString(36).substring(7);
-		const randomStringPanel = (Math.random() + 1).toString(36).substring(7);
-		const randomStringPanel2 = (Math.random() + 1).toString(36).substring(7);
-		// console.log('split content', sectionId, type, index);
+		const randomStrings = [getRandomId(), getRandomId(), getRandomId()];
 
-		// const sectionItems = [...Array(count)].map((item, indexCount) => ({
-		// 		uniqueId: randomString,
-		// 		id: randomString,
+
+		// console.log([
+		// 	...sections.map(section => {
+		// 		if (section.id === sectionId) {
+		// 			return {
+		// 				...section,
+		// 				uniqueId: section.id,
+		// 				zones: [...section.zones, ...randomStrings.slice(0, count)],
+		// 				direction: type === 'vs' ? 'horizontal' : 'vertical',
+		// 				type: 'list'
+		// 			};
+		// 		}
+		// 		return section;
+		// 	}),
+		// 	...[...Array(count)].map((item, indexCount) => ({
+		// 		uniqueId: randomStrings[indexCount],
+		// 		id: randomStrings[indexCount],
 		// 		direction: 'vertical',
 		// 		order: 'normal',
 		// 		background: getRandomColor(),
@@ -300,18 +311,16 @@ function MuiPanelProvider({
 		// 		isCollapsed: false,
 		// 		type: indexCount === index ? 'content' : 'panel',
 		// 		zones: [ ]
-		// 	}));
+		// 	}))
+		// ]);
 
-		// console.log(sectionItems);
 
 		setSections(sections => [
 			...sections.map(section => {
 				if (section.id === sectionId) {
 					return {
 						...section,
-						zones: count === 3
-							? [...section.zones, randomString, randomStringPanel, randomStringPanel2]
-							: [...section.zones, randomString, randomStringPanel],
+						zones: [...section.zones, ...randomStrings.slice(0, count)],
 						direction: type === 'vs' ? 'horizontal' : 'vertical',
 						type: 'list'
 					};
@@ -319,8 +328,8 @@ function MuiPanelProvider({
 				return section;
 			}),
 			...[...Array(count)].map((item, indexCount) => ({
-				uniqueId: indexCount === index ? randomString : randomStringPanel,
-				id: indexCount === index ? randomString : randomStringPanel,
+				uniqueId: randomStrings[indexCount],
+				id: randomStrings[indexCount],
 				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
@@ -329,28 +338,6 @@ function MuiPanelProvider({
 				type: indexCount === index ? 'content' : 'panel',
 				zones: [ ]
 			}))
-			// {
-			// 	uniqueId: randomString,
-			// 	id: randomString,
-			// 	direction: 'vertical',
-			// 	order: 'normal',
-			// 	background: getRandomColor(),
-			// 	parentId: sectionId,
-			// 	isCollapsed: false,
-			// 	type: index === 0 ? 'content' : 'panel',
-			// 	zones: [ ]
-			// },
-			// {
-			// 	uniqueId: randomStringPanel,
-			// 	id: randomStringPanel,
-			// 	direction: 'vertical',
-			// 	order: 'normal',
-			// 	background: getRandomColor(),
-			// 	parentId: sectionId,
-			// 	isCollapsed: false,
-			// 	type: index === 0 ? 'panel' : 'content',
-			// 	zones: [ ]
-			// }
 		]);
 	};
 	const splitContent = ({ sectionId }) => {
