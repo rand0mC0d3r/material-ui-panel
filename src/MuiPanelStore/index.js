@@ -318,39 +318,39 @@ function MuiPanelProvider({
 				}
 				return section;
 			}),
-			// [...Array(count)].map((item, indexCount) => ({
-			// 	uniqueId: indexCount !== index ? randomString : randomStringPanel,
-			// 	id: indexCount !== index ? randomString : randomStringPanel,
+			...[...Array(count)].map((item, indexCount) => ({
+				uniqueId: indexCount === index ? randomString : randomStringPanel,
+				id: indexCount === index ? randomString : randomStringPanel,
+				direction: 'vertical',
+				order: 'normal',
+				background: getRandomColor(),
+				parentId: sectionId,
+				isCollapsed: false,
+				type: indexCount === index ? 'content' : 'panel',
+				zones: [ ]
+			}))
+			// {
+			// 	uniqueId: randomString,
+			// 	id: randomString,
 			// 	direction: 'vertical',
 			// 	order: 'normal',
 			// 	background: getRandomColor(),
 			// 	parentId: sectionId,
 			// 	isCollapsed: false,
-			// 	type: indexCount === index ? 'content' : 'panel',
+			// 	type: index === 0 ? 'content' : 'panel',
 			// 	zones: [ ]
-			// }))
-			{
-				uniqueId: randomString,
-				id: randomString,
-				direction: 'vertical',
-				order: 'normal',
-				background: getRandomColor(),
-				parentId: sectionId,
-				isCollapsed: false,
-				type: index === 0 ? 'content' : 'panel',
-				zones: [ ]
-			},
-			{
-				uniqueId: randomStringPanel,
-				id: randomStringPanel,
-				direction: 'vertical',
-				order: 'normal',
-				background: getRandomColor(),
-				parentId: sectionId,
-				isCollapsed: false,
-				type: index === 0 ? 'panel' : 'content',
-				zones: [ ]
-			}
+			// },
+			// {
+			// 	uniqueId: randomStringPanel,
+			// 	id: randomStringPanel,
+			// 	direction: 'vertical',
+			// 	order: 'normal',
+			// 	background: getRandomColor(),
+			// 	parentId: sectionId,
+			// 	isCollapsed: false,
+			// 	type: index === 0 ? 'panel' : 'content',
+			// 	zones: [ ]
+			// }
 		]);
 	};
 	const splitContent = ({ sectionId }) => {
