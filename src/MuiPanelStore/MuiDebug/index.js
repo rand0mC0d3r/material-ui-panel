@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '8px',
     left: '30%',
     right: '30%',
-    top: '32px',
+    top: '100px',
 		height: '850px',
 		overflow: 'auto'
 	},

@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import get from 'lodash/get';
 import { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
@@ -282,39 +283,75 @@ function MuiPanelProvider({
 			: layoutObject));
 	};
 
-	const splitContentNg = ({ sectionId, type, index }) => {
+	const splitContentNg = ({ sectionId, type, index, count }) => {
+		debugger;
 		const randomString = (Math.random() + 1).toString(36).substring(7);
 		const randomStringPanel = (Math.random() + 1).toString(36).substring(7);
+		const randomStringPanel2 = (Math.random() + 1).toString(36).substring(7);
 		// console.log('split content', sectionId, type, index);
+
+		// const sectionItems = [...Array(count)].map((item, indexCount) => ({
+		// 		uniqueId: randomString,
+		// 		id: randomString,
+		// 		direction: 'vertical',
+		// 		order: 'normal',
+		// 		background: getRandomColor(),
+		// 		parentId: sectionId,
+		// 		isCollapsed: false,
+		// 		type: indexCount === index ? 'content' : 'panel',
+		// 		zones: [ ]
+		// 	}));
+
+		// console.log(sectionItems);
+
 		setSections(sections => [
 			...sections.map(section => {
 				if (section.id === sectionId) {
-					return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' };
+					return {
+						...section,
+						zones: count === 3
+							? [...section.zones, randomString, randomStringPanel, randomStringPanel2]
+							: [...section.zones, randomString, randomStringPanel],
+						direction: type === 'vs' ? 'horizontal' : 'vertical',
+						type: 'list'
+					};
 				}
 				return section;
 			}),
+			// [...Array(count)].map((item, indexCount) => ({
+			// 	uniqueId: indexCount !== index ? randomString : randomStringPanel,
+			// 	id: indexCount !== index ? randomString : randomStringPanel,
+			// 	direction: 'vertical',
+			// 	order: 'normal',
+			// 	background: getRandomColor(),
+			// 	parentId: sectionId,
+			// 	isCollapsed: false,
+			// 	type: indexCount === index ? 'content' : 'panel',
+			// 	zones: [ ]
+			// }))
 			{
 				uniqueId: randomString,
 				id: randomString,
-				direction: type === 'vs' ? 'vertical' : 'horizontal',
+				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
 				parentId: sectionId,
 				isCollapsed: false,
-				type: 'content',
+				type: index === 0 ? 'content' : 'panel',
 				zones: [ ]
 			},
 			{
 				uniqueId: randomStringPanel,
 				id: randomStringPanel,
-				direction: type === 'vs' ? 'vertical' : 'horizontal',
+				direction: 'vertical',
 				order: 'normal',
 				background: getRandomColor(),
 				parentId: sectionId,
 				isCollapsed: false,
-				type: 'panel',
+				type: index === 0 ? 'panel' : 'content',
 				zones: [ ]
-		}]);
+			}
+		]);
 	};
 	const splitContent = ({ sectionId }) => {
 		const randomString = (Math.random() + 1).toString(36).substring(7);

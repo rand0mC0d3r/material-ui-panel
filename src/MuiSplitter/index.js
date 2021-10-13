@@ -159,8 +159,8 @@ const MuiSplitter = ({
       <div className={classes.rootController}>
         <Tooltip title="Divide the interface into panels" arrow placement="bottom">
           <span>
-          <MupSectionsSplitter createSection={({type, index}) =>
-              splitContentNg({ sectionId: section.id, type, index })} />
+          <MupSectionsSplitter createSection={({type, index, count}) =>
+              splitContentNg({ sectionId: section.id, type, index, count })} />
           </span>
         </Tooltip>
       </div>

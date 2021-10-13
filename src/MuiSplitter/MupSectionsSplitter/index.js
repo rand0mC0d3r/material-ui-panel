@@ -58,33 +58,33 @@ const MupSectionsSplitter = ({ createSection = () => { }}) => {
     {
       tooltip: 'Vertical split',
       content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 0 })}></div>
-        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 1 })}></div>
+        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 0, count: 2 })}></div>
+        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 1, count: 2 })}></div>
       </div>
     },
     {
       tooltip: 'Horizontal split',
       content: <div className={classes.general} style={{'flexDirection': 'column'}}>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  0})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  1})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  0, count: 2})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  1, count: 2})}></div>
       </div>
     },
-    // {
-    //   tooltip: '3 Mains primary',
-    //   content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-    //     <div className={classes.block} style={{'flex': '1 1 20%'}}></div>
-    //     <div className={classes.block} style={{'flex': '1 1 60%'}}></div>
-    //     <div className={classes.block} style={{'flex': '1 1 20%'}}></div>
-    //   </div>
-    // },
-    // {
-    //   tooltip: '3 Mains even',
-    //   content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-    //     <div className={classes.block} style={{'flex': '1 1 33%'}}></div>
-    //     <div className={classes.block} style={{'flex': '1 1 34%'}}></div>
-    //     <div className={classes.block} style={{'flex': '1 1 33%'}}></div>
-    //   </div>
-    // },
+    {
+      tooltip: '3 Mains primary',
+      content: <div className={classes.general} style={{'flexDirection': 'row'}}>
+        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  0, count: 3})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  1, count: 3})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  2, count: 3})}></div>
+      </div>
+    },
+    {
+      tooltip: '3 Mains even',
+      content: <div className={classes.general} style={{'flexDirection': 'column'}}>
+        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  0, count: 3})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  1, count: 3})}></div>
+        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  2, count: 3})}></div>
+      </div>
+    },
     // {
     //   tooltip: 'Main + sides',
     //   content: <div className={classes.general} style={{'flexDirection': 'row'}}>
@@ -124,12 +124,12 @@ const MupSectionsSplitter = ({ createSection = () => { }}) => {
 
   return <>{visible && <div onClick={toggleVisible} className={classes.wrapper}>
     {blocks.map(block => (
-      <div className={classes.container}>
+      <div key={block.tooltip} className={classes.container}>
         {block.content}
       </div>
     ))}
   </div>}
-    {!visible && <VerticalSplitIcon style={{cursor: 'pointer'}} onClick={toggleVisible} color="action" />}
+  {!visible && <VerticalSplitIcon style={{cursor: 'pointer'}} onClick={toggleVisible} color="action" />}
   </>;
 };
 export default MupSectionsSplitter;
