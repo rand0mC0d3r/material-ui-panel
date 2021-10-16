@@ -15,9 +15,8 @@ const useStyles = makeStyles(theme => ({
     gridAutoColumns: '1fr',
     gridAutoRows: '1fr',
     gridTemplateColumns: '1fr 1fr',
-    // gridTemplateColumns: '1fr 1fr 1fr',
     gridTemplateRows: '1fr',
-    gap: '12px',
+    gap: '8px',
     gridTemplateAreas:
       // '. . .',
       '. .',
@@ -26,14 +25,33 @@ const useStyles = makeStyles(theme => ({
   },
   block: {
     backgroundColor: theme.palette.augmentColor({ main: theme.palette.divider }).light,
-    border: theme.palette.divider,
     alignSelf: 'stretch',
-    borderRadius: '4px',
+    border: `1px solid ${theme.palette.divider}`,
     flex: '1 1 50%',
 
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
-      border: `2px solid ${theme.palette.primary.dark}`,
+    },
+  },
+  blockHorizontal: {
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderBottomLeftRadius: '4px',
+    },
+    '&:last-child': {
+      borderTopRightRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
+  },
+  blockVertical: {
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
     },
   },
   general: {
@@ -58,31 +76,31 @@ const MupSectionsSplitter = ({ createSection = () => { }}) => {
     {
       tooltip: 'Vertical split',
       content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 0, count: 2 })}></div>
-        <div className={classes.block} onClick={() => createSection({ type: 'vs', index: 1, count: 2 })}></div>
+        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index: 0, count: 2 })}></div>
+        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index: 1, count: 2 })}></div>
       </div>
     },
     {
       tooltip: 'Horizontal split',
       content: <div className={classes.general} style={{'flexDirection': 'column'}}>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  0, count: 2})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  1, count: 2})}></div>
+        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  0, count: 2})}></div>
+        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  1, count: 2})}></div>
       </div>
     },
     {
       tooltip: '3 Mains primary',
       content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  0, count: 3})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  1, count: 3})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'hs', index:  2, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({type: 'vs', index:  0, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({type: 'vs', index:  1, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({type: 'vs', index:  2, count: 3})}></div>
       </div>
     },
     {
       tooltip: '3 Mains even',
       content: <div className={classes.general} style={{'flexDirection': 'column'}}>
-        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  0, count: 3})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  1, count: 3})}></div>
-        <div className={classes.block} onClick={() => createSection({type: 'vs', index:  2, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  0, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  1, count: 3})}></div>
+        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  2, count: 3})}></div>
       </div>
     },
     // {

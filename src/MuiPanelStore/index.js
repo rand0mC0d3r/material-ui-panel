@@ -153,6 +153,18 @@ function MuiPanelProvider({
 		));
 	};
 
+	const setSectionUrl = ({ sectionId, url }) => {
+		setSections(sections => sections.map(section => {
+			if (section.id === sectionId) {
+				return {
+					...section,
+					url
+				};
+			}
+			return section;
+		}));
+	};
+
 	const toggleSectionDirection = ({ sectionId }) => {
 		setSections(sections => sections.map(section => {
 			if (section.id === sectionId) {
@@ -287,34 +299,6 @@ function MuiPanelProvider({
 		debugger;
 		const randomStrings = [getRandomId(), getRandomId(), getRandomId()];
 
-
-		// console.log([
-		// 	...sections.map(section => {
-		// 		if (section.id === sectionId) {
-		// 			return {
-		// 				...section,
-		// 				uniqueId: section.id,
-		// 				zones: [...section.zones, ...randomStrings.slice(0, count)],
-		// 				direction: type === 'vs' ? 'horizontal' : 'vertical',
-		// 				type: 'list'
-		// 			};
-		// 		}
-		// 		return section;
-		// 	}),
-		// 	...[...Array(count)].map((item, indexCount) => ({
-		// 		uniqueId: randomStrings[indexCount],
-		// 		id: randomStrings[indexCount],
-		// 		direction: 'vertical',
-		// 		order: 'normal',
-		// 		background: getRandomColor(),
-		// 		parentId: sectionId,
-		// 		isCollapsed: false,
-		// 		type: indexCount === index ? 'content' : 'panel',
-		// 		zones: [ ]
-		// 	}))
-		// ]);
-
-
 		setSections(sections => [
 			...sections.map(section => {
 				if (section.id === sectionId) {
@@ -374,14 +358,14 @@ function MuiPanelProvider({
 		}]);
 	};
 
-	const chooseTypeForSection = ({ panelId, isList = false }) => {
+	const chooseTypeForSection = ({ panelId, type = 'list' }) => {
 		let foundPanelId = null;
 		setSections(sections => sections.map(section => {
 			if (section.id === panelId) {
 				foundPanelId = section.panelId;
 				return {
 					...section,
-					type: isList ? 'list' : 'panel',
+					type,
 					isCollapsed: false,
 					panelId: undefined
 				};
@@ -492,6 +476,7 @@ function MuiPanelProvider({
 
 				toggleSectionDirection,
 				chooseTypeForSection,
+				setSectionUrl,
 				toggleCollapseSection,
 				addPanelToSection, removePanelFromSection,
 

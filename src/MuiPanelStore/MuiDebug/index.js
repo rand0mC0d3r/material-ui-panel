@@ -6,9 +6,10 @@ import DataProvider from '../../MuiPanelStore';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		position: 'absolute',
-		backgroundColor: theme.palette.background.default,
 		border: `3px dotted ${theme.palette.divider}`,
 		borderRadius: '8px',
+		backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    backdropFilter: 'blur(5px)',
 		padding: '8px',
     left: '30%',
     right: '30%',
@@ -26,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 		border: `1px solid ${theme.palette.divider}`,
 		borderRadius: '4px',
 		cursor: 'pointer',
-
 	}
 }));
 

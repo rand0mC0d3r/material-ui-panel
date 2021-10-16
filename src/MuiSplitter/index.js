@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, MenuItem, Select, TextField, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
@@ -8,10 +8,12 @@ import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentatio
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import FlipIcon from '@material-ui/icons/Flip';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
+import LanguageIcon from '@material-ui/icons/Language';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import WebIcon from '@material-ui/icons/Web';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
 import { cloneElement, useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
 import MupSectionsSplitter from './MupSectionsSplitter';
@@ -98,11 +100,19 @@ const useStyles = makeStyles(theme => ({
   },
   rootController: {
     position: 'absolute',
-    padding: '4px 12px',
+    padding: '2px 8px',
+    top: '-16px',
     backgroundColor: theme.palette.background.paper,
-    borderRadius: '0px 0px 8px 8px',
-    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: '4px',
+    // border: `1px solid ${theme.palette.divider}`,
+    boxShadow: '0px 0px 1px 1px #EEE',
     zIndex: '1',
+
+    '&:hover': {
+      top: '0px',
+      transition: 'top .15s ease-in-out'
+
+    },
   },
   groupsBox: {
     gap: '8px'
@@ -144,7 +154,7 @@ const MuiSplitter = ({
     const theme = useTheme();
   const classes = useStyles(theme);
   const [layoutObject, setLayoutObject] = useState(null);
-  const { layout, splitContentNg, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const { layout, splitContentNg, setSectionUrl, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
 
   useEffect(() => {
     if (section.type === 'panel') {
@@ -157,12 +167,8 @@ const MuiSplitter = ({
 
     {section.type === 'content' ? <div className={classes.rootWrapper}>
       <div className={classes.rootController}>
-        <Tooltip title="Divide the interface into panels" arrow placement="bottom">
-          <span>
-          <MupSectionsSplitter createSection={({type, index, count}) =>
-              splitContentNg({ sectionId: section.id, type, index, count })} />
-          </span>
-        </Tooltip>
+        <MupSectionsSplitter
+          createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
       </div>
       </div>
       : <>
@@ -190,9 +196,23 @@ const MuiSplitter = ({
                   {section.type === 'panel' && (layoutObject?.title || 'Waiting for selection...')}
                   {section.type === 'content' && 'Main content'}
                 </Typography>
+                </>}
+              {section.type === 'web' && <>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    fullWidth
+                    placeholder="url address"
+                    onChange={(event) => setSectionUrl({
+                      sectionId: section.uniqueId,
+                      url: event.target.value
+                    })} />
               </>}
             </div>
+
             <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
+
+
               {section.type === 'list' && <Tooltip
                 arrow
                 title="Current orientation"
@@ -288,15 +308,21 @@ const MuiSplitter = ({
         <div className={classes.selectMode}>
         <Tooltip title="Select a mode to continue..." arrow>
           <Box display="flex" alignItems="center" style={{ gap: '8px'}}>
-            <div onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })} className={classes.splitButton}>
-              <AppsIcon style={{ fontSize: 48 }} color={section.type !== 'list' ? 'disabled' : 'primary' } />
+            <div onClick={() => chooseTypeForSection({ panelId: section.id })} className={classes.splitButton}>
+              <AppsIcon style={{ fontSize: 48 }} color={section.type === 'list' ? 'primary' : 'disabled' } />
             </div>
 
             <CallSplitIcon color="disabled" />
 
-            <div onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })} className={classes.splitButton} >
-              <WebIcon style={{ fontSize: 48 }} color={section.type !== 'list' ? 'primary' : 'disabled' } />
+            <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'panel' })} className={classes.splitButton} >
+              <WebAssetIcon style={{ fontSize: 48 }} color={section.type === 'panel' ? 'primary' : 'disabled' } />
             </div>
+
+            <CallSplitIcon  color="disabled" />
+
+            <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'web' })} className={classes.splitButton} >
+              <LanguageIcon style={{ fontSize: 42 }} color={section.type === 'web' ? 'primary' : 'disabled'} />
+              </div>
           </Box>
         </Tooltip>
         </div>
@@ -306,6 +332,9 @@ const MuiSplitter = ({
       </>}
       {section.type === 'content' && <>
           <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }} id={'content-section'} />
+      </>}
+      {section.type === 'web' && section.url && <>
+        <iframe src={`http://${section.url.replace('http://','').replace('https://','')}`} style={{ width: '100%', height: '100%' }} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div
