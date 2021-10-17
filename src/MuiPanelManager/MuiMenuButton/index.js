@@ -9,7 +9,7 @@ const icons = theme => ({
   iconButton: {
     fontSize: '24px',
     opacity: '0.55',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
 
     '&:hover': {
       color: theme.palette.augmentColor({ main: theme.palette.text.secondary }).dark,
@@ -86,7 +86,10 @@ const badge = theme => ({
   leftFixBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-14px' } },
 });
 
-const styledText = ({ theme }) => ({
+
+const useStyles = makeStyles((theme) => ({
+  ...badge(theme),
+  ...icons(theme),
   shortText: {
     fontSize: '10px',
     width: '40px',
@@ -96,63 +99,12 @@ const styledText = ({ theme }) => ({
     textOverflow: 'ellipsis',
     color: theme.palette.text.primary,
   },
-});
-
-const useStyles = makeStyles((theme) => ({
-  ...styledText({ theme }),
-  ...badge(theme),
-  ...icons(theme),
-
   buttonMenu: {
     border: '0px none',
     padding: theme.spacing(2, 0),
     borderRadius: '0px',
     minWidth: 'initial',
 
-  },
-  rightGroupButtonMenu: {
-    position: 'relative',
-    '&::after': {
-      content: '"."',
-      backgroundColor: theme.palette.divider,
-      color: theme.palette.divider,
-      position: 'absolute',
-      fontSize: '4px',
-      lineHeight: '12px',
-      width: '8px',
-      top: 22,
-      borderRadius: '0px 4px 4px 0px',
-      left: -4,
-    },
-  },
-  leftGroupButtonMenu: {
-    position: 'relative',
-    '&::after': {
-      content: '"."',
-      backgroundColor: theme.palette.divider,
-      color: theme.palette.divider,
-      position: 'absolute',
-      width: '8px',
-      top: 22,
-      borderRadius: '4px 0px 0px 4px',
-      right: -4,
-      lineHeight: '12px',
-      fontSize: '4px'
-    },
-  },
-  rightButtonMenu: {
-    borderRight: '4px solid transparent',
-  },
-  leftButtonMenu: {
-    borderLeft: '4px solid transparent'
-  },
-  rightActiveButtonMenu: {
-    borderRight: `4px solid ${theme.palette.text.primary}`,
-    opacity: '1',
-  },
-  leftActiveButtonMenu: {
-    borderLeft: `4px solid ${theme.palette.text.primary}`,
-    opacity: '1',
   },
 }));
 
@@ -202,6 +154,7 @@ const MuiMenuButton = withTheme(({
           onContextMenu={(e) => handleClick(e)}
           disableRipple={lo.noPanel}
           disableElevation={lo.noPanel}
+          disabled={lo.noPanel && lo.handleOnClick === undefined}
           onClick={() => !lo.noPanel ? handleSetVisible({ uniqueId: lo.uniqueId }) : lo.handleOnClick()}
           variant="text"
           fullWidth

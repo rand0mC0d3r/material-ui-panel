@@ -19,12 +19,13 @@ const MupButton = ({ id, tooltip, shortText, icon, showIcon, onClick }) => {
     if (id && icon && !isRegistered) { registerPanel(id); setIsRegistered(true); }
   }, [isRegistered, id, icon, registerPanel]);
 
+  //todo add de-register button
+
   return null;
 };
 
 MupButton.defaultProps = {
   showIcon: true,
-  onClick: () => { }
 };
 
 MupButton.propTypes = {
@@ -33,7 +34,7 @@ MupButton.propTypes = {
 	shortText: PropTypes.string,
 	icon: PropTypes.node,
 	showIcon: PropTypes.bool,
-	onClick: PropTypes.func,
+	onClick: PropTypes.oneOf([PropTypes.func, PropTypes.undefined]),
 };
 
 export default MupButton;

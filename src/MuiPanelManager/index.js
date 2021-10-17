@@ -66,7 +66,7 @@ const styledPanel = theme => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     // height: '100%',
   },
   leftPanel: {
@@ -224,35 +224,37 @@ const MuiPanelManager = ({
       {availableSides
         .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
         .map(side => <div
-        key={`${side}_panels`}
-        id={`MuiPanels_${side}Side`}
-        onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
-        className={`
-        ${classes.panelContainerWrapper}
-        ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) &&
-          (side === 'left'
-            ? classes.leftPanel
-            : classes.rightPanel
-          )
-        }`}
-      >
-        <div
-          id={`${side}-panel`} key={`${side}-panel`}
-          className={`${classes.panelContainer}`}
-          style={{
-            gridArea: `${side}Panel`,
-            overflow: 'hidden auto',
-            width: settings.isCollapsed
-              ? '0px'
-              : (layout.some(l => l.side === side && l.isVisible && !l.asSection)
-                ? (side === 'left'
-                  ? leftPanelWidth
-                  : rightPanelWidth)
-                : 'unset'),
-            height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
-          }}
-        />
-      </div>)}
+          key={`${side}_panels`}
+          id={`MuiPanels_${side}Side`}
+          onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
+          className={`
+          ${classes.panelContainerWrapper}
+          ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) &&
+            (side === 'left'
+              ? classes.leftPanel
+              : classes.rightPanel
+            )
+          }`}
+        >
+          <div
+            id={`${side}-panel`} key={`${side}-panel`}
+            className={`${classes.panelContainer}`}
+            style={{
+              gridArea: `${side}Panel`,
+              overflow: 'hidden auto',
+              width: settings.isCollapsed
+                ? '0px'
+                : (layout.some(l => l.side === side && l.isVisible && !l.asSection)
+                  ? (side === 'left'
+                    ? leftPanelWidth
+                    : rightPanelWidth)
+                  : 'unset'),
+              height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
+            }}
+          >
+              {/* <div>panels collapse</div> */}
+            </div>
+        </div>)}
 
       {availableSides
         .filter(side => layout.some(lo => lo.side === side && !lo.asContent))

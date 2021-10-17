@@ -51,9 +51,9 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
     !!id ? createPortal(
     <div style={{
       order: layoutObject.parentId ? '' : '-1',
-      flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
+      flex: !layoutObject.parentId ? `${layoutObject.isCollapsed ? '0' : '1'} 1 auto` : '0 0 auto',
       display: 'flex',
-      height:  layoutObject.parentId ? 'unset' :'100%',
+      height: (layoutObject.parentId || layoutObject.isCollapsed) ? 'unset' :'100%',
       flexDirection: 'column'
     }}>
       {!layoutObject.asSection && <MupHeaderPanel {...{ layoutObject }} />}

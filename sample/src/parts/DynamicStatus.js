@@ -21,6 +21,15 @@ const SaveStatus = () => {
     setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Status ADD' }])
     setRequestAttention(true)
   }
+
+  const handleAgreeTwo = () => {
+    setElements([
+      { icon: <CloudDoneOutlinedIcon />, text: `Status ADD ${Math.random().toString(36).substr(2, 5)}` },
+      { icon: <CloudDoneOutlinedIcon />, text: `Status ADD 2 ${Math.random().toString(36).substr(2, 5)}` }
+    ])
+    setRequestAttention(true)
+  }
+
   const handleAgreeFail = () => {
     setElements([{ icon: <CloudOffOutlinedIcon />, text: 'Status DEL' }])
     setRequestAttention(false)
@@ -34,14 +43,14 @@ const SaveStatus = () => {
     <MupStatus
       id='statusSaveDoc'
       onClick={handleClickOpen}
-      tooltip="Add dynamic status?"
+      tooltip="Add dynamic status element?"
       elements={elements}
     />
     <Dialog
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Add a dynamic element?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{"Add a dynamic status element?"}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           Want to add or remove a dynamic status?
@@ -54,8 +63,11 @@ const SaveStatus = () => {
         <Button onClick={handleAgree} color="primary">
           Add
         </Button>
+        <Button onClick={handleAgreeTwo} color="primary">
+          Add 2
+        </Button>
         <Button onClick={handleAgreeFail} color="secondary">
-          Remove
+          Remove all
         </Button>
       </DialogActions>
     </Dialog>

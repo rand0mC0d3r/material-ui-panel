@@ -37,10 +37,10 @@ const MupDebug = () => {
 			collapsed: true,
 		}, {
 			title: 'Layout',
-			collapsed: true,
+			collapsed: false,
 			}, {
 			title: 'Status',
-			collapsed: false,
+			collapsed: true,
 		}, {
 			title: 'Settings',
 			collapsed: true,

@@ -30,7 +30,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
 
@@ -47,24 +47,51 @@ function App() {
     <ThemeProvider {...{ theme }}>
       <MuiPanelProvider showSplitterButton={false} initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
-        {/* // status section */}
+        {/* status section */}
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
 
+        {/* buttons section  */}
+        <MupButton
+          id="logoAndCustomColorAndTooltip"
+          tooltip="Custom Tooltip &amp; Color"
+          shortText="LKDN"
+          // icon={<BathtubIcon style={{ color: 'orange' }}
+          icon={<LinkedInIcon style={{ color: green[500] }} />}
+        />
+
+        <ActButton />
+
+        {/* status section  */}
         <GalleryStatus />
         <ConfigStatus />
         <MenuStatus />
         <SaveStatus />
         <DynamicStatus />
 
+        <MupStatus
+          id="statusA"
+          side="left"
+          tooltip='33% frames left / Ready for photo'
+          elements={[
+            { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
+            { icon: <CameraIcon />, text: 'Ipsum' },
+          ]}
+        />
+
+        <MupStatus
+          id="triggerChromeCastPanel"
+          side="left"
+          focusOnClick='chromecastPanel'
+          tooltip="Toggle visibility for panel"
+          elements={[
+          { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
+        ]}>
+          demo text
+        </MupStatus>
+
+        {/* panel section  */}
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
-
-        <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
-        <MupButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
-        <MupButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
-
-        <ActButton />
-
         <ComplexPanel />
         <IframePanel/>
         <AnotherIframePanel />
@@ -92,21 +119,6 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel>
 
-        {/* <MupStatus
-          id="statusA"
-          side="left"
-          tooltip='33% frames left / Ready for photo'
-          elements={[
-            { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
-            { icon: <CameraIcon />, text: 'Ipsum' },
-          ]}
-        />
-
-        <MupStatus id="triggerChromeCastPanel" side="left" focusOnClick='chromecastPanel' tooltip="Toggle visibility for panel" elements={[
-          { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
-        ]}>
-          demo text
-        </MupStatus> */}
 
         <MupContent>
           <iframe
