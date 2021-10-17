@@ -1,6 +1,6 @@
 import TextureIcon from '@material-ui/icons/Texture';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import DataProvider from '../MuiPanelStore';
 import MupHeaderPanel from '../MupHeaderPanel';

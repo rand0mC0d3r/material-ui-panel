@@ -9,27 +9,25 @@ const MupContent = ({ children }) => {
   const [elemRef, setElemRef] = useState();
 
   useEffect(() => { handleContentAnnouncement({ children }); }, []);
-
+  useEffect(() => setElemRef(document.getElementById('content-section')), [sections]);
   useEffect(() => {
     const findObject = layout.find(lo => lo.asContent);
     if (findObject) { setLayoutObject(findObject);}
   }, [layout]);
 
-  useEffect(() => {
-    setElemRef(document.getElementById('content-section'));
-  }, [sections]);
-
-  return (layoutObject && elemRef) ? createPortal(
-    <div style={{
-      order: layoutObject.parentId ? '' : '-1',
-      flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
-      display: 'flex',
-      height:  layoutObject.parentId ? 'unset' :'100%',
-      flexDirection: 'column'
-    }}>
-      {children}
-    </div>,
-    elemRef)
+  return (layoutObject && elemRef)
+    ? createPortal(
+        <div style={{
+          order: layoutObject.parentId ? '' : '-1',
+          flex: !layoutObject.parentId ? '1 1 auto' : '0 0 auto',
+          display: 'flex',
+          height:  layoutObject.parentId ? 'unset' :'100%',
+          flexDirection: 'column'
+        }}>
+          {children}
+        </div>,
+        elemRef
+      )
     : null;
 };
 

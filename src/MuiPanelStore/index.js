@@ -18,6 +18,7 @@ function MuiPanelProvider({
 	inverseMarkers,
 	debugMode,
 	showCollapseButton,
+	showSplitterButton,
 	...props }) {
 	// const cachedLayout = localStorage.getItem(localStorageKey);
 
@@ -36,6 +37,7 @@ function MuiPanelProvider({
 	]);
 	const initialSettings = get(props, 'settings', {
 		isCollapsed: false,
+		canSplitter: true,
 		inverseMarkers: false,
 		markerColor: 'textPrimary',
 		debugMode: false,
@@ -494,7 +496,7 @@ function MuiPanelProvider({
 				handleStatusDestroy,
 				handleSetStatusElements,
 			}}>
-			<MuiPanelManager {...{allowRightClick, showCollapseButton}}>
+			<MuiPanelManager {...{allowRightClick, showCollapseButton, showSplitterButton }}>
 				{props.children}
 			</MuiPanelManager>
 			{settings.debugMode && <MuiDebug />}

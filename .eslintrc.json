@@ -15,8 +15,9 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "mui-unused-classes"],
   "rules": {
+    "mui-unused-classes/unused-classes": 2,
     "comma-dangle": ["error", "only-multiline"],
     "no-console": "off",
     "no-unused-vars":"warn",

@@ -1,11 +1,12 @@
 import { IconButton, Tooltip } from '@material-ui/core';
-import { withTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { ArrowLeft, ArrowRight } from '@material-ui/icons';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import DataProvider from '../MuiPanelStore';
 
-const MupMenuCollapseButton = withTheme(({ theme, side }) => {
+const MupMenuCollapseButton = ({ side }) => {
+	const theme = useTheme();
 	const { settings, toggleSettingIsCollapsed } = useContext(DataProvider);
 
 	return <Tooltip
@@ -39,15 +40,15 @@ const MupMenuCollapseButton = withTheme(({ theme, side }) => {
 				? <ArrowRight style={{ fontSize: 16 }} />
 				: <ArrowLeft style={{ fontSize: 16 }} />)}
 		</IconButton>
-	</Tooltip>
-})
+	</Tooltip>;
+};
 
 MupMenuCollapseButton.defaultProps = {
 	side: 'right',
-}
+};
 
 MupMenuCollapseButton.propTypes = {
 	side: PropTypes.oneOf(['left', 'right']),
-}
+};
 
 export default MupMenuCollapseButton;

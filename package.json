@@ -14,6 +14,7 @@
     "babel-loader": "8.2.2",
     "concurrently": "^6.3.0",
     "copy-and-watch": "^0.1.5",
+    "eslint-plugin-mui-unused-classes": "^1.0.3",
     "npm-check-updates": "^11.8.5"
   },
   "dependencies": {

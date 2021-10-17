@@ -45,7 +45,7 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider showSplitterButton={false} initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* // status section */}
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
@@ -59,7 +59,7 @@ function App() {
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
 
-        {/* <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
+        <MupButton id="logoAndCustomColorAndTooltip" tooltip="Custom Color" icon={<LinkedInIcon style={{ color: green[500] }} />} />
         <MupButton id="logoAndPaletteColorAndText" icon={<GitHub color="secondary" />} shortText="GIT" />
         <MupButton id="logoAndCssColorAndTooltipAndText" tooltip="Time for a bath..." icon={<BathtubIcon style={{ color: 'orange' }} />} shortText="WASH" />
 
@@ -90,7 +90,7 @@ function App() {
 
         <MupPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MupPanel> */}
+        </MupPanel>
 
         {/* <MupStatus
           id="statusA"
@@ -111,7 +111,13 @@ function App() {
         <MupContent>
           <iframe
             title="Random Wiki article"
-            style={{ width: "100%", filter: "opacity(0.3) grayscale(1)", backgroundColor: '#FFF', height: "100%", border: '0px none' }}
+            style={{
+              width: "100%",
+              // filter: "opacity(0.3) grayscale(1)",
+              backgroundColor: '#FFF',
+              height: "100%",
+              border: '0px none'
+            }}
             src="https://en.wikipedia.org/wiki/Special:Random"
             />
         </MupContent>

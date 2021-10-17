@@ -150,8 +150,9 @@ const useStyles = makeStyles(theme => ({
 const MuiSplitter = ({
   section,
   isRoot = false,
+  showSplitterButton = true,
 }) => {
-    const theme = useTheme();
+  const theme = useTheme();
   const classes = useStyles(theme);
   const [layoutObject, setLayoutObject] = useState(null);
   const { layout, splitContentNg, setSectionUrl, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
@@ -166,10 +167,10 @@ const MuiSplitter = ({
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
 
     {section.type === 'content' ? <div className={classes.rootWrapper}>
-      <div className={classes.rootController}>
+      {showSplitterButton && <div className={classes.rootController}>
         <MupSectionsSplitter
           createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
-      </div>
+      </div>}
       </div>
       : <>
       <Tooltip title="Double-Click to collapse" arrow>

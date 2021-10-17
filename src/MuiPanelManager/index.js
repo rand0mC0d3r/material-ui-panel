@@ -11,7 +11,6 @@ const menuWidth = '56px';
 const leftPanelWidth = '500px';
 const rightPanelWidth = '500px';
 
-
 const styledGrid = {
   bothGrid: {
     'grid-template-columns': 'auto auto 1fr auto auto',
@@ -199,6 +198,7 @@ const MuiPanelManager = ({
   children,
   allowRightClick = false,
   showCollapseButton = true,
+  showSplitterButton = true,
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -280,7 +280,7 @@ const MuiPanelManager = ({
       </div>)}
 
       <div style={{ gridArea: 'main', display: 'flex', minWidth: '500px' }}>
-          {sections.filter(section => !section.parentId).map(section => <MuiSplitter key={ section.id} section={section} isRoot />)}
+        {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{showSplitterButton}} key={ section.id} section={section} isRoot />)}
       </div>
 
       {children}

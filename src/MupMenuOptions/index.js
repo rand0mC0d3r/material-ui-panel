@@ -1,7 +1,7 @@
 import { Box, Select, Tooltip, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -11,26 +11,24 @@ import DataProvider from '../MuiPanelStore';
 
 const useStyles = makeStyles(( theme ) => ({
   popover: {
-    "& .MuiPopover-paper": {
+    '& .MuiPopover-paper': {
       border: `1px solid ${theme.palette.divider}`
     }
   }
 }));
 
-const MupMenuOptions = withTheme(({
+const MupMenuOptions = ({
   lo,
   anchorEl,
   setAnchorEl,
   side,
   underMenu = false,
-  theme,
 }) => {
   const { layout, handleSetAsEmbedded, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider);
   const open = Boolean(anchorEl);
-  const classes = useStyles(theme)
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const onClose = () => { setAnchorEl(null); };
-
-  // useEffect(() => { setAnchorEl(null); }, [lo])
 
   return <Popover className={classes.popover} marginThreshold={0} elevation={0} {...{open, anchorEl, onClose}}
     anchorOrigin={underMenu
@@ -71,7 +69,7 @@ const MupMenuOptions = withTheme(({
 
         {!lo.asEmbedded && !lo.asGroup && <Select fullWidth
           disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
-          onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
+          onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }); }}>
             {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
               <Box display="flex" alignItems="center" style={{ gap: theme.spacing(14), alignItems: 'center' }}>
                 {lo.icon}
@@ -81,7 +79,7 @@ const MupMenuOptions = withTheme(({
         </Select>}
       </>}
     </Box>
-  </Popover>
-})
+  </Popover>;
+};
 
 export default MupMenuOptions;
