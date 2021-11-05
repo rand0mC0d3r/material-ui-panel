@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MupSectionsSplitter = ({ createSection = () => { }}) => {
+const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [visible, setVisible] = useState(false);
@@ -140,7 +140,10 @@ const MupSectionsSplitter = ({ createSection = () => { }}) => {
     // },
   ];
 
-  return <>{visible && <div onClick={toggleVisible} className={classes.wrapper}>
+  return <>{visible && <div
+    onClick={toggleVisible}
+    className={classes.wrapper}
+    style={isRoot ? {  } : { }}>
     {blocks.map(block => (
       <div key={block.tooltip} className={classes.container}>
         {block.content}

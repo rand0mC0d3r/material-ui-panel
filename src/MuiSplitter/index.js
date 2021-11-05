@@ -6,6 +6,7 @@ import BlurOnIcon from '@material-ui/icons/BlurOn';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import CloseIcon from '@material-ui/icons/Close';
 import FlipIcon from '@material-ui/icons/Flip';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import LanguageIcon from '@material-ui/icons/Language';
@@ -38,8 +39,8 @@ const useStyles = makeStyles(theme => ({
   },
   smallButton: {
     padding: '0px',
-    width: theme.spacing(3),
-    minWidth: theme.spacing(3),
+    width: theme.spacing(4),
+    minWidth: theme.spacing(4),
     lineHeight: '0px'
   },
   selectMode: {
@@ -101,16 +102,18 @@ const useStyles = makeStyles(theme => ({
   rootController: {
     position: 'absolute',
     padding: '2px 8px',
-    top: '-16px',
-    backgroundColor: theme.palette.background.paper,
+    paddingTop: '48px',
+    top: '-44px',
+    backgroundColor: `${theme.palette.background.paper}d`,
     borderRadius: '4px',
-    // border: `1px solid ${theme.palette.divider}`,
-    boxShadow: '0px 0px 1px 1px #EEE',
+    backdropFilter: 'blur(10px)',
+
+    boxShadow: `0px 0px 1px 1px ${theme.palette.divider}`,
     zIndex: '1',
 
     '&:hover': {
-      top: '0px',
-      transition: 'top .15s ease-in-out'
+      top: '-40px',
+      transition: 'top .35s ease-in-out'
 
     },
   },
@@ -166,10 +169,13 @@ const MuiSplitter = ({
 
   return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
 
-    {section.type === 'content' ? <div className={classes.rootWrapper}>
+    {section.type === 'content' ? <div
+      className={classes.rootWrapper}
+      style={sections.length === 1
+        ? {}
+        : {}}>
       {showSplitterButton && <div className={classes.rootController}>
-        <MupSectionsSplitter
-          createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
+        <MupSectionsSplitter createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
       </div>}
       </div>
       : <>
@@ -212,8 +218,6 @@ const MuiSplitter = ({
             </div>
 
             <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
-
-
               {section.type === 'list' && <Tooltip
                 arrow
                 title="Current orientation"
@@ -235,12 +239,7 @@ const MuiSplitter = ({
                     <LibraryAddOutlinedIcon color="action" />
                   </Button></Tooltip>}
 
-              {section.type === 'list' && section.zones.length === 0 && <div
-                onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
-                className={classes.splitButton}
-              >
-                <AppsIcon />
-              </div>}
+
 
                 {section.type === 'panel' && <Box
                   key={`selectOptions_${section.id}`}
@@ -264,36 +263,55 @@ const MuiSplitter = ({
                   </MenuItem>)}
                 </Select>
 
-                {section.panelId !== undefined && <><MobileScreenShareIcon onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }); }} color="action" /></>}
+              {section.panelId !== undefined && <>
+                    <MobileScreenShareIcon
+                      onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }); }} color="action" /></>}
+
 
                 <div
                   onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
                   className={classes.splitButton}
                 ><WebIcon /></div>
-
               </Box>}
 
-              {section.type !== 'content' ?
-                <Button
-                  className={classes.smallButton}
-                  onClick={() => { showContent({ sectionId: section.id }); }}
-                  disabled={section.type === 'content'}>
-                  <AspectRatioIcon />
-                </Button> : <>
-                  <Button className={classes.smallButton}
-                    onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
-                  >
-                    <AppsIcon color={section.type !== 'list' ? 'disabled' : 'primary'} />
-                  </Button>
-                </>}
-
-              {section.type !== 'content' && <Tooltip arrow title="Remove section">
-                <span>
-                  <Button disabled={section.type === 'list' && section.zones.length > 0} onClick={() => { removeZoneFromSection({ sectionId: section.id }); }} className={classes.smallButton}>
-                    <CancelPresentationOutlinedIcon />
-                  </Button>
-                </span>
+              {section.type !== 'content' && <Tooltip arrow title="Switch to showing the main content">
+                  <span>
+                    <Button
+                      className={classes.smallButton}
+                      onClick={() => { showContent({ sectionId: section.id }); }}
+                      disabled={section.type === 'content'}
+                    >
+                      <AspectRatioIcon />
+                    </Button>
+                  </span>
               </Tooltip>}
+
+              <div style={{ display: 'flex', gap: '4px'}}>
+                {section.zones.length === 0 && <Tooltip arrow title="Switch panel type">
+                  <span>
+                    <Button className={classes.smallButton}
+                      variant="outlined"
+                      disabled={((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId))}
+                      onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+                    >
+                      <AppsIcon/>
+                    </Button>
+                  </span>
+                </Tooltip>}
+
+                {section.type !== 'content' && <Tooltip arrow title="Remove section">
+                  <span>
+                    <Button
+                      variant="outlined"
+                      disabled={section.type === 'list' && section.zones.length > 0}
+                      onClick={() => { removeZoneFromSection({ sectionId: section.id }); }}
+                      className={classes.smallButton}
+                    >
+                      <CloseIcon />
+                    </Button>
+                  </span>
+                </Tooltip>}
+              </div>
             </Box>
           </>}
         </div>

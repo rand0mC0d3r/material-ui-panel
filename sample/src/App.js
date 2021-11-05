@@ -30,7 +30,7 @@ import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(true);
+  const [debugMode, setDebugMode] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
 
@@ -45,7 +45,10 @@ function App() {
 
   return <>
     <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider showSplitterButton={false} initialSide='left' debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
+      <MuiPanelProvider
+        showSplitterButton={true}
+        initialSide='left'
+        debugMode={debugMode} markerColor={markerColor} inverseMarkers={inverseMarkers} showCollapseButton={collapseMode}>
 
         {/* status section */}
         <ToggleTheme {...{ toggleDebugMode, debugMode, toggleDarkMode, darkMode, toggleCollapseMode, collapseMode, toggleInverseMarkers, inverseMarkers, markerColor, setMarkerColor }} />
