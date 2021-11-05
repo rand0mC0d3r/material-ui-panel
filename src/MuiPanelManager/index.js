@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@material-ui/core';
-import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useContext, useEffect, useState } from 'react';
 import DataProvider from '../MuiPanelStore';
@@ -178,7 +178,7 @@ const useStyles = makeStyles(theme => ({
     width: menuWidth,
   },
   menuCollapsed: {
-    width: '8px',
+    width: '0px',
     backgroundColor: theme.palette.background.paper,
     transition: 'background-color 350ms ease-out 100ms',
     opacity: 1,

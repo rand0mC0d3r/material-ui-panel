@@ -2,16 +2,11 @@ import { Box, Button, MenuItem, Select, TextField, Tooltip, Typography } from '@
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
-import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import BlurOnIcon from '@material-ui/icons/BlurOn';
-import CallSplitIcon from '@material-ui/icons/CallSplit';
-import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import CloseIcon from '@material-ui/icons/Close';
-import FlipIcon from '@material-ui/icons/Flip';
 import HttpIcon from '@material-ui/icons/Http';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
-import LanguageIcon from '@material-ui/icons/Language';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
@@ -64,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     padding: '0px 12px',
     alignItems: 'center',
-    gap: "24px",
+    gap: '24px',
     justifyContent: 'space-between',
 
     '&:hover': {
@@ -374,7 +369,10 @@ const MuiSplitter = ({
           <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }} id={'content-section'} />
       </>}
       {section.type === 'web' && section.url && <>
-        <iframe src={`http://${section.url.replace('http://','').replace('https://','')}`} style={{ border: "0px", width: '100%', height: '100%' }} />
+        <iframe
+          title={section.url}
+          src={`http://${section.url.replace('http://', '').replace('https://', '')}`}
+          style={{ border: '0px', width: '100%', height: '100%' }} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div

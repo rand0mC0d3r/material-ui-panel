@@ -356,7 +356,7 @@ function MuiPanelProvider({
 				parentId: sectionId,
 				isCollapsed: false,
 				type: 'panel',
-				zones: [ ]
+				zones: []
 		}]);
 	};
 
@@ -369,7 +369,8 @@ function MuiPanelProvider({
 					...section,
 					type,
 					isCollapsed: false,
-					panelId: undefined
+					panelId: undefined,
+					url: undefined,
 				};
 			}
 			return section;

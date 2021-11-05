@@ -56,7 +56,7 @@ const MupDebug = () => {
 			}
 			return d;
 		}));
-	}, [sections]);
+	}, [sections, classes.dumpText]);
 
 	useEffect(() => {
 		setDumps(dumps => dumps.map(d => {
@@ -65,7 +65,7 @@ const MupDebug = () => {
 			}
 			return d;
 		}));
-	}, [layout]);
+	}, [layout, classes.dumpText]);
 
 	useEffect(() => {
 		setDumps(dumps => dumps.map(d => {
@@ -74,7 +74,7 @@ const MupDebug = () => {
 			}
 			return d;
 		}));
-	}, [settings]);
+	}, [settings, classes.dumpText]);
 
 	useEffect(() => {
 		setDumps(dumps => dumps.map(d => {
@@ -83,7 +83,7 @@ const MupDebug = () => {
 			}
 			return d;
 		}));
-	}, [status]);
+	}, [status, classes.dumpText]);
 
 	const toggleDumpCollapse = (title) => {
 		setDumps(dumps => dumps.map((dump) => { if (dump.title === title) dump.collapsed = !dump.collapsed; return dump; }));
