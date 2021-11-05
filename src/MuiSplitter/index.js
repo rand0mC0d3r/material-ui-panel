@@ -1,4 +1,5 @@
 import { Box, Button, MenuItem, Select, TextField, Tooltip, Typography } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import AspectRatioIcon from '@material-ui/icons/AspectRatio';
@@ -8,8 +9,10 @@ import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentatio
 import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
 import CloseIcon from '@material-ui/icons/Close';
 import FlipIcon from '@material-ui/icons/Flip';
+import HttpIcon from '@material-ui/icons/Http';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import LanguageIcon from '@material-ui/icons/Language';
+import LaptopIcon from '@material-ui/icons/Laptop';
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
@@ -61,6 +64,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     padding: '0px 12px',
     alignItems: 'center',
+    gap: "24px",
     justifyContent: 'space-between',
 
     '&:hover': {
@@ -91,7 +95,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   wrapperRepeat: {
-    boxShadow: 'inset 1px 1px 0px 0px #CCC',
+    // boxShadow: 'inset 1px 1px 0px 0px #CCC',
   },
   rootWrapper: {
     position: 'absolute',
@@ -117,13 +121,19 @@ const useStyles = makeStyles(theme => ({
 
     },
   },
+  iframePanel: {
+    '&::-webkit-scrollbar' : {
+      display: 'none'
+    }
+  },
   groupsBox: {
     gap: '8px'
   },
   title: {
     alignItems: 'center',
     display: 'flex',
-    gap: '8px'
+    // gap: '8px',
+    flex: '1 1 auto'
   },
   horizontal: {
     flexDirection: 'row',
@@ -183,10 +193,10 @@ const MuiSplitter = ({
         <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
           onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
           style={isRoot
-            ? { border: '0px none', backgroundColor: theme.palette.background.paper }
+            ? { borderBottom: `1px solid ${theme.palette.divider}`, backgroundColor: theme.palette.background.paper }
             : section.isCollapsed
               ? { backgroundColor: section.background }
-              : { borderBottom: `4px solid ${section.background}` }
+              : { borderBottom: `3px solid ${section.background}` }
           }
         >
           {!section.isCollapsed && <>
@@ -209,7 +219,17 @@ const MuiSplitter = ({
                     size="small"
                     variant="outlined"
                     fullWidth
-                    placeholder="url address"
+                    autoFocus
+                    value={section.url}
+                    style={{flex: '1 1 auto'}}
+                    placeholder="http://target.url/..."
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <HttpIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                     onChange={(event) => setSectionUrl({
                       sectionId: section.uniqueId,
                       url: event.target.value
@@ -274,7 +294,7 @@ const MuiSplitter = ({
                 ><WebIcon /></div>
               </Box>}
 
-              {section.type !== 'content' && <Tooltip arrow title="Switch to showing the main content">
+              {/* {section.type !== 'content' && <Tooltip arrow title="Switch to showing the main content">
                   <span>
                     <Button
                       className={classes.smallButton}
@@ -284,7 +304,7 @@ const MuiSplitter = ({
                       <AspectRatioIcon />
                     </Button>
                   </span>
-              </Tooltip>}
+              </Tooltip>} */}
 
               <div style={{ display: 'flex', gap: '4px'}}>
                 {section.zones.length === 0 && <Tooltip arrow title="Switch panel type">
@@ -326,21 +346,22 @@ const MuiSplitter = ({
       {((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId)) &&
         <div className={classes.selectMode}>
         <Tooltip title="Select a mode to continue..." arrow>
-          <Box display="flex" alignItems="center" style={{ gap: '8px'}}>
+          <Box display="flex" alignItems="center" style={{ gap: '32px' }}>
+
             <div onClick={() => chooseTypeForSection({ panelId: section.id })} className={classes.splitButton}>
               <AppsIcon style={{ fontSize: 48 }} color={section.type === 'list' ? 'primary' : 'disabled' } />
             </div>
 
-            <CallSplitIcon color="disabled" />
+            <div onClick={() => { showContent({ sectionId: section.id }); }} className={classes.splitButton} >
+              <LaptopIcon style={{ fontSize: 48 }} color={section.type === 'content' ? 'primary' : 'disabled' } />
+            </div>
 
             <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'panel' })} className={classes.splitButton} >
               <WebAssetIcon style={{ fontSize: 48 }} color={section.type === 'panel' ? 'primary' : 'disabled' } />
             </div>
 
-            <CallSplitIcon  color="disabled" />
-
             <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'web' })} className={classes.splitButton} >
-              <LanguageIcon style={{ fontSize: 42 }} color={section.type === 'web' ? 'primary' : 'disabled'} />
+              <HttpIcon style={{ fontSize: 42 }} color={section.type === 'web' ? 'primary' : 'disabled'} />
               </div>
           </Box>
         </Tooltip>
@@ -353,7 +374,7 @@ const MuiSplitter = ({
           <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }} id={'content-section'} />
       </>}
       {section.type === 'web' && section.url && <>
-        <iframe src={`http://${section.url.replace('http://','').replace('https://','')}`} style={{ width: '100%', height: '100%' }} />
+        <iframe src={`http://${section.url.replace('http://','').replace('https://','')}`} style={{ border: "0px", width: '100%', height: '100%' }} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div
