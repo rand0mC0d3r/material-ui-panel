@@ -14,17 +14,15 @@
     "babel-loader": "8.2.3",
     "concurrently": "^6.3.0",
     "copy-and-watch": "^0.1.5",
+    "serve": "13.0.2",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
     "npm-check-updates": "^12.0.0"
   },
   "dependencies": {
     "@material-ui/core": ">=4.12.3",
     "@material-ui/icons": ">=4.11.2",
-    "lodash.get": ">=4.4.2",
     "prop-types": "^15.7.2",
-    "react": ">=17.0.2",
-    "sample": "file:sample",
-    "serve": "13.0.2"
+    "react": ">=17.0.2"
   },
   "files": [
     "LICENSE",
@@ -57,8 +55,8 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": "12.0.0",
-    "npm": "7.0.0"
+    "node": "^16.0.0",
+    "npm": "^7.20.0"
   },
   "repository": {
     "type": "git",

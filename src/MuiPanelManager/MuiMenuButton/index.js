@@ -88,7 +88,6 @@ const badge = theme => ({
   leftFixBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-14px' } },
 });
 
-
 const useStyles = makeStyles((theme) => ({
   ...badge(theme),
   ...icons(theme),
@@ -99,14 +98,12 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    // color: theme.palette.text.primary,
   },
   buttonMenu: {
     border: '0px none',
     padding: theme.spacing(2, 0),
     borderRadius: '0px',
     minWidth: 'initial',
-
   },
 }));
 
@@ -139,10 +136,6 @@ const MuiMenuButton = withTheme(({
     return colorMap.find(({ id }) => id === settings.markerColor).value;
   };
 
-  // useEffect(() => {
-  //   setAnchorEl(null);
-  // }, [lo])
-
   return <>
     <Tooltip
       arrow
@@ -155,7 +148,12 @@ const MuiMenuButton = withTheme(({
           lo.shortText?.length > 0 ||
           lo.hint?.length > 0 ||
           lo.tooltip?.length > 0)
-          ? `${(lo.tooltip || lo.hint || lo.title || lo.shortText)} ${lo.disabled && '(disabled)'}`
+          ? `
+            ${(lo.tooltip || lo.hint || lo.title || lo.shortText)}
+            ${lo.disabled
+            ? '(disabled)'
+            : ''}
+          `
           : ''}
     >
       <span>

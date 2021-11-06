@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-import get from 'lodash/get';
 import { createContext, useEffect, useState } from 'react';
 import MuiPanelManager from '../MuiPanelManager';
 import { oppositeSide } from '../utils';
@@ -22,9 +20,9 @@ function MuiPanelProvider({
 	...props }) {
 	// const cachedLayout = localStorage.getItem(localStorageKey);
 
-	const initialLayout = get(props, 'layout', []);
-	const initialStatus = get(props, 'status', []);
-	const initialSections = get(props, 'sections', [
+	const initialLayout = props['layout'] || [];
+	const initialStatus = props['status'] || [];
+	const initialSections = props['sections'] || [
 		{
 			id: getRandomId(),
 			direction: 'horizontal',
@@ -34,15 +32,15 @@ function MuiPanelProvider({
 			isCollapsed: true,
 			zones: []
 		},
-	]);
-	const initialSettings = get(props, 'settings', {
+	];
+	const initialSettings = props['settings'] || {
 		isCollapsed: false,
 		canSplitter: true,
 		inverseMarkers: false,
 		allowRightClick: false,
 		markerColor: 'textPrimary',
 		debugMode: false,
-	});
+	};
 
 	const [layout, setLayout] = useState(initialLayout);
 	const [status, setStatus] = useState(initialStatus);
@@ -309,7 +307,6 @@ function MuiPanelProvider({
 	};
 
 	const splitContentNg = ({ sectionId, type, index, count }) => {
-		debugger;
 		const randomStrings = [getRandomId(), getRandomId(), getRandomId()];
 
 		setSections(sections => [
