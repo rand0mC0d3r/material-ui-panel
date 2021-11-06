@@ -4,6 +4,7 @@ import { green } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatIndentIncrease, GitHub } from '@material-ui/icons';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
+import AppsIcon from '@material-ui/icons/Apps';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
@@ -66,13 +67,13 @@ function App() {
           id="logoAndCustomColorAndTooltip2"
           tooltip="Custom Tooltip &amp; but no color"
           disabled
-          icon={<LinkedInIcon style={{ color: green[500] }} />}
+          icon={<AppsIcon style={{ color: green[500] }} />}
         />
 
         <MupButton
           id="logoAndCustomColorAndTooltip3"
           tooltip="Custom Tooltip &amp; MUI Color"
-          icon={<LinkedInIcon color="primary" />}
+          icon={<AppsIcon color="primary" />}
         />
 
         <ActButton />
