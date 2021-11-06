@@ -1,21 +1,21 @@
-import { Box, Button, MenuItem, Select, TextField, Tooltip, Typography } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppsIcon from '@material-ui/icons/Apps';
-import BlurOnIcon from '@material-ui/icons/BlurOn';
-import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
-import CloseIcon from '@material-ui/icons/Close';
-import HttpIcon from '@material-ui/icons/Http';
-import ImportExportIcon from '@material-ui/icons/ImportExport';
-import LaptopIcon from '@material-ui/icons/Laptop';
-import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
-import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import WebIcon from '@material-ui/icons/Web';
-import WebAssetIcon from '@material-ui/icons/WebAsset';
-import { cloneElement, useContext, useEffect, useState } from 'react';
-import DataProvider from '../MuiPanelStore';
-import MupSectionsSplitter from './MupSectionsSplitter';
+import { Box, Button, MenuItem, Select, TextField, Tooltip, Typography } from '@material-ui/core'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import AppsIcon from '@material-ui/icons/Apps'
+import BlurOnIcon from '@material-ui/icons/BlurOn'
+import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode'
+import CloseIcon from '@material-ui/icons/Close'
+import HttpIcon from '@material-ui/icons/Http'
+import ImportExportIcon from '@material-ui/icons/ImportExport'
+import LaptopIcon from '@material-ui/icons/Laptop'
+import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined'
+import MobileScreenShareIcon from '@material-ui/icons/MobileScreenShare'
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
+import WebIcon from '@material-ui/icons/Web'
+import WebAssetIcon from '@material-ui/icons/WebAsset'
+import { cloneElement, useContext, useEffect, useState } from 'react'
+import DataProvider from '../MuiPanelStore'
+import MupSectionsSplitter from './MupSectionsSplitter'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -153,26 +153,32 @@ const useStyles = makeStyles(theme => ({
     gap: '16px',
     flex: '0 0 auto'
   }
-}));
+}))
 
 const MuiSplitter = ({
   section,
   isRoot = false,
   showSplitterButton = true,
 }) => {
-  const theme = useTheme();
-  const classes = useStyles(theme);
-  const [layoutObject, setLayoutObject] = useState(null);
-  const { layout, splitContentNg, setSectionUrl, showContent, removeZoneFromSection, toggleCollapseSection, removePanelFromSection, sections, addPanelToSection, chooseTypeForSection, addZoneToSection, toggleSectionDirection } = useContext(DataProvider);
+  const theme = useTheme()
+  const classes = useStyles(theme)
+  const [layoutObject, setLayoutObject] = useState(null)
+  const {
+    layout, splitContentNg, setSectionUrl, showContent,
+    removeZoneFromSection, toggleCollapseSection,
+    removePanelFromSection, sections, addPanelToSection,
+    chooseTypeForSection, addZoneToSection, toggleSectionDirection
+  } = useContext(DataProvider)
 
   useEffect(() => {
     if (section.type === 'panel') {
-      const findLayoutObject = layout.find(l => l.uniqueId === section.panelId);
-      setLayoutObject(findLayoutObject);
+      const findLayoutObject = layout.find(l => l.uniqueId === section.panelId)
+      setLayoutObject(findLayoutObject)
     }
-  }, [section]);
+  }, [section])
 
-  return <div className={`${classes.wrapper}`} style={isRoot ? { border: '0px none' } : {}}>
+  return <div className={`${classes.wrapper}`}
+    style={isRoot ? { border: '0px none' } : {}}>
 
     {section.type === 'content' ? <div
       className={classes.rootWrapper}
@@ -182,34 +188,35 @@ const MuiSplitter = ({
       {showSplitterButton && <div className={classes.rootController}>
         <MupSectionsSplitter createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
       </div>}
-      </div>
+    </div>
       : <>
-      <Tooltip title="Double-Click to collapse" arrow>
-        <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
-          onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
-          style={isRoot
+        <Tooltip title="Double-Click to collapse"
+          arrow>
+          <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
+            onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
+            style={isRoot
             ? { borderBottom: `1px solid ${theme.palette.divider}`, backgroundColor: theme.palette.background.paper }
             : section.isCollapsed
               ? { backgroundColor: section.background }
               : { borderBottom: `3px solid ${section.background}` }
-          }
-        >
-          {!section.isCollapsed && <>
-            <div className={classes.title}>
-              {!isRoot && <>
-                {section.type === 'list' && <AppsIcon color="action" />}
-                {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
-                {section.type === 'content' && <BlurOnIcon color="disabled" />}
+            }
+          >
+            {!section.isCollapsed && <>
+              <div className={classes.title}>
+                {!isRoot && <>
+                  {section.type === 'list' && <AppsIcon color="action" />}
+                  {section.type === 'panel' && <ChromeReaderModeIcon color="disabled" />}
+                  {section.type === 'content' && <BlurOnIcon color="disabled" />}
                   <Typography
                     style={layoutObject?.title && { fontWeight: 'bold' }}
                     color={layoutObject?.title ? 'textPrimary' : 'textSecondary'}
                     variant='subtitle2'>
-                  {section.type === 'list' && 'Add sub-sections ...'}
-                  {section.type === 'panel' && (layoutObject?.title || 'Waiting for selection...')}
-                  {section.type === 'content' && 'Main content'}
-                </Typography>
+                    {section.type === 'list' && 'Add sub-sections ...'}
+                    {section.type === 'panel' && (layoutObject?.title || 'Waiting for selection...')}
+                    {section.type === 'content' && 'Main content'}
+                  </Typography>
                 </>}
-              {section.type === 'web' && <>
+                {section.type === 'web' && <>
                   <TextField
                     size="small"
                     variant="outlined"
@@ -229,28 +236,40 @@ const MuiSplitter = ({
                       sectionId: section.uniqueId,
                       url: event.target.value
                     })} />
-              </>}
-            </div>
+                </>}
+              </div>
 
-            <Box alignItems="center" display="flex" className={classes.buttonsWrapper}>
-              {section.type === 'list' && <Tooltip
-                arrow
-                title="Current orientation"
-                placement='bottom'>
-                {section.direction !== 'vertical'
-                  ? <SwapHorizIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />
-                  : <ImportExportIcon className={classes.groupIcon} style={{ fontSize: '16px', color: theme.palette.background.default }} />}
-              </Tooltip>}
+              <Box alignItems="center"
+                display="flex"
+                className={classes.buttonsWrapper}>
+                {section.type === 'list' && <Tooltip
+                  arrow
+                  title="Current orientation"
+                  placement='bottom'>
+                  {section.direction !== 'vertical'
+                  ? <SwapHorizIcon className={classes.groupIcon}
+                    style={{ fontSize: '16px', color: theme.palette.background.default }} />
+                  : <ImportExportIcon className={classes.groupIcon}
+                    style={{ fontSize: '16px', color: theme.palette.background.default }} />}
+                </Tooltip>}
 
-              {section.type === 'list' && <Tooltip arrow title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
-                <Button disableRipple disableElevation className={classes.smallButton} onClick={() => toggleSectionDirection({ sectionId: section.id })}>
-                  {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
-                </Button>
-              </Tooltip>}
+                {section.type === 'list' && <Tooltip arrow
+                  title={`Switch to ${section.direction === 'vertical' ? 'columns' : 'rows'}`}>
+                  <Button disableRipple
+                    disableElevation
+                    className={classes.smallButton}
+                    onClick={() => toggleSectionDirection({ sectionId: section.id })}>
+                    {section.direction !== 'vertical' ? <SwapHorizIcon color="action" /> : <ImportExportIcon color="action" />}
+                  </Button>
+                </Tooltip>}
 
-              {section.type === 'list' &&
-                <Tooltip arrow title="Add a new section...">
-                  <Button disableRipple disableElevation onClick={() => addZoneToSection({ sectionId: section.id })} className={classes.smallButton}>
+                {section.type === 'list' &&
+                <Tooltip arrow
+                  title="Add a new section...">
+                  <Button disableRipple
+                    disableElevation
+                    onClick={() => addZoneToSection({ sectionId: section.id })}
+                    className={classes.smallButton}>
                     <LibraryAddOutlinedIcon color="action" />
                   </Button></Tooltip>}
 
@@ -263,33 +282,35 @@ const MuiSplitter = ({
                   className={classes.buttonsWrapper}
                 >
                   <Select
-                  fullWidth
-                  value={section.panelId || ''}
-                  onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }); }}
-                >
-                  {layout.filter(lo => !lo.noPanel && !lo.asContent).map(lo => <MenuItem
-                    key={`${section.id}_${lo.uniqueId}`}
-                    value={lo.uniqueId}
+                    fullWidth
+                    value={section.panelId || ''}
+                    onChange={(event) => { addPanelToSection({ sectionId: section.id, panelId: event.target.value }) }}
                   >
-                    <Box display="flex" alignItems="center" className={classes.groupsBox}>
-                      {lo.icon && cloneElement(lo.icon, { color: 'disabled' })}
-                      <Typography variant="caption" color="textSecondary">{lo.title}</Typography>
-                    </Box>
-                  </MenuItem>)}
-                </Select>
+                    {layout.filter(lo => !lo.noPanel && !lo.asContent).map(lo => <MenuItem
+                      key={`${section.id}_${lo.uniqueId}`}
+                      value={lo.uniqueId}
+                    >
+                      <Box display="flex"
+                        alignItems="center"
+                        className={classes.groupsBox}>
+                        {lo.icon && cloneElement(lo.icon, { color: 'disabled' })}
+                        <Typography variant="caption"
+                          color="textSecondary">{lo.title}</Typography>
+                      </Box>
+                    </MenuItem>)}
+                  </Select>
 
-              {section.panelId !== undefined && <>
+                  {section.panelId !== undefined && <>
                     <MobileScreenShareIcon
-                      onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }); }} color="action" /></>}
+                      onClick={() => { removePanelFromSection({ sectionId: section.id, panelId: section.panelId }) }}
+                      color="action" /></>}
+                  <div
+                    onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
+                    className={classes.splitButton}
+                  ><WebIcon /></div>
+                </Box>}
 
-
-                <div
-                  onClick={() => chooseTypeForSection({ panelId: section.id, isList: true })}
-                  className={classes.splitButton}
-                ><WebIcon /></div>
-              </Box>}
-
-              {/* {section.type !== 'content' && <Tooltip arrow title="Switch to showing the main content">
+                {/* {section.type !== 'content' && <Tooltip arrow title="Switch to showing the main content">
                   <span>
                     <Button
                       className={classes.smallButton}
@@ -301,37 +322,39 @@ const MuiSplitter = ({
                   </span>
               </Tooltip>} */}
 
-              <div style={{ display: 'flex', gap: '4px'}}>
-                {section.zones.length === 0 && <Tooltip arrow title="Switch panel type">
-                  <span>
-                    <Button className={classes.smallButton}
-                      variant="outlined"
-                      disabled={((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId))}
-                      onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
-                    >
-                      <AppsIcon/>
-                    </Button>
-                  </span>
-                </Tooltip>}
+                <div style={{ display: 'flex', gap: '4px'}}>
+                  {section.zones.length === 0 && <Tooltip arrow
+                    title="Switch panel type">
+                    <span>
+                      <Button className={classes.smallButton}
+                        variant="outlined"
+                        disabled={((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId))}
+                        onClick={() => chooseTypeForSection({ panelId: section.id, isList: false })}
+                      >
+                        <AppsIcon/>
+                      </Button>
+                    </span>
+                  </Tooltip>}
 
-                {section.type !== 'content' && <Tooltip arrow title="Remove section">
-                  <span>
-                    <Button
-                      variant="outlined"
-                      disabled={section.type === 'list' && section.zones.length > 0}
-                      onClick={() => { removeZoneFromSection({ sectionId: section.id }); }}
-                      className={classes.smallButton}
-                    >
-                      <CloseIcon />
-                    </Button>
-                  </span>
-                </Tooltip>}
-              </div>
-            </Box>
-          </>}
-        </div>
-      </Tooltip>
-    </>}
+                  {section.type !== 'content' && <Tooltip arrow
+                    title="Remove section">
+                    <span>
+                      <Button
+                        variant="outlined"
+                        disabled={section.type === 'list' && section.zones.length > 0}
+                        onClick={() => { removeZoneFromSection({ sectionId: section.id }) }}
+                        className={classes.smallButton}
+                      >
+                        <CloseIcon />
+                      </Button>
+                    </span>
+                  </Tooltip>}
+                </div>
+              </Box>
+            </>}
+          </div>
+        </Tooltip>
+      </>}
     <div className={`
         ${classes.root}
         ${section.direction === 'horizontal'
@@ -340,33 +363,46 @@ const MuiSplitter = ({
       `}>
       {((section.type === 'list' && section.zones.length === 0) || (section.type === 'panel' && !section.panelId)) &&
         <div className={classes.selectMode}>
-        <Tooltip title="Select a mode to continue..." arrow>
-          <Box display="flex" alignItems="center" style={{ gap: '32px' }}>
+          <Tooltip title="Select a mode to continue..."
+            arrow>
+            <Box display="flex"
+              alignItems="center"
+              style={{ gap: '32px' }}>
 
-            <div onClick={() => chooseTypeForSection({ panelId: section.id })} className={classes.splitButton}>
-              <AppsIcon style={{ fontSize: 48 }} color={section.type === 'list' ? 'primary' : 'disabled' } />
-            </div>
-
-            <div onClick={() => { showContent({ sectionId: section.id }); }} className={classes.splitButton} >
-              <LaptopIcon style={{ fontSize: 48 }} color={section.type === 'content' ? 'primary' : 'disabled' } />
-            </div>
-
-            <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'panel' })} className={classes.splitButton} >
-              <WebAssetIcon style={{ fontSize: 48 }} color={section.type === 'panel' ? 'primary' : 'disabled' } />
-            </div>
-
-            <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'web' })} className={classes.splitButton} >
-              <HttpIcon style={{ fontSize: 42 }} color={section.type === 'web' ? 'primary' : 'disabled'} />
+              <div onClick={() => chooseTypeForSection({ panelId: section.id })}
+                className={classes.splitButton}>
+                <AppsIcon style={{ fontSize: 48 }}
+                  color={section.type === 'list' ? 'primary' : 'disabled' } />
               </div>
-          </Box>
-        </Tooltip>
+
+              <div onClick={() => { showContent({ sectionId: section.id }) }}
+                className={classes.splitButton} >
+                <LaptopIcon style={{ fontSize: 48 }}
+                  color={section.type === 'content' ? 'primary' : 'disabled' } />
+              </div>
+
+              <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'panel' })}
+                className={classes.splitButton} >
+                <WebAssetIcon style={{ fontSize: 48 }}
+                  color={section.type === 'panel' ? 'primary' : 'disabled' } />
+              </div>
+
+              <div onClick={() => chooseTypeForSection({ panelId: section.id, type: 'web' })}
+                className={classes.splitButton} >
+                <HttpIcon style={{ fontSize: 42 }}
+                  color={section.type === 'web' ? 'primary' : 'disabled'} />
+              </div>
+            </Box>
+          </Tooltip>
         </div>
       }
       {section.type === 'panel' && section.panelId && <>
-          <div style={{ width: '100%', height: '100%' }} id={`${section.panelId}-section`} />
+        <div style={{ width: '100%', height: '100%' }}
+          id={`${section.panelId}-section`} />
       </>}
       {section.type === 'content' && <>
-          <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }} id={'content-section'} />
+        <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }}
+          id={'content-section'} />
       </>}
       {section.type === 'web' && section.url && <>
         <iframe
@@ -380,9 +416,9 @@ const MuiSplitter = ({
           className={`${classes.zone} ${isRoot ? classes.wrapperRepeat : null}`}
           style={section.direction === 'horizontal' ? { width: '0px' } : {}}>
           <MuiSplitter section={sections.find(s => s.id === zone)} />
-      </div>)}
+        </div>)}
     </div>
-  </div>;
-};
+  </div>
+}
 
-export default MuiSplitter;
+export default MuiSplitter

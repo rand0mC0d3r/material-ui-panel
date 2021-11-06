@@ -1,15 +1,15 @@
-import { Box, Tooltip } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useContext, useEffect, useState } from 'react';
-import DataProvider from '../MuiPanelStore';
-import MuiSplitter from '../MuiSplitter';
-import MupMenuCollapseButton from '../MupMenuCollapseButton';
-import MuiMenuButton from './MuiMenuButton';
+import { Box, Tooltip } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useContext, useEffect, useState } from 'react'
+import DataProvider from '../MuiPanelStore'
+import MuiSplitter from '../MuiSplitter'
+import MupMenuCollapseButton from '../MupMenuCollapseButton'
+import MuiMenuButton from './MuiMenuButton'
 
-const menuWidth = '56px';
-const leftPanelWidth = '500px';
-const rightPanelWidth = '500px';
+const menuWidth = '56px'
+const leftPanelWidth = '500px'
+const rightPanelWidth = '500px'
 
 const styledGrid = {
   bothGrid: {
@@ -30,7 +30,7 @@ const styledGrid = {
       "main rightPanel rightMenu"
     `
   },
-};
+}
 
 const styledMenus = theme => ({
   bothMenus: {
@@ -50,7 +50,7 @@ const styledMenus = theme => ({
     'grid-area': 'rightMenu',
     borderLeft: `1px solid ${theme.palette.divider}`
   },
-});
+})
 
 const styledPanel = theme => ({
   panelContainerWrapper: {
@@ -79,7 +79,7 @@ const styledPanel = theme => ({
     display: 'unset',
     gridArea: 'rightPanel',
   },
-});
+})
 
 const useStyles = makeStyles(theme => ({
   statusBar: {
@@ -191,32 +191,32 @@ const useStyles = makeStyles(theme => ({
   emptySpace: {
     flex: '1 1 auto'
   }
-}));
+}))
 
-const availableSides = ['left', 'right'];
+const availableSides = ['left', 'right']
 const MuiPanelManager = ({
   children,
   allowRightClick = false,
   showCollapseButton = true,
   showSplitterButton = true,
 }) => {
-  const theme = useTheme();
-  const classes = useStyles(theme);
-  const [sides, setSides] = useState();
-  const matches = useMediaQuery('(min-width:600px)');
-  const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider);
+  const theme = useTheme()
+  const classes = useStyles(theme)
+  const [sides, setSides] = useState()
+  const matches = useMediaQuery('(min-width:600px)')
+  const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider)
 
   useEffect(() => {
-    toggleSettingIsCollapsed(!matches);
-  }, [matches]);
+    toggleSettingIsCollapsed(!matches)
+  }, [matches])
 
 
   useEffect(() => {
     if (layout.length > 0) {
-      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc; }, []))];
-      setSides(foundSides.length === 1 ? foundSides[0] : 'both');
+      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
+      setSides(foundSides.length === 1 ? foundSides[0] : 'both')
     }
-  }, [layout]);
+  }, [layout])
 
   return <Box id="MuiPanelManager" display="flex" flexDirection="column" className={classes.wrapper}>
     <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
@@ -226,7 +226,7 @@ const MuiPanelManager = ({
         .map(side => <div
           key={`${side}_panels`}
           id={`MuiPanels_${side}Side`}
-          onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
+          onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
           className={`
           ${classes.panelContainerWrapper}
           ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) &&
@@ -234,7 +234,7 @@ const MuiPanelManager = ({
               ? classes.leftPanel
               : classes.rightPanel
             )
-          }`}
+}`}
         >
           <div
             id={`${side}-panel`} key={`${side}-panel`}
@@ -252,34 +252,39 @@ const MuiPanelManager = ({
               height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
             }}
           >
-              {/* <div>panels collapse</div> */}
-            </div>
+            {/* <div>panels collapse</div> */}
+          </div>
         </div>)}
 
       {availableSides
         .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
         .map(side => <div key={`${side}_menus`}>
-          {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 && <Tooltip title={settings.isCollapsed ? 'DoubleClick to expand' : ''} arrow placement="left">
-            <div
-              id={`${side}-menu`}
-              onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed(); } }
-              onContextMenu={(e) => { !allowRightClick && e.preventDefault(); }}
-              className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
+          {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 &&
+            <Tooltip title={settings.isCollapsed ? 'DoubleClick to expand' : ''} arrow placement="left">
+              <div
+                id={`${side}-menu`}
+                onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
+                onContextMenu={(e) => { !allowRightClick && e.preventDefault() }}
+                className={`${classes[`${side}Menu`]} ${classes.bothMenus} ${settings.isCollapsed
                 ? classes.menuCollapsed
                 : classes.menuOpen}`}
-            >
-              {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
-              {!settings.isCollapsed && <>
-                {layout
-                  .filter(lo => lo.side === side)
-                  .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
-                  .map(lo => <MuiMenuButton extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)} key={lo.uniqueId} {...{ lo, side }} />)}
-                <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed(); }} />
-              </>}
-            </div>
+              >
+                {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
+                {!settings.isCollapsed && <>
+                  {layout
+                    .filter(lo => lo.side === side)
+                    .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
+                    .map(lo => <MuiMenuButton
+                      extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)}
+                      key={lo.uniqueId}
+                      {...{ lo, side }}
+                    />)}
+                  <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
+                </>}
+              </div>
             </Tooltip>
           }
-      </div>)}
+        </div>)}
 
       <div style={{ gridArea: 'main', display: 'flex', minWidth: '500px' }}>
         {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{showSplitterButton}} key={ section.id} section={section} isRoot />)}
@@ -291,7 +296,7 @@ const MuiPanelManager = ({
 
     {status.length > 0 && <Box
       id="MuiStatusBarList"
-      onContextMenu={(e) => { e.preventDefault(); }}
+      onContextMenu={(e) => { e.preventDefault() }}
       display="flex"
       className={classes.statusBar}
       justifyContent="space-between"
@@ -305,7 +310,7 @@ const MuiPanelManager = ({
           className={classes.statusBarHalf}
         />)}
     </Box>}
-  </Box>;
-};
+  </Box>
+}
 
-export default MuiPanelManager;
+export default MuiPanelManager

@@ -1,6 +1,7 @@
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import VerticalSplitIcon from '@material-ui/icons/VerticalSplit';
-import { useState } from 'react';
+import { ClickAwayListener } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import VerticalSplitIcon from '@material-ui/icons/VerticalSplit'
+import { useState } from 'react'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -61,16 +62,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     alignContent: 'stretch',
   }
-}));
+}))
 
 const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
-  const theme = useTheme();
-  const classes = useStyles(theme);
-  const [visible, setVisible] = useState(false);
+  const theme = useTheme()
+  const classes = useStyles(theme)
+  const [visible, setVisible] = useState(false)
 
   const toggleVisible = () => {
-    setVisible(visible => !visible);
-  };
+    setVisible(visible => !visible)
+  }
 
   const blocks = [
     {
@@ -138,19 +139,22 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
     //     <div className={classes.block}></div>
     //   </div>
     // },
-  ];
+  ]
 
-  return <>{visible && <div
-    onClick={toggleVisible}
-    className={classes.wrapper}
-    style={isRoot ? {  } : { }}>
-    {blocks.map(block => (
-      <div key={block.tooltip} className={classes.container}>
-        {block.content}
+  return <>
+    {visible && <ClickAwayListener onClickAway={toggleVisible}>
+      <div
+        onClick={toggleVisible}
+        className={classes.wrapper}
+        style={isRoot ? {  } : { }}>
+        {blocks.map(block => (
+          <div key={block.tooltip} className={classes.container}>
+            {block.content}
+          </div>
+        ))}
       </div>
-    ))}
-  </div>}
-  {!visible && <VerticalSplitIcon style={{cursor: 'pointer'}} onClick={toggleVisible} color="action" />}
-  </>;
-};
-export default MupSectionsSplitter;
+    </ClickAwayListener>}
+    {!visible && <VerticalSplitIcon style={{cursor: 'pointer'}} onClick={toggleVisible} color="action" />}
+  </>
+}
+export default MupSectionsSplitter

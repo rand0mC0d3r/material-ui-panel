@@ -1,9 +1,9 @@
-import { Box, SvgIcon, Typography } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import DataProvider from '../MuiPanelStore';
+import { Box, SvgIcon, Typography } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
+import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: `${theme.palette.augmentColor({main: theme.palette.divider}).light} !important`
     }
   },
-}));
+}))
 
 const MupStatus = ({
   id,
@@ -23,41 +23,41 @@ const MupStatus = ({
   tooltip,
   elements
 }) => {
-  const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider);
-  const [statusObject, setStatusObject] = useState(null);
-  const theme = useTheme();
-  const classes = useStyles(theme);
+  const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
+  const [statusObject, setStatusObject] = useState(null)
+  const theme = useTheme()
+  const classes = useStyles(theme)
 
   const callbackOnClick = useCallback(
-    (e) => { if (onClick) { onClick(e); } },
-    [onClick]);
+    (e) => { if (onClick) { onClick(e) } },
+    [onClick])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    handleStatusAnnouncement({ id, elements, side, tooltip });
-  }, [side, tooltip, elements, handleStatusAnnouncement]);
+    handleStatusAnnouncement({ id, elements, side, tooltip })
+  }, [side, tooltip, elements, handleStatusAnnouncement])
 
   const callbackHandleStatusDestroy = useCallback((id) => {
-    handleStatusDestroy({ id });
-  },[]);
+    handleStatusDestroy({ id })
+  },[])
 
   useEffect(() => {
     return () => {
-      callbackHandleStatusDestroy(id);
-    };
-  }, [id, callbackHandleStatusDestroy]);
+      callbackHandleStatusDestroy(id)
+    }
+  }, [id, callbackHandleStatusDestroy])
 
   useEffect(() => {
     if (id && statusObject === null && !status.some(item => item.uniqueId === id)) {
-      callbackHandleStatusAnnouncement(id);
+      callbackHandleStatusAnnouncement(id)
     }
-  }, [id, statusObject, status, callbackHandleStatusAnnouncement]);
+  }, [id, statusObject, status, callbackHandleStatusAnnouncement])
 
   useEffect(() => {
     if (statusObject === null) {
-    const findObject = status.find(item => item.uniqueId === id);
-      findObject && setStatusObject(findObject.uniqueId);
+      const findObject = status.find(item => item.uniqueId === id)
+      findObject && setStatusObject(findObject.uniqueId)
     }
-  }, [status, id, statusObject]);
+  }, [status, id, statusObject])
 
   return (statusObject !== null && !!id) ? createPortal(<Box
     key={`MupStatus_${id}_wrapper`}
@@ -80,32 +80,23 @@ const MupStatus = ({
       backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
     }}
   >
-    {elements.map(element => <Box
-      display="flex"
-      key={`MupStatus_${element.text}_container`}
-      alignItems="center"
-      style={{ gap: '6px' }}
-    >
+    {elements.map(element => <Box display="flex" alignItems="center" key={`MupStatus_${element.text}_container`} style={{ gap: '6px' }}>
       {element.icon && <SvgIcon style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
-      {element.text && <Typography
-        variant="subtitle2"
-        style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}
-        color="textPrimary"
-      >
+      {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
         {element.text}
       </Typography>}
     </Box>)}
-    </Box>,
+  </Box>,
   document.getElementById(`material-ui-panel-statusBar-${side}`))
-  : null;
-};
+  : null
+}
 
 MupStatus.defaultProps = {
   side: 'left',
   requestAttention: false,
   tooltip: '',
   elements: [],
-};
+}
 
 MupStatus.propTypes = {
   id: PropTypes.string,
@@ -119,6 +110,6 @@ MupStatus.propTypes = {
     icon: PropTypes.node,
     text: PropTypes.string,
   })),
-};
+}
 
-export default MupStatus;
+export default MupStatus

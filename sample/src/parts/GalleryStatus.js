@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   avatar: {
     backgroundColor: red[500],
   },
@@ -64,7 +61,7 @@ const GalleryStatus = () => {
       maxWidth='md'
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Gallery proposal?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Gallery proposal?'}</DialogTitle>
       <DialogContent>
         <div style={{ width: '1000px', height: '500px',  overflow: 'auto', position: 'relative'}}>
         <Box style={{ position: 'absolute', gap: '16px' }} display="flex" flexDirection="row" alignItems="center">
@@ -150,7 +147,7 @@ const GalleryStatus = () => {
         </Button>
       </DialogActions>
     </Dialog>
-  </>
-}
+  </>;
+};
 
 export default GalleryStatus;

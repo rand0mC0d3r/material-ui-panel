@@ -11,7 +11,7 @@ const SaveStatus = () => {
   const [requestAttention, setRequestAttention] = useState(true);
 
   useEffect(() => {
-    handleReady()
+    handleReady();
   }, []);
 
   const handleClickOpen = () => { setOpen(true); };

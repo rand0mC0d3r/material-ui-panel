@@ -7,6 +7,15 @@
   },
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
+  "overrides": [
+    {
+      "files": [
+        "**/*.js",
+        "./sample/src/**/*.js",
+        "./sample/src/parts/**/*.js"
+      ]
+    }
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -15,17 +24,28 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react", "mui-unused-classes"],
+  "plugins": [
+    "react",
+    "mui-unused-classes"
+  ],
   "rules": {
-    "mui-unused-classes/unused-classes": 2,
+    "indent": ["error", 2, { "ignoredNodes": ["ConditionalExpression"] }],
+    "mui-unused-classes/unused-classes": 1,
     "comma-dangle": ["error", "only-multiline"],
-    "no-console": "off",
-    "no-unused-vars":"warn",
+    "no-unused-vars":"error",
     "linebreak-style": ["error", "unix"],
-    "quotes": ["warn", "single"],
-    "semi": ["warn", "always"],
+    "quotes": ["error", "single"],
+    "max-len": ["error", 160],
     "react/jsx-uses-react": 0,
     "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 0
+    "react/jsx-closing-tag-location": "off",
+    "semi": ["error", "never"],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-underscore-dangle": "off",
+    "newline-per-chained-call": "off",
+    "no-restricted-syntax": "off",
+    "no-param-reassign": "off",
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-max-props-per-line": [1, { "maximum": 3, "when": "multiline" }],
   }
 }

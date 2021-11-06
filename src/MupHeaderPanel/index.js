@@ -1,14 +1,14 @@
-import { Box, Button, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles, withTheme } from '@material-ui/core/styles';
-import AmpStoriesIcon from '@material-ui/icons/AmpStories';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import React, { cloneElement, useContext } from 'react';
-import DataProvider from '../MuiPanelStore';
-import MupMenuOptions from '../MupMenuOptions';
-const fontSize = 20;
+import { Box, Button, Tooltip, Typography } from '@material-ui/core'
+import { makeStyles, withTheme } from '@material-ui/core/styles'
+import AmpStoriesIcon from '@material-ui/icons/AmpStories'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import React, { cloneElement, useContext } from 'react'
+import DataProvider from '../MuiPanelStore'
+import MupMenuOptions from '../MupMenuOptions'
+const fontSize = 20
 
 const useStyles = makeStyles(theme => ({
   collapseButton: {
@@ -29,24 +29,24 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     backdropFilter: 'blur(4px)',
   },
-}));
+}))
 
 const MupHeaderPanel = withTheme(({
   layoutObject: { uniqueId, side, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
   layoutObject,
   theme,
 }) => {
-  const classes = useStyles(theme);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { handleToggleCollapse } = useContext(DataProvider);
+  const classes = useStyles(theme)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const { handleToggleCollapse } = useContext(DataProvider)
 
-  const handleClick = (event) => { setAnchorEl(event.currentTarget); };
+  const handleClick = (event) => { setAnchorEl(event.currentTarget) }
 
   return <Box
     justifyContent="space-between"
     onDoubleClick={() => handleToggleCollapse({ uniqueId })}
     alignItems="center"
-    onContextMenu={(e) => { e.preventDefault(); handleClick(e); }}
+    onContextMenu={(e) => { e.preventDefault(); handleClick(e) }}
     display="flex"
     className={`${classes.header}`}
   >
@@ -110,13 +110,13 @@ const MupHeaderPanel = withTheme(({
         <Button
           className={classes.collapseButton}
           size="small"
-          onClick={(e) => { e.preventDefault(); handleClick(e); }}
+          onClick={(e) => { e.preventDefault(); handleClick(e) }}
         >
           <MoreHorizIcon color="action" />
         </Button>
       </Tooltip>
     </Box>
-  </Box>;
-});
+  </Box>
+})
 
-export default MupHeaderPanel;
+export default MupHeaderPanel
