@@ -39,6 +39,7 @@ function MuiPanelProvider({
 		isCollapsed: false,
 		canSplitter: true,
 		inverseMarkers: false,
+		allowRightClick: false,
 		markerColor: 'textPrimary',
 		debugMode: false,
 	});
@@ -64,7 +65,7 @@ function MuiPanelProvider({
 		setStatus(status => [...status.filter(lo => lo.uniqueId !== id)]);
 	};
 
-	const handlePanelAnnouncement = ({ id, ref, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+	const handlePanelAnnouncement = ({ id, ref, disabled, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
 		setLayout(layout => [
 			...layout.filter(lo => lo.uniqueId !== id),
 			{
@@ -83,6 +84,7 @@ function MuiPanelProvider({
 				side: initialSide,
 				isVisible: false,
 				parentId: null,
+				disabled,
 				iconInHeader,
 				isCollapsed: false,
 				ref,
@@ -100,6 +102,10 @@ function MuiPanelProvider({
 				children,
 			}
 		]);
+	};
+
+	const handlePanelDestroy = ({ id }) => {
+		setLayout(layout => [...layout.filter(lo => lo.uniqueId !== id)]);
 	};
 
 	const handleContentAnnouncement = ({ id, children }) => {
@@ -135,9 +141,14 @@ function MuiPanelProvider({
 	};
 
 	const handleSetAsGroup = ({ uniqueId }) => {
-		setLayout(layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 			? { ...layoutObject, asGroup: !layoutObject.asGroup }
 			: layoutObject));
+	};
+
+	const handleSetIcon = ({ uniqueId, icon }) => {
+		setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+			? { ...layoutObject, icon }: layoutObject));
 	};
 
 	const handleSetStatusElements = ({ uniqueId, elements }) => {
@@ -452,8 +463,12 @@ function MuiPanelProvider({
 			);
 		}, [layout]);
 
-		useEffect(() => setSettings(settings => ({...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
-		useEffect(() => setSettings(settings => ({...settings, debugMode: debugMode })), [debugMode]);
+		useEffect(() => setSettings(settings => ({ ...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers]);
+
+		useEffect(() => setSettings(settings => ({ ...settings, allowRightClick: !settings.allowRightClick })), [allowRightClick]);
+
+		useEffect(() => setSettings(settings => ({ ...settings, debugMode: debugMode })), [debugMode]);
+
 
 		useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor]);
 
@@ -491,7 +506,10 @@ function MuiPanelProvider({
 				handleSetSide,
 				handleToggleCollapse,
 				handleSetAsEmbedded,
-				handlePanelAnnouncement, handleContentAnnouncement,
+				handleSetIcon,
+				handlePanelAnnouncement,
+				handleContentAnnouncement,
+				handlePanelDestroy,
 
 				handleStatusAnnouncement,
 				handleStatusDestroy,

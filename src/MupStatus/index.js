@@ -13,8 +13,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip, elements }) => {
-  const { status, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider);
+const MupStatus = ({
+  id,
+  side,
+  focusOnClick,
+  onClick,
+  onContextMenu,
+  requestAttention,
+  tooltip,
+  elements
+}) => {
+  const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider);
   const [statusObject, setStatusObject] = useState(null);
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -33,7 +42,6 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
 
   useEffect(() => {
     return () => {
-      console.log('destroy');
       callbackHandleStatusDestroy(id);
     };
   }, [id, callbackHandleStatusDestroy]);
@@ -54,7 +62,14 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
   return (statusObject !== null && !!id) ? createPortal(<Box
     key={`MupStatus_${id}_wrapper`}
     title={tooltip}
-    onClick={(e) => focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : !!onClick && callbackOnClick(e)}
+    onClick={(e) => focusOnClick
+      ? handleSetVisible({ uniqueId: focusOnClick })
+      : onClick ? callbackOnClick(e) : null
+    }
+    onContextMenu={(e) => settings.allowRightClick
+      ? onContextMenu ? onContextMenu(e) : null
+      : e.preventDefault()
+    }
     display="flex"
     alignItems="center"
     className={(focusOnClick || onClick) ? classes.root : ''}
@@ -87,7 +102,6 @@ const MupStatus = ({ id, side, focusOnClick, onClick, requestAttention, tooltip,
 
 MupStatus.defaultProps = {
   side: 'left',
-  onClick: null,
   requestAttention: false,
   tooltip: '',
   elements: [],
@@ -98,6 +112,7 @@ MupStatus.propTypes = {
   side: PropTypes.oneOf(['left', 'right']),
   focusOnClick: PropTypes.string,
   onClick: PropTypes.func,
+  onContextMenu: PropTypes.func,
   requestAttention: PropTypes.bool,
   tooltip: PropTypes.string,
   elements: PropTypes.arrayOf(PropTypes.shape({

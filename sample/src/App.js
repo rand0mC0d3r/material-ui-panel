@@ -7,6 +7,7 @@ import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import CameraIcon from '@material-ui/icons/Camera';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
+import HomeIcon from '@material-ui/icons/Home';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useMemo, useState } from 'react';
@@ -57,9 +58,21 @@ function App() {
         <MupButton
           id="logoAndCustomColorAndTooltip"
           tooltip="Custom Tooltip &amp; Color"
-          shortText="LKDN"
-          // icon={<BathtubIcon style={{ color: 'orange' }}
+          shortText="HOME"
+          icon={<HomeIcon style={{ color: green[500] }} />}
+        />
+
+        <MupButton
+          id="logoAndCustomColorAndTooltip2"
+          tooltip="Custom Tooltip &amp; but no color"
+          disabled
           icon={<LinkedInIcon style={{ color: green[500] }} />}
+        />
+
+        <MupButton
+          id="logoAndCustomColorAndTooltip3"
+          tooltip="Custom Tooltip &amp; MUI Color"
+          icon={<LinkedInIcon color="primary" />}
         />
 
         <ActButton />

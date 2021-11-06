@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Tooltip } from '@material-ui/core';
+import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
 import React, { cloneElement, useContext } from 'react';
 import DataProvider from '../../MuiPanelStore';
@@ -16,12 +16,14 @@ const icons = theme => ({
       opacity: '0.9',
     }
   },
-
   activeButton: {
     opacity: '0.9',
     color: theme.palette.text.secondary,
   },
-
+  disabledButton: {
+    opacity: '0.9',
+    color: `${theme.palette.text.disabled} !important`,
+  },
   iconExtraButton: {
     fontSize: '10px',
     opacity: '0.55',
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    color: theme.palette.text.primary,
+    // color: theme.palette.text.primary,
   },
   buttonMenu: {
     border: '0px none',
@@ -147,14 +149,21 @@ const MuiMenuButton = withTheme(({
       key={lo.index}
       placement={lo.side}
       enterDelay={1000}
-      title={(lo.title?.length > 0 || lo.shortText?.length > 0 || lo.hint?.length > 0 || lo.tooltip?.length > 0)  ? (lo.tooltip || lo.hint || lo.title || lo.shortText) : ''}
+      title={
+        (
+          lo.title?.length > 0 ||
+          lo.shortText?.length > 0 ||
+          lo.hint?.length > 0 ||
+          lo.tooltip?.length > 0)
+          ? `${(lo.tooltip || lo.hint || lo.title || lo.shortText)} ${lo.disabled && '(disabled)'}`
+          : ''}
     >
       <span>
         <Button
           onContextMenu={(e) => handleClick(e)}
           disableRipple={!lo.handleOnClick}
           disableElevation={!lo.handleOnClick}
-          disabled={lo.noPanel && lo.handleOnClick === undefined}
+          disabled={lo.disabled || lo.noPanel && lo.handleOnClick === undefined}
           onClick={() => !lo.noPanel ? handleSetVisible({ uniqueId: lo.uniqueId }) : lo.handleOnClick()}
           variant="text"
           fullWidth
@@ -182,13 +191,11 @@ const MuiMenuButton = withTheme(({
             <ContentContainerBox display="flex" alignItems="center" flexDirection="column">
               {lo.showIcon && cloneElement(
                 lo.icon, {
-                  // style: {
-                    // color: !lo.noPanel ? determineColor() : 'unset',
-                  // },
                   className: `
                     ${!lo.noPanel && classes.iconButton}
                     ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconButton`]}
                     ${lo.isVisible && classes.activeIconButton}
+                    ${lo.disabled && classes.disabledButton}
                   `,
               })}
               {!lo.noPanel && extraIcons && extraIcons.map((extraIcon, i) => <>
@@ -206,7 +213,10 @@ const MuiMenuButton = withTheme(({
                 })}
 
               </>)}
-              {lo.shortText && <div className={classes.shortText}>{lo.shortText.substr(0,4)}</div>}
+              {lo.shortText && <Typography
+                className={classes.shortText}
+                style={{color: lo.disabled ? theme.palette.text.disabled : theme.palette.text.primary}}
+              >{lo.shortText.substr(0, 4)}</Typography>}
             </ContentContainerBox>
           </Badge>
         </Button>

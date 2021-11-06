@@ -10,7 +10,7 @@ const ComplexPanel = () => {
 
   return <MupPanel
     id="complexityPanel"
-    title="Complex panel long long text with many details"
+    title="Sample panel long long text with many details"
     subTitle="Sample sub-title text"
     icon={<ChromeReaderMode />}
   >

@@ -82,6 +82,7 @@ export default (): JSX.Element => {
 | *markerColor* | string | ```textPrimary``` | Sets on of the material-UI ```Typography``` range of available colors. Options ```textPrimary```, ```textSecondary```, ```primary```, ```secondary``` |
 
 ---
+
 ## < MuiPanelManager >
 
 Self organizing manager wrapper that renders all children given
@@ -110,26 +111,65 @@ Self organizing manager wrapper that renders all children given
 </MuiPanelManager>
 ```
 ---
-## Status Bar Component - ```<MupStatus>```
 
-**NOTE:** Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
+## < MuiPanelManager >
+
+Self organizing manager wrapper that renders all children given
+
+##### Available API's
+
+| Argument | Default | Description |
+|-----|----|--------|
+| allowRightClick | false | Determines if the panel allows opening the default browser context menu on right click |
+
+##### Code sample
+
+```
+<MuiPanelManager>
+	<MuiDivider tooltip="Default separator" />
+
+	<NotificationPanel />
+
+	<MupPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
+		{`Lorem ipsum dolor sit amet, ...`}
+	</MupPanel>
+
+	<MupPanel title="Sample Panel" icon={<FormatAlignLeftIcon />}>
+		<Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+	</MupPanel>
+</MuiPanelManager>
+```
+---
+
+## ```<MupStatus>``` - Status Bar Component
+
+Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
 
 Add a section to either ```left``` or ```right``` side of the status bar.
 
-Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
+Each ```MupStatus``` entity must contain an ```id``` in form of an unique identifier across the session.
 
-##### Available arguments
+#### # Parent configuration
+
+```<MuiPanelProvider />``` allows the user to configure the status bar with the following properties:
+
+| Argument | Type | Default | Description |
+|-----|--|--|---|
+| allowRightClick | ```bool``` | _inherited_ | Decides if right/long click triggers any action |
+
+#### # Available arguments
 
 
-|  | Argument | Type | Default | Description |
-|--|-----|--|--|---|
-| ⭐ | id | ```string``` | ... |  Give a unique identifier to the status element |
-| ⭐	| elements | ```array```  | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
-|	| side | ```string``` | ```left``` | Determines to which side the panel is bound |
-| | requestAttention | ```bool``` | ```false``` | When truthy is swaps to the ```secondary``` color |
-| | tooltip | ```string``` | ```''``` | Provides a tooltip acting as a guide |
-| | focusOnClick | ```string``` | _null_ | Toggles visibility of panel known by ```material-ui-panel.<MuiPanelProvider>``` |
-| | onClick | ```func``` | ```() => {}``` | Issues callback when status section is clicked  |
+| Argument | | Type | Default | Description |
+|-----|--|--|--|---|
+|  id |⭐ | ```string``` | ... |  Give a unique identifier to the status element |
+| elements | ⭐	| ```array```  | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
+| side |	| ```string``` | ```left``` | Determines to which side the panel is bound |
+| requestAttention |	| ```bool``` | ```false``` | When truthy is uses the ```secondary``` color |
+| tooltip |	| ```string``` | ```''``` | Provides a tooltip acting as a guide |
+| focusOnClick	| | ```string``` | _null_ | Toggles visibility of a panel known by ```<MuiPanelProvider>``` by it's unique identifier |
+| onClick |	| ```func``` | ```() => {}``` | Issues callback when status section is clicked  |
+| onContextMenu |	| ```func``` | ```() => {}``` | Issues callback when status section is right/long clicked.  |
 
 #### Code sample
 
@@ -140,10 +180,10 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
  <MupStatus
   id="sampleStatus"
   side="left"
-  focusOnClick='anotherPanel'								// onClick will focus a panel known
+  focusOnClick='anotherPanel'                               // onClick will focus a panel known
   tooltip="Sample Status Tooltip"
   elements={[
-   { icon: <CameraIcon />, text: 'I got a new camera' },				// Add an icon + text
+   { icon: <CameraIcon />, text: 'I got a new camera' },    // Add an icon + text
  ]}/>
 ```
 
@@ -169,6 +209,87 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an uuid.
     />
 
 ```
+
+
+
+---
+## ```<MupButton>``` - Button Component
+
+![/media/preview.png](/media/mupButton.png)
+
+**HINT**: Works great to display a logo or a button with a custom icon
+
+Internally the ```<MuiPanelProvider>``` is made aware of the ```<MupButton>``` instance after the **first render** which triggers the internal hook to upstream call the provider with a new entity.
+
+#### # Available arguments
+
+
+| Argument | Req | Observed | Type | Default | Description |
+|-----|--|--|--|--|---|
+| id |⭐ | |```string``` | ... |  Give a unique identifier to the status element |
+| icon |⭐ | 👀  | ```node``` |  | Passthru element of Node type. Uses ```cloneElement``` internally |
+| tooltip |	| 👀  | ```string``` |  | Provides a tooltip acting as a guide |
+| shortText |	| 👀  | ```string``` |  | Provides a short text of max 4 UTF8 chars |
+| showIcon |	| 👀  |```bool``` | ```true``` | Used to determine if the icon should be shown in case provided |
+| disabled |	| 👀  |```bool``` | ```false``` | Determine if the colors turn gray and interactivity is disabled |
+| onClick |	|  | ```func``` |  | Issues callback when status section is clicked  |
+
+#### Code sample
+
+##### Simple example - static
+
+```
+<MupButton
+  id="appLogo"
+  tooltip={`Click here to go ${page.url}`
+  shortText="LKDN"                                                  // 4 letters will be displayed in all CAPS
+  icon={<BathtubIcon style={{ color: 'orange' }}                    // custom color
+  icon={<LinkedInIcon style={{ color: green[500] }} />}             // custom color
+  icon={<SvgIcon component={StarIcon} viewBox="0 0 ..." />}         // raw svg icon
+  icon={<Icon style={{ color: green[500] }}>add_circle</Icon>}      // font material icon
+  icon={<Icon className="fa fa-plus-circle" color="secondary" />}   // font awesome icon
+  showIcon={false}                                                  // hide icon
+  disabled={true}                                                   // disable interaction
+  onClick={() => console.log('clicked')}                            // callback
+/>
+  ```
+
+##### Dynamic example - updateable
+  ```
+  export default ({ tooltip, shortText, icon, showIcon, disabled, ... }) => {
+
+  return <>
+    <MupButton
+      { ... { tooltip, shortText, icon, showIcon, disabled } }
+      id="appLogo"
+      ...
+    />
+  </>
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 ## (Your) Content Component - ```<MupContent>```

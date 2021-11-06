@@ -14,6 +14,13 @@ const ActButton = () => {
       id="sample"
       shortText="LOAD"
       tooltip="Default separator with action clicker" />
+    <MupButton
+      onClick={() => setOpen(true)}
+      icon={<CachedIcon />}
+      disabled
+      id="sampleDisabled"
+      shortText="LOAD"
+      tooltip="Default separator with action clicker" />
     <Dialog
       open={open}
       onClose={handleClose}
