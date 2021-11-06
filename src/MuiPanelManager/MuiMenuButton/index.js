@@ -1,11 +1,35 @@
-import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles, styled, withTheme } from '@material-ui/core/styles';
-import React, { cloneElement, useContext } from 'react';
-import DataProvider from '../../MuiPanelStore';
-import MupMenuOptions from '../../MupMenuOptions';
-import { oppositeSide } from '../../utils';
+import { Badge, Box, Button, Tooltip, Typography } from '@material-ui/core'
+import { makeStyles, styled, withTheme } from '@material-ui/core/styles'
+import React, { cloneElement, useContext } from 'react'
+import DataProvider from '../../MuiPanelStore'
+import MupMenuOptions from '../../MupMenuOptions'
+import { oppositeSide } from '../../utils'
 
-const icons = theme => ({
+const useStyles = makeStyles((theme) => ({
+  badge: {
+    '& .MuiBadge-badge': {
+      width: '22px',
+      fontSize: '11px',
+      height: '16px',
+      minWidth: '22px',
+      bottom: '12px',
+      boxShadow: `0px 0px 0px 2px ${theme.palette.background.paper}`,
+    },
+  },
+  groupBadge: {
+    '& .MuiBadge-badge': {
+      boxShadow: `
+        0px 2px 0px -1px ${theme.palette.background.paper},
+        0px 3px 0px 0px ${theme.palette.divider},
+        0px 5px 0px -1px ${theme.palette.background.paper},
+        0px 6px 0px 0px ${theme.palette.divider}
+      `
+    }
+  },
+  rightBadge: { '& .MuiBadge-badge': { left: '-10px', right: 'unset' } },
+  leftBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-10px' } },
+  rightFixBadge: { '& .MuiBadge-badge': { left: '-14px', right: 'unset' } },
+  leftFixBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-14px' } },
   iconButton: {
     fontSize: '24px',
     opacity: '0.55',
@@ -64,33 +88,6 @@ const icons = theme => ({
   leftIconButton: {
     marginRight: '4px'
   },
-});
-
-const badge = theme => ({
-  badge: {
-    '& .MuiBadge-badge': {
-      width: '22px',
-      fontSize: '11px',
-      height: '16px',
-      minWidth: '22px',
-      bottom: '12px',
-      boxShadow: `0px 0px 0px 2px ${theme.palette.background.paper}`,
-    },
-  },
-  groupBadge: {
-    '& .MuiBadge-badge': {
-      boxShadow: `0px 2px 0px -1px ${theme.palette.background.paper}, 0px 3px 0px 0px ${theme.palette.divider}, 0px 5px 0px -1px ${theme.palette.background.paper}, 0px 6px 0px 0px ${theme.palette.divider}`
-    }
-  },
-  rightBadge: { '& .MuiBadge-badge': { left: '-10px', right: 'unset' } },
-  leftBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-10px' } },
-  rightFixBadge: { '& .MuiBadge-badge': { left: '-14px', right: 'unset' } },
-  leftFixBadge: { '& .MuiBadge-badge': { left: 'unset', right: '-14px' } },
-});
-
-const useStyles = makeStyles((theme) => ({
-  ...badge(theme),
-  ...icons(theme),
   shortText: {
     fontSize: '10px',
     width: '40px',
@@ -105,11 +102,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     minWidth: 'initial',
   },
-}));
+}))
 
 const ContentContainerBox = styled(Box) (({ theme }) => ({
-	gap: theme.spacing(1),
-}));
+  gap: theme.spacing(1),
+}))
 
 const MuiMenuButton = withTheme(({
   lo,
@@ -117,14 +114,14 @@ const MuiMenuButton = withTheme(({
   side,
   theme,
 }) => {
-  const classes = useStyles(theme);// const classes = useStyles(theme)
-  const { settings, handleSetVisible } = useContext(DataProvider);
+  const classes = useStyles(theme)// const classes = useStyles(theme)
+  const { settings, handleSetVisible } = useContext(DataProvider)
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const determineColor = () => {
     const colorMap = [
@@ -132,9 +129,9 @@ const MuiMenuButton = withTheme(({
       { id: 'secondary', value: theme.palette.secondary.main },
       { id: 'textPrimary', value: theme.palette.text.primary },
       { id: 'textSecondary', value: theme.palette.text.secondary }
-    ];
-    return colorMap.find(({ id }) => id === settings.markerColor).value;
-  };
+    ]
+    return colorMap.find(({ id }) => id === settings.markerColor).value
+  }
 
   return <>
     <Tooltip
@@ -161,7 +158,7 @@ const MuiMenuButton = withTheme(({
           onContextMenu={(e) => handleClick(e)}
           disableRipple={!lo.handleOnClick}
           disableElevation={!lo.handleOnClick}
-          disabled={lo.disabled || lo.noPanel && lo.handleOnClick === undefined}
+          disabled={(lo.disabled || lo.noPanel) && lo.handleOnClick === undefined}
           onClick={() => !lo.noPanel ? handleSetVisible({ uniqueId: lo.uniqueId }) : lo.handleOnClick()}
           variant="text"
           fullWidth
@@ -177,7 +174,7 @@ const MuiMenuButton = withTheme(({
           <Badge
             className={`
               ${classes.badge}
-              ${classes[`${side}Badge`]}
+              ${side === 'right' ? classes.rightBadge : classes.leftBadge}]}
               ${!settings.inverseMarkers && classes[`${side}FixBadge`]}
               ${lo.notifications.summary > lo.notifications.count && classes.groupBadge}
               `}
@@ -195,21 +192,19 @@ const MuiMenuButton = withTheme(({
                     ${lo.isVisible && classes.activeIconButton}
                     ${lo.disabled && classes.disabledButton}
                   `,
-              })}
+                })}
               {!lo.noPanel && extraIcons && extraIcons.map((extraIcon, i) => <>
-
-              {i <= 2 && cloneElement(
-                extraIcon, {
-                style: {
-                  color: lo.isVisible && !lo.noPanel && determineColor(),
-                },
-                className: `
+                {i <= 2 && cloneElement(
+                  extraIcon, {
+                    style: {
+                      color: lo.isVisible && !lo.noPanel && determineColor(),
+                    },
+                    className: `
                     ${classes.iconExtraButton}
                     ${!lo.noPanel && classes[`${!settings.inverseMarkers ? oppositeSide(side) :side}IconExtraButton`]}
                     ${classes[`iconExtraButton${i}`]}
                   `,
-                })}
-
+                  })}
               </>)}
               {lo.shortText && <Typography
                 className={classes.shortText}
@@ -221,6 +216,6 @@ const MuiMenuButton = withTheme(({
       </span>
     </Tooltip>
     <MupMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
-    </>;
-});
-export default MuiMenuButton;
+  </>
+})
+export default MuiMenuButton

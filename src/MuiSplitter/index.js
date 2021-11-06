@@ -112,7 +112,8 @@ const useStyles = makeStyles(theme => ({
 
     '&:hover': {
       top: '-40px',
-      transition: 'top .35s ease-in-out'
+      boxShadow: `0 1px 6px 1px ${theme.palette.divider}`,
+      transition: 'all .35s ease-in-out'
 
     },
   },
@@ -163,6 +164,7 @@ const MuiSplitter = ({
   const theme = useTheme()
   const classes = useStyles(theme)
   const [layoutObject, setLayoutObject] = useState(null)
+
   const {
     layout, splitContentNg, setSectionUrl, showContent,
     removeZoneFromSection, toggleCollapseSection,
@@ -180,22 +182,28 @@ const MuiSplitter = ({
   return <div className={`${classes.wrapper}`}
     style={isRoot ? { border: '0px none' } : {}}>
 
-    {section.type === 'content' ? <div
-      className={classes.rootWrapper}
-      style={sections.length === 1
-        ? {}
-        : {}}>
-      {showSplitterButton && <div className={classes.rootController}>
-        <MupSectionsSplitter createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
-      </div>}
-    </div>
+    {section.type === 'content'
+      ? <div
+        className={classes.rootWrapper}
+        style={sections.length === 1
+          ? {}
+          : {}}>
+        {showSplitterButton && <div className={classes.rootController}>
+          <MupSectionsSplitter
+            createSection={({ type, index, count }) => splitContentNg({ sectionId: section.id, type, index, count })} />
+        </div>}
+      </div>
       : <>
         <Tooltip title="Double-Click to collapse"
           arrow>
           <div className={section.isCollapsed ? classes.headerCollapsed : classes.header}
             onDoubleClick={() => toggleCollapseSection({ sectionId: section.id })}
             style={isRoot
-            ? { borderBottom: `1px solid ${theme.palette.divider}`, backgroundColor: theme.palette.background.paper }
+              ? {
+                borderBottom: `1px solid ${theme.palette.divider}`,
+                backgroundColor: theme.palette.background.default,
+                zIndex: '5',
+              }
             : section.isCollapsed
               ? { backgroundColor: section.background }
               : { borderBottom: `3px solid ${section.background}` }
@@ -400,10 +408,14 @@ const MuiSplitter = ({
         <div style={{ width: '100%', height: '100%' }}
           id={`${section.panelId}-section`} />
       </>}
-      {section.type === 'content' && <>
-        <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'stretch', alignItems: 'stretch' }}
-          id={'content-section'} />
-      </>}
+      {section.type === 'content' && <div style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'stretch',
+        alignItems: 'stretch'
+      }}
+      id={'content-section'} />}
       {section.type === 'web' && section.url && <>
         <iframe
           title={section.url}

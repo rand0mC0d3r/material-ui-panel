@@ -13,7 +13,7 @@ const MupButton = ({ id, tooltip, shortText, disabled, icon, showIcon, onClick }
       noPanel: true,
       icon, id, shortText, showIcon, tooltip, disabled
     })
-  }, [handlePanelAnnouncement, icon, onClick, shortText, showIcon, tooltip])
+  }, [handlePanelAnnouncement, icon, onClick, shortText, disabled, showIcon, tooltip])
 
   const callbackHandlePaneDestroy = useCallback((id) => {
     handlePanelDestroy({ id })

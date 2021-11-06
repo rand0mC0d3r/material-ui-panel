@@ -141,15 +141,44 @@ Self organizing manager wrapper that renders all children given
 ```
 ---
 
-## ```<MupStatus>``` - Status Bar Component
+## ```<MupPanel>``` - 🪟  Panel Component
+#####  The component creates a panel object to host the contents given. It's self registered and managed
 
-Architecturally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged
+![/media/preview.png](/media/mupPanel1.png)
+**Hint**: Panels can issue notifications
+
+![/media/preview.png](/media/mupPanel2.png)
+**Hint**: Panels can feature automatic padding
+
+---
+
+## ```<MupStatus>``` - 📟 Status Bar Component
+#####  The component creates an object for the status bar that can be clicked. It's self registered and managed
+
+![/media/preview.png](/media/mupStatus1.png)
+**Hint**: Direct actions are permitted
+
+<br />
+
+![/media/preview.png](/media/mupStatus2.png)
+**Hint**: As well placed menu actions
+<br />
+
+![/media/preview.png](/media/mupStatus3.png)
+**Hint**: Informational sections
+
+<br />
+
+![/media/preview.png](/media/mupStatus4.png)
+**Hint**: Errors are using the secondary color
+
+Internally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged to de-clutter the DOM.
 
 Add a section to either ```left``` or ```right``` side of the status bar.
 
 Each ```MupStatus``` entity must contain an ```id``` in form of an unique identifier across the session.
 
-#### # Parent configuration
+#### # Inherited configuration
 
 ```<MuiPanelProvider />``` allows the user to configure the status bar with the following properties:
 
@@ -177,15 +206,46 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an unique identi
 ##### Simple example - static
 
 ```
- <MupStatus
-  id="sampleStatus"
+// 2 icons with text
+<MupStatus
+  id="statusA"
   side="left"
-  focusOnClick='anotherPanel'                               // onClick will focus a panel known
-  tooltip="Sample Status Tooltip"
+  tooltip='33% frames left / Ready for photo'
   elements={[
-   { icon: <CameraIcon />, text: 'I got a new camera' },    // Add an icon + text
- ]}/>
-```
+    { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
+    { icon: <CameraIcon />, text: 'Ipsum' },
+  ]}
+/>
+
+// 1 icon triggering a panel
+<MupStatus
+  id="triggerChromeCastPanel"
+  side="left"
+  focusOnClick='chromecastPanel'
+  tooltip="Toggle visibility for panel"
+  elements={[
+  { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
+]}>
+  demo text
+</MupStatus>
+
+// 1 icon doing an onClick callback
+<MupStatus
+  id='statusSimilarDocuments'
+  onClick={handleClickOpen}
+  tooltip="View Documents ... - (Last checked - 3 min ago)"
+  elements={[{ icon: <AllInboxIcon />, text: '4 Related' }]}
+/>
+
+// 1 icon requesting attention, no text
+<MupStatus
+  id='statusSimilarDocuments'
+  onClick={handleClickOpen}
+  requestAttention
+  tooltip="View Documents ... - (Last checked - 3 min ago)"
+  elements={[{ icon: <AllInboxIcon /> }]}
+/>
+  ```
 
 ##### Dynamic example - updateable
 ```
@@ -199,6 +259,8 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an unique identi
    setRequestAttention(true)								// Update attention state
   }
 
+  ...
+
   return <>
     <MupStatus
       id='statusCustomElement'
@@ -207,17 +269,19 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an unique identi
       tooltip="Save Document?"
       elements={elements}								// Initialize empty (won't show)
     />
-
-```
+  ```
 
 
 
 ---
-## ```<MupButton>``` - Button Component
+## ```<MupButton>``` - 🛎️ Button Component
+#####  The component creates an 🏝️ ( + 📄 ) object that can be clicked. It's self registered and managed
 
 ![/media/preview.png](/media/mupButton.png)
+**HINT**: Works great to display a logo or a button with a custom icon ( + text )
 
-**HINT**: Works great to display a logo or a button with a custom icon
+Allows the developer to add to the sidebars a logo, a logo with a custom short text, or a button triggering a custom action.
+
 
 Internally the ```<MuiPanelProvider>``` is made aware of the ```<MupButton>``` instance after the **first render** which triggers the internal hook to upstream call the provider with a new entity.
 
@@ -267,32 +331,8 @@ Internally the ```<MuiPanelProvider>``` is made aware of the ```<MupButton>``` i
   </>
   ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-## (Your) Content Component - ```<MupContent>```
+## ```<MupContent>``` - ⚠️  Your Content Component -
 
 This is the observable wrapper of your entire application. This should be included as close to root as possible where content represents your view or a representation of your current application UI.
 
@@ -301,7 +341,7 @@ This is the observable wrapper of your entire application. This should be includ
 
 |  | Argument | Type | Default | Description |
 |--|-----|--|--|---|
-| ⭐ | children | ```ReactNode``` | ... |  Pass-thru for the current app UI |
+| ⭐ | children | ```Node``` | ... |  Passthru ```Node``` for the current app UI. Expecting the router output or the **main <...>** of the application. <br /><br />Consider to include all custom wrappers for **<Layout ...>**, **<Notifications ...>** and others.  |
 
 #### Code sample
 
@@ -310,10 +350,9 @@ This is the observable wrapper of your entire application. This should be includ
 
 ```
  <MupContent>
-
-  ... your app
-  ... <ReactRouter>
-
+  <...>
+    <ReactRouter ... />                    // your app page/pages
+  </...>
  </MupContent>
 ```
 

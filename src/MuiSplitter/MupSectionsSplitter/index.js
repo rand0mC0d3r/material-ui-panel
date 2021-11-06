@@ -1,4 +1,4 @@
-import { ClickAwayListener } from '@material-ui/core'
+import { Tooltip } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit'
 import { useState } from 'react'
@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     gridTemplateRows: '1fr',
     gap: '8px',
     gridTemplateAreas:
-      // '. . .',
       '. .',
     width: '100%',
     height: '100%',
@@ -69,9 +68,7 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
   const classes = useStyles(theme)
   const [visible, setVisible] = useState(false)
 
-  const toggleVisible = () => {
-    setVisible(visible => !visible)
-  }
+  const toggleVisible = () => setVisible(visible => !visible)
 
   const blocks = [
     {
@@ -104,46 +101,10 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
         <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({type: 'hs', index:  2, count: 3})}></div>
       </div>
     },
-    // {
-    //   tooltip: 'Main + sides',
-    //   content: <div className={classes.general} style={{'flexDirection': 'row'}}>
-    //     <div className={classes.block}></div>
-    //     <div style={{
-    //       'flex': '1 1 50%',
-    //       display: 'flex',
-    //       gap: '4px',
-    //       flexDirection: 'column',
-    //     }}>
-    //       <div className={classes.block}></div>
-    //       <div className={classes.block}></div>
-    //     </div>
-    //   </div>
-    // },
-    // {
-    //   tooltip: '4 squares',
-    //   content: <div style={{
-    //     display: 'grid',
-    //     gridAutoColumns: '1fr',
-    //     gridAutoRows: '1fr',
-    //     gridTemplateColumns: '1fr 1fr',
-    //     gridTemplateRows: '1fr',
-    //     gap: '4px',
-    //     gridTemplateAreas:
-    //       '. .',
-    //     width: '100%',
-    //     height: '100%',
-    //   }}>
-    //     <div className={classes.block}></div>
-    //     <div className={classes.block}></div>
-    //     <div className={classes.block}></div>
-    //     <div className={classes.block}></div>
-    //   </div>
-    // },
   ]
 
-  return <>
-    {visible && <ClickAwayListener onClickAway={toggleVisible}>
-      <div
+  return visible
+      ? <div
         onClick={toggleVisible}
         className={classes.wrapper}
         style={isRoot ? {  } : { }}>
@@ -153,8 +114,7 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false}) => {
           </div>
         ))}
       </div>
-    </ClickAwayListener>}
-    {!visible && <VerticalSplitIcon style={{cursor: 'pointer'}} onClick={toggleVisible} color="action" />}
-  </>
+    : <Tooltip title="Split the screen" arrow>
+      <VerticalSplitIcon style={{ cursor: 'pointer' }} onClick={toggleVisible} color="action" /></Tooltip>
 }
 export default MupSectionsSplitter

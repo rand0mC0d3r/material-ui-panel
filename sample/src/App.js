@@ -57,22 +57,21 @@ function App() {
 
         {/* buttons section  */}
         <MupButton
-          id="logoAndCustomColorAndTooltip"
+          id="logoAndText"
           tooltip="Custom Tooltip &amp; Color"
           shortText="HOME"
           icon={<HomeIcon style={{ color: green[500] }} />}
         />
 
         <MupButton
-          id="logoAndCustomColorAndTooltip2"
-          tooltip="Custom Tooltip &amp; but no color"
+          id="logoDisabled"
           disabled
           icon={<AppsIcon style={{ color: green[500] }} />}
         />
 
         <MupButton
-          id="logoAndCustomColorAndTooltip3"
-          tooltip="Custom Tooltip &amp; MUI Color"
+          id="logoColored"
+          tooltip="Custom Tooltip &amp; and default MUI Color"
           icon={<AppsIcon color="primary" />}
         />
 
@@ -142,13 +141,13 @@ function App() {
             title="Random Wiki article"
             style={{
               width: "100%",
-              // filter: "opacity(0.3) grayscale(1)",
+              filter: "opacity(0.25) grayscale(1)",
               backgroundColor: '#FFF',
               height: "100%",
               border: '0px none'
             }}
             src="https://en.wikipedia.org/wiki/Special:Random"
-            />
+          />
         </MupContent>
 
       </MuiPanelProvider>

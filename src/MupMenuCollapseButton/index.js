@@ -9,13 +9,7 @@ const MupMenuCollapseButton = ({ side }) => {
   const theme = useTheme()
   const { settings, toggleSettingIsCollapsed } = useContext(DataProvider)
 
-  return <Tooltip
-    placement={side}
-    arrow
-    title={settings.isCollapsed
-			? 'Expand Panel'
-			: 'Minimize Panel'}
-  >
+  return <Tooltip placement={side} arrow title={settings.isCollapsed ? 'Expand Panel' : 'Minimize Panel'}>
     <IconButton
       size="small"
       style={{
@@ -31,7 +25,7 @@ const MupMenuCollapseButton = ({ side }) => {
 					? `${theme.shape.borderRadius}px 0px 0px ${theme.shape.borderRadius}px`
 					: `0px ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0px`,
       }}
-      onClick={toggleSettingIsCollapsed}
+      onClick={() => toggleSettingIsCollapsed(!settings.isCollapsed)}
     >
       {side === 'right' && (settings.isCollapsed
 				? <ArrowLeft style={{ fontSize: 16 }} />

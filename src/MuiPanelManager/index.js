@@ -1,4 +1,4 @@
-import { Box, Tooltip } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useContext, useEffect, useState } from 'react'
@@ -218,7 +218,8 @@ const MuiPanelManager = ({
     }
   }, [layout])
 
-  return <Box id="MuiPanelManager" display="flex" flexDirection="column" className={classes.wrapper}>
+  return <Box id="MuiPanelManager" display="flex" flexDirection="column"
+    className={classes.wrapper}>
     <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 
       {availableSides
@@ -260,7 +261,6 @@ const MuiPanelManager = ({
         .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
         .map(side => <div key={`${side}_menus`}>
           {layout.filter(lo => lo.side === side && !lo.asContent && !lo.asSection).length > 0 &&
-            <Tooltip title={settings.isCollapsed ? 'DoubleClick to expand' : ''} arrow placement="left">
               <div
                 id={`${side}-menu`}
                 onDoubleClick={() => {settings.isCollapsed && toggleSettingIsCollapsed() } }
@@ -282,12 +282,12 @@ const MuiPanelManager = ({
                   <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
                 </>}
               </div>
-            </Tooltip>
           }
         </div>)}
 
       <div style={{ gridArea: 'main', display: 'flex', minWidth: '500px' }}>
-        {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{showSplitterButton}} key={ section.id} section={section} isRoot />)}
+        {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{showSplitterButton}} key={ section.id} section={section}
+          isRoot />)}
       </div>
 
       {children}

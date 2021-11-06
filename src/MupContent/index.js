@@ -26,13 +26,12 @@ const MupContent = ({ children }) => {
       }}>
         {children}
       </div>,
-      elemRef
-    )
+      elemRef)
     : null
 }
 
 MupContent.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node.isRequired,
 }
 
 export default MupContent

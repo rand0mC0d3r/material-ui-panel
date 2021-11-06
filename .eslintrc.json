@@ -32,11 +32,12 @@
     "indent": ["error", 2, { "ignoredNodes": ["ConditionalExpression"] }],
     "mui-unused-classes/unused-classes": 1,
     "comma-dangle": ["error", "only-multiline"],
-    "no-unused-vars":"error",
+    "no-unused-vars": "error",
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "max-len": ["error", 160],
     "react/jsx-uses-react": 0,
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
     "react/jsx-uses-vars": 2,
     "react/jsx-closing-tag-location": "off",
     "semi": ["error", "never"],
@@ -46,6 +47,6 @@
     "no-restricted-syntax": "off",
     "no-param-reassign": "off",
     "react/react-in-jsx-scope": 0,
-    "react/jsx-max-props-per-line": [1, { "maximum": 3, "when": "multiline" }],
+    "react/jsx-max-props-per-line": [1, { "maximum": 3, "when": "always" }]
   }
 }

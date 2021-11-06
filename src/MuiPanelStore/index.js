@@ -63,7 +63,8 @@ function MuiPanelProvider({
     setStatus(status => [...status.filter(lo => lo.uniqueId !== id)])
   }
 
-  const handlePanelAnnouncement = ({ id, ref, disabled, children, handleOnClick, placement, notifications, subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
+  const handlePanelAnnouncement = ({ id, ref, disabled, children, handleOnClick, placement, notifications,
+    subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
     setLayout(layout => [
       ...layout.filter(lo => lo.uniqueId !== id),
       {
@@ -149,8 +150,12 @@ function MuiPanelProvider({
 			? { ...layoutObject, icon }: layoutObject))
   }
 
+  const handleSetDisabled = ({ uniqueId }) => {
+    setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === uniqueId
+			? { ...layoutObject, disabled: !layoutObject.disabled, isCollapsed: true }: layoutObject))
+  }
+
   const handleSetStatusElements = ({ uniqueId, elements }) => {
-    console.log(uniqueId, elements, status)
     setStatus(status => status.map(statusObject => statusObject.uniqueId === uniqueId
 			? { ...statusObject, elements }
 			: statusObject))
@@ -501,6 +506,7 @@ function MuiPanelProvider({
       handleSetVisible,
       handlePanelAlerts,
       handleSetSide,
+      handleSetDisabled,
       handleToggleCollapse,
       handleSetAsEmbedded,
       handleSetIcon,

@@ -1,4 +1,4 @@
-import { Box, SvgIcon, Typography } from '@material-ui/core'
+import { Box, SvgIcon, Tooltip, Typography } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { useCallback, useContext, useEffect, useState } from 'react'
@@ -59,34 +59,36 @@ const MupStatus = ({
     }
   }, [status, id, statusObject])
 
-  return (statusObject !== null && !!id) ? createPortal(<Box
-    key={`MupStatus_${id}_wrapper`}
-    title={tooltip}
-    onClick={(e) => focusOnClick
+  return (statusObject !== null && !!id) ? createPortal(<Tooltip title={tooltip} arrow>
+    <Box
+      key={`MupStatus_${id}_wrapper`}
+      onClick={(e) => focusOnClick
       ? handleSetVisible({ uniqueId: focusOnClick })
       : onClick ? callbackOnClick(e) : null
-    }
-    onContextMenu={(e) => settings.allowRightClick
+      }
+      onContextMenu={(e) => settings.allowRightClick
       ? onContextMenu ? onContextMenu(e) : null
       : e.preventDefault()
-    }
-    display="flex"
-    alignItems="center"
-    className={(focusOnClick || onClick) ? classes.root : ''}
-    style={{
-      gap: '16px',
-      padding: '3px 6px',
-      cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
-      backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
-    }}
-  >
-    {elements.map(element => <Box display="flex" alignItems="center" key={`MupStatus_${element.text}_container`} style={{ gap: '6px' }}>
-      {element.icon && <SvgIcon style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
-      {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
-        {element.text}
-      </Typography>}
-    </Box>)}
-  </Box>,
+      }
+      display="flex"
+      alignItems="center"
+      className={(focusOnClick || onClick) ? classes.root : ''}
+      style={{
+        gap: '16px',
+        padding: '3px 6px',
+        cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
+        backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
+      }}
+    >
+      {elements.map(element => <Box display="flex" alignItems="center" key={`MupStatus_${element.text}_container`}
+        style={{ gap: '6px' }}>
+        {element.icon && <SvgIcon style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
+        {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
+          {element.text}
+        </Typography>}
+      </Box>)}
+    </Box>
+  </Tooltip>,
   document.getElementById(`material-ui-panel-statusBar-${side}`))
   : null
 }
@@ -99,7 +101,7 @@ MupStatus.defaultProps = {
 }
 
 MupStatus.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   side: PropTypes.oneOf(['left', 'right']),
   focusOnClick: PropTypes.string,
   onClick: PropTypes.func,
@@ -107,9 +109,9 @@ MupStatus.propTypes = {
   requestAttention: PropTypes.bool,
   tooltip: PropTypes.string,
   elements: PropTypes.arrayOf(PropTypes.shape({
-    icon: PropTypes.node,
+    icon: PropTypes.node.isRequired,
     text: PropTypes.string,
-  })),
+  })).isRequired,
 }
 
 export default MupStatus
