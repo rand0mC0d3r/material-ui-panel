@@ -231,7 +231,7 @@ const MuiSplitter = ({
                     fullWidth
                     autoFocus
                     value={section.url}
-                    style={{flex: '1 1 auto'}}
+                    style={{ flex: '1 1 auto' }}
                     placeholder="http://target.url/..."
                     InputProps={{
                       startAdornment: (
@@ -330,7 +330,7 @@ const MuiSplitter = ({
                   </span>
               </Tooltip>} */}
 
-                <div style={{ display: 'flex', gap: '4px'}}>
+                <div style={{ display: 'flex', gap: '4px' }}>
                   {section.zones.length === 0 && <Tooltip arrow
                     title="Switch panel type">
                     <span>

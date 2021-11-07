@@ -190,6 +190,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuCollapsed: {
     width: '0px',
+    border: '0px',
     backgroundColor: theme.palette.background.paper,
     transition: 'background-color 350ms ease-out 100ms',
     opacity: 1,
@@ -205,6 +206,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const availableSides = ['left', 'right']
+
 const MuiPanelManager = ({
   children,
   allowRightClick = false,
@@ -221,10 +223,14 @@ const MuiPanelManager = ({
     toggleSettingIsCollapsed(!matches)
   }, [matches])
 
-
   useEffect(() => {
     if (layout.length > 0) {
-      const foundSides = [...new Set(layout.reduce((acc, val) => { acc.push(val.side); return acc }, []))]
+      const foundSides = [
+        ...new Set(layout.reduce((acc, val) => {
+          acc.push(val.side)
+
+          return acc
+        }, []))]
       setSides(foundSides.length === 1 ? foundSides[0] : 'both')
     }
   }, [layout])
@@ -293,7 +299,7 @@ const MuiPanelManager = ({
         </div>)}
 
       <div style={{ gridArea: 'main', display: 'flex', minWidth: '500px' }}>
-        {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{showSplitterButton}} key={ section.id} section={section}
+        {sections.filter(section => !section.parentId).map(section => <MuiSplitter {...{ showSplitterButton }} key={ section.id} section={section}
           isRoot />)}
       </div>
 

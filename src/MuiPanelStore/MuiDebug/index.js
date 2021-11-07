@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MupDebug = () => {
   const { settings, status, sections, layout } = useContext(DataProvider)
+
   const [dumps, setDumps] = useState([{
     title: 'Sections',
     collapsed: true,
@@ -54,9 +55,13 @@ const MupDebug = () => {
       if (d.title === 'Sections') {
         return {
           ...d, dataSource: sections.map(obj => <pre
-            key={`section_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj }, null, 4)}</pre>)
+            key={`section_${obj.uniqueId}`}
+            className={classes.dumpText}>
+            {JSON.stringify({ ...obj }, null, 4)}
+          </pre>)
         }
       }
+
       return d
     }))
   }, [sections, classes.dumpText])
@@ -66,9 +71,13 @@ const MupDebug = () => {
       if (d.title === 'Layout') {
         return {
           ...d, dataSource: layout.map(obj => <pre
-            key={`layout_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)}</pre>)
+            key={`layout_${obj.uniqueId}`}
+            className={classes.dumpText}>
+            {JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)}
+          </pre>)
         }
       }
+
       return d
     }))
   }, [layout, classes.dumpText])
@@ -78,9 +87,13 @@ const MupDebug = () => {
       if (d.title === 'Settings') {
         return {
           ...d, dataSource: Object.entries(settings).map(([key, val]) => <pre
-            key={`settings_${key}`} className={classes.dumpText}>{key}: {JSON.stringify(val)}</pre>)
+            key={`settings_${key}`}
+            className={classes.dumpText}>
+            {key}: {JSON.stringify(val)}
+          </pre>)
         }
       }
+
       return d
     }))
   }, [settings, classes.dumpText])
@@ -90,25 +103,37 @@ const MupDebug = () => {
       if (d.title === 'Status') {
         return {
           ...d, dataSource: status.map(obj => <pre
-            key={`settings_${obj.uniqueId}`} className={classes.dumpText}>{JSON.stringify({ ...obj, elements: null }, null, 4)}</pre>)
+            key={`settings_${obj.uniqueId}`}
+            className={classes.dumpText}>
+            {JSON.stringify({ ...obj, elements: null }, null, 4)}
+          </pre>)
         }
       }
+
       return d
     }))
   }, [status, classes.dumpText])
 
   const toggleDumpCollapse = (title) => {
-    setDumps(dumps => dumps.map((dump) => { if (dump.title === title) dump.collapsed = !dump.collapsed; return dump }))
+    setDumps(dumps => dumps
+      .filter(dump => dump.title === title)
+      .map((dump) => dump.collapsed = !dump.collapsed && dump ))
   }
 
   return settings.debugMode
-		? <div key="MupDebug" className={classes.root}>{dumps.map(dump => <Fragment key={dump.title}>
-		    <Typography className={classes.header} color="textPrimary" onClick={() => toggleDumpCollapse(dump.title)}
-		      variant="h6">
-		      {dump.title}
-		    </Typography>
-		    {!dump.collapsed && dump.dataSource}
-		</Fragment>)}</div>
+    ? <div key="MupDebug" className={classes.root}>
+      {dumps.map(dump => <Fragment key={dump.title}>
+        <Typography
+          className={classes.header}
+          color="textPrimary"
+          onClick={() => toggleDumpCollapse(dump.title)}
+          variant="h6"
+        >
+          {dump.title}
+        </Typography>
+        {!dump.collapsed && dump.dataSource}
+      </Fragment>)}
+    </div>
 	: null
 }
 

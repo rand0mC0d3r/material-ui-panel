@@ -8,7 +8,7 @@ import DataProvider from '../MuiPanelStore'
 const useStyles = makeStyles(theme => ({
   root: {
     '&:hover': {
-      backgroundColor: `${theme.palette.augmentColor({main: theme.palette.divider}).light} !important`
+      backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.divider }).light} !important`
     }
   },
 }))
@@ -82,7 +82,7 @@ const MupStatus = ({
     >
       {elements.map(element => <Box display="flex" alignItems="center" key={`MupStatus_${element.text}_container`}
         style={{ gap: '6px' }}>
-        {element.icon && <SvgIcon style={{ fontSize: 20}} color='action'>{element.icon}</SvgIcon>}
+        {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
         {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
           {element.text}
         </Typography>}

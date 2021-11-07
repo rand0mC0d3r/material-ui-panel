@@ -33,7 +33,7 @@ const MupMenuOptions = ({
   return <Popover className={classes.popover}
     marginThreshold={0}
     elevation={0}
-    {...{open, anchorEl, onClose}}
+    {...{ open, anchorEl, onClose }}
     anchorOrigin={underMenu
       ? { vertical: 'bottom', horizontal: 'center' }
       : { vertical: 'center', horizontal: side !== 'right' ? 'right' : 'left' }

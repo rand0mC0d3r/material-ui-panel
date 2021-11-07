@@ -4,9 +4,13 @@ import { oppositeSide } from '../utils'
 import MuiDebug from './MuiDebug'
 
 const localStorageKey = 'material-ui-panel.layout'
+
+const settingsStorageKey = 'material-ui-panel.settings'
+
 const DataContext = createContext(null)
 
 const getRandomColor = () => '#' + Math.random().toString(16).substr(-6)
+
 const getRandomId = () => (Math.random() + 1).toString(36).substring(7)
 
 function MuiPanelProvider({
@@ -21,9 +25,11 @@ function MuiPanelProvider({
   ...props }) {
   // const cachedLayout = localStorage.getItem(localStorageKey);
 
-  const initialLayout = props['layout'] || []
-  const initialStatus = props['status'] || []
-  const initialSections = props['sections'] || [
+  const [layout, setLayout] = useState(props['layout'] || [])
+
+  const [status, setStatus] = useState(props['status'] || [])
+
+  const [sections, setSections] = useState(props['sections'] || [
     {
       id: getRandomId(),
       direction: 'horizontal',
@@ -33,20 +39,16 @@ function MuiPanelProvider({
       isCollapsed: true,
       zones: []
     },
-  ]
-  const initialSettings = props['settings'] || {
+  ])
+
+  const [settings, setSettings] = useState(props['settings'] || {
     isCollapsed: false,
     canSplitter: true,
     inverseMarkers: false,
     allowRightClick: false,
     markerColor: 'textPrimary',
     debugMode: false,
-  }
-
-  const [layout, setLayout] = useState(initialLayout)
-  const [status, setStatus] = useState(initialStatus)
-  const [sections, setSections] = useState(initialSections)
-  const [settings, setSettings] = useState(initialSettings)
+  })
 
   const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {
     setStatus(status => [
@@ -60,6 +62,7 @@ function MuiPanelProvider({
       }
     ])
   }
+
   const handleStatusDestroy = ({ id }) => {
     setStatus(status => [...status.filter(lo => lo.uniqueId !== id)])
   }
@@ -132,6 +135,7 @@ function MuiPanelProvider({
 				      if (value.parentId === layoutObject.uniqueId) {
 				        acc = acc + value.notifications.count
 				      }
+
 				      return acc
 				    }, 0) + layoutObject.notifications.count,
 				  }
@@ -178,6 +182,7 @@ function MuiPanelProvider({
           url
         }
       }
+
       return section
     }))
   }
@@ -190,6 +195,7 @@ function MuiPanelProvider({
           direction: section.direction === 'vertical' ? 'horizontal' : 'vertical'
         }
       }
+
       return section
     }))
   }
@@ -203,6 +209,7 @@ function MuiPanelProvider({
           isCollapsed: !section.isCollapsed
         }
       }
+
       return section
     }))
   }
@@ -214,6 +221,7 @@ function MuiPanelProvider({
         if (section.id === sectionId) {
           return { ...section, zones: [...section.zones, randomString] }
         }
+
         return section
       }),
       {
@@ -229,7 +237,6 @@ function MuiPanelProvider({
   }
 
   const removeZoneFromSection = ({ sectionId }) => {
-    console.log('clicked remove section')
     setSections(sections => [
       ...sections
         .filter(section => section.id !== sectionId)
@@ -237,6 +244,7 @@ function MuiPanelProvider({
           if (section.zones.some(sz => sz === sectionId)) {
             return { ...section, zones: [...section.zones.filter(sz => sz !== sectionId)] }
           }
+
           return section
         }),
     ])
@@ -247,6 +255,7 @@ function MuiPanelProvider({
     setSections(sections => sections.map(section => {
       if (section.id === sectionId) {
         previousPanel = section.panelId
+
         return {
           ...section,
           panelId,
@@ -255,6 +264,7 @@ function MuiPanelProvider({
       }
       if (section.panelId === panelId) {
         previousPanel = section.panelId
+
         return {
           ...section,
           panelId: null,
@@ -272,9 +282,7 @@ function MuiPanelProvider({
 				: layoutObject))
   }
 
-
   const removePanelFromSection = ({ sectionId, panelId }) => {
-    console.log('here', panelId)
     setSections(sections => sections.map(section => {
       if (section.id === sectionId) {
         return {
@@ -282,6 +290,7 @@ function MuiPanelProvider({
           panelId: null
         }
       }
+
       return section
     }))
     setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === panelId
@@ -305,6 +314,7 @@ function MuiPanelProvider({
           type: 'content',
         }
       }
+
       return section
     }))
     setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
@@ -325,6 +335,7 @@ function MuiPanelProvider({
             type: 'list'
           }
         }
+
         return section
       }),
       ...[...Array(count)].map((item, indexCount) => ({
@@ -340,14 +351,17 @@ function MuiPanelProvider({
       }))
     ])
   }
+
   const splitContent = ({ sectionId }) => {
     const randomString = (Math.random() + 1).toString(36).substring(7)
+
     const randomStringPanel = (Math.random() + 1).toString(36).substring(7)
     setSections(sections => [
       ...sections.map(section => {
         if (section.id === sectionId) {
           return { ...section, zones: [...section.zones, randomString, randomStringPanel], type: 'list' }
         }
+
         return section
       }),
       {
@@ -379,6 +393,7 @@ function MuiPanelProvider({
     setSections(sections => sections.map(section => {
       if (section.id === panelId) {
         foundPanelId = section.panelId
+
         return {
           ...section,
           type,
@@ -387,6 +402,7 @@ function MuiPanelProvider({
           url: undefined,
         }
       }
+
       return section
     }))
     setLayout(layout => layout.map(layoutObject => layoutObject.uniqueId === foundPanelId
@@ -418,6 +434,7 @@ function MuiPanelProvider({
       const updateEmbedded = layout => layout.map(layoutObject => layoutObject.uniqueId === uniqueId
 					? { ...layoutObject, parentId, isVisible: true, side: findParent.side, asEmbedded: !layoutObject.asEmbedded }
 					: layoutObject)
+
       const activateParent = layout =>  layout.map(layoutObject => layoutObject.uniqueId === parentId || layoutObject.parentId === parentId
 					? { ...layoutObject, isVisible: true }
 					: layoutObject)
@@ -447,13 +464,14 @@ function MuiPanelProvider({
       setLayout(layout => ([...layout.map(lo => {
         if (lo.side === foundObject.side && !lo.asSection) {
           if (lo.uniqueId === foundObject.uniqueId) {
-            return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 }}
+            return { ...lo, isVisible: !lo.isVisible, notifications: { ...lo.notifications, count: 0, summary: 0 } }
           } else if (lo.parentId === foundObject.uniqueId) {
             return { ...lo, isVisible: !lo.isVisible }
           } else {
             return { ...lo, isVisible: false }
           }
         }
+
         return lo
       })]))
     }
@@ -471,12 +489,15 @@ function MuiPanelProvider({
   useEffect(() => setSettings(settings => ({ ...settings, debugMode: debugMode })), [debugMode])
   useEffect(() => setSettings(settings => ({ ...settings, upperBar: upperBar })), [upperBar])
 
-  useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor])
+  useEffect(() => !!markerColor && setSettings(settings => ({ ...settings, markerColor })), [markerColor])
 
   // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
-  // useEffect(() => { console.log('settings', settings) }, [settings]);
   // useEffect(() => { console.log('sections', sections) }, [sections]);
   // useEffect(() => { console.log('status', status) }, [status]);
+
+  useEffect(() => {
+    localStorage.setItem(settingsStorageKey, JSON.stringify(settings))
+  }, [settings])
 
   return <DataContext.Provider
     id="provider"
@@ -517,7 +538,7 @@ function MuiPanelProvider({
       handleStatusDestroy,
       handleSetStatusElements,
     }}>
-    <MuiPanelManager {...{allowRightClick, showCollapseButton, showSplitterButton }}>
+    <MuiPanelManager {...{ allowRightClick, showCollapseButton, showSplitterButton }}>
       {props.children}
     </MuiPanelManager>
     {settings.debugMode && <MuiDebug />}

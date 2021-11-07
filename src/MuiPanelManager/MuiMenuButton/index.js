@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ContentContainerBox = styled(Box) (({ theme }) => ({
+const ContentContainerBox = styled(Box)(({ theme }) => ({
   gap: theme.spacing(0.5),
 }))
 
@@ -159,6 +159,7 @@ const MuiMenuButton = withTheme(({
   theme,
 }) => {
   const classes = useStyles(theme)// const classes = useStyles(theme)
+
   const { settings, handleSetVisible } = useContext(DataProvider)
 
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -174,6 +175,7 @@ const MuiMenuButton = withTheme(({
       { id: 'textPrimary', value: theme.palette.text.primary },
       { id: 'textSecondary', value: theme.palette.text.secondary }
     ]
+
     return colorMap.find(({ id }) => id === settings.markerColor).value
   }
 

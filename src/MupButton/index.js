@@ -34,7 +34,6 @@ const MupButton = ({ id, tooltip, shortText, disabled, icon, showIcon, onClick }
     if (id && icon && isRegistered) {
       callbackHandleSetIcon(icon)
     }
-
   }, [isRegistered, id, icon, callbackHandleSetIcon])
 
   useEffect(() => {

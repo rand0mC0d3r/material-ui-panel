@@ -50,10 +50,11 @@ const MupHeaderPanel = withTheme(({
     display="flex"
     className={`${classes.header}`}
   >
-    <MupMenuOptions underMenu={true} {...{lo: layoutObject, side, anchorEl, setAnchorEl}} />
+    <MupMenuOptions underMenu={true} {...{ lo: layoutObject, side, anchorEl, setAnchorEl }} />
     <Box display="flex" alignItems="center" style={{ gap: theme.spacing(1) }}>
       <Tooltip arrow title="Click to toggle collapse">
-        <Button disableRipple disableElevation onClick={() => handleToggleCollapse({ uniqueId })} className={classes.collapseButton}>
+        <Button disableRipple disableElevation onClick={() => handleToggleCollapse({ uniqueId })}
+          className={classes.collapseButton}>
           {isCollapsed ? <ChevronRightIcon style={{ fontSize }} /> : <ExpandMoreIcon style={{ fontSize }} />}
         </Button>
       </Tooltip>
