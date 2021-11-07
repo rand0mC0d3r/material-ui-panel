@@ -16,14 +16,15 @@
     "copy-and-watch": "^0.1.5",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
     "npm-check-updates": "^12.0.0",
-    "serve": "13.0.2"
+
   },
   "dependencies": {
     "@material-ui/core": ">=4.12.3",
     "@material-ui/icons": ">=4.11.2",
     "prop-types": "^15.7.2",
     "react": ">=17.0.2",
-    "sample": "file:sample"
+    "sample": "file:sample",
+    "serve": "13.0.2"
   },
   "files": [
     "LICENSE",
