@@ -40,10 +40,6 @@ const useStyles = makeStyles((theme) => ({
       opacity: '0.9',
     }
   },
-  activeButton: {
-    opacity: '0.9',
-    color: theme.palette.text.secondary,
-  },
   disabledButton: {
     opacity: '0.9',
     color: `${theme.palette.text.disabled} !important`,
@@ -98,14 +94,62 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonMenu: {
     border: '0px none',
-    padding: theme.spacing(2, 0),
+    padding: theme.spacing(2.25, 0),
     borderRadius: '0px',
     minWidth: 'initial',
+
+    '@media (max-width: 780px)' : {
+      padding: theme.spacing(1.75, 0),
+    }
+  },
+  rightGroupButtonMenu: {
+    position: 'relative',
+    '&::after': {
+      content: '"."',
+      backgroundColor: theme.palette.divider,
+      color: theme.palette.divider,
+      position: 'absolute',
+      fontSize: '4px',
+      lineHeight: '12px',
+      width: '8px',
+      top: 22,
+      borderRadius: '0px 4px 4px 0px',
+      left: -4,
+    },
+  },
+  leftGroupButtonMenu: {
+    position: 'relative',
+    '&::after': {
+      content: '"."',
+      backgroundColor: theme.palette.divider,
+      color: theme.palette.divider,
+      position: 'absolute',
+      width: '8px',
+      top: 22,
+      borderRadius: '4px 0px 0px 4px',
+      right: -4,
+      lineHeight: '12px',
+      fontSize: '4px'
+    },
+  },
+  rightButtonMenu: {
+    borderRight: '4px solid transparent',
+  },
+  leftButtonMenu: {
+    borderLeft: '4px solid transparent'
+  },
+  rightActiveButtonMenu: {
+    borderRight: `4px solid ${theme.palette.text.primary}`,
+    opacity: '1',
+  },
+  leftActiveButtonMenu: {
+    borderLeft: `4px solid ${theme.palette.text.primary}`,
+    opacity: '1',
   },
 }))
 
 const ContentContainerBox = styled(Box) (({ theme }) => ({
-  gap: theme.spacing(1),
+  gap: theme.spacing(0.5),
 }))
 
 const MuiMenuButton = withTheme(({

@@ -7,6 +7,7 @@ import MupStatus from '../components/MupStatus';
 
 const ToggleTheme = ({
   toggleDarkMode, darkMode,
+  toggleUpperBar, upperBar,
   toggleDebugMode, debugMode,
   toggleCollapseMode, collapseMode,
   toggleInverseMarkers, inverseMarkers,
@@ -31,6 +32,16 @@ const ToggleTheme = ({
         color="primary"
         checked={darkMode}
         onChange={toggleDarkMode}
+      />
+    },
+    {
+      title: 'Upper Bar',
+      status: upperBar,
+      statusToggle: toggleUpperBar,
+      component: <Switch
+        color="primary"
+        checked={upperBar}
+        onChange={toggleUpperBar}
       />
     },
     {

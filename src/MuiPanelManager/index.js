@@ -229,7 +229,7 @@ const MuiPanelManager = ({
     }
   }, [layout])
 
-  return <Box id="MuiPanelManager" display="flex" flexDirection="column"
+  return <Box id="MuiPanelManager" display="flex" flexDirection={settings.upperBar ? 'column-reverse' : 'column'}
     className={classes.wrapper}>
     <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
 

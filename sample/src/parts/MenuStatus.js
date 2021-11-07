@@ -17,6 +17,7 @@ const ConfigStatus = () => {
 
   return <>
     <MupStatus
+      style={{ position: 'relative'}}
       id='statusSampleMenu'
       onClick={handleClick}
       tooltip="Open Sample menu..."

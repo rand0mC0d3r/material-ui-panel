@@ -15,6 +15,7 @@ function MuiPanelProvider({
   markerColor,
   inverseMarkers,
   debugMode,
+  upperBar,
   showCollapseButton,
   showSplitterButton,
   ...props }) {
@@ -466,11 +467,9 @@ function MuiPanelProvider({
   }, [layout])
 
   useEffect(() => setSettings(settings => ({ ...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers])
-
   useEffect(() => setSettings(settings => ({ ...settings, allowRightClick: !settings.allowRightClick })), [allowRightClick])
-
   useEffect(() => setSettings(settings => ({ ...settings, debugMode: debugMode })), [debugMode])
-
+  useEffect(() => setSettings(settings => ({ ...settings, upperBar: upperBar })), [upperBar])
 
   useEffect(() => !!markerColor && setSettings(settings => ({...settings, markerColor })), [markerColor])
 
