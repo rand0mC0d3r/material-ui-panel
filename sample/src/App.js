@@ -19,6 +19,7 @@ import MupContent from './components/MupContent';
 import MupPanel from './components/MupPanel';
 import MupStatus from './components/MupStatus';
 import ActButton from './parts/ActButton';
+import AliveStatus from './parts/AliveStatus';
 import AnotherIframePanel from './parts/AnotherIframePanel';
 import ComplexPanel from './parts/ComplexPanel';
 import ConfigStatus from './parts/ConfigStatus';
@@ -100,8 +101,9 @@ function App() {
         <GalleryStatus />
         <SaveStatus />
         <DynamicStatus />
+        <AliveStatus />
 
-        <MupStatus
+        {/* <MupStatus
           id="statusA"
           side="left"
           tooltip='33% frames left / Ready for photo'
@@ -109,7 +111,7 @@ function App() {
             { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
             { icon: <CameraIcon />, text: 'Ipsum' },
           ]}
-        />
+        /> */}
 
         <MupStatus
           id="triggerChromeCastPanel"
