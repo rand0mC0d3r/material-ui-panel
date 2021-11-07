@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import { useState } from 'react';
 import MupStatus from '../components/MupStatus';
 
@@ -21,7 +21,7 @@ const ConfigStatus = () => {
       id='statusSampleMenu'
       onClick={handleClick}
       tooltip="Open Sample menu..."
-      elements={[{ icon: <SettingsIcon />}]}
+      elements={[{ icon: <ListAltIcon />, text: 'Config Menu' }]}
     />
     {open && <Menu
       id="simple-menu"

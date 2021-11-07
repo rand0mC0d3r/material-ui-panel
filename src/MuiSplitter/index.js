@@ -230,7 +230,7 @@ const MuiSplitter = ({
                     variant="outlined"
                     fullWidth
                     autoFocus
-                    value={section.url}
+                    value={section.url || ''}
                     style={{ flex: '1 1 auto' }}
                     placeholder="http://target.url/..."
                     InputProps={{

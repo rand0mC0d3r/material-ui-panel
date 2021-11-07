@@ -95,9 +95,9 @@ function App() {
         <ActButton />
 
         {/* status section  */}
-        <GalleryStatus />
-        <ConfigStatus />
         <MenuStatus />
+        <ConfigStatus />
+        <GalleryStatus />
         <SaveStatus />
         <DynamicStatus />
 

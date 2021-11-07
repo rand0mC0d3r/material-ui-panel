@@ -1,5 +1,6 @@
 import { Popover } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { Skeleton } from '@material-ui/lab';
 import { useState } from 'react';
 import MupStatus from '../components/MupStatus';
 
@@ -30,8 +31,17 @@ const ConfigStatus = () => {
       anchorOrigin={{ vertical: 'top', horizontal: 'center'}}
       transformOrigin={{ vertical: 'bottom', horizontal: 'center'}}
     >
-      <div style={{ width: '350px', padding: '16px'}}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed euismod nisi. Duis nec commodo augue. Curabitur fringilla efficitur lacus, scelerisque convallis ex consequat at. Maecenas gravida volutpat porta. Integer viverra et sapien eget dictum. Sed fringilla pharetra bibendum. Cras gravida diam in orci hendrerit commodo. Integer eget lobortis leo, a pellentesque tortor. Fusce vel libero pulvinar, pellentesque neque et, aliquam mauris. Suspendisse at vulputate sapien, eget sodales elit. Integer eleifend blandit dolor, ac ultricies nibh consectetur ut. Suspendisse non dolor non mi placerat hendrerit eu sit amet turpis. Nunc sit amet dolor faucibus augue commodo tempus sed non velit. Donec vehicula, dui vitae vehicula convallis, massa mi eleifend nisl, ut lobortis erat odio ut quam. Pellentesque sit amet augue nec urna ultrices pulvinar. Sed in quam at est euismod pharetra.
+      <div style={{ width: '350px', padding: '16px', margin: '16px'}}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed euismod nisi. Duis nec commodo augue. Curabitur fringilla efficitur lacus, scelerisque convallis ex consequat at. Maecenas gravida volutpat porta. Integer viverra et sapien eget dictum. Sed fringilla pharetra bibendum. Cras gravida diam in orci hendrerit commodo. Integer eget lobortis leo, a pellentesque tortor. Fusce vel libero pulvinar, pellentesque neque et, aliquam mauris. Suspendisse at vulputate sapien, eget sodales elit. Integer eleifend blandit dolor, ac ultricies nibh consectetur ut.
+
+      <div style={{marginTop: '16px', display: "flex", gap: "8px", flexDirection: "column"}}>
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+        <Skeleton animation="wave" height={10} />
+        <Skeleton variant="rect" width={'100%'} height={200} />
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
+        <Skeleton animation="wave" height={10} width="80%" />
+      </div>
       </div>
     </Popover>
   </>
