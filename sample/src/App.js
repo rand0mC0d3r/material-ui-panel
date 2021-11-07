@@ -141,7 +141,7 @@ function App() {
             title="Random Wiki article"
             style={{
               width: "100%",
-              filter: "opacity(0.25) grayscale(1)",
+              filter: "opacity(0.25) blur(5px) grayscale(1)",
               backgroundColor: '#FFF',
               height: "100%",
               border: '0px none'

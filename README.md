@@ -1,11 +1,22 @@
 # 📑 material-ui-panel
 
-**NOTE: not functional yet. WIP**
+### Alpha version
 
-![/media/preview.png](/media/preview.png)
+<br />
 
-A zero-maintenance/batteries-included panel manager inspired by VSCode style/aspect that adds via Material-UI elements a self populating/managed and state keeping organization of it's children panels.
+![/media/preview.png](/media/main1.png)
+**Hint**: Combined panels ✅ , both sides panels ✅ , Splitted sections ✅ , Panel insertion into section ✅
 
+<br />
+
+![/media/preview.png](/media/main2.png)
+**Hint**: Alerts in status-bar ✅ , Alerts in sides panels ✅ , Splitted sections template selector ✅ , Embedded web-views ✅
+
+A zero-maintenance/batteries-included panel manager inspired by VSCode style/aspect that adds via Material-UI elements a self populating/managed and state keeping organization of generated children panels.
+
+<br/>
+<br/>
+<br/>
 
 **NOTE:** comes bundled with ```prop-types```. No **Typescript** support. Help me by creating a *PR* 💌 .
 

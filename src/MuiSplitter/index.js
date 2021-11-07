@@ -420,7 +420,12 @@ const MuiSplitter = ({
         <iframe
           title={section.url}
           src={`http://${section.url.replace('http://', '').replace('https://', '')}`}
-          style={{ border: '0px', width: '100%', height: '100%' }} />
+          style={{
+            border: '0px',
+            filter: 'opacity(0.25) blur(5px) grayscale(1)',
+            width: '100%',
+            height: '100%'
+          }} />
       </>}
       {section.type === 'list' && section.zones && section.zones.map(zone =>
         <div
