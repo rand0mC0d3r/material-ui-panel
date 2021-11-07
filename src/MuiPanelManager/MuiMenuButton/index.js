@@ -94,12 +94,12 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonMenu: {
     border: '0px none',
-    padding: theme.spacing(2.25, 0),
+    padding: theme.spacing(2, 0),
     borderRadius: '0px',
     minWidth: 'initial',
 
     '@media (max-width: 1200px)' : {
-      padding: theme.spacing(1.75, 0),
+      padding: theme.spacing(1.65, 0),
     }
   },
   rightGroupButtonMenu: {
