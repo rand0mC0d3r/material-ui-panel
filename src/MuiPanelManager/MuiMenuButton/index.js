@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     minWidth: 'initial',
 
-    '@media (max-width: 780px)' : {
+    '@media (max-width: 1200px)' : {
       padding: theme.spacing(1.75, 0),
     }
   },
@@ -219,7 +219,7 @@ const MuiMenuButton = withTheme(({
               ${!settings.inverseMarkers && classes[`${side}FixBadge`]}
               ${lo.notifications.summary > lo.notifications.count && classes.groupBadge}
               `}
-            anchorOrigin={{ vertical: 'bottom', horizontal: oppositeSide(side, 'left')}}
+            anchorOrigin={{ vertical: 'bottom', horizontal: oppositeSide(side, 'left') }}
             badgeContent={Math.max(0, Math.min(99, Math.max(lo.notifications.summary, lo.notifications.count) || 0))}
             color={lo.notifications.color}
             variant={lo.variant}
@@ -249,14 +249,14 @@ const MuiMenuButton = withTheme(({
               </>)}
               {lo.shortText && <Typography
                 className={classes.shortText}
-                style={{color: lo.disabled ? theme.palette.text.disabled : theme.palette.text.primary}}
+                style={{ color: lo.disabled ? theme.palette.text.disabled : theme.palette.text.primary }}
               >{lo.shortText.substr(0, 4)}</Typography>}
             </ContentContainerBox>
           </Badge>
         </Button>
       </span>
     </Tooltip>
-    <MupMenuOptions {...{lo, side, anchorEl, setAnchorEl}} />
+    <MupMenuOptions {...{ lo, side, anchorEl, setAnchorEl }} />
   </>
 })
 export default MuiMenuButton

@@ -6,6 +6,13 @@ import { createPortal } from 'react-dom'
 import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
+  default: {
+    padding: '3px 6px',
+
+    '@media (max-width: 780px)' : {
+      padding: '3px 2px',
+    }
+  },
   root: {
     '&:hover': {
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.divider }).light} !important`
@@ -72,10 +79,9 @@ const MupStatus = ({
       }
       display="flex"
       alignItems="center"
-      className={(focusOnClick || onClick) ? classes.root : ''}
+      className={`${classes.default} ${(focusOnClick || onClick) ? classes.root : ''}`}
       style={{
         gap: '16px',
-        padding: '3px 6px',
         cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
         backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
       }}

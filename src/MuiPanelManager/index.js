@@ -91,10 +91,12 @@ const useStyles = makeStyles(theme => ({
     color: `${theme.palette.background.default} !important`
   },
   statusBarHalf: {
-    // flex: '1 1 50%',
     overflow: 'hidden',
-    // width: '0px',
-    gap: '8px'
+    gap: '8px',
+
+    '@media (max-width: 1200px)' : {
+      gap: '4px',
+    }
   },
   wrapper: {
     height: '100%',

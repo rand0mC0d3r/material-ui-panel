@@ -15,7 +15,7 @@ const ToggleTheme = ({
 }) => {
   const toggles = [
     {
-      title: 'Debug Mode',
+      title: 'Debug',
       status: debugMode,
       statusToggle: toggleDebugMode,
       component: <Switch
@@ -25,7 +25,7 @@ const ToggleTheme = ({
       />
     },
     {
-      title: 'Dark Mode',
+      title: 'Dark',
       status: darkMode,
       statusToggle: toggleDarkMode,
       component: <Switch
@@ -45,7 +45,7 @@ const ToggleTheme = ({
       />
     },
     {
-      title: 'Collapse Mode',
+      title: 'Collapse',
       status: collapseMode,
       statusToggle: toggleCollapseMode,
       component: <Switch
@@ -55,7 +55,7 @@ const ToggleTheme = ({
       />
     },
     {
-      title: 'Inverse Markers',
+      title: 'Inverse',
       status: inverseMarkers,
       statusToggle: toggleInverseMarkers,
       component: <Switch
