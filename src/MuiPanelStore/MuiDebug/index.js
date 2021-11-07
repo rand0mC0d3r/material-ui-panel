@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import { Tooltip, Typography } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import DataProvider from '../../MuiPanelStore'
@@ -6,32 +6,56 @@ import DataProvider from '../../MuiPanelStore'
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'absolute',
-    border: `3px dotted ${theme.palette.divider}`,
+    border: `2px dotted ${theme.palette.divider}`,
     borderRadius: '8px',
-    backgroundColor: 'rgba(255, 255, 255, 0.75)',
-    backdropFilter: 'blur(5px)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    backdropFilter: 'blur(10px)',
     padding: '8px',
-    left: '30%',
-    right: '30%',
+    left: '600px',
+    right: '600px',
     top: '100px',
-    height: '850px',
-    overflow: 'auto'
+    bottom: '100px',
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px'
   },
   dumpText: {
-    color: theme.palette.text.primary,
+    margin: '0px'
+  },
+  dataSourceWrapper: {
+    display: 'flex',
+    padding: '8px 8px',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '16px'
   },
   header: {
     backgroundColor: theme.palette.background.paper,
     padding: '8px',
-    marginBottom: '8px',
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: '4px',
     cursor: 'pointer',
+  },
+  storeElement: {
+    border: `1px solid ${theme.palette.divider}`,
+    padding: '8px',
+    color: theme.palette.text.secondary,
+    borderRadius: '8px',
+
+    '&:hover': {
+      border: `1px solid ${theme.palette.primary.main}`,
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary
+    }
   }
 }))
 
 const MupDebug = () => {
   const { settings, status, sections, layout } = useContext(DataProvider)
+  const localStorageKey = 'material-ui-panel.debug'
+  const theme = useTheme()
+  const classes = useStyles(theme)
 
   const [dumps, setDumps] = useState([{
     title: 'Sections',
@@ -47,34 +71,43 @@ const MupDebug = () => {
     collapsed: true,
   }])
 
-  const theme = useTheme()
-  const classes = useStyles(theme)
+  useEffect(() => {
+    const storedDumpSettings = localStorage.getItem(localStorageKey)
+    if (storedDumpSettings) {
+      setDumps(JSON.parse(storedDumpSettings))
+    }
+  }, [])
 
   useEffect(() => {
-    setDumps(dumps => dumps.map(d => {
-      if (d.title === 'Sections') {
-        return {
-          ...d, dataSource: sections.map(obj => <pre
-            key={`section_${obj.uniqueId}`}
-            className={classes.dumpText}>
-            {JSON.stringify({ ...obj }, null, 4)}
-          </pre>)
-        }
-      }
+    localStorage.setItem(localStorageKey, JSON.stringify(dumps.map(({ title, collapsed }) => ({ title, collapsed }))))
+  }, [dumps])
 
-      return d
-    }))
+  const processDump = (title, dump, removeKeys) => {
+    return dump.title === title
+      ? {
+        ...dump, dataSource: sections.map(obj => <div className={classes.storeElement}><pre
+          key={`section_${obj.uniqueId}`}
+          className={classes.dumpText}>
+          {JSON.stringify({ ...obj, ...removeKeys }, null, 4)}
+        </pre></div>)
+      }
+    : dump
+  }
+
+
+  useEffect(() => {
+    setDumps(dumps => dumps.map(dump => processDump('Sections', dump)))
   }, [sections, classes.dumpText])
 
   useEffect(() => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Layout') {
         return {
-          ...d, dataSource: layout.map(obj => <pre
+          ...d, dataSource: layout.map(obj => <div className={classes.storeElement}><pre
             key={`layout_${obj.uniqueId}`}
             className={classes.dumpText}>
             {JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)}
-          </pre>)
+          </pre></div>)
         }
       }
 
@@ -86,11 +119,11 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Settings') {
         return {
-          ...d, dataSource: Object.entries(settings).map(([key, val]) => <pre
+          ...d, dataSource: Object.entries(settings).map(([key, val]) => <div className={classes.storeElement}><pre
             key={`settings_${key}`}
             className={classes.dumpText}>
             {key}: {JSON.stringify(val)}
-          </pre>)
+          </pre></div>)
         }
       }
 
@@ -102,11 +135,11 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Status') {
         return {
-          ...d, dataSource: status.map(obj => <pre
+          ...d, dataSource: status.map(obj => <div className={classes.storeElement}><pre
             key={`settings_${obj.uniqueId}`}
             className={classes.dumpText}>
             {JSON.stringify({ ...obj, elements: null }, null, 4)}
-          </pre>)
+          </pre></div>)
         }
       }
 
@@ -115,23 +148,20 @@ const MupDebug = () => {
   }, [status, classes.dumpText])
 
   const toggleDumpCollapse = (title) => {
-    setDumps(dumps => dumps
-      .filter(dump => dump.title === title)
-      .map((dump) => dump.collapsed = !dump.collapsed && dump ))
+    setDumps(dumps => dumps.map((dump) => { if (dump.title === title) dump.collapsed = !dump.collapsed
+
+      return dump }))
   }
 
   return settings.debugMode
     ? <div key="MupDebug" className={classes.root}>
       {dumps.map(dump => <Fragment key={dump.title}>
-        <Typography
-          className={classes.header}
-          color="textPrimary"
-          onClick={() => toggleDumpCollapse(dump.title)}
-          variant="h6"
-        >
-          {dump.title}
-        </Typography>
-        {!dump.collapsed && dump.dataSource}
+        <Tooltip title="Click to toggle collapse status" arrow placement="left">
+          <Typography className={classes.header} onClick={() => toggleDumpCollapse(dump.title)} variant="h6">
+            {dump.title} ({dump.dataSource && dump.dataSource.length})
+          </Typography>
+        </Tooltip>
+        {!dump.collapsed && <div className={classes.dataSourceWrapper}>{dump.dataSource}</div>}
       </Fragment>)}
     </div>
 	: null

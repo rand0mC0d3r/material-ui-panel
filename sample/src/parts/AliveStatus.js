@@ -22,7 +22,6 @@ const AliveStatus = () => {
         setElements([{ icon: <WifiOffIcon />, text: '0 KB/s' }])
         setRequestAttention(true)
       }
-      console.log('This will run every second!');
   }, 500);
   return () => clearInterval(interval);
 }, []);

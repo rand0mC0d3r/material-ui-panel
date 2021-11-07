@@ -14,7 +14,21 @@
 ![/media/preview.png](/media/main2.png)
 **Hint**: Alerts in status-bar ✅ , Alerts in sides panels ✅ , Splitted sections template selector ✅ , Embedded web-views ✅
 
+
+![/media/preview.png](/media/main3.png)
+**Hint**: Dark-Mode ✅ , Upper bar ✅ , Menu capabilities ✅
+
 A zero-maintenance/batteries-included panel manager inspired by VSCode style/aspect that adds via Material-UI elements a self populating/managed and state keeping organization of generated children panels.
+
+
+#### Current limitations
+
+- **StatusBar**
+  - Cannot display 2 status bars, 1 up and 1 down
+  - Status items cannot be ordered
+  - Status items are not draggable
+  - Status items don't have a pre-defined size
+  - Status items require a unique id
 
 <br/>
 <br/>
@@ -38,6 +52,7 @@ npm install @kadarka/material-ui-panel --save
 yarn i @kadarka/material-ui-panel
 ```
 
+---
 ## 🎛️ Architecture & Structure
 
 #### DOM & CSS Grid wise
@@ -129,29 +144,25 @@ Self organizing manager wrapper that renders all children given
 
 Self organizing manager wrapper that renders all children given
 
-##### Available API's
+---
+## ```<MuiDebug>``` - 🕵️ (Internal) - Debug component
 
-| Argument | Default | Description |
-|-----|----|--------|
-| allowRightClick | false | Determines if the panel allows opening the default browser context menu on right click |
-
-##### Code sample
+A utility modal to display the current state of the panels, layout, settings and the rest of the store. It's constantly updated via the **Provider** hooks.
 
 ```
-<MuiPanelManager>
-	<MuiDivider tooltip="Default separator" />
-
-	<NotificationPanel />
-
-	<MupPanel title="Lorem Ipsum Panel" icon={<FormatIndentIncreaseIcon />}>
-		{`Lorem ipsum dolor sit amet, ...`}
-	</MupPanel>
-
-	<MupPanel title="Sample Panel" icon={<FormatAlignLeftIcon />}>
-		<Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-	</MupPanel>
-</MuiPanelManager>
+...
+<MuiPanelProvider debugMode={true}...>
+  ...
+</MuiPanelProvider>
+...
 ```
+
+
+---
+## < Mui Splitter >
+
+Self organizing manager wrapper that renders all children given
+
 ---
 
 ## ```<MupPanel>``` - 🪟  Panel Component
