@@ -103,6 +103,17 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
 
   },
+  scrollSide: {
+    overflow: 'scroll',
+    position: 'absolute',
+    left: '0px',
+    bottom: '0px',
+    top: '0px',
+
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
+  },
   root: {
     // height: "100%",
     flex: '1 1 auto',
@@ -231,11 +242,7 @@ const MuiPanelManager = ({
           className={`
           ${classes.panelContainerWrapper}
           ${layout.some(l => l.side === side && !l.asSection && !l.asContent && l.isVisible) &&
-            (side === 'left'
-              ? classes.leftPanel
-              : classes.rightPanel
-            )
-}`}
+            (side === 'left' ? classes.leftPanel : classes.rightPanel)}`}
         >
           <div
             id={`${side}-panel`} key={`${side}-panel`}
@@ -252,9 +259,7 @@ const MuiPanelManager = ({
                   : 'unset'),
               height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
             }}
-          >
-            {/* <div>panels collapse</div> */}
-          </div>
+          />
         </div>)}
 
       {availableSides
@@ -270,17 +275,19 @@ const MuiPanelManager = ({
                 : classes.menuOpen}`}
               >
                 {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
-                {!settings.isCollapsed && <>
-                  {layout
-                    .filter(lo => lo.side === side)
-                    .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
-                    .map(lo => <MuiMenuButton
-                      extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)}
-                      key={lo.uniqueId}
-                      {...{ lo, side }}
-                    />)}
-                  <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
-                </>}
+                <div className={`${classes.scrollSide}`}>
+                  {!settings.isCollapsed && <>
+                    {layout
+                      .filter(lo => lo.side === side)
+                      .filter(lo => !lo.asEmbedded && !lo.asContent && !lo.asSection)
+                      .map(lo => <MuiMenuButton
+                        extraIcons={layout.filter(l => lo.uniqueId === l.parentId).map(l => l.icon)}
+                        key={lo.uniqueId}
+                        {...{ lo, side }}
+                      />)}
+                    <div className={classes.emptySpace} onDoubleClick={() => { !settings.isCollapsed && toggleSettingIsCollapsed() }} />
+                  </>}
+                </div>
               </div>
           }
         </div>)}

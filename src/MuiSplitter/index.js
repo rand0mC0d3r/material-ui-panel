@@ -419,10 +419,10 @@ const MuiSplitter = ({
       {section.type === 'web' && section.url && <>
         <iframe
           title={section.url}
-          src={`http://${section.url.replace('http://', '').replace('https://', '')}`}
+          src={`https://${section.url.replace('http://', '').replace('https://', '')}`}
           style={{
             border: '0px',
-            filter: 'opacity(0.25) blur(5px) grayscale(1)',
+            filter: 'opacity(0.25) grayscale(1)',
             width: '100%',
             height: '100%'
           }} />

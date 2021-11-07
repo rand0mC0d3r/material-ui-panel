@@ -21,7 +21,12 @@ const IframePanel = () => {
 
     <iframe
       title="Random Wiki article"
-      style={{ width: "100%", height: "95%", border: '0px none' }}
+      style={{
+        filter: "opacity(0.25) grayscale(1)",
+        width: "100%",
+        height: "95%",
+        border: '0px none'
+      }}
       src={url}
     />
   </MupPanel>

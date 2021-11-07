@@ -145,12 +145,7 @@ const MuiMenuButton = withTheme(({
           lo.shortText?.length > 0 ||
           lo.hint?.length > 0 ||
           lo.tooltip?.length > 0)
-          ? `
-            ${(lo.tooltip || lo.hint || lo.title || lo.shortText)}
-            ${lo.disabled
-            ? '(disabled)'
-            : ''}
-          `
+          ? `${(lo.tooltip || lo.hint || lo.title || lo.shortText)} ${lo.disabled ? '(disabled)': ''}`
           : ''}
     >
       <span>

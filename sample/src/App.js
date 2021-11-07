@@ -38,7 +38,14 @@ function App() {
 
   const [markerColor, setMarkerColor] = useState('primary');
 
-  const theme = useMemo(() => createTheme({ palette: { type: darkMode ? 'dark' : 'light' } }), [darkMode])
+  const theme = useMemo(() => createTheme({
+    palette: {
+      type: darkMode ? 'dark' : 'light',
+      background: darkMode
+        ? { default: '#000', paper: '#000' }
+        : { default: '#FAFAFA', paper: '#FFF' },
+    }
+  }), [darkMode])
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
   const toggleDebugMode = () => setDebugMode(!debugMode);
@@ -123,7 +130,13 @@ function App() {
             <Skeleton variant="rect" animation="wave" height={10} width="80%" />
             <iframe
               title="Random Wiki article"
-              style={{ width: "100%", height: "600px", border: '1px dotted #CCC', borderRadius: '8px' }}
+              style={{
+                filter: "opacity(0.25) grayscale(1)",
+                width: "100%",
+                height: "600px",
+                border: '1px dotted #CCC',
+                borderRadius: '8px'
+              }}
               src={'https://en.wikipedia.org/wiki/Chromecast'}
             />
             <Skeleton variant="rect" animation="wave" height={25} />
@@ -141,7 +154,7 @@ function App() {
             title="Random Wiki article"
             style={{
               width: "100%",
-              filter: "opacity(0.25) blur(5px) grayscale(1)",
+              filter: "opacity(0.25) grayscale(1)",
               backgroundColor: '#FFF',
               height: "100%",
               border: '0px none'
