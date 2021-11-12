@@ -1,6 +1,6 @@
 {
   "name": "material-ui-panel-manager",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "<MupPanel> component for material-ui",
   "main": "lib/index.js",
   "private": false,
@@ -16,7 +16,6 @@
     "copy-and-watch": "^0.1.5",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
     "npm-check-updates": "^12.0.0"
-
   },
   "dependencies": {
     "@material-ui/core": ">=4.12.3",
