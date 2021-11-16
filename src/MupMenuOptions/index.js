@@ -6,6 +6,7 @@ import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
 import AmpStoriesIcon from '@material-ui/icons/AmpStories'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import ViewStreamIcon from '@material-ui/icons/ViewStream'
+import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import DataProvider from '../MuiPanelStore'
 
@@ -17,13 +18,7 @@ const useStyles = makeStyles(( theme ) => ({
   }
 }))
 
-const MupMenuOptions = ({
-  lo,
-  anchorEl,
-  setAnchorEl,
-  side,
-  underMenu = false,
-}) => {
+const MupMenuOptions = ({ lo, anchorEl, setAnchorEl, side, underMenu }) => {
   const { layout, handleSetAsEmbedded, handleSetAsGroup, handleUnSetAsEmbedded, handleSetSide } = useContext(DataProvider)
   const open = Boolean(anchorEl)
   const theme = useTheme()
@@ -90,6 +85,18 @@ const MupMenuOptions = ({
       </>}
     </Box>
   </Popover>
+}
+
+MupMenuOptions.defaultProps = {
+  underMenu: false
+}
+
+MupMenuOptions.propTypes = {
+  lo: PropTypes.object.isRequired,
+  anchorEl: PropTypes.object,
+  setAnchorEl: PropTypes.func.isRequired,
+  side: PropTypes.string.isRequired,
+  underMenu: PropTypes.bool
 }
 
 export default MupMenuOptions

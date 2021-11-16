@@ -43,8 +43,11 @@ function App() {
   const theme = useMemo(() => createTheme({
     palette: {
       type: darkMode ? 'dark' : 'light',
+      primary: darkMode
+        ? { main: "#0969da" }
+        : { main: '#0969da' },
       background: darkMode
-        ? { default: '#000', paper: '#000' }
+        ? { default: '#161b22', paper: '#0d1117' }
         : { default: '#FAFAFA', paper: '#FFF' },
     }
   }), [darkMode])
