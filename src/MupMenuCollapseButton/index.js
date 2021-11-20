@@ -26,6 +26,7 @@ const MupMenuCollapseButton = ({ side }) => {
 					: `0px ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0px`,
       }}
       onClick={() => toggleSettingIsCollapsed(!settings.isCollapsed)}
+      onTouchEnd={() => toggleSettingIsCollapsed(!settings.isCollapsed)}
     >
       {side === 'right' && (settings.isCollapsed
 				? <ArrowLeft style={{ fontSize: 16 }} />

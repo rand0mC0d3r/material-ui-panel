@@ -12,7 +12,7 @@ const IframePanel = () => {
     <iframe
       title="Random Wiki article"
       style={{
-        filter: "opacity(0.25) grayscale(1)",
+        filter: "opacity(0.5) grayscale(0.5)",
         width: "100%",
         height: "100%",
         border: '0px none'

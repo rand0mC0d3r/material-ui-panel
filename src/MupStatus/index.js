@@ -1,4 +1,4 @@
-import { Box, SvgIcon, Tooltip, Typography } from '@material-ui/core'
+import { Box, MenuList, Popover, SvgIcon, Tooltip, Typography } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { useCallback, useContext, useEffect, useState } from 'react'
@@ -7,7 +7,7 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
-    padding: '3px 6px',
+    padding: '8px 4px',
 
     '@media (max-width: 780px)' : {
       padding: '3px 2px',
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const MupStatus = ({
   id,
+  asMenu,
   side,
   focusOnClick,
   onClick,
@@ -35,9 +36,17 @@ const MupStatus = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
-  const callbackOnClick = useCallback(
-    (e) => { if (onClick) { onClick(e) } },
-    [onClick])
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const callbackOnClick = useCallback((e) => {
+    onClick(e)
+  },
+  [onClick])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
     handleStatusAnnouncement({ id, elements, side, tooltip })
@@ -66,36 +75,67 @@ const MupStatus = ({
     }
   }, [status, id, statusObject])
 
-  return (statusObject !== null && !!id) ? createPortal(<Tooltip title={tooltip} arrow>
-    <Box
-      key={`MupStatus_${id}_wrapper`}
-      onClick={(e) => focusOnClick
-      ? handleSetVisible({ uniqueId: focusOnClick })
-      : onClick ? callbackOnClick(e) : null
-      }
-      onContextMenu={(e) => settings.allowRightClick
-      ? onContextMenu ? onContextMenu(e) : null
-      : e.preventDefault()
-      }
-      display="flex"
-      alignItems="center"
-      className={`${classes.default} ${(focusOnClick || onClick) ? classes.root : ''}`}
-      style={{
-        gap: '16px',
-        cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
-        backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
-      }}
-    >
-      {elements.map(element => <Box display="flex" alignItems="center" key={`MupStatus_${element.text}_container`}
-        style={{ gap: '6px' }}>
-        {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
-        {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
-          {element.text}
-        </Typography>}
-      </Box>)}
-    </Box>
-  </Tooltip>,
-  document.getElementById(`material-ui-panel-statusBar-${side}`))
+  return (statusObject !== null && !!id) ? createPortal(
+    <>
+      <Tooltip title={tooltip} arrow>
+        <Box
+          key={`MupStatus_${id}_wrapper`}
+          onClick={(e) => focusOnClick
+            ? handleSetVisible({ uniqueId: focusOnClick })
+            : asMenu
+              ? setAnchorEl(e.currentTarget)
+              : onClick
+                ? callbackOnClick(e)
+                : null
+          }
+          onContextMenu={(e) => settings.allowRightClick
+            ? onContextMenu
+              ? onContextMenu(e)
+              : null
+            : e.preventDefault()
+          }
+          display="flex"
+          alignItems="center"
+          className={`${classes.default} ${(focusOnClick || onClick || asMenu)
+            ? classes.root
+            : ''}`}
+          style={{
+            gap: '16px',
+            cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
+            backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
+          }}
+        >
+          {elements.map(element => <Box display="flex" alignItems="center"
+            key={`MupStatus_${element.text}_container`}
+            style={{ gap: '6px' }}>
+            {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
+            {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
+              {element.text}
+            </Typography>}
+          </Box>)}
+        </Box>
+      </Tooltip>
+      {asMenu && <>
+        <Popover
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: settings.upperBar ? 'bottom' : 'top',
+            horizontal: 'left'
+          }}
+          transformOrigin={{
+            vertical: !settings.upperBar ? 'bottom' : 'top',
+            horizontal: 'left'
+          }}
+        >
+          <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={() => { }}>
+            {asMenu}
+          </MenuList>
+        </Popover>
+      </>}
+    </>,
+    document.getElementById(`material-ui-panel-statusBar-${side}`))
   : null
 }
 
@@ -104,12 +144,14 @@ MupStatus.defaultProps = {
   requestAttention: false,
   tooltip: '',
   elements: [],
+  asButton: false,
 }
 
 MupStatus.propTypes = {
   id: PropTypes.string.isRequired,
   side: PropTypes.oneOf(['left', 'right']),
   focusOnClick: PropTypes.string,
+  asMenu: PropTypes.any,
   onClick: PropTypes.func,
   onContextMenu: PropTypes.func,
   requestAttention: PropTypes.bool,

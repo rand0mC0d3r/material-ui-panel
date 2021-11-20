@@ -83,7 +83,7 @@ const styledPanel = theme => ({
 
 const useStyles = makeStyles(theme => ({
   statusBar: {
-    padding: '0px 10px',
+    padding: '0px 14px',
     gap: '32px',
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.divider

@@ -1,4 +1,4 @@
-import { Tooltip } from '@material-ui/core'
+import { Button, Tooltip } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import VerticalSplitIcon from '@material-ui/icons/VerticalSplit'
 import { useState } from 'react'
@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     alignSelf: 'stretch',
     border: `1px solid ${theme.palette.divider}`,
     flex: '1 1 50%',
+    minWidth: 'unset',
 
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
@@ -60,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     justifyContent: 'space-between',
     alignContent: 'stretch',
-  }
+  },
 }))
 
 const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false }) => {
@@ -68,53 +69,66 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false }) => {
   const classes = useStyles(theme)
   const [visible, setVisible] = useState(false)
 
-  const toggleVisible = () => setVisible(visible => !visible)
+  const toggleVisible = () => {
+    setVisible(visible => !visible)
+  }
+
+  const generateButton = ({ className, action }) => {
+    return <Button className={`${classes.block} ${className}`} onClick={action} onTouchStart={action}></Button>
+  }
+
 
   const blocks = [
     {
       tooltip: 'Vertical split',
       content: <div className={classes.general} style={{ 'flexDirection': 'row' }}>
-        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index: 0, count: 2 })}></div>
-        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index: 1, count: 2 })}></div>
+        {generateButton({ className: classes.blockHorizontal, action: () => createSection({ type: 'vs', index: 0, count: 2 }) })}
+        {generateButton({ className: classes.blockHorizontal, action: () => createSection({ type: 'vs', index: 1, count: 2 }) })}
       </div>
     },
     {
       tooltip: 'Horizontal split',
       content: <div className={classes.general} style={{ 'flexDirection': 'column' }}>
-        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({ type: 'hs', index:  0, count: 2 })}></div>
-        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({ type: 'hs', index:  1, count: 2 })}></div>
+        {generateButton({ className: classes.blockVertical, action: () => createSection({ type: 'hs', index: 0, count: 2 }) })}
+        {generateButton({ className: classes.blockVertical, action: () => createSection({ type: 'hs', index: 1, count: 2 }) })}
       </div>
     },
     {
       tooltip: '3 Mains primary',
       content: <div className={classes.general} style={{ 'flexDirection': 'row' }}>
-        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index:  0, count: 3 })}></div>
-        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index:  1, count: 3 })}></div>
-        <div className={`${classes.block} ${classes.blockHorizontal}`} onClick={() => createSection({ type: 'vs', index:  2, count: 3 })}></div>
+        {generateButton({ className: classes.blockHorizontal, action: () => createSection({ type: 'vs', index: 0, count: 3 }) })}
+        {generateButton({ className: classes.blockHorizontal, action: () => createSection({ type: 'vs', index: 1, count: 3 }) })}
+        {generateButton({ className: classes.blockHorizontal, action: () => createSection({ type: 'vs', index: 2, count: 3 }) })}
       </div>
     },
     {
       tooltip: '3 Mains even',
       content: <div className={classes.general} style={{ 'flexDirection': 'column' }}>
-        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({ type: 'hs', index:  0, count: 3 })}></div>
-        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({ type: 'hs', index:  1, count: 3 })}></div>
-        <div className={`${classes.block} ${classes.blockVertical}`} onClick={() => createSection({ type: 'hs', index:  2, count: 3 })}></div>
+        {generateButton({ className: classes.blockVertical, action: () => createSection({ type: 'hs', index: 0, count: 3 }) })}
+        {generateButton({ className: classes.blockVertical, action: () => createSection({ type: 'hs', index: 1, count: 3 }) })}
+        {generateButton({ className: classes.blockVertical, action: () => createSection({ type: 'hs', index: 2, count: 3 }) })}
       </div>
     },
   ]
 
   return visible
-      ? <div
-        onClick={toggleVisible}
-        className={classes.wrapper}
-        style={isRoot ? {  } : { }}>
-        {blocks.map(block => (
-          <div key={block.tooltip} className={classes.container}>
-            {block.content}
-          </div>
-        ))}
-      </div>
-    : <Tooltip title="Split the screen" arrow>
-      <VerticalSplitIcon style={{ cursor: 'pointer' }} onClick={toggleVisible} color="action" /></Tooltip>
+    ? <div
+      onTouchStart={toggleVisible}
+      onClick={toggleVisible}
+      className={classes.wrapper}
+      style={isRoot ? {  } : { }}>
+      {blocks.map(block => (
+        <div key={block.tooltip} className={classes.container}>
+          {block.content}
+        </div>
+      ))}
+    </div>
+    : <>
+      <Tooltip title="Split the screen" arrow>
+        <Button onTouchEnd={toggleVisible} onClick={toggleVisible}>
+          <VerticalSplitIcon />
+        </Button>
+      </Tooltip>
+    </>
 }
 export default MupSectionsSplitter

@@ -27,7 +27,7 @@ const AliveStatus = () => {
 }, []);
 
   return <MupStatus
-      side='right'
+      side='left'
       id='statusAlive'
       requestAttention={requestAttention}
       tooltip="Online status"

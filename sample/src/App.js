@@ -104,7 +104,6 @@ function App() {
         <GalleryStatus />
         <SaveStatus />
         <DynamicStatus />
-        <AliveStatus />
 
         {/* <MupStatus
           id="statusA"
@@ -127,6 +126,8 @@ function App() {
           demo text
         </MupStatus>
 
+        <AliveStatus />
+
         {/* panel section  */}
         <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
@@ -146,7 +147,7 @@ function App() {
             <iframe
               title="Random Wiki article"
               style={{
-                filter: "opacity(0.25) grayscale(1)",
+                filter: "opacity(0.5) grayscale(0.5)",
                 width: "100%",
                 height: "600px",
                 border: '1px dotted #CCC',
@@ -169,7 +170,7 @@ function App() {
             title="Random Wiki article"
             style={{
               width: "100%",
-              filter: "opacity(0.25) grayscale(1)",
+              filter: "opacity(0.5) grayscale(0.5)",
               backgroundColor: '#FFF',
               height: "100%",
               border: '0px none'
