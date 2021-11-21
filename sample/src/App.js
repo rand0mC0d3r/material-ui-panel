@@ -34,7 +34,7 @@ import ToggleTheme from './parts/ToggleTheme';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
-  const [upperBar, setUpperBar] = useState(false);
+  const [upperBar, setUpperBar] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
 
@@ -100,6 +100,7 @@ function App() {
 
         {/* status section  */}
         <MenuStatus />
+        <MupStatus tooltip="Only label with no text" id='fooStatus' elements={[{ text: 'Foo' }]}/>
         <ConfigStatus />
         <GalleryStatus />
         <SaveStatus />

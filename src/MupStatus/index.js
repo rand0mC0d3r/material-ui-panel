@@ -1,4 +1,4 @@
-import { Box, MenuList, Popover, SvgIcon, Tooltip, Typography } from '@material-ui/core'
+import { Box, Popover, SvgIcon, Tooltip, Typography } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { useCallback, useContext, useEffect, useState } from 'react'
@@ -104,7 +104,7 @@ const MupStatus = ({
           style={{
             minWidth: minWidth || 'auto',
             gap: '16px',
-            cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
+            cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
             backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
           }}
         >
@@ -132,9 +132,7 @@ const MupStatus = ({
             horizontal: 'left'
           }}
         >
-          <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={() => { }}>
-            {asMenu}
-          </MenuList>
+          {asMenu}
         </Popover>
       </>}
     </>,

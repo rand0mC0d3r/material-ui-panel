@@ -123,12 +123,12 @@ const MupSectionsSplitter = ({ createSection = () => { }, isRoot = false }) => {
         </div>
       ))}
     </div>
-    : <>
+    : <div>
       <Tooltip title="Split the screen" arrow>
-        <Button onTouchEnd={toggleVisible} onClick={toggleVisible}>
+        <Button style={{ minWidth: 'auto' }} onTouchEnd={toggleVisible} onClick={toggleVisible}>
           <VerticalSplitIcon />
         </Button>
       </Tooltip>
-    </>
+    </div>
 }
 export default MupSectionsSplitter

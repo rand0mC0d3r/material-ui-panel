@@ -31,7 +31,7 @@ const AliveStatus = () => {
     minWidth={100}
     id='statusAlive'
     requestAttention={requestAttention}
-    tooltip="Online status"
+    tooltip="Dynamic Online status"
     elements={elements}
   />
 }

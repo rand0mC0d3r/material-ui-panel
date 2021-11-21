@@ -100,18 +100,18 @@ const useStyles = makeStyles(theme => ({
   },
   rootController: {
     position: 'absolute',
-    padding: '2px 8px',
+    padding: '0px 0px',
     paddingTop: '48px',
-    top: '-44px',
-    backgroundColor: `${theme.palette.background.paper}d`,
+    top: '-74px',
+    backgroundColor: `${theme.palette.background.paper}a`,
     borderRadius: '4px',
-    backdropFilter: 'blur(10px)',
+    backdropFilter: 'blur(3px)',
 
     boxShadow: `0px 0px 1px 1px ${theme.palette.divider}`,
     zIndex: '1',
 
     '&:hover': {
-      top: '-40px',
+      top: '-48px',
       boxShadow: `0 1px 6px 1px ${theme.palette.divider}`,
       transition: 'all .35s ease-in-out'
 
