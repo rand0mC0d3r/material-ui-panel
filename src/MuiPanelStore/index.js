@@ -47,14 +47,14 @@ function MuiPanelProvider({
     debugMode: false,
   })
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const storedSettings = JSON.parse(localStorage.getItem(settingsStorageKey))
-    if (storedSettings) {
-      setSettings(storedSettings)
-    }
-    console.log('ffff')
-  }, [])
+  //   const storedSettings = JSON.parse(localStorage.getItem(settingsStorageKey))
+  //   if (storedSettings) {
+  //     setSettings(storedSettings)
+  //   }
+  //   console.log('ffff')
+  // }, [])
 
 
   const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {

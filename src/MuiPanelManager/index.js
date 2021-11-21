@@ -122,6 +122,7 @@ const useStyles = makeStyles((theme, upperbar) => ({
     left: '0px',
     bottom: '0px',
     top: '0px',
+    right: '0px',
 
     '&::-webkit-scrollbar': {
       display: 'none'

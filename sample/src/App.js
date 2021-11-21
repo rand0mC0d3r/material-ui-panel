@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { AmpStories, FormatIndentIncrease, GitHub } from '@material-ui/icons';
@@ -139,9 +139,9 @@ function App() {
         <IframePanel/>
         <AnotherIframePanel />
 
-        <MupPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
-          {`Lorem ipsum dolor sit amet, consectetur adipiscing elit...`}
-        </MupPanel>
+        {/* <MupPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
+          <Typography color="textPrimary">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</Typography>
+        </MupPanel> */}
 
         <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
           <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>

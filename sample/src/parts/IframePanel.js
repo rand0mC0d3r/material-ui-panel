@@ -17,7 +17,8 @@ const IframePanel = () => {
         height: "100%",
         border: '0px none'
       }}
-      src="https://en.wikipedia.org/wiki/Special:Random"
+      src="https://meet.google.com/"
+      allow="camera;microphone"
     />
   </MupPanel>
 }
