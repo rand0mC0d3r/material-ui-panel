@@ -7,7 +7,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [upperBar, setUpperBar] = useState(true);
-  const [help, setHelp] = useState(true);
+  const [help, setHelp] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
   const [wikiUrl, setWikiUrl] = useState("https://en.wikipedia.org/wiki/Comparison_of_Material_Design_implementations");

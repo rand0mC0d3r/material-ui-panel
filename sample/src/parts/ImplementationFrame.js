@@ -153,7 +153,7 @@ function ImplementationFrame({
           title="Random Wiki article"
           style={{
             width: "100%",
-            filter: "opacity(0.5) grayscale(0.5)",
+            filter: "opacity(0.75) grayscale(0.5)",
             backgroundColor: '#FFF',
             height: "100%",
             border: '0px none'
