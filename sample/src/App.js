@@ -37,6 +37,7 @@ function App() {
   const [upperBar, setUpperBar] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
+  const [wikiUrl, setWikiUrl] = useState("https://en.wikipedia.org/wiki/Comparison_of_Material_Design_implementations");
 
   const [markerColor, setMarkerColor] = useState('primary');
 
@@ -93,6 +94,7 @@ function App() {
 
         <MupButton
           id="logoColored"
+          onClick={() => setWikiUrl("https://www.wikidata.org/wiki/Wikidata:Main_Page")}
           tooltip="Custom Tooltip &amp; and default MUI Color"
           icon={<AppsIcon color="primary" />}
         />
@@ -168,18 +170,17 @@ function App() {
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel>
 
-
         <MupContent>
           <iframe
-            title="Random Wiki article"
-            style={{
-              width: "100%",
-              filter: "opacity(0.5) grayscale(0.5)",
-              backgroundColor: '#FFF',
-              height: "100%",
-              border: '0px none'
-            }}
-            src="https://en.wikipedia.org/wiki/Comparison_of_Material_Design_implementations"
+          title="Random Wiki article"
+          style={{
+            width: "100%",
+            filter: "opacity(0.5) grayscale(0.5)",
+            backgroundColor: '#FFF',
+            height: "100%",
+            border: '0px none'
+          }}
+          src={wikiUrl}
           />
         </MupContent>
 

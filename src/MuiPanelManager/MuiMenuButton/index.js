@@ -199,8 +199,10 @@ const MuiMenuButton = withTheme(({
           onContextMenu={(e) => handleClick(e)}
           disableRipple={!lo.handleOnClick}
           disableElevation={!lo.handleOnClick}
-          disabled={(lo.disabled || lo.noPanel) && lo.handleOnClick === undefined}
-          onClick={() => !lo.noPanel ? handleSetVisible({ uniqueId: lo.uniqueId }) : lo.handleOnClick()}
+          disabled={lo.disabled && (lo.noPanel || !lo.handleOnClick)}
+          onClick={() => !lo.noPanel
+            ? handleSetVisible({ uniqueId: lo.uniqueId })
+            : lo.handleOnClick && lo.handleOnClick()}
           variant="text"
           fullWidth
           style={{
