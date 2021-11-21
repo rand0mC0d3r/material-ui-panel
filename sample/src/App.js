@@ -58,6 +58,8 @@ function App() {
   const toggleCollapseMode = () => setCollapseMode(!collapseMode);
   const toggleInverseMarkers = () => setInverseMarkers(!inverseMarkers);
 
+  const refreshPage = () => window.location.reload(false);
+
   return <>
     <ThemeProvider {...{ theme }}>
       <MuiPanelProvider
@@ -99,8 +101,9 @@ function App() {
         <ActButton />
 
         {/* status section  */}
+        <MupStatus tooltip="Image with no text" onClick={refreshPage} id='fooImageStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true }]}/>
         <MenuStatus />
-        <MupStatus tooltip="Only label with no text" id='fooStatus' elements={[{ text: 'Foo' }]}/>
+        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "Lorem" }]}/>
         <ConfigStatus />
         <GalleryStatus />
         <SaveStatus />

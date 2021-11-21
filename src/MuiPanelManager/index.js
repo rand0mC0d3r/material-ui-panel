@@ -81,18 +81,20 @@ const styledPanel = theme => ({
   },
 })
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme, upperbar) => ({
   statusBar: {
-    padding: '0px 14px',
+    padding: '0px 15px',
     gap: '32px',
+    borderBottom: !upperbar ? `1px solid ${theme.palette.divider}` : 'none',
+    borderTop: upperbar ? `1px solid ${theme.palette.divider}` : 'none',
     backgroundColor: theme.palette.type === 'light'
-      ? theme.palette.divider
+      ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
       : theme.palette.background.paper,
     color: `${theme.palette.background.default} !important`
   },
   statusBarHalf: {
     overflow: 'hidden',
-    gap: '8px',
+    gap: '13px',
 
     '@media (max-width: 1200px)' : {
       gap: '4px',
@@ -216,10 +218,10 @@ const MuiPanelManager = ({
   showSplitterButton = true,
 }) => {
   const theme = useTheme()
-  const classes = useStyles(theme)
   const [sides, setSides] = useState()
   const matches = useMediaQuery('(min-width:600px)')
   const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider)
+  const classes = useStyles(theme, settings.upperBar)
 
   useEffect(() => {
     toggleSettingIsCollapsed(!matches)

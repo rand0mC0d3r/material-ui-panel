@@ -112,6 +112,12 @@ const MupStatus = ({
             key={`MupStatus_${element.text}_container`}
             style={{ gap: '6px' }}>
             {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
+            {element.image && <img
+              style={{
+                width: '20px',
+                height: '20px',
+                borderRadius: element.mask ? '50%' : '0px',
+              }} src={element.image} />}
             {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
               {element.text}
             </Typography>}
@@ -159,7 +165,8 @@ MupStatus.propTypes = {
   requestAttention: PropTypes.bool,
   tooltip: PropTypes.string,
   elements: PropTypes.arrayOf(PropTypes.shape({
-    icon: PropTypes.node.isRequired,
+    icon: PropTypes.node,
+    image: PropTypes.node,
     text: PropTypes.string,
   })).isRequired,
 }
