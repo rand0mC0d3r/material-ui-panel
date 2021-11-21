@@ -4,7 +4,6 @@ import { oppositeSide } from '../utils'
 import MuiDebug from './MuiDebug'
 
 const localStorageKey = 'material-ui-panel.layout'
-
 const settingsStorageKey = 'material-ui-panel.settings'
 
 const DataContext = createContext(null)
@@ -23,10 +22,8 @@ function MuiPanelProvider({
   showCollapseButton,
   showSplitterButton,
   ...props }) {
-  // const cachedLayout = localStorage.getItem(localStorageKey);
 
   const [layout, setLayout] = useState(props['layout'] || [])
-
   const [status, setStatus] = useState(props['status'] || [])
 
   const [sections, setSections] = useState(props['sections'] || [
@@ -49,6 +46,16 @@ function MuiPanelProvider({
     markerColor: 'textPrimary',
     debugMode: false,
   })
+
+  useEffect(() => {
+
+    const storedSettings = JSON.parse(localStorage.getItem(settingsStorageKey))
+    if (storedSettings) {
+      setSettings(storedSettings)
+    }
+    console.log('ffff')
+  }, [])
+
 
   const handleStatusAnnouncement = ({ id, side, elements, tooltip }) => {
     setStatus(status => [
@@ -484,16 +491,12 @@ function MuiPanelProvider({
     )
   }, [layout])
 
-  useEffect(() => setSettings(settings => ({ ...settings, inverseMarkers: !settings.inverseMarkers })), [inverseMarkers])
-  useEffect(() => setSettings(settings => ({ ...settings, allowRightClick: !settings.allowRightClick })), [allowRightClick])
-  useEffect(() => setSettings(settings => ({ ...settings, debugMode: debugMode })), [debugMode])
-  useEffect(() => setSettings(settings => ({ ...settings, upperBar: upperBar })), [upperBar])
+  useEffect(() => setSettings(settings =>
+    ({ ...settings, inverseMarkers, allowRightClick, debugMode, upperBar })),
+  [inverseMarkers, allowRightClick, debugMode, upperBar])
+
 
   useEffect(() => !!markerColor && setSettings(settings => ({ ...settings, markerColor })), [markerColor])
-
-  // useEffect(() => { console.log("---"); layout.forEach(layoutObject => console.log(layoutObject)) }, [layout]);
-  // useEffect(() => { console.log('sections', sections) }, [sections]);
-  // useEffect(() => { console.log('status', status) }, [status]);
 
   useEffect(() => {
     localStorage.setItem(settingsStorageKey, JSON.stringify(settings))

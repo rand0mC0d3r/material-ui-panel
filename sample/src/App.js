@@ -32,8 +32,8 @@ import SaveStatus from './parts/SaveStatus';
 import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const [debugMode, setDebugMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [debugMode, setDebugMode] = useState(false);
   const [upperBar, setUpperBar] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
@@ -60,9 +60,8 @@ function App() {
 
   const refreshPage = () => window.location.reload(false);
 
-  return <>
-    <ThemeProvider {...{ theme }}>
-      <MuiPanelProvider
+  return <ThemeProvider {...{ theme }} >
+    <MuiPanelProvider
         showSplitterButton={true}
         initialSide='left'
         {...{debugMode, markerColor, inverseMarkers, upperBar}}
@@ -180,13 +179,12 @@ function App() {
               height: "100%",
               border: '0px none'
             }}
-            src="https://en.wikipedia.org/wiki/Special:Random"
+            src="https://en.wikipedia.org/wiki/Comparison_of_Material_Design_implementations"
           />
         </MupContent>
 
       </MuiPanelProvider>
     </ThemeProvider>
-  </>;
 }
 
 export default App;

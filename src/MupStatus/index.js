@@ -76,73 +76,76 @@ const MupStatus = ({
     }
   }, [status, id, statusObject])
 
-  return (statusObject !== null && !!id) ? createPortal(
-    <>
-      <Tooltip title={tooltip} arrow>
-        <Box
-          key={`MupStatus_${id}_wrapper`}
-          onClick={(e) => focusOnClick
+  return (statusObject !== null &&
+    !!id &&
+    document.getElementById(`material-ui-panel-statusBar-${side}`))
+    ? createPortal(
+      <>
+        <Tooltip title={tooltip} arrow>
+          <Box
+            key={`MupStatus_${id}_wrapper`}
+            onClick={(e) => focusOnClick
             ? handleSetVisible({ uniqueId: focusOnClick })
             : asMenu
               ? setAnchorEl(e.currentTarget)
               : onClick
                 ? callbackOnClick(e)
                 : null
-          }
-          onContextMenu={(e) => settings.allowRightClick
+            }
+            onContextMenu={(e) => settings.allowRightClick
             ? onContextMenu
               ? onContextMenu(e)
               : null
             : e.preventDefault()
-          }
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          className={`${classes.default} ${(focusOnClick || onClick || asMenu)
+            }
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            className={`${classes.default} ${(focusOnClick || onClick || asMenu)
             ? classes.root
             : ''}`}
-          style={{
-            minWidth: minWidth || 'auto',
-            gap: '16px',
-            cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
-            backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
-          }}
-        >
-          {elements.map(element => <Box display="flex" alignItems="center"
-            key={`MupStatus_${element.text}_container`}
-            style={{ gap: '6px' }}>
-            {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
-            {element.image && <img
-              style={{
-                width: '20px',
-                height: '20px',
-                borderRadius: element.mask ? '50%' : '0px',
-              }} src={element.image} />}
-            {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
-              {element.text}
-            </Typography>}
-          </Box>)}
-        </Box>
-      </Tooltip>
-      {asMenu && <>
-        <Popover
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: settings.upperBar ? 'bottom' : 'top',
-            horizontal: 'left'
-          }}
-          transformOrigin={{
-            vertical: !settings.upperBar ? 'bottom' : 'top',
-            horizontal: 'left'
-          }}
-        >
-          {asMenu}
-        </Popover>
-      </>}
-    </>,
-    document.getElementById(`material-ui-panel-statusBar-${side}`))
+            style={{
+              minWidth: minWidth || 'auto',
+              gap: '16px',
+              cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
+              backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
+            }}
+          >
+            {elements.map(element => <Box display="flex" alignItems="center"
+              key={`MupStatus_${element.text}_container`}
+              style={{ gap: '6px' }}>
+              {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
+              {element.image && <img
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: element.mask ? '50%' : '0px',
+                }} src={element.image} />}
+              {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
+                {element.text}
+              </Typography>}
+            </Box>)}
+          </Box>
+        </Tooltip>
+        {asMenu && <>
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: settings.upperBar ? 'bottom' : 'top',
+              horizontal: 'left'
+            }}
+            transformOrigin={{
+              vertical: !settings.upperBar ? 'bottom' : 'top',
+              horizontal: 'left'
+            }}
+          >
+            {asMenu}
+          </Popover>
+        </>}
+      </>,
+      document.getElementById(`material-ui-panel-statusBar-${side}`))
   : null
 }
 

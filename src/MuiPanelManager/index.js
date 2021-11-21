@@ -90,13 +90,22 @@ const useStyles = makeStyles((theme, upperbar) => ({
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
       : theme.palette.background.paper,
-    color: `${theme.palette.background.default} !important`
+    color: `${theme.palette.background.default} !important`,
+
+    '@media (max-width: 1300px)' : {
+      gap: '4px',
+      padding: '0px 5px',
+    }
   },
   statusBarHalf: {
-    overflow: 'hidden',
+    overflow: 'scroll',
     gap: '13px',
 
-    '@media (max-width: 1200px)' : {
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    },
+
+    '@media (max-width: 1300px)' : {
       gap: '4px',
     }
   },
@@ -239,10 +248,14 @@ const MuiPanelManager = ({
     }
   }, [layout])
 
-  return <Box id="MuiPanelManager" display="flex" flexDirection={settings.upperBar ? 'column-reverse' : 'column'}
-    className={classes.wrapper}>
-    <div id="MuiPanels" className={`${classes.root} ${classes[`${sides}Grid`]}`}>
+  return <Box id="MuiPanelManager"
+    display="flex"
 
+    flexDirection={settings.upperBar ? 'column-reverse' : 'column'}
+    className={classes.wrapper}>
+    <div
+      id="MuiPanels"
+      className={`${classes.root} ${classes[`${sides}Grid`]}`}>
       {availableSides
         .filter(side => layout.some(lo => lo.side === side && !lo.asContent))
         .map(side => <div
@@ -323,7 +336,7 @@ const MuiPanelManager = ({
           id={`material-ui-panel-statusBar-${side}`}
           key={`${side}_status`}
           display="flex"
-          justifyContent={side === 'left' ? 'flex-start' : 'flex-end'}
+          justifyContent={side === 'left' ? 'flex-start' : 'flex-start'}
           className={classes.statusBarHalf}
         />)}
     </Box>}
