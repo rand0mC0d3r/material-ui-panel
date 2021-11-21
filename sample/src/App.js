@@ -42,7 +42,6 @@ function App() {
       }} />
 
   return <ThemeProvider {...{ theme }} >
-
     {help
       ? <div style={{
       display: 'flex',
@@ -62,6 +61,7 @@ function App() {
           height: '70%'
         }}>
           {constructImplementation}
+          <div style={{ position: 'absolute', left: '-200px', textAlign: 'right'}}>UpperBar section</div>
         </div>
       </div>
       : constructImplementation}
