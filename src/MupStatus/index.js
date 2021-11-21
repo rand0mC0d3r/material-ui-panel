@@ -24,6 +24,7 @@ const MupStatus = ({
   id,
   asMenu,
   side,
+  minWidth,
   focusOnClick,
   onClick,
   onContextMenu,
@@ -95,11 +96,13 @@ const MupStatus = ({
             : e.preventDefault()
           }
           display="flex"
+          justifyContent="center"
           alignItems="center"
           className={`${classes.default} ${(focusOnClick || onClick || asMenu)
             ? classes.root
             : ''}`}
           style={{
+            minWidth: minWidth || 'auto',
             gap: '16px',
             cursor: (focusOnClick || !!onClick) ? 'pointer' : 'initial',
             backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
@@ -152,6 +155,7 @@ MupStatus.propTypes = {
   side: PropTypes.oneOf(['left', 'right']),
   focusOnClick: PropTypes.string,
   asMenu: PropTypes.any,
+  minWidth: PropTypes.number,
   onClick: PropTypes.func,
   onContextMenu: PropTypes.func,
   requestAttention: PropTypes.bool,

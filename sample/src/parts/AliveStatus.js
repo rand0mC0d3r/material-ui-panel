@@ -27,12 +27,13 @@ const AliveStatus = () => {
 }, []);
 
   return <MupStatus
-      side='left'
-      id='statusAlive'
-      requestAttention={requestAttention}
-      tooltip="Online status"
-      elements={elements}
-    />
+    side='left'
+    minWidth={100}
+    id='statusAlive'
+    requestAttention={requestAttention}
+    tooltip="Online status"
+    elements={elements}
+  />
 }
 
 export default AliveStatus;
