@@ -8,6 +8,7 @@ import MupStatus from '../components/MupStatus';
 const ToggleTheme = ({
   toggleDarkMode, darkMode,
   toggleUpperBar, upperBar,
+  toggleHelp, help,
   toggleDebugMode, debugMode,
   toggleCollapseMode, collapseMode,
   toggleInverseMarkers, inverseMarkers,
@@ -22,6 +23,16 @@ const ToggleTheme = ({
         color="primary"
         checked={debugMode}
         onChange={toggleDebugMode}
+      />
+    },
+    {
+      title: 'Help',
+      status: help,
+      statusToggle: toggleHelp,
+      component: <Switch
+        color="primary"
+        checked={help}
+        onChange={toggleHelp}
       />
     },
     {
