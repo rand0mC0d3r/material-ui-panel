@@ -84,7 +84,7 @@ const styledPanel = theme => ({
 const useStyles = makeStyles((theme, upperbar) => ({
   statusBar: {
     padding: '0px 15px',
-    gap: '32px',
+    gap: '16px',
     borderBottom: !upperbar ? `1px solid ${theme.palette.divider}` : 'none',
     borderTop: upperbar ? `1px solid ${theme.palette.divider}` : 'none',
     backgroundColor: theme.palette.type === 'light'
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme, upperbar) => ({
     color: `${theme.palette.background.default} !important`,
 
 
-    '@media (max-width: 1600px)' : {
+    '@media (max-width: 1400px)' : {
       gap: '4px',
       padding: '0px 5px',
     }
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme, upperbar) => ({
       display: 'none'
     },
 
-    '@media (max-width: 1600px)' : {
+    '@media (max-width: 1400px)' : {
       gap: '4px',
     }
   },
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme, upperbar) => ({
 
   },
   scrollSide: {
-    overflow: 'scroll',
+    overflow: 'visible',
     position: 'absolute',
     left: '0px',
     bottom: '0px',

@@ -4,6 +4,7 @@ import { green } from '@material-ui/core/colors';
 import { AmpStories } from '@material-ui/icons';
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
 import AppsIcon from '@material-ui/icons/Apps';
+import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 import CastConnectedIcon from '@material-ui/icons/CastConnected';
 import HomeIcon from '@material-ui/icons/Home';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -37,7 +38,9 @@ function ImplementationFrame({
 }) {
 
   const [markerColor, setMarkerColor] = useState('primary');
-  const refreshPage = () => window.location.reload(false);
+	const refreshPage = () => window.location.reload(false);
+
+	const toggleFullScreen = () => { }
 
   return <MuiPanelProvider
         showSplitterButton={true}
@@ -109,8 +112,7 @@ function ImplementationFrame({
         </MupStatus>
 
         <AliveStatus />
-        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "Lorem" }]}/>
-
+        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "User" }]}/>
 
         {/* panel section  */}
         <NotificationPanel />
