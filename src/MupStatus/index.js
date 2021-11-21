@@ -105,6 +105,7 @@ const MupStatus = ({
             ? classes.root
             : ''}`}
             style={{
+              scrollSnapAlign: 'start',
               minWidth: minWidth || 'auto',
               gap: '16px',
               cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',

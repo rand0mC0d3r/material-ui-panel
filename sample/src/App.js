@@ -55,7 +55,8 @@ function App() {
         <div style={{
           position: 'relative',
           borderRadius: '30px',
-          minWidth: '1550px',
+          // minWidth: '1200px',
+          maxWidth: '90%',
           width: '70%',
           border: '45px solid #333333',
           height: '70%'

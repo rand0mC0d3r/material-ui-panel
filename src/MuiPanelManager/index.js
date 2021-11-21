@@ -92,20 +92,23 @@ const useStyles = makeStyles((theme, upperbar) => ({
       : theme.palette.background.paper,
     color: `${theme.palette.background.default} !important`,
 
-    '@media (max-width: 1300px)' : {
+
+    '@media (max-width: 1600px)' : {
       gap: '4px',
       padding: '0px 5px',
     }
   },
   statusBarHalf: {
     overflow: 'scroll',
+    // scrollSnapAlign: 'start',
+    scrollSnapType: 'both mandatory',
     gap: '13px',
 
     '&::-webkit-scrollbar': {
       display: 'none'
     },
 
-    '@media (max-width: 1300px)' : {
+    '@media (max-width: 1600px)' : {
       gap: '4px',
     }
   },
