@@ -7,7 +7,7 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
-    padding: '8px 4px',
+    padding: '6px 4px',
 
     '@media (max-width: 780px)' : {
       padding: '3px 2px',

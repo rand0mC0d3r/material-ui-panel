@@ -32,8 +32,8 @@ import SaveStatus from './parts/SaveStatus';
 import ToggleTheme from './parts/ToggleTheme';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [debugMode, setDebugMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [debugMode, setDebugMode] = useState(true);
   const [upperBar, setUpperBar] = useState(true);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);
@@ -103,7 +103,6 @@ function App() {
         {/* status section  */}
         <MupStatus tooltip="Image with no text" onClick={refreshPage} id='fooImageStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true }]}/>
         <MenuStatus />
-        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "Lorem" }]}/>
         <ConfigStatus />
         <GalleryStatus />
         <SaveStatus />
@@ -131,6 +130,8 @@ function App() {
         </MupStatus>
 
         <AliveStatus />
+        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "Lorem" }]}/>
+
 
         {/* panel section  */}
         <NotificationPanel />

@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     border: `2px dotted ${theme.palette.divider}`,
     borderRadius: '8px',
-    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    backgroundColor: `${theme.palette.background.paper}c`,
     backdropFilter: 'blur(10px)',
     padding: '8px',
     left: '100px',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     gap: '16px'
   },
   header: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
     padding: '8px',
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: '4px',
@@ -157,7 +157,8 @@ const MupDebug = () => {
     ? <div key="MupDebug" className={classes.root}>
       {dumps.map(dump => <Fragment key={dump.title}>
         <Tooltip title="Click to toggle collapse status" arrow placement="left">
-          <Typography className={classes.header} onClick={() => toggleDumpCollapse(dump.title)} variant="h6">
+          <Typography color="textPrimary" className={classes.header} onClick={() => toggleDumpCollapse(dump.title)}
+            variant="h6">
             {dump.title} ({dump.dataSource && dump.dataSource.length})
           </Typography>
         </Tooltip>
