@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useContext, useEffect, useState } from 'react'
 import DataProvider from '../MuiPanelStore'
 import MuiSplitter from '../MuiSplitter'
+import MuiStatusBlock from '../MuiStatusBlock'
 import MupMenuCollapseButton from '../MupMenuCollapseButton'
 import MuiMenuButton from './MuiMenuButton'
 
@@ -82,36 +83,6 @@ const styledPanel = theme => ({
 })
 
 const useStyles = makeStyles((theme, upperbar) => ({
-  statusBar: {
-    padding: '0px 15px',
-    gap: '16px',
-    borderBottom: !upperbar ? `1px solid ${theme.palette.divider}` : 'none',
-    borderTop: upperbar ? `1px solid ${theme.palette.divider}` : 'none',
-    backgroundColor: theme.palette.type === 'light'
-      ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
-      : theme.palette.background.paper,
-    color: `${theme.palette.background.default} !important`,
-
-
-    '@media (max-width: 1400px)' : {
-      gap: '4px',
-      padding: '0px 5px',
-    }
-  },
-  statusBarHalf: {
-    overflow: 'scroll',
-    // scrollSnapAlign: 'start',
-    scrollSnapType: 'both mandatory',
-    gap: '13px',
-
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    },
-
-    '@media (max-width: 1400px)' : {
-      gap: '4px',
-    }
-  },
   wrapper: {
     height: '100%',
     width: '100%',
@@ -328,22 +299,7 @@ const MuiPanelManager = ({
 
     </div>
 
-    {status.length > 0 && <Box
-      id="MuiStatusBarList"
-      onContextMenu={(e) => { e.preventDefault() }}
-      display="flex"
-      className={classes.statusBar}
-      justifyContent="space-between"
-    >
-      {availableSides
-        .map(side => <Box
-          id={`material-ui-panel-statusBar-${side}`}
-          key={`${side}_status`}
-          display="flex"
-          justifyContent={side === 'left' ? 'flex-start' : 'flex-start'}
-          className={classes.statusBarHalf}
-        />)}
-    </Box>}
+    <MuiStatusBlock />
   </Box>
 }
 

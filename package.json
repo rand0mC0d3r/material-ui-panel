@@ -11,7 +11,7 @@
     "@babel/preset-react": "^7.16.0",
     "@babel/types": "^7.16.0",
     "babel-eslint": "^10.0.3",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.1.0",
     "concurrently": "^6.4.0",
     "copy-and-watch": "^0.1.6",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
@@ -41,7 +41,7 @@
   "author": "rand0mC0d3r",
   "license": "MIT",
   "scripts": {
-    "dev": "ncu -u && concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
+    "dev": "concurrently \"npm run copy.component\" \"cd sample && npx react-scripts start\"",
     "start": "serve -s build",
     "prebuild": "npm install ./sample && npm run clone.component",
     "build": "rm -rf ./build && cd sample && npx react-scripts build && mv ./build ../",

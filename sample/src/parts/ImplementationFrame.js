@@ -43,7 +43,7 @@ function ImplementationFrame({
 	const toggleFullScreen = () => { }
 
   return <MuiPanelProvider
-        showSplitterButton={true}
+        showSplitterButton={false}
         initialSide='left'
         {...{debugMode, markerColor, inverseMarkers, upperBar}}
         showCollapseButton={collapseMode}>
@@ -60,7 +60,7 @@ function ImplementationFrame({
         }} />
 
         {/* buttons section  */}
-        <MupButton
+        {/* <MupButton
           id="logoAndText"
           tooltip="Custom Tooltip &amp; Color"
           shortText="HOME"
@@ -80,7 +80,7 @@ function ImplementationFrame({
           icon={<AppsIcon color="primary" />}
         />
 
-        <ActButton />
+        <ActButton /> */}
 
         {/* status section  */}
         <MupStatus tooltip="Image with no text" onClick={refreshPage} id='fooImageStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true }]}/>
@@ -112,20 +112,20 @@ function ImplementationFrame({
         </MupStatus>
 
         <AliveStatus />
-        <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "User" }]}/>
+        {/* <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "User" }]}/> */}
 
         {/* panel section  */}
-        <NotificationPanel />
+        {/* <NotificationPanel />
         <NotificationPanel icon={<AddToHomeScreenIcon />} identifier="notificationsPanel2" title="Other Panel Triggering notifications" />
         <ComplexPanel />
         <IframePanel/>
-        <AnotherIframePanel />
+        <AnotherIframePanel /> */}
 
         {/* <MupPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           <Typography color="textPrimary">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</Typography>
         </MupPanel> */}
 
-        <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
+        {/* <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
           <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>
             <Skeleton variant="rect" animation="wave" height={10} />
             <Skeleton variant="rect" animation="wave" height={20}  />
@@ -148,9 +148,9 @@ function ImplementationFrame({
 
         <MupPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MupPanel>
+        </MupPanel> */}
 
-        <MupContent>
+        {/* <MupContent>
           <iframe
           title="Random Wiki article"
           style={{
@@ -162,7 +162,7 @@ function ImplementationFrame({
           }}
           src={wikiUrl}
           />
-        </MupContent>
+        </MupContent> */}
 
       </MuiPanelProvider>
 }

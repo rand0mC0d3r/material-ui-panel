@@ -99,7 +99,7 @@ const ToggleTheme = ({
       key={`toggle_${toggle.title}`}
       id={`toggle_${toggle.title}`}
       tooltip={`Toggle the ${toggle.title} flag: ${toggle.status ? 'off' : 'on'}`}
-      onClick={ () => toggle.statusToggle() }
+      onClick={() => toggle.statusToggle()}
       elements={[
     {
       icon: toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />,

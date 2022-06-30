@@ -7,11 +7,8 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
-    padding: '6px 4px',
-
-    '@media (max-width: 780px)' : {
-      padding: '3px 2px',
-    }
+    padding: '4px',
+    height: '24px'
   },
   root: {
     '&:hover': {
@@ -34,34 +31,30 @@ const MupStatus = ({
 }) => {
   const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const theme = useTheme()
   const classes = useStyles(theme)
-
-  const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const handleClose = () => setAnchorEl(null)
 
   const callbackOnClick = useCallback((e) => {
     onClick(e)
-  },
-  [onClick])
+  }, [onClick])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
     handleStatusAnnouncement({ id, elements, side, tooltip })
   }, [side, tooltip, elements, handleStatusAnnouncement])
 
-  const callbackHandleStatusDestroy = useCallback((id) => {
-    handleStatusDestroy({ id })
-  },[])
+  // const callbackHandleStatusDestroy = useCallback((id) => {
+  //   handleStatusDestroy({ id })
+  // },[])
 
-  useEffect(() => {
-    return () => {
-      callbackHandleStatusDestroy(id)
-    }
-  }, [id, callbackHandleStatusDestroy])
+  // useEffect(() => {
+  //   return () => {
+  //     callbackHandleStatusDestroy(id)
+  //   }
+  // }, [id, callbackHandleStatusDestroy])
 
   useEffect(() => {
     if (id && statusObject === null && !status.some(item => item.uniqueId === id)) {
@@ -70,9 +63,8 @@ const MupStatus = ({
   }, [id, statusObject, status, callbackHandleStatusAnnouncement])
 
   useEffect(() => {
-    if (statusObject === null) {
-      const findObject = status.find(item => item.uniqueId === id)
-      findObject && setStatusObject(findObject.uniqueId)
+    if (statusObject === null && status.some(item => item.uniqueId === id)) {
+      setStatusObject(status.find(item => item.uniqueId === id).uniqueId)
     }
   }, [status, id, statusObject])
 
@@ -117,6 +109,7 @@ const MupStatus = ({
               style={{ gap: '6px' }}>
               {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
               {element.image && <img
+                alt="injected element"
                 style={{
                   width: '20px',
                   height: '20px',
