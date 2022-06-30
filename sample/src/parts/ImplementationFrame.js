@@ -151,7 +151,7 @@ function ImplementationFrame({
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel> */}
 
-        <MuiStatusBar />
+        <MuiStatusBar/>
 
         <MupContent>
           <iframe

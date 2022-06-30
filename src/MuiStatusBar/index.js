@@ -3,18 +3,14 @@ import { createPortal } from 'react-dom'
 import DataProvider from '../MuiPanelStore'
 import InternalStatus from './InternalStatus'
 
-const MuiStatusBlock = () => {
-  const { toggleStatusBarAnnounced  } = useContext(DataProvider)
-  const [statusDOM, setStatusDOM] = useState(null)
+export default ({ style, className }) => {
+  const { triggerStatusBarAnnounced  } = useContext(DataProvider)
+  const [documentElement, setDocumentElement] = useState(null)
 
   useEffect(() => {
-    toggleStatusBarAnnounced()
-    setStatusDOM(document.getElementById('material-ui-panel-statusBar'))
+    setDocumentElement(document.getElementById('material-ui-panel-statusBar'))
+    triggerStatusBarAnnounced()
   }, [])
 
-  return statusDOM
-    ? createPortal(<InternalStatus />, statusDOM)
-    : null
+  return <>{documentElement && createPortal(<InternalStatus {...{ style, className }} />, documentElement)}</>
 }
-
-export default MuiStatusBlock

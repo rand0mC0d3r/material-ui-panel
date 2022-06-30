@@ -39,22 +39,23 @@ const useStyles = makeStyles((theme) => ({
 
 const availableSides = ['left', 'right']
 
-const MuiStatusInternal = () => {
+export default ({ style, className }) => {
   const theme = useTheme()
   const { status, settings } = useContext(DataProvider)
   const classes = useStyles(theme)
 
   return <>
     {status.length > 0 && <Box
-      id="MuiStatusBarList"
+      id="material-ui-panel-statusBar-wrapper"
       onContextMenu={(e) => { e.preventDefault() }}
       display="flex"
+      className={[classes.statusBar, className].filter(e => !!e).join(' ')}
+      justifyContent="space-between"
       style={{
+        ...style,
         borderBottom: settings.upperBar ? `1px solid ${theme.palette.divider}` : 'none',
         borderTop: !settings.upperBar ? `1px solid ${theme.palette.divider}` : 'none',
       }}
-      className={classes.statusBar}
-      justifyContent="space-between"
     >
       {availableSides.map(side => <Box
         id={`material-ui-panel-statusBar-${side}`}
@@ -66,5 +67,3 @@ const MuiStatusInternal = () => {
     </Box>}
   </>
 }
-
-export default MuiStatusInternal

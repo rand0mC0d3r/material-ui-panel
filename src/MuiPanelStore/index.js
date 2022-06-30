@@ -463,7 +463,12 @@ function MuiPanelProvider({
   }
 
   const toggleSettingIsCollapsed = (collapsed) => setSettings(settings => ({ ...settings, isCollapsed: collapsed ? collapsed : !settings.isCollapsed }))
-  const toggleStatusBarAnnounced = () => setSettings(settings => ({ ...settings, statusBarAnnounced: !settings.statusBarAnnounced }))
+
+  const triggerStatusBarAnnounced = () => {
+    if (!settings.statusBarAnnounced) {
+      setSettings(settings => ({ ...settings, statusBarAnnounced: true }))
+    }
+  }
 
   const handleSetVisible = ({ uniqueId }) => {
     setSettings(settings => ({ ...settings, isCollapsed: false }))
@@ -533,7 +538,7 @@ function MuiPanelProvider({
       handleSetSide,
       handleSetDisabled,
       handleToggleCollapse,
-      toggleStatusBarAnnounced,
+      triggerStatusBarAnnounced,
       handleSetAsEmbedded,
       handleSetIcon,
       handlePanelAnnouncement,
