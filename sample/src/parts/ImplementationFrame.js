@@ -9,6 +9,7 @@ import CastConnectedIcon from '@material-ui/icons/CastConnected';
 import HomeIcon from '@material-ui/icons/Home';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useState } from 'react';
+import MuiStatusBar from '../components/MuiStatusBar';
 import MupButton from '../components/MupButton';
 import MupContent from '../components/MupContent';
 import MupPanel from '../components/MupPanel';
@@ -150,7 +151,9 @@ function ImplementationFrame({
           <Skeleton variant="rect" width={'100%'} height={300} />
         </MupPanel> */}
 
-        {/* <MupContent>
+        <MuiStatusBar />
+
+        <MupContent>
           <iframe
           title="Random Wiki article"
           style={{
@@ -162,7 +165,9 @@ function ImplementationFrame({
           }}
           src={wikiUrl}
           />
-        </MupContent> */}
+        </MupContent>
+
+
 
       </MuiPanelProvider>
 }

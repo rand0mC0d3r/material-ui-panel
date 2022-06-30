@@ -41,6 +41,7 @@ function MuiPanelProvider({
   const [settings, setSettings] = useState(props['settings'] || {
     isCollapsed: false,
     canSplitter: true,
+    statusBarAnnounced: false,
     inverseMarkers: false,
     allowRightClick: false,
     markerColor: 'textPrimary',
@@ -462,6 +463,7 @@ function MuiPanelProvider({
   }
 
   const toggleSettingIsCollapsed = (collapsed) => setSettings(settings => ({ ...settings, isCollapsed: collapsed ? collapsed : !settings.isCollapsed }))
+  const toggleStatusBarAnnounced = () => setSettings(settings => ({ ...settings, statusBarAnnounced: !settings.statusBarAnnounced }))
 
   const handleSetVisible = ({ uniqueId }) => {
     setSettings(settings => ({ ...settings, isCollapsed: false }))
@@ -531,6 +533,7 @@ function MuiPanelProvider({
       handleSetSide,
       handleSetDisabled,
       handleToggleCollapse,
+      toggleStatusBarAnnounced,
       handleSetAsEmbedded,
       handleSetIcon,
       handlePanelAnnouncement,

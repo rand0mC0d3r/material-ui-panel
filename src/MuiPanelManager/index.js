@@ -4,8 +4,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useContext, useEffect, useState } from 'react'
 import DataProvider from '../MuiPanelStore'
 import MuiSplitter from '../MuiSplitter'
-import MuiStatusBlock from '../MuiStatusBlock'
+import MuiStatusBar from '../MuiStatusBar'
 import MupMenuCollapseButton from '../MupMenuCollapseButton'
+import InternalStatus from './../MuiStatusBar/InternalStatus'
 import MuiMenuButton from './MuiMenuButton'
 
 const menuWidth = '56px'
@@ -204,7 +205,7 @@ const MuiPanelManager = ({
   const theme = useTheme()
   const [sides, setSides] = useState()
   const matches = useMediaQuery('(min-width:600px)')
-  const { status, settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider)
+  const { settings, sections, toggleSettingIsCollapsed, layout } = useContext(DataProvider)
   const classes = useStyles(theme, settings.upperBar)
 
   useEffect(() => {
@@ -225,7 +226,6 @@ const MuiPanelManager = ({
 
   return <Box id="MuiPanelManager"
     display="flex"
-
     flexDirection={settings.upperBar ? 'column-reverse' : 'column'}
     className={classes.wrapper}>
     <div
@@ -299,7 +299,9 @@ const MuiPanelManager = ({
 
     </div>
 
-    <MuiStatusBlock />
+    <div id="material-ui-panel-statusBar">
+      {!settings.statusBarAnnounced && <InternalStatus />}
+    </div>
   </Box>
 }
 

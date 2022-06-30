@@ -1,7 +1,7 @@
 import { Box } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useContext } from 'react'
-import DataProvider from '../MuiPanelStore'
+import DataProvider from '../../MuiPanelStore'
 
 const useStyles = makeStyles((theme) => ({
   statusBar: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const availableSides = ['left', 'right']
 
-const MuiStatusBlock = () => {
+const MuiStatusBlock = ({  }) => {
   const theme = useTheme()
   const { status, settings } = useContext(DataProvider)
   const classes = useStyles(theme)

@@ -36,7 +36,7 @@ const MupStatus = ({
   const classes = useStyles(theme)
   const open = Boolean(anchorEl)
 
-  const handleClose = () => setAnchorEl(null)
+  const onClose = () => setAnchorEl(null)
 
   const callbackOnClick = useCallback((e) => {
     onClick(e)
@@ -73,7 +73,13 @@ const MupStatus = ({
     document.getElementById(`material-ui-panel-statusBar-${side}`))
     ? createPortal(
       <>
-        <Tooltip title={tooltip} arrow>
+        <Tooltip
+          title={tooltip}
+          disableFocusListener={tooltip === ''}
+          disableHoverListener={tooltip === ''}
+          disableTouchListener={tooltip === ''}
+          arrow
+        >
           <Box
             key={`MupStatus_${id}_wrapper`}
             onClick={(e) => focusOnClick
@@ -121,23 +127,12 @@ const MupStatus = ({
             </Box>)}
           </Box>
         </Tooltip>
-        {asMenu && <>
-          <Popover
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: settings.upperBar ? 'bottom' : 'top',
-              horizontal: 'left'
-            }}
-            transformOrigin={{
-              vertical: !settings.upperBar ? 'bottom' : 'top',
-              horizontal: 'left'
-            }}
-          >
-            {asMenu}
-          </Popover>
-        </>}
+        {asMenu && <Popover {...{ open, anchorEl, onClose }}
+          anchorOrigin={{ vertical: settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
+          transformOrigin={{ vertical: !settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
+        >
+          {asMenu}
+        </Popover>}
       </>,
       document.getElementById(`material-ui-panel-statusBar-${side}`))
   : null
