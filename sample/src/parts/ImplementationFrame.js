@@ -89,19 +89,9 @@ function ImplementationFrame({
         <MenuStatus />
         <ConfigStatus />
         <GalleryStatus />
-        <DynamicInjectStatus />
+
         <SaveStatus />
         <DynamicStatus />
-
-        {/* <MupStatus
-          id="statusA"
-          side="left"
-          tooltip='33% frames left / Ready for photo'
-          elements={[
-            { icon: <FormatIndentIncrease color="action" />, text: 'Lorem' },
-            { icon: <CameraIcon />, text: 'Ipsum' },
-          ]}
-        /> */}
 
         <MupStatus
           id="triggerChromeCastPanel"
@@ -115,6 +105,7 @@ function ImplementationFrame({
         </MupStatus>
 
         <AliveStatus />
+        <DynamicInjectStatus />
         {/* <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "User" }]}/> */}
 
         {/* panel section  */}

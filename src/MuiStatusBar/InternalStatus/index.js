@@ -6,8 +6,8 @@ import DataProvider from '../../MuiPanelStore'
 const useStyles = makeStyles((theme) => ({
   statusBar: {
     padding: '0px 8px',
-    gap: '8px',
-    height: '32px',
+    gap: '4px',
+    height: '28px',
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
       : theme.palette.background.paper,
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   statusBarHalf: {
     overflow: 'scroll',
     scrollSnapType: 'both mandatory',
-    gap: '8px',
+    gap: '4px',
     '&::-webkit-scrollbar': {
       display: 'none'
     },

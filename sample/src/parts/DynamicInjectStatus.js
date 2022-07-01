@@ -1,3 +1,4 @@
+import { Chip, TextField } from '@material-ui/core';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import ToysIcon from '@material-ui/icons/Toys';
@@ -31,11 +32,16 @@ const AliveStatus = () => {
     />
     {injectElement && <MupStatus
       side='primary'
-      minWidth={100}
       id='dummyObject'
       tooltip="Dummy element"
       elements={[{ icon: <ToysIcon />, text: 'Injected' }]}
     />}
+    <MupStatus
+      side='primary'
+      id='dummyButton'
+      tooltip="Dummy element"
+      elements={[{ node: <Chip size="small" variant="outlined" label="test..." /> }]}
+    />
   </>
 }
 

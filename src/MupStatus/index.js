@@ -7,8 +7,10 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
-    padding: '4px',
-    height: '24px'
+    padding: '0px 8px',
+    display: 'flex',
+    alignItems: 'center',
+    alignSelf: 'stretch'
   },
   root: {
     '&:hover': {
@@ -112,6 +114,7 @@ const MupStatus = ({
             {elements.map(element => <Box display="flex" alignItems="center"
               key={`MupStatus_${element.text}_container`}
               style={{ gap: '6px' }}>
+              {element.node && <>{element.node}</>}
               {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
               {element.image && <img
                 alt="injected element"
@@ -157,6 +160,7 @@ MupStatus.propTypes = {
   tooltip: PropTypes.string,
   elements: PropTypes.arrayOf(PropTypes.shape({
     icon: PropTypes.node,
+    node: PropTypes.node,
     image: PropTypes.node,
     text: PropTypes.string,
   })).isRequired,
