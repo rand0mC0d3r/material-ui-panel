@@ -180,15 +180,18 @@ Self organizing manager wrapper that renders all children given
 #####  The component creates an object for the status bar that can be clicked. It's self registered and managed
 
 ![/media/preview.png](/media/mupStatus1.png)
+
 **Hint**: Direct actions are permitted
 
 <br />
 
 ![/media/preview.png](/media/mupStatus2.png)
+
 **Hint**: As well placed menu actions
 <br />
 
 ![/media/preview.png](/media/mupStatus3.png)
+
 **Hint**: Informational sections
 
 <br />
