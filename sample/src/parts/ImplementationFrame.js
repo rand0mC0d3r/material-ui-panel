@@ -122,11 +122,15 @@ function ImplementationFrame({
         <IframePanel/>
         <AnotherIframePanel /> */}
 
+        <ComplexPanel />
+    <IframePanel />
+    <AnotherIframePanel />
+
         {/* <MupPanel placement="bottom" id="randomText44" title="Lorem Ipsum Panel" icon={<FormatIndentIncrease />}>
           <Typography color="textPrimary">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</Typography>
         </MupPanel> */}
 
-        {/* <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
+        <MupPanel id="chromecastPanel" title="Cast Icon" icon={<CastConnectedIcon />}>
           <Box display="flex" flexDirection="column" style={{ gap: '8px'}}>
             <Skeleton variant="rect" animation="wave" height={10} />
             <Skeleton variant="rect" animation="wave" height={20}  />
@@ -149,7 +153,7 @@ function ImplementationFrame({
 
         <MupPanel id="tralalaPanel" title="Sub Demo Panel TextMock" iconInHeader={false} hint="No icon big guy..." icon={<AmpStories />}>
           <Skeleton variant="rect" width={'100%'} height={300} />
-        </MupPanel> */}
+        </MupPanel>
 
         <MuiStatusBar/>
 
