@@ -3,7 +3,6 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import MupStatus from '../components/MupStatus';
 
 const ConfigStatus = () => <MupStatus
-    asButton
     asMenu={<MenuList id="menu-list-grow" onKeyDown={() => { }}>
       <MenuItem onClick={() => { }}>Profile</MenuItem>
       <MenuItem onClick={() => { }}>My account</MenuItem>
