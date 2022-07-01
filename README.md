@@ -177,7 +177,8 @@ Self organizing manager wrapper that renders all children given
 ---
 
 ## ```<MupStatus>``` - 📟 Status Bar Component
-#####  The component creates an object for the status bar that can be clicked. It's self registered and managed
+
+The component creates an object for the status bar that can be clicked. It's self registered and managed
 
 ![/media/preview.png](/media/mupStatus1.png)
 
@@ -197,11 +198,14 @@ Self organizing manager wrapper that renders all children given
 <br />
 
 ![/media/preview.png](/media/mupStatus4.png)
+
 **Hint**: Errors are using the secondary color
+
+---
 
 Internally the wrapper ```<MupStatusBar>``` bound to the scene is not being rendered and started if there are no ```<MupStatus>``` announced across the application at any point in time. Later instantiation is fully encouraged to de-clutter the DOM.
 
-Add a section to either ```left``` or ```right``` side of the status bar.
+Add a section to either ```primary``` or ```secondary``` side of the status bar. An omission will result in a default section.
 
 Each ```MupStatus``` entity must contain an ```id``` in form of an unique identifier across the session.
 
@@ -220,7 +224,7 @@ Each ```MupStatus``` entity must contain an ```id``` in form of an unique identi
 |-----|--|--|--|---|
 |  id |⭐ | ```string``` | ... |  Give a unique identifier to the status element |
 | elements | ⭐	| ```array```  | ```[]``` | List of objects of type ```{icon: ReactNode, text: string}```  |
-| side |	| ```string``` | ```left``` | Determines to which side the panel is bound |
+| side |	| ```string``` | ```primary``` | Determines to which side the panel is bound |
 | requestAttention |	| ```bool``` | ```false``` | When truthy is uses the ```secondary``` color |
 | tooltip |	| ```string``` | ```''``` | Provides a tooltip acting as a guide |
 | focusOnClick	| | ```string``` | _null_ | Toggles visibility of a panel known by ```<MuiPanelProvider>``` by it's unique identifier |

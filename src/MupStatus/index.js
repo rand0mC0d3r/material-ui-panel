@@ -29,7 +29,7 @@ const MupStatus = ({
   tooltip,
   elements
 }) => {
-  const { status, settings, handleSetVisible, handleStatusAnnouncement } = useContext(DataProvider)
+  const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const theme = useTheme()
@@ -45,6 +45,16 @@ const MupStatus = ({
   const callbackHandleStatusAnnouncement = useCallback((id) => {
     handleStatusAnnouncement({ id, elements, side, tooltip })
   }, [side, tooltip, elements, handleStatusAnnouncement])
+
+  const callbackHandleStatusDestroy = useCallback(() => {
+    handleStatusDestroy({ id })
+  }, [id])
+
+  useEffect(() => {
+    return () => {
+      callbackHandleStatusDestroy()
+    }
+  }, [callbackHandleStatusDestroy])
 
   useEffect(() => {
     if (id && statusObject === null && !status.some(item => item.uniqueId === id)) {
@@ -128,7 +138,7 @@ const MupStatus = ({
 }
 
 MupStatus.defaultProps = {
-  side: 'left',
+  side: 'primary',
   requestAttention: false,
   tooltip: '',
   elements: [],
@@ -137,7 +147,7 @@ MupStatus.defaultProps = {
 
 MupStatus.propTypes = {
   id: PropTypes.string.isRequired,
-  side: PropTypes.oneOf(['left', 'right']),
+  side: PropTypes.oneOf(['primary', 'secondary']),
   focusOnClick: PropTypes.string,
   asMenu: PropTypes.any,
   minWidth: PropTypes.number,

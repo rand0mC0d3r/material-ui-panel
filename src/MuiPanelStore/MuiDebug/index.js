@@ -119,7 +119,7 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Settings') {
         return {
-          ...d, dataSource: Object.entries(settings).map(([key, val]) => <div className={classes.storeElement}><pre
+          ...d, dataSource: Object.entries(settings).map(([key, val]) => <div key={`settings_${key}`} className={classes.storeElement}><pre
             key={`settings_${key}`}
             className={classes.dumpText}>
             {key}: {JSON.stringify(val)}
@@ -135,10 +135,10 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Status') {
         return {
-          ...d, dataSource: status.map(obj => <div className={classes.storeElement}><pre
+          ...d, dataSource: status.map(obj => <div key={`settings_${obj.uniqueId}`} className={classes.storeElement}><pre
             key={`settings_${obj.uniqueId}`}
             className={classes.dumpText}>
-            {JSON.stringify({ ...obj, elements: null }, null, 4)}
+            {JSON.stringify({ ...obj, elements: obj.elements.length }, null, 4)}
           </pre></div>)
         }
       }

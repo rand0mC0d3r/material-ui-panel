@@ -119,6 +119,7 @@ function MuiPanelProvider({
     setLayout(layout => [...layout.filter(lo => lo.uniqueId !== id)])
   }
 
+
   const handleContentAnnouncement = ({ id, children }) => {
     setLayout(layout => [
       ...layout.filter(lo => lo.uniqueId !== id),

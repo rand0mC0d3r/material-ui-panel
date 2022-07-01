@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const availableSides = ['left', 'right']
+const availableSides = ['primary', 'secondary']
 
 export default ({ style, className }) => {
   const theme = useTheme()
@@ -61,8 +61,8 @@ export default ({ style, className }) => {
         id={`material-ui-panel-statusBar-${side}`}
         key={`${side}_status`}
         display="flex"
-        justifyContent={side === 'left' ? 'flex-start' : 'flex-end'}
-        className={side === 'left' ? classes.statusBarHalf : classes.statusBarHalfSecondary}
+        justifyContent={side === availableSides[0] ? 'flex-start' : 'flex-end'}
+        className={side === availableSides[0] ? classes.statusBarHalf : classes.statusBarHalfSecondary}
       />)}
     </Box>}
   </>

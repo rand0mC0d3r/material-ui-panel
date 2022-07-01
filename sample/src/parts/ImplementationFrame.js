@@ -20,6 +20,7 @@ import AliveStatus from './AliveStatus';
 import AnotherIframePanel from './AnotherIframePanel';
 import ComplexPanel from './ComplexPanel';
 import ConfigStatus from './ConfigStatus';
+import DynamicInjectStatus from './DynamicInjectStatus';
 import DynamicStatus from './DynamicStatus';
 import GalleryStatus from './GalleryStatus';
 import IframePanel from './IframePanel';
@@ -88,6 +89,7 @@ function ImplementationFrame({
         <MenuStatus />
         <ConfigStatus />
         <GalleryStatus />
+        <DynamicInjectStatus />
         <SaveStatus />
         <DynamicStatus />
 
@@ -103,7 +105,7 @@ function ImplementationFrame({
 
         <MupStatus
           id="triggerChromeCastPanel"
-          side="left"
+          side="primary"
           focusOnClick='chromecastPanel'
           tooltip="Toggle visibility for panel"
           elements={[
