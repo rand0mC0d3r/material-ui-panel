@@ -7,23 +7,39 @@ const useStyles = makeStyles((theme) => ({
   statusBar: {
     padding: '0px 8px',
     gap: '4px',
+    display: 'flex',
+    justifyContent: 'space-between',
     height: '28px',
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
       : theme.palette.background.paper,
     color: `${theme.palette.background.default} !important`,
   },
-  statusBarHalf: {
+  upper: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderTop: 'none',
+  },
+  lower: {
+    borderBottom: 'none',
+    borderTop: `1px solid ${theme.palette.divider}`,
+  },
+  child: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+  },
+  primary: {
     overflow: 'scroll',
+    justifyContent: 'flex-start',
     scrollSnapType: 'both mandatory',
     gap: '4px',
     '&::-webkit-scrollbar': {
       display: 'none'
     },
   },
-  statusBarHalfSecondary: {
+  secondary: {
     overflow: 'hidden',
     flexWrap: 'wrap',
+    justifyContent: 'flex-end',
     alignItems: 'flex-start',
     scrollSnapType: 'both mandatory',
     gap: '0px 8px',
@@ -37,33 +53,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const availableSides = ['primary', 'secondary']
-
 export default ({ style, className }) => {
   const theme = useTheme()
   const { status, settings } = useContext(DataProvider)
   const classes = useStyles(theme)
 
   return <>
-    {status.length > 0 && <Box
+    {status.length > 0 && <div {...{ style }}
       id="material-ui-panel-statusBar-wrapper"
-      onContextMenu={(e) => { e.preventDefault() }}
-      display="flex"
-      className={[classes.statusBar, className].filter(e => !!e).join(' ')}
-      justifyContent="space-between"
-      style={{
-        ...style,
-        borderBottom: settings.upperBar ? `1px solid ${theme.palette.divider}` : 'none',
-        borderTop: !settings.upperBar ? `1px solid ${theme.palette.divider}` : 'none',
-      }}
+      className={[
+        classes.statusBar,
+        className,
+        settings.upperBar ? classes.upper : classes.lower
+      ].filter(e => !!e).join(' ')}
     >
-      {availableSides.map(side => <Box
+      {['primary', 'secondary'].map((side, i) => <div
         id={`material-ui-panel-statusBar-${side}`}
         key={`${side}_status`}
-        display="flex"
-        justifyContent={side === availableSides[0] ? 'flex-start' : 'flex-end'}
-        className={side === availableSides[0] ? classes.statusBarHalf : classes.statusBarHalfSecondary}
+        className={[
+          classes.child,
+          i === 0 ? classes.primary : classes.secondary
+        ].filter(e => !!e).join(' ')}
       />)}
-    </Box>}
+    </div>}
   </>
 }

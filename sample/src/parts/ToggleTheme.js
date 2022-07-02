@@ -96,6 +96,7 @@ const ToggleTheme = ({
     .filter(toggle => toggle.status !== undefined)
     .map(toggle => <MupStatus
       side="secondary"
+      secondary
       key={`toggle_${toggle.title}`}
       id={`toggle_${toggle.title}`}
       tooltip={`Toggle the ${toggle.title} flag: ${toggle.status ? 'off' : 'on'}`}

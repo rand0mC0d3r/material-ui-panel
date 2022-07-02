@@ -23,16 +23,19 @@ const MupStatus = ({
   id,
   asMenu,
   side,
+  secondary,
   minWidth,
   focusOnClick,
   onClick,
   onContextMenu,
   requestAttention,
   tooltip,
-  elements
+  elements,
+  children
 }) => {
   const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
+  const [elementFound, setElementFound] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null)
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -44,9 +47,16 @@ const MupStatus = ({
     onClick(e)
   }, [onClick])
 
+  useEffect(() => {
+    const elementSearched = document.getElementById(`material-ui-panel-statusBar-${secondary ? 'secondary' : 'primary'}`)
+    if (elementSearched !== null) {
+      setElementFound(elementSearched)
+    }
+  }, [secondary, statusObject])
+
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    handleStatusAnnouncement({ id, elements, side, tooltip })
-  }, [side, tooltip, elements, handleStatusAnnouncement])
+    handleStatusAnnouncement({ id, elements, secondary, tooltip })
+  }, [secondary, tooltip, elements, handleStatusAnnouncement])
 
   const callbackHandleStatusDestroy = useCallback(() => {
     handleStatusDestroy({ id })
@@ -70,9 +80,7 @@ const MupStatus = ({
     }
   }, [status, id, statusObject])
 
-  return (statusObject !== null &&
-    !!id &&
-    document.getElementById(`material-ui-panel-statusBar-${side}`))
+  return (statusObject !== null && !!id && elementFound)
     ? createPortal(
       <>
         <Tooltip
@@ -127,6 +135,7 @@ const MupStatus = ({
                 {element.text}
               </Typography>}
             </Box>)}
+            {children}
           </Box>
         </Tooltip>
         {asMenu && <Popover {...{ open, anchorEl, onClose }}
@@ -136,12 +145,13 @@ const MupStatus = ({
           {asMenu}
         </Popover>}
       </>,
-      document.getElementById(`material-ui-panel-statusBar-${side}`))
+      elementFound)
   : null
 }
 
 MupStatus.defaultProps = {
   side: 'primary',
+  secondary: false,
   requestAttention: false,
   tooltip: '',
   elements: [],
@@ -151,6 +161,7 @@ MupStatus.defaultProps = {
 MupStatus.propTypes = {
   id: PropTypes.string.isRequired,
   side: PropTypes.oneOf(['primary', 'secondary']),
+  secondary: PropTypes.bool,
   focusOnClick: PropTypes.string,
   asMenu: PropTypes.any,
   minWidth: PropTypes.number,
@@ -158,6 +169,7 @@ MupStatus.propTypes = {
   onContextMenu: PropTypes.func,
   requestAttention: PropTypes.bool,
   tooltip: PropTypes.string,
+  children: PropTypes.any,
   elements: PropTypes.arrayOf(PropTypes.shape({
     icon: PropTypes.node,
     node: PropTypes.node,
