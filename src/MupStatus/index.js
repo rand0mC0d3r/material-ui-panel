@@ -7,7 +7,8 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
-    padding: '0px 8px',
+    height: '100%',
+    padding: '0px 4px',
     display: 'flex',
     alignItems: 'center',
     alignSelf: 'stretch'
@@ -22,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 const MupStatus = ({
   id,
   asMenu,
-  side,
   secondary,
   minWidth,
   focusOnClick,
@@ -150,7 +150,6 @@ const MupStatus = ({
 }
 
 MupStatus.defaultProps = {
-  side: 'primary',
   secondary: false,
   requestAttention: false,
   tooltip: '',
@@ -160,7 +159,6 @@ MupStatus.defaultProps = {
 
 MupStatus.propTypes = {
   id: PropTypes.string.isRequired,
-  side: PropTypes.oneOf(['primary', 'secondary']),
   secondary: PropTypes.bool,
   focusOnClick: PropTypes.string,
   asMenu: PropTypes.any,

@@ -12,5 +12,7 @@ export default ({ style, className }) => {
     triggerStatusBarAnnounced()
   }, [])
 
-  return <>{documentElement && createPortal(<InternalStatus {...{ style, className }} />, documentElement)}</>
+  return documentElement
+    ? createPortal(<InternalStatus {...{ style, className }} />, documentElement)
+    : null
 }

@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useContext } from 'react'
 import DataProvider from '../../MuiPanelStore'
@@ -40,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     flexWrap: 'wrap',
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     scrollSnapType: 'both mandatory',
+
     gap: '0px 8px',
     flex: '1 1 auto',
     width: '0px',
@@ -62,8 +62,8 @@ export default ({ style, className }) => {
     {status.length > 0 && <div {...{ style }}
       id="material-ui-panel-statusBar-wrapper"
       className={[
-        classes.statusBar,
         className,
+        classes.statusBar,
         settings.upperBar ? classes.upper : classes.lower
       ].filter(e => !!e).join(' ')}
     >

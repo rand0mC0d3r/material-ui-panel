@@ -95,7 +95,6 @@ function ImplementationFrame({
 
         <MupStatus
           id="triggerChromeCastPanel"
-          side="primary"
           focusOnClick='chromecastPanel'
           tooltip="Toggle visibility for panel"
           elements={[

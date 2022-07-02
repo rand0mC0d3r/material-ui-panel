@@ -1,10 +1,5 @@
-import { Box, Popover, SvgIcon, Tooltip, Typography } from '@material-ui/core'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
-import { useCallback, useContext, useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
-import DataProvider from '../MuiPanelStore'
-
+import { Box, SvgIcon, Typography } from '@material-ui/core'
+import { useTheme } from '@material-ui/core/styles'
 
 const MupStatusChild = ({
   icon,
@@ -13,8 +8,12 @@ const MupStatusChild = ({
 }) => {
   const theme = useTheme()
 
-  return  <Box display="flex" alignItems="center" flexWrap="nowrap"
-    style={{ gap: '8px', color: theme.palette.action }}>
+  return <Box
+    display="flex"
+    alignItems="center"
+    flexWrap="nowrap"
+    style={{ gap: '4px', color: theme.palette.action }}
+  >
 
     {icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{icon}</SvgIcon>}
 
@@ -28,6 +27,5 @@ const MupStatusChild = ({
     {children}
   </Box>
 }
-
 
 export default MupStatusChild

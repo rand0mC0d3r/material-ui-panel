@@ -4,6 +4,7 @@ import Select from '@material-ui/core/Select';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import MupStatus from '../components/MupStatus';
+import MupStatusChild from '../components/MupStatusChild';
 
 const ToggleTheme = ({
   toggleDarkMode, darkMode,
@@ -95,19 +96,14 @@ const ToggleTheme = ({
   return <>{toggles
     .filter(toggle => toggle.status !== undefined)
     .map(toggle => <MupStatus
-      side="secondary"
       secondary
       key={`toggle_${toggle.title}`}
       id={`toggle_${toggle.title}`}
       tooltip={`Toggle the ${toggle.title} flag: ${toggle.status ? 'off' : 'on'}`}
       onClick={() => toggle.statusToggle()}
-      elements={[
-        {
-          icon: toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />,
-          text: toggle.title
-        }
-      ]}
-    />)}</>;
+    >
+      <MupStatusChild text={toggle.title} icon={toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />}   />
+    </MupStatus>)}</>;
 };
 
 export default ToggleTheme;

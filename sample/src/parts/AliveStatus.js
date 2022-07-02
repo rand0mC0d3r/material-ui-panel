@@ -27,7 +27,6 @@ const AliveStatus = () => {
 }, []);
 
   return <MupStatus
-    side='primary'
     minWidth={100}
     id='statusAlive'
     requestAttention={requestAttention}
