@@ -4,7 +4,8 @@ import { useTheme } from '@material-ui/core/styles'
 const MupStatusChild = ({
   icon,
   text,
-  children
+  image,
+  mask,
 }) => {
   const theme = useTheme()
 
@@ -24,7 +25,14 @@ const MupStatusChild = ({
     >
       {text}
     </Typography>}
-    {children}
+
+    {image && <img
+      alt="injected element"
+      style={{
+        width: '20px',
+        height: '20px',
+        borderRadius: mask ? '50%' : '0px',
+      }} src={image} />}
   </Box>
 }
 

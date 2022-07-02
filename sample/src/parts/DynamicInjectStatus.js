@@ -11,24 +11,20 @@ const AliveStatus = () => {
 
   return <>
     <MupStatus
-      minWidth={100}
+      style={{ minWidth: '100px' }}
       onClick={() => setInjectElement(!injectElement)}
       id='statusAlive'
       tooltip="Toggle injected status"
     >
       <MupStatusChild icon={injectElement ? <RadioButtonCheckedIcon />  : <RadioButtonUncheckedIcon />} text='Toggle injection' />
     </MupStatus>
-    {injectElement && <MupStatus
-      id='dummyObject'
-      tooltip="Dummy element"
-    >
+
+    {injectElement && <MupStatus id='dummyObject' tooltip="Dummy element">
       <MupStatusChild icon={<ToysIcon />} text='Injected' />
     </MupStatus>}
-    <MupStatus
-      id='dummyButton'
-      tooltip="Dummy element"
-    >
-      <Chip size="small" variant="outlined" label="test..." />
+
+    <MupStatus id='dummyButton' tooltip="Dummy element" >
+      <Chip size="small" onClick={() => { }} variant="outlined" label="test..." />
     </MupStatus>
   </>
 }

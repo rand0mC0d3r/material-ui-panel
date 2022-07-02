@@ -24,7 +24,7 @@ const MupStatus = ({
   id,
   asMenu,
   secondary,
-  minWidth,
+  style,
   focusOnClick,
   onClick,
   onContextMenu,
@@ -91,6 +91,7 @@ const MupStatus = ({
           arrow
         >
           <Box
+            id={id}
             key={`MupStatus_${id}_wrapper`}
             onClick={(e) => focusOnClick
             ? handleSetVisible({ uniqueId: focusOnClick })
@@ -113,13 +114,13 @@ const MupStatus = ({
             ? classes.root
             : ''}`}
             style={{
-              minWidth: minWidth || 'auto',
+              ...style,
               gap: '16px',
               cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
               backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
             }}
           >
-            {elements.map(element => <Box display="flex" alignItems="center"
+            {/* {elements.map(element => <Box display="flex" alignItems="center"
               key={`MupStatus_${element.text}_container`}
               style={{ gap: '6px' }}>
               {element.node && <>{element.node}</>}
@@ -134,7 +135,7 @@ const MupStatus = ({
               {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
                 {element.text}
               </Typography>}
-            </Box>)}
+            </Box>)} */}
             {children}
           </Box>
         </Tooltip>
@@ -162,7 +163,7 @@ MupStatus.propTypes = {
   secondary: PropTypes.bool,
   focusOnClick: PropTypes.string,
   asMenu: PropTypes.any,
-  minWidth: PropTypes.number,
+  style: PropTypes.any,
   onClick: PropTypes.func,
   onContextMenu: PropTypes.func,
   requestAttention: PropTypes.bool,

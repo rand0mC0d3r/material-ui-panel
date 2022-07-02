@@ -1,95 +1,47 @@
-import { Switch, Typography } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+/* eslint-disable import/no-anonymous-default-export */
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import MupStatus from '../components/MupStatus';
 import MupStatusChild from '../components/MupStatusChild';
 
-const ToggleTheme = ({
+export default ({
   toggleDarkMode, darkMode,
   toggleUpperBar, upperBar,
   toggleHelp, help,
   toggleDebugMode, debugMode,
   toggleCollapseMode, collapseMode,
   toggleInverseMarkers, inverseMarkers,
-  setMarkerColor, markerColor,
 }) => {
   const toggles = [
     {
       title: 'Debug',
       status: debugMode,
       statusToggle: toggleDebugMode,
-      component: <Switch
-        color="primary"
-        checked={debugMode}
-        onChange={toggleDebugMode}
-      />
     },
     {
       title: 'Help',
       status: help,
       statusToggle: toggleHelp,
-      component: <Switch
-        color="primary"
-        checked={help}
-        onChange={toggleHelp}
-      />
     },
     {
       title: 'Dark',
       status: darkMode,
       statusToggle: toggleDarkMode,
-      component: <Switch
-        color="primary"
-        checked={darkMode}
-        onChange={toggleDarkMode}
-      />
     },
     {
       title: 'Upper Bar',
       status: upperBar,
       statusToggle: toggleUpperBar,
-      component: <Switch
-        color="primary"
-        checked={upperBar}
-        onChange={toggleUpperBar}
-      />
     },
     {
       title: 'Collapse',
       status: collapseMode,
       statusToggle: toggleCollapseMode,
-      component: <Switch
-        color="primary"
-        checked={collapseMode}
-        onChange={toggleCollapseMode}
-      />
     },
     {
       title: 'Inverse',
       status: inverseMarkers,
       statusToggle: toggleInverseMarkers,
-      component: <Switch
-        color="primary"
-        checked={inverseMarkers}
-        onChange={toggleInverseMarkers}
-      />
-    },
-    {
-      title: 'Markers Color',
-      component: <Select
-          value={markerColor}
-          onChange={(e) => setMarkerColor(e.target.value)}
-      >
-        {['primary', 'secondary', 'textPrimary', 'textSecondary'].map(color => (
-          <MenuItem key={color} value={color}>
-            <Typography variant="caption">
-              {color}
-            </Typography>
-          </MenuItem>
-        ))}
-        </Select>
     },
   ];
 
@@ -105,5 +57,3 @@ const ToggleTheme = ({
       <MupStatusChild text={toggle.title} icon={toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />}   />
     </MupStatus>)}</>;
 };
-
-export default ToggleTheme;

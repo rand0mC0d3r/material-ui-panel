@@ -1,38 +1,29 @@
+/* eslint-disable import/no-anonymous-default-export */
 import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import { useEffect, useState } from 'react';
 import MupStatus from '../components/MupStatus';
+import MupStatusChild from '../components/MupStatusChild';
 
-const AliveStatus = () => {
-  const [elements, setElements] = useState();
-  const [requestAttention, setRequestAttention] = useState(true);
-
-  useEffect(() => {
-    setElements([{ icon: <WifiIcon />, text: '123 KB/s' }])
-    setRequestAttention(false)
-  }, []);
+export default () => {
+  const [speed, setSpeed] = useState(123);
+  const [highlight, setHighlight] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const number = Math.ceil(Math.random() * 100);
-      if (number <= 80) {
-        setElements([{ icon: <WifiIcon />, text: `12${number} KB/s` }])
-        setRequestAttention(false)
-      } else {
-        setElements([{ icon: <WifiOffIcon />, text: '0 KB/s' }])
-        setRequestAttention(true)
-      }
+      setHighlight(number < 30)
+      setSpeed(number);
   }, 500);
   return () => clearInterval(interval);
 }, []);
 
   return <MupStatus
-    minWidth={100}
+    style={{ minWidth: '100px' }}
     id='statusAlive'
-    requestAttention={requestAttention}
+    highlight={highlight}
     tooltip="Dynamic Online status"
-    elements={elements}
-  />
+  >
+    <MupStatusChild icon={speed > 30 ? <WifiIcon /> : <WifiOffIcon />} text={`${speed} KB/s`} />
+  </MupStatus>
 }
-
-export default AliveStatus;
