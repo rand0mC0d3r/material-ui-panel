@@ -24,14 +24,26 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.divider }).light} !important`
     }
   },
-  actionHighlight: {
+  actionHighlightSecondary: {
     '&:hover': {
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.secondary.main }).dark} !important`,
       color: `${theme.palette.background.default } !important`
     },
   },
+  actionHighlightPrimary: {
+    '&:hover': {
+      backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.primary.main }).dark} !important`,
+      color: `${theme.palette.background.default } !important`
+    },
+  },
   hightlight: {
     backgroundColor: theme.palette.secondary.main,
+    '& > div > *': {
+      color: `${theme.palette.background.default } !important`
+    }
+  },
+  hightlightPrimary: {
+    backgroundColor: theme.palette.primary.main,
     '& > div > *': {
       color: `${theme.palette.background.default } !important`
     }
@@ -46,7 +58,7 @@ const MupStatus = ({
   focusOnClick,
   onClick = false,
   onContextMenu,
-  highlight,
+  highlight = 'default',
   tooltip,
   elements,
   children
@@ -130,10 +142,13 @@ const MupStatus = ({
             alignItems="center"
             className={clsx([
               classes.default,
-              highlight && classes.hightlight,
-              onClick && highlight && classes.actionHighlight,
+              highlight !== 'default' && classes.hightlight,
+              highlight === 'primary' && classes.hightlightPrimary,
+              onClick && highlight !== 'default' && classes.actionHighlight,
+              onClick && highlight === 'primary' && classes.actionHighlightPrimary,
+              onClick && highlight === 'secondary' && classes.actionHighlightSecondary,
               onClick && classes.interactive,
-              onClick && !highlight && classes.actionNormal,
+              onClick && highlight === 'default' && classes.actionNormal,
             ])}
             style={{ ...style }}
           >
@@ -153,7 +168,7 @@ const MupStatus = ({
 
 MupStatus.defaultProps = {
   secondary: false,
-  requestAttention: false,
+  highlight: 'default',
   tooltip: '',
   elements: [],
   asButton: false,
@@ -167,7 +182,7 @@ MupStatus.propTypes = {
   style: PropTypes.any,
   onClick: PropTypes.func,
   onContextMenu: PropTypes.func,
-  requestAttention: PropTypes.bool,
+  highlight: PropTypes.oneOf(['default', 'primary', 'secondary']),
   tooltip: PropTypes.string,
   children: PropTypes.any,
   elements: PropTypes.arrayOf(PropTypes.shape({

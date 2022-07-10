@@ -20,7 +20,7 @@ export default () => {
   return () => clearInterval(interval);
 }, []);
 
-  return <MupStatus {...{ highlight }}
+  return <MupStatus {...{ highlight: highlight ? 'secondary' : 'default' }}
     secondary
     style={{ minWidth: '80px' }}
     id='statusAlive'

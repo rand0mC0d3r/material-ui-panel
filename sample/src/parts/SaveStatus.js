@@ -9,19 +9,24 @@ import MupStatusChild from '../components/MupStatusChild';
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
   const [elements, setElements] = useState([{ key: 'document', icon: <CloudOutlinedIcon />, text: 'Document ready' }]);
-  const [highlight, setHighlight] = useState(false);
+  const [highlight, setHighlight] = useState('default');
 
   const handleClose = () => { setOpen(false);};
 
-  const handleAgree = () => {
+  const handleDefault = () => {
     setElements([{ key: 'document', icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
-    setHighlight(false)
-  }
-  const handleAgreeFail = () => {
-    setElements([{ key: 'document', icon: <CloudOffOutlinedIcon />, text: 'Document failed' }])
-    setHighlight(true)
+    setHighlight('default')
   }
 
+  const handleAgree = () => {
+    setElements([{ key: 'document', icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
+    setHighlight('primary')
+  }
+
+  const handleAgreeFail = () => {
+    setElements([{ key: 'document', icon: <CloudOffOutlinedIcon />, text: 'Document failed' }])
+    setHighlight('secondary')
+  }
 
   return <>
     <MupStatus
@@ -46,6 +51,9 @@ const SaveStatus = () => {
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Exit
+        </Button>
+        <Button onClick={handleDefault} color="default">
+          Default
         </Button>
         <Button onClick={handleAgree} color="primary">
           Success
