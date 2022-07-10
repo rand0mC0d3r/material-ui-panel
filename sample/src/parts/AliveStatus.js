@@ -1,28 +1,28 @@
-/* eslint-disable import/no-anonymous-default-export */
-import WifiIcon from '@material-ui/icons/Wifi';
-import WifiOffIcon from '@material-ui/icons/WifiOff';
-import { useEffect, useState } from 'react';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import WifiIcon from '@material-ui/icons/Wifi'
+import WifiOffIcon from '@material-ui/icons/WifiOff'
+import { useEffect, useState } from 'react'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
-const breakpoint = 50;
+const breakpoint = 50
 
 export default () => {
-  const [speed, setSpeed] = useState(123);
-  const [highlight, setHighlight] = useState(false);
+  const [speed, setSpeed] = useState(123)
+  const [highlight, setHighlight] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const number = Math.ceil(Math.random() * 250);
+      const number = Math.ceil(Math.random() * 250)
       setHighlight(number < breakpoint)
-      setSpeed(number);
-  }, 500);
-  return () => clearInterval(interval);
-}, []);
+      setSpeed(number)
+    }, 500)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return <MupStatus {...{ highlight: highlight ? 'secondary' : 'default' }}
     secondary
-    style={{ minWidth: '80px' }}
+    style={{ minWidth: '90px' }}
     id='statusAlive'
     tooltip={`Server connection bandwidth ${speed} KB/s`}
   >

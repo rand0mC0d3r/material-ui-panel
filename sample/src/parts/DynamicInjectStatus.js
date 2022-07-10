@@ -1,13 +1,13 @@
-import { Chip } from '@material-ui/core';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import ToysIcon from '@material-ui/icons/Toys';
-import { useState } from 'react';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import { Chip } from '@material-ui/core'
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked'
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
+import ToysIcon from '@material-ui/icons/Toys'
+import { useState } from 'react'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
 const AliveStatus = () => {
-  const [injectElement, setInjectElement] = useState(false);
+  const [injectElement, setInjectElement] = useState(false)
 
   return <>
     <MupStatus
@@ -24,9 +24,10 @@ const AliveStatus = () => {
     </MupStatus>}
 
     <MupStatus id='dummyButton' tooltip="Dummy element" >
-      <Chip size="small" onClick={() => { }} variant="outlined" label="test..." />
+      <Chip size="small" onClick={() => { }} variant="outlined"
+        label="test..." />
     </MupStatus>
   </>
 }
 
-export default AliveStatus;
+export default AliveStatus

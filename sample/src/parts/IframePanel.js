@@ -1,5 +1,5 @@
-import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined';
-import MupPanel from '../components/MupPanel';
+import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
+import MupPanel from '../components/MupPanel'
 
 const IframePanel = () => {
   return <MupPanel
@@ -12,9 +12,9 @@ const IframePanel = () => {
     <iframe
       title="Random Wiki article"
       style={{
-        filter: "opacity(0.5) grayscale(0.5)",
-        width: "100%",
-        height: "100%",
+        filter: 'opacity(0.5) grayscale(0.5)',
+        width: '100%',
+        height: '100%',
         border: '0px none'
       }}
       src="https://meet.google.com/"
@@ -23,4 +23,4 @@ const IframePanel = () => {
   </MupPanel>
 }
 
-export default IframePanel;
+export default IframePanel

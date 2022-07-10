@@ -1,7 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
-import CastConnectedIcon from '@material-ui/icons/CastConnected';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import CastConnectedIcon from '@material-ui/icons/CastConnected'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
 
 export default () => <MupStatus
@@ -9,5 +8,5 @@ export default () => <MupStatus
   focusOnClick='chromecastPanel'
   tooltip="Toggle visibility for panel"
 >
-    <MupStatusChild icon={<CastConnectedIcon />} text={'Toggle Panel'} />
+  <MupStatusChild icon={<CastConnectedIcon />} text={'Toggle Panel'} />
 </MupStatus>

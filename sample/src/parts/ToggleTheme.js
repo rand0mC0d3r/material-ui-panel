@@ -1,8 +1,7 @@
-/* eslint-disable import/no-anonymous-default-export */
-import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
-import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined'
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
 export default ({
   toggleDarkMode, darkMode,
@@ -43,7 +42,7 @@ export default ({
       status: inverseMarkers,
       statusToggle: toggleInverseMarkers,
     },
-  ];
+  ]
 
   return <>{toggles
     .filter(toggle => toggle.status !== undefined)
@@ -55,5 +54,5 @@ export default ({
       onClick={() => toggle.statusToggle()}
     >
       <MupStatusChild text={toggle.title} icon={toggle.status ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankOutlinedIcon />}   />
-    </MupStatus>)}</>;
-};
+    </MupStatus>)}</>
+}

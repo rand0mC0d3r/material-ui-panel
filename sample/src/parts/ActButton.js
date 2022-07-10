@@ -1,11 +1,11 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import CachedIcon from '@material-ui/icons/Cached';
-import { useState } from 'react';
-import MupButton from '../components/MupButton';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import CachedIcon from '@material-ui/icons/Cached'
+import { useState } from 'react'
+import MupButton from '../components/MupButton'
 
 const ActButton = () => {
-  const [open, setOpen] = useState(false);
-  const handleClose = () => { setOpen(false);};
+  const [open, setOpen] = useState(false)
+  const handleClose = () => { setOpen(false)}
 
   return <>
     <MupButton
@@ -25,7 +25,7 @@ const ActButton = () => {
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Dummy Modal?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Dummy Modal?'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           Lorem Ipsum
@@ -40,4 +40,4 @@ const ActButton = () => {
   </>
 }
 
-export default ActButton;
+export default ActButton

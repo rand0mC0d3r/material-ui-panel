@@ -1,10 +1,9 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { Popover } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
-import { Skeleton } from '@material-ui/lab';
-import { useState } from 'react';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import { Popover } from '@material-ui/core'
+import SettingsIcon from '@material-ui/icons/Settings'
+import { Skeleton } from '@material-ui/lab'
+import { useState } from 'react'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
 export default () => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -33,7 +32,7 @@ export default () => {
         In sed euismod nisi.
         Duis nec commodo augue.
         Curabitur fringilla
-        <div style={{ marginTop: '16px', display: "flex", gap: "8px", flexDirection: "column" }}>
+        <div style={{ marginTop: '16px', display: 'flex', gap: '8px', flexDirection: 'column' }}>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} />
           <Skeleton variant="rect" width={'100%'} height={200} />

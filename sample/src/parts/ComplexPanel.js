@@ -1,12 +1,12 @@
-import { Box, TextField } from '@material-ui/core';
-import { ChromeReaderMode } from '@material-ui/icons';
-import { Skeleton } from '@material-ui/lab';
-import { useState } from 'react';
-import MupPanel from '../components/MupPanel';
+import { Box, TextField } from '@material-ui/core'
+import { ChromeReaderMode } from '@material-ui/icons'
+import { Skeleton } from '@material-ui/lab'
+import { useState } from 'react'
+import MupPanel from '../components/MupPanel'
 
 const ComplexPanel = () => {
-  const [value, setValue] = useState('Sample persisten text...');
-  const handleChange = event => { setValue(event.target.value) };
+  const [value, setValue] = useState('Sample persisten text...')
+  const handleChange = event => { setValue(event.target.value) }
 
   return <MupPanel
     id="complexityPanel"
@@ -14,7 +14,7 @@ const ComplexPanel = () => {
     subTitle="Sample sub-title text"
     icon={<ChromeReaderMode />}
   >
-    <Box display="flex" flexDirection="column" style={{ gap: "16px" }}>
+    <Box display="flex" flexDirection="column" style={{ gap: '16px' }}>
       <div>
         <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
         <Skeleton animation="wave" height={10} />
@@ -43,4 +43,4 @@ const ComplexPanel = () => {
   </MupPanel>
 }
 
-export default ComplexPanel;
+export default ComplexPanel

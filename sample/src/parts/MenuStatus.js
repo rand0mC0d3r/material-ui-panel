@@ -1,9 +1,8 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { MenuItem, MenuList, Popover } from '@material-ui/core';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import { useState } from 'react';
-import MupStatus from '../components/MupStatus';
-import MupStatusChild from '../components/MupStatusChild';
+import { MenuItem, MenuList, Popover } from '@material-ui/core'
+import ListAltIcon from '@material-ui/icons/ListAlt'
+import { useState } from 'react'
+import MupStatus from '../components/MupStatus'
+import MupStatusChild from '../components/MupStatusChild'
 
 export default () => {
   const [anchorEl, setAnchorEl] = useState(null)

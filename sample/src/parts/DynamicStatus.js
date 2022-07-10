@@ -1,21 +1,21 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
-import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined';
-import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
-import { useEffect, useState } from 'react';
-import MupStatus from '../components/MupStatus';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined'
+import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined'
+import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined'
+import { useEffect, useState } from 'react'
+import MupStatus from '../components/MupStatus'
 
 const SaveStatus = () => {
-  const [open, setOpen] = useState(false);
-  const [elements, setElements] = useState();
-  const [requestAttention, setRequestAttention] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [elements, setElements] = useState()
+  const [requestAttention, setRequestAttention] = useState(false)
 
   useEffect(() => {
     handleReady()
-  }, []);
+  }, [])
 
-  const handleClickOpen = () => { setOpen(true); };
-  const handleClose = () => { setOpen(false); handleReady()};
+  const handleClickOpen = () => { setOpen(true) }
+  const handleClose = () => { setOpen(false); handleReady()}
 
   const handleAgree = () => {
     setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Status ADD' }])
@@ -50,7 +50,7 @@ const SaveStatus = () => {
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle id="alert-dialog-title">{"Add a dynamic status element?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Add a dynamic status element?'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           Want to add or remove a dynamic status?
@@ -81,4 +81,4 @@ const SaveStatus = () => {
   </>
 }
 
-export default SaveStatus;
+export default SaveStatus

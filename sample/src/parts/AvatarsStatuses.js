@@ -1,7 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { Avatar, Popover } from '@material-ui/core';
-import { useState } from 'react';
-import MupStatus from '../components/MupStatus';
+import { Avatar, Popover } from '@material-ui/core'
+import { useState } from 'react'
+import MupStatus from '../components/MupStatus'
 
 export default () => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -9,6 +8,7 @@ export default () => {
   const open = Boolean(anchorEl)
 
   const onClose = () => setAnchorEl(null)
+
   return <>
     <MupStatus
       id='avatars'
@@ -17,7 +17,7 @@ export default () => {
       onClick={e => setAnchorEl(e.currentTarget)}
       style={{ minWidth: '32px' }}
     >
-      <div style={{ display: 'flex', gap: "0px" }}>
+      <div style={{ display: 'flex', gap: '0px' }}>
         {['34', '55', '69'].map((image, i) => <img
           src={`https://picsum.photos/id/${image}/20/20`}
           key={image}
@@ -32,7 +32,7 @@ export default () => {
       anchorOrigin={{ vertical: isToggled ? 'top' : 'bottom', horizontal: 'left' }}
       transformOrigin={{ vertical: isToggled ? 'bottom' : 'top', horizontal: 'left' }}
     >
-      <div style={{ width: '350px', display: 'flex', padding: '16px', margin: '16px', gap: "16px" }}>
+      <div style={{ width: '350px', display: 'flex', padding: '16px', margin: '16px', gap: '16px' }}>
         {['34', '55', '69'].map(image => <img
           src={`https://picsum.photos/id/${image}/80/80`}
           key={image}

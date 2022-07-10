@@ -8,7 +8,7 @@
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
   "ignorePatterns": [
-    "../sample/src/components/**/*.js"
+    "components/**/*.js"
   ],
   "parserOptions": {
     "ecmaFeatures": {
