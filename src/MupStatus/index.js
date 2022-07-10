@@ -1,4 +1,4 @@
-import { Box, Popover, Tooltip } from '@material-ui/core'
+import { Box, Tooltip } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
@@ -60,7 +60,6 @@ const MupStatus = ({
   onContextMenu,
   highlight = 'default',
   tooltip,
-  elements,
   children
 }) => {
   const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
@@ -87,8 +86,9 @@ const MupStatus = ({
   }, [secondary, statusObject])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    handleStatusAnnouncement({ id, elements, secondary, tooltip })
-  }, [secondary, tooltip, elements, handleStatusAnnouncement])
+    console.log(tooltip)
+    handleStatusAnnouncement({ id, secondary, tooltip })
+  }, [secondary, tooltip, handleStatusAnnouncement])
 
   const callbackHandleStatusDestroy = useCallback(() => {
     handleStatusDestroy({ id })
@@ -129,50 +129,40 @@ const MupStatus = ({
     ])
   }
 
-  return (statusObject !== null && !!id && elementFound)
-    ? createPortal(
-      <>
-        <Tooltip
-          title={tooltip}
-          disableFocusListener={tooltip === ''}
-          disableHoverListener={tooltip === ''}
-          disableTouchListener={tooltip === ''}
-          arrow
-        >
-          <Box
-            id={id}
-            key={`MupStatus_${id}_wrapper`}
-            onClick={(e) => focusOnClick
-            ? handleSetVisible({ uniqueId: focusOnClick })
-            : onClick
-                ? callbackOnClick(e)
-                : null
-            }
-            onContextMenu={(e) => settings.allowRightClick
-            ? onContextMenu
-              ? onContextMenu(e)
-              : null
-            : e.preventDefault()
-            }
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            className={generateClasses()}
-            style={{ ...style }}
-          >
-            {children}
-          </Box>
-        </Tooltip>
-      </>,
-      elementFound)
-  : null
+  return <>{(statusObject !== null && !!id && elementFound) && createPortal(
+    <Tooltip
+      title={tooltip}
+      disableFocusListener={tooltip === ''}
+      disableHoverListener={tooltip === ''}
+      disableTouchListener={tooltip === ''}
+      arrow
+    >
+      <Box
+        id={id}
+        key={`MupStatus_${id}_wrapper`}
+        onClick={(e) => focusOnClick
+          ? handleSetVisible({ uniqueId: focusOnClick })
+          : onClick ? callbackOnClick(e) : null}
+        onContextMenu={(e) => settings.allowRightClick
+          ? onContextMenu ? onContextMenu(e) : null
+          : e.preventDefault()}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        className={generateClasses()}
+        style={{ ...style }}
+      >
+        {children}
+      </Box>
+    </Tooltip>,
+    elementFound)
+  }</>
 }
 
 MupStatus.defaultProps = {
   secondary: false,
   highlight: 'default',
   tooltip: '',
-  elements: [],
   asButton: false,
 }
 
@@ -187,12 +177,6 @@ MupStatus.propTypes = {
   highlight: PropTypes.oneOf(['default', 'primary', 'secondary']),
   tooltip: PropTypes.string,
   children: PropTypes.any,
-  elements: PropTypes.arrayOf(PropTypes.shape({
-    icon: PropTypes.node,
-    node: PropTypes.node,
-    image: PropTypes.node,
-    text: PropTypes.string,
-  })).isRequired,
 }
 
 export default MupStatus

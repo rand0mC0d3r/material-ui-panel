@@ -138,7 +138,7 @@ const MupDebug = () => {
           ...d, dataSource: status.map(obj => <div key={`settings_${obj.uniqueId}`} className={classes.storeElement}><pre
             key={`settings_${obj.uniqueId}`}
             className={classes.dumpText}>
-            {JSON.stringify({ ...obj, elements: obj.elements.length }, null, 4)}
+            {JSON.stringify({ ...obj }, null, 4)}
           </pre></div>)
         }
       }

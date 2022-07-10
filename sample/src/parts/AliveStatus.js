@@ -4,18 +4,19 @@ import { useEffect, useState } from 'react'
 import MupStatus from '../components/MupStatus'
 import MupStatusChild from '../components/MupStatusChild'
 
-const breakpoint = 50
+const breakpoint = 60
 
 export default () => {
-  const [speed, setSpeed] = useState(123)
+  const [speed, setSpeed] = useState(75)
   const [highlight, setHighlight] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const number = Math.ceil(Math.random() * 250)
+      const signChosen = Math.ceil(Math.random() * 250) > 210 ? '-1' : '1'
+      const number = speed + signChosen * Math.ceil(Math.random() * 50)
       setHighlight(number < breakpoint)
-      setSpeed(number)
-    }, 500)
+      setSpeed(() => number)
+    }, 750)
 
     return () => clearInterval(interval)
   }, [])
