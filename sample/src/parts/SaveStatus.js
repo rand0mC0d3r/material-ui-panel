@@ -30,6 +30,7 @@ const SaveStatus = () => {
 
   return <>
     <MupStatus
+      style={{ minWidth: '132px' }}
       id='statusSaveDoc'
       highlight={highlight}
       onClick={() => setOpen(true)}
