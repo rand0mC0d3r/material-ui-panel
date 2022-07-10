@@ -22,7 +22,7 @@ export default () => {
 
   return <MupStatus {...{ highlight }}
     secondary
-    style={{ minWidth: '100px' }}
+    style={{ minWidth: '80px' }}
     id='statusAlive'
     tooltip={`Server connection bandwidth ${speed} KB/s`}
   >

@@ -18,6 +18,7 @@ import { MuiPanelProvider } from './../components/MuiPanelStore';
 import ActButton from './ActButton';
 import AliveStatus from './AliveStatus';
 import AnotherIframePanel from './AnotherIframePanel';
+import CastStatus from './CastStatus';
 import ComplexPanel from './ComplexPanel';
 import ConfigStatus from './ConfigStatus';
 import DynamicInjectStatus from './DynamicInjectStatus';
@@ -93,15 +94,7 @@ function ImplementationFrame({
         <SaveStatus />
         <DynamicStatus />
 
-        <MupStatus
-          id="triggerChromeCastPanel"
-          focusOnClick='chromecastPanel'
-          tooltip="Toggle visibility for panel"
-          elements={[
-          { icon: <CastConnectedIcon />, text: 'Toggle Panel' }
-        ]}>
-          demo text
-        </MupStatus>
+        <CastStatus />
 
         <AliveStatus />
         <DynamicInjectStatus />
