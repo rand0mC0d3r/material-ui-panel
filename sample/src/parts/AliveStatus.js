@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import MupStatus from '../components/MupStatus';
 import MupStatusChild from '../components/MupStatusChild';
 
-const breakpoint = 250;
+const breakpoint = 50;
 
 export default () => {
   const [speed, setSpeed] = useState(123);

@@ -19,29 +19,22 @@ const useStyles = makeStyles(theme => ({
   interactive: {
     cursor: 'pointer',
   },
-  interactiveHighlight: {
-    '& > div > *': {
-      color: `${theme.palette.background.default } !important`
-    }
-  },
-  root: {
+  actionNormal: {
     '&:hover': {
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.divider }).light} !important`
     }
   },
-  children: {
+  actionHighlight: {
     '&:hover': {
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.secondary.main }).dark} !important`,
       color: `${theme.palette.background.default } !important`
     },
   },
-  rootHightlight: {
+  hightlight: {
     backgroundColor: theme.palette.secondary.main,
-
     '& > div > *': {
       color: `${theme.palette.background.default } !important`
     }
-
   },
 }))
 
@@ -137,11 +130,10 @@ const MupStatus = ({
             alignItems="center"
             className={clsx([
               classes.default,
-              onClick && highlight && classes.interactiveHighlight,
-              onClick && highlight && classes.root,
-              onClick && !highlight && classes.interactive,
-              highlight && classes.rootHightlight,
-              onClick && highlight && classes.children
+              highlight && classes.hightlight,
+              onClick && highlight && classes.actionHighlight,
+              onClick && classes.interactive,
+              onClick && !highlight && classes.actionNormal,
             ])}
             style={{ ...style }}
           >
