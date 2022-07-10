@@ -9,12 +9,12 @@ import CastConnectedIcon from '@material-ui/icons/CastConnected'
 import HomeIcon from '@material-ui/icons/Home'
 import Skeleton from '@material-ui/lab/Skeleton'
 import { useState } from 'react'
+import { MuiPanelProvider } from '../components/MuiPanelStore'
 import MuiStatusBar from '../components/MuiStatusBar'
 import MupButton from '../components/MupButton'
 import MupContent from '../components/MupContent'
 import MupPanel from '../components/MupPanel'
 import MupStatus from '../components/MupStatus'
-import { MuiPanelProvider } from './../components/MuiPanelStore'
 import ActButton from './ActButton'
 import AliveStatus from './AliveStatus'
 import AnotherIframePanel from './AnotherIframePanel'
@@ -145,7 +145,7 @@ function ImplementationFrame({
       <Skeleton variant="rect" width={'100%'} height={300} />
     </MupPanel>
 
-    <MuiStatusBar/>
+    <MuiStatusBar style={{ padding: '0px' }}/>
 
     <MupContent>
       <iframe

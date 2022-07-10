@@ -3,9 +3,9 @@ import CachedIcon from '@material-ui/icons/Cached'
 import { useState } from 'react'
 import MupButton from '../components/MupButton'
 
-const ActButton = () => {
+export default () => {
   const [open, setOpen] = useState(false)
-  const handleClose = () => { setOpen(false)}
+  const onClose = () => { setOpen(false)}
 
   return <>
     <MupButton
@@ -21,10 +21,7 @@ const ActButton = () => {
       id="sampleDisabled"
       shortText="LOAD"
       tooltip="Default separator with action clicker" />
-    <Dialog
-      open={open}
-      onClose={handleClose}
-    >
+    <Dialog {...{ open, onClose }}>
       <DialogTitle id="alert-dialog-title">{'Dummy Modal?'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -32,12 +29,10 @@ const ActButton = () => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={onClose} color="primary">
           Close
         </Button>
       </DialogActions>
     </Dialog>
   </>
 }
-
-export default ActButton

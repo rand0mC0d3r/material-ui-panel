@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { useMemo, useState } from 'react'
 import './App.css'
-import ImplementationFrame from './parts/ImplementationFrame'
+import ImplementationFrame from './parts/_ImplementationFrame'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
