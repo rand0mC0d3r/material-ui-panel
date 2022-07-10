@@ -24,10 +24,13 @@ export default () => {
 
   return <MupStatus {...{ highlight }}
     secondary
-    style={{ minWidth: '90px' }}
     id='statusAlive'
     tooltip={`Server connection bandwidth ${speed} KB/s`}
   >
-    <MupStatusChild icon={highlight === 'secondary' ? <SignalWifi1BarIcon /> :  <SignalWifi4BarIcon />} text={`${speed} KB/s`} />
+    <MupStatusChild
+      icon={highlight === 'secondary' ? <SignalWifi1BarIcon /> : <SignalWifi4BarIcon />}
+      text={`${speed} KB/s`}
+      textStyle={{ minWidth: '60px' }}
+    />
   </MupStatus>
 }

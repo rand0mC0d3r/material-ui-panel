@@ -4,6 +4,7 @@ import { useTheme } from '@material-ui/core/styles'
 const MupStatusChild = ({
   icon,
   text,
+  textStyle,
   image,
   mask,
 }) => {
@@ -21,7 +22,7 @@ const MupStatusChild = ({
     {text && <Typography
       variant="subtitle2"
       color="textPrimary"
-      style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}
+      style={{ ...textStyle, lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}
     >
       {text}
     </Typography>}
