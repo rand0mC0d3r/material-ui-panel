@@ -17,6 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 import { useState } from 'react';
 import MupStatus from '../components/MupStatus';
+import MupStatusChild from '../components/MupStatusChild';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +55,9 @@ const GalleryStatus = () => {
       id='statusSimilarDocuments'
       onClick={handleClickOpen}
       tooltip="View Documents ... - (Last checked - 3 min ago)"
-      elements={[{ icon: <AllInboxIcon />, text: '4 Related' }]}
-    />
+    >
+      <MupStatusChild icon={<AllInboxIcon />} text="4 Related" />
+    </MupStatus>
     <Dialog
       open={open}
       maxWidth='md'
