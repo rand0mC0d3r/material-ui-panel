@@ -29,6 +29,7 @@ const MupStatus = ({
   onClick,
   onContextMenu,
   requestAttention,
+  highlight,
   tooltip,
   elements,
   children
@@ -117,7 +118,7 @@ const MupStatus = ({
               ...style,
               gap: '16px',
               cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
-              backgroundColor: requestAttention ? theme.palette.secondary.main : 'transparent',
+              backgroundColor: (requestAttention || highlight) ? theme.palette.secondary.main : 'transparent',
             }}
           >
             {/* {elements.map(element => <Box display="flex" alignItems="center"

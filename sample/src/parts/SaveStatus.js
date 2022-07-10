@@ -2,43 +2,36 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
 import CloudOffOutlinedIcon from '@material-ui/icons/CloudOffOutlined';
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MupStatus from '../components/MupStatus';
+import MupStatusChild from '../components/MupStatusChild';
 
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
-  const [elements, setElements] = useState();
-  const [requestAttention, setRequestAttention] = useState(true);
+  const [elements, setElements] = useState([{ key: 'document', icon: <CloudOutlinedIcon />, text: 'Document ready' }]);
+  const [highlight, setHighlight] = useState(false);
 
-  useEffect(() => {
-    handleReady();
-  }, []);
-
-  const handleClickOpen = () => { setOpen(true); };
-  const handleClose = () => { setOpen(false); handleReady()};
+  const handleClose = () => { setOpen(false);};
 
   const handleAgree = () => {
-    setElements([{ icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
-    setRequestAttention(false)
+    setElements([{ key: 'document', icon: <CloudDoneOutlinedIcon />, text: 'Document saved' }])
+    setHighlight(false)
   }
   const handleAgreeFail = () => {
-    setElements([{ icon: <CloudOffOutlinedIcon />, text: 'Document failed' }])
-    setRequestAttention(true)
+    setElements([{ key: 'document', icon: <CloudOffOutlinedIcon />, text: 'Document failed' }])
+    setHighlight(true)
   }
 
-  const handleReady = () => {
-    setElements([{ icon: <CloudOutlinedIcon />, text: 'Document ready' }])
-    setRequestAttention(false)
-  }
 
   return <>
     <MupStatus
       id='statusSaveDoc'
-      requestAttention={requestAttention}
-      onClick={handleClickOpen}
+      highlight={highlight}
+      onClick={() => setOpen(true)}
       tooltip="Save Document?"
-      elements={elements}
-    />
+    >
+      {elements.map(({ key, text, icon }) => <MupStatusChild {...{ key, text, icon}} />)}
+    </MupStatus>
 
     <Dialog
       open={open}

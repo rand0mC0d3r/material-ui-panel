@@ -24,7 +24,7 @@ function App() {
     }
   }), [darkMode])
 
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleDarkMode = () => setDarkMode(darkMode);
   const toggleDebugMode = () => setDebugMode(!debugMode);
   const toggleUpperBar = () => setUpperBar(!upperBar);
   const toggleHelp = () => setHelp(!help);
