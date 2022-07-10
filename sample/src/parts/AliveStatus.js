@@ -18,10 +18,9 @@ export default () => {
   return () => clearInterval(interval);
 }, []);
 
-  return <MupStatus
+  return <MupStatus {...{ highlight }}
     style={{ minWidth: '100px' }}
     id='statusAlive'
-    highlight={highlight}
     tooltip="Dynamic Online status"
   >
     <MupStatusChild icon={speed > 30 ? <WifiIcon /> : <WifiOffIcon />} text={`${speed} KB/s`} />
