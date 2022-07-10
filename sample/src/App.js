@@ -6,7 +6,7 @@ import ImplementationFrame from './parts/ImplementationFrame';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
-  const [upperBar, setUpperBar] = useState(false);
+  const [upperBar, setUpperBar] = useState(true);
   const [help, setHelp] = useState(false);
   const [collapseMode, setCollapseMode] = useState(true);
   const [inverseMarkers, setInverseMarkers] = useState(false);

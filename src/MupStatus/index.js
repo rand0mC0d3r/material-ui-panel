@@ -52,7 +52,6 @@ const useStyles = makeStyles(theme => ({
 
 const MupStatus = ({
   id,
-  asMenu,
   secondary,
   style,
   focusOnClick,
@@ -110,6 +109,23 @@ const MupStatus = ({
     }
   }, [status, id, statusObject])
 
+  const generateClasses = () => {
+    return clsx([
+      classes.default,
+
+      highlight !== 'default' && classes.hightlight,
+      highlight === 'primary' && classes.hightlightPrimary,
+
+      (onClick || focusOnClick) && [
+        classes.interactive,
+        highlight === 'default' && classes.actionNormal,
+        highlight !== 'default' && classes.actionHighlight,
+        highlight === 'primary' && classes.actionHighlightPrimary,
+        highlight === 'secondary' && classes.actionHighlightSecondary
+      ],
+    ])
+  }
+
   return (statusObject !== null && !!id && elementFound)
     ? createPortal(
       <>
@@ -125,9 +141,7 @@ const MupStatus = ({
             key={`MupStatus_${id}_wrapper`}
             onClick={(e) => focusOnClick
             ? handleSetVisible({ uniqueId: focusOnClick })
-            : asMenu
-              ? setAnchorEl(e.currentTarget)
-              : onClick
+            : onClick
                 ? callbackOnClick(e)
                 : null
             }
@@ -140,27 +154,18 @@ const MupStatus = ({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            className={clsx([
-              classes.default,
-              highlight !== 'default' && classes.hightlight,
-              highlight === 'primary' && classes.hightlightPrimary,
-              onClick && highlight !== 'default' && classes.actionHighlight,
-              onClick && highlight === 'primary' && classes.actionHighlightPrimary,
-              onClick && highlight === 'secondary' && classes.actionHighlightSecondary,
-              onClick && classes.interactive,
-              onClick && highlight === 'default' && classes.actionNormal,
-            ])}
+            className={generateClasses()}
             style={{ ...style }}
           >
             {children}
           </Box>
         </Tooltip>
-        {asMenu && <Popover {...{ open, anchorEl, onClose }}
+        {/* {asMenu && <Popover {...{ open, anchorEl, onClose }}
           anchorOrigin={{ vertical: settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
           transformOrigin={{ vertical: !settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
         >
           {asMenu}
-        </Popover>}
+        </Popover>} */}
       </>,
       elementFound)
   : null

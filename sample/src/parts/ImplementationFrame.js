@@ -18,6 +18,7 @@ import { MuiPanelProvider } from './../components/MuiPanelStore';
 import ActButton from './ActButton';
 import AliveStatus from './AliveStatus';
 import AnotherIframePanel from './AnotherIframePanel';
+import AvatarStatus from './AvatarStatus';
 import CastStatus from './CastStatus';
 import ComplexPanel from './ComplexPanel';
 import ConfigStatus from './ConfigStatus';
@@ -86,7 +87,7 @@ function ImplementationFrame({
         <ActButton /> */}
 
         {/* status section  */}
-        <MupStatus tooltip="Image with no text" onClick={refreshPage} id='fooImageStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true }]}/>
+        <AvatarStatus />
         <MenuStatus />
         <ConfigStatus />
         <GalleryStatus />
