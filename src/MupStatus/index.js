@@ -1,5 +1,6 @@
 import { Box, Popover, Tooltip } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -7,15 +8,35 @@ import DataProvider from '../MuiPanelStore'
 
 const useStyles = makeStyles(theme => ({
   default: {
+    WebkitFontSmoothing: 'auto',
     height: '100%',
-    padding: '0px 4px',
+    padding: '0px 8px',
     display: 'flex',
     alignItems: 'center',
+    gap: '16px',
     alignSelf: 'stretch'
+  },
+  interactive: {
+    cursor: 'pointer',
+  },
+  interactiveHighlight: {
+    '& > div > *': {
+      color: `${theme.palette.background.default } !important`
+    }
   },
   root: {
     '&:hover': {
       backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.divider }).light} !important`
+    }
+  },
+  rootHightlight: {
+    backgroundColor: theme.palette.secondary.main,
+    '&:hover': {
+      backgroundColor: `${theme.palette.augmentColor({ main: theme.palette.secondary.main }).dark} !important`,
+      color: `${theme.palette.background.default } !important`
+    },
+    '& > div > *': {
+      color: `${theme.palette.background.default } !important`
     }
   },
 }))
@@ -26,9 +47,8 @@ const MupStatus = ({
   secondary,
   style,
   focusOnClick,
-  onClick,
+  onClick = false,
   onContextMenu,
-  requestAttention,
   highlight,
   tooltip,
   elements,
@@ -111,32 +131,13 @@ const MupStatus = ({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            className={`${classes.default} ${(focusOnClick || onClick || asMenu)
-            ? classes.root
-            : ''}`}
-            style={{
-              ...style,
-              gap: '16px',
-              cursor: (focusOnClick || !!onClick || asMenu) ? 'pointer' : 'initial',
-              backgroundColor: (requestAttention || highlight) ? theme.palette.secondary.main : 'transparent',
-            }}
+            className={clsx([
+              classes.default,
+              onClick && (highlight ? classes.interactiveHighlight : classes.interactive),
+              highlight ? classes.rootHightlight : (onClick && classes.root),
+            ])}
+            style={{ ...style }}
           >
-            {/* {elements.map(element => <Box display="flex" alignItems="center"
-              key={`MupStatus_${element.text}_container`}
-              style={{ gap: '6px' }}>
-              {element.node && <>{element.node}</>}
-              {element.icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{element.icon}</SvgIcon>}
-              {element.image && <img
-                alt="injected element"
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: element.mask ? '50%' : '0px',
-                }} src={element.image} />}
-              {element.text && <Typography variant="subtitle2" color="textPrimary" style={{ lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}>
-                {element.text}
-              </Typography>}
-            </Box>)} */}
             {children}
           </Box>
         </Tooltip>

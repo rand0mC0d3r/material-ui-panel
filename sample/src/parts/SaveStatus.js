@@ -9,7 +9,7 @@ import MupStatusChild from '../components/MupStatusChild';
 const SaveStatus = () => {
   const [open, setOpen] = useState(false);
   const [elements, setElements] = useState([{ key: 'document', icon: <CloudOutlinedIcon />, text: 'Document ready' }]);
-  const [highlight, setHighlight] = useState(false);
+  const [highlight, setHighlight] = useState(true);
 
   const handleClose = () => { setOpen(false);};
 
