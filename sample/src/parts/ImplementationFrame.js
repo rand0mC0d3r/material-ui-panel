@@ -18,6 +18,7 @@ import { MuiPanelProvider } from './../components/MuiPanelStore';
 import ActButton from './ActButton';
 import AliveStatus from './AliveStatus';
 import AnotherIframePanel from './AnotherIframePanel';
+import AvatarsStatuses from './AvatarsStatuses';
 import AvatarStatus from './AvatarStatus';
 import CastStatus from './CastStatus';
 import ComplexPanel from './ComplexPanel';
@@ -90,10 +91,11 @@ function ImplementationFrame({
         <AvatarStatus />
         <MenuStatus />
         <ConfigStatus />
+        <AvatarsStatuses />
         <GalleryStatus />
 
         <SaveStatus />
-        <DynamicStatus />
+        {/* <DynamicStatus /> */}
 
         <CastStatus />
 

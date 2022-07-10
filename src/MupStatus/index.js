@@ -54,6 +54,7 @@ const MupStatus = ({
   id,
   secondary,
   style,
+  hasToggled,
   focusOnClick,
   onClick = false,
   onContextMenu,
@@ -65,16 +66,18 @@ const MupStatus = ({
   const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
   const [elementFound, setElementFound] = useState(null)
-  const [anchorEl, setAnchorEl] = useState(null)
   const theme = useTheme()
   const classes = useStyles(theme)
-  const open = Boolean(anchorEl)
-
-  const onClose = () => setAnchorEl(null)
 
   const callbackOnClick = useCallback((e) => {
     onClick(e)
   }, [onClick])
+
+  useEffect(() => {
+    if (hasToggled) {
+      hasToggled(settings.upperBar)
+    }
+  }, [settings.upperBar])
 
   useEffect(() => {
     const elementSearched = document.getElementById(`material-ui-panel-statusBar-${secondary ? 'secondary' : 'primary'}`)
@@ -160,12 +163,6 @@ const MupStatus = ({
             {children}
           </Box>
         </Tooltip>
-        {/* {asMenu && <Popover {...{ open, anchorEl, onClose }}
-          anchorOrigin={{ vertical: settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
-          transformOrigin={{ vertical: !settings.upperBar ? 'bottom' : 'top', horizontal: 'left' }}
-        >
-          {asMenu}
-        </Popover>} */}
       </>,
       elementFound)
   : null

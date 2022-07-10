@@ -8,12 +8,14 @@ import MupStatusChild from '../components/MupStatusChild';
 
 export default () => {
   const [anchorEl, setAnchorEl] = useState(null)
+  const [isToggled, setIsToggled] = useState(false)
   const open = Boolean(anchorEl)
 
   const onClose = () => setAnchorEl(null)
 
   return <>
     <MupStatus
+      hasToggled={() => { setIsToggled(!isToggled) }}
       onClick={e => setAnchorEl(e.currentTarget)}
       id='statusPopoverMenu'
       tooltip="Popover Menu external ..."
@@ -22,8 +24,8 @@ export default () => {
     </MupStatus>
 
     <Popover {...{ open, anchorEl, onClose }}
-      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-      transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      anchorOrigin={{ vertical: isToggled ? 'top' : 'bottom', horizontal: 'left' }}
+      transformOrigin={{ vertical: isToggled ? 'bottom' : 'top', horizontal: 'left' }}
     >
       <div style={{ width: '350px', padding: '16px', margin: '16px' }}>
         Lorem ipsum dolor sit amet,
