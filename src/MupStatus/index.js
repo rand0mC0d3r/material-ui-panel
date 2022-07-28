@@ -1,4 +1,3 @@
-import { Box, Tooltip } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
@@ -14,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     gap: '16px',
+    justifyContent: 'center',
     alignSelf: 'stretch'
   },
   interactive: {
@@ -62,7 +62,7 @@ const MupStatus = ({
   tooltip,
   children
 }) => {
-  const { status, settings, handleSetVisible, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
+  const { status, settings, handleSetVisible, tooltipComponent, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
   const [elementFound, setElementFound] = useState(null)
   const theme = useTheme()
@@ -86,7 +86,6 @@ const MupStatus = ({
   }, [secondary, statusObject])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    console.log(tooltip)
     handleStatusAnnouncement({ id, secondary, tooltip })
   }, [secondary, tooltip, handleStatusAnnouncement])
 
@@ -129,34 +128,26 @@ const MupStatus = ({
     ])
   }
 
-  return <>{(statusObject !== null && !!id && elementFound) && createPortal(
-    <Tooltip
-      title={tooltip}
-      disableFocusListener={tooltip === ''}
-      disableHoverListener={tooltip === ''}
-      disableTouchListener={tooltip === ''}
-      arrow
-    >
-      <Box
-        id={id}
-        key={`MupStatus_${id}_wrapper`}
-        onClick={(e) => focusOnClick
+  const generateComponent = () => {
+    return <div
+      id={id}
+      key={`MupStatus_${id}_wrapper`}
+      onClick={(e) => focusOnClick
           ? handleSetVisible({ uniqueId: focusOnClick })
           : onClick ? callbackOnClick(e) : null}
-        onContextMenu={(e) => settings.allowRightClick
+      onContextMenu={(e) => settings.allowRightClick
           ? onContextMenu ? onContextMenu(e) : null
-          : e.preventDefault()}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        className={generateClasses()}
-        style={{ ...style }}
-      >
-        {children}
-      </Box>
-    </Tooltip>,
-    elementFound)
-  }</>
+        : e.preventDefault()}
+      className={generateClasses()}
+      style={{ ...style }}
+    >
+      {tooltipComponent !== undefined
+        ? <>{tooltipComponent(tooltip, <span>{children}</span>)}</>
+        : children}
+    </div>
+  }
+
+  return <>{(statusObject !== null && !!id && elementFound) && createPortal(generateComponent(), elementFound)}</>
 }
 
 MupStatus.defaultProps = {

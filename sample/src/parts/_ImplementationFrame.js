@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Box } from '@material-ui/core'
+import { Box, Tooltip } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 import { AmpStories } from '@material-ui/icons'
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
@@ -50,6 +50,7 @@ function ImplementationFrame({
   return <MuiPanelProvider
     showSplitterButton={false}
     initialSide='left'
+    tooltipComponent={(tooltip, component) => <Tooltip title={tooltip}>{component}</Tooltip>}
     {...{ debugMode, markerColor, inverseMarkers, upperBar }}
     showCollapseButton={collapseMode}>
 

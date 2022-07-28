@@ -19,6 +19,7 @@ function MuiPanelProvider({
   inverseMarkers,
   debugMode,
   upperBar,
+  tooltipComponent,
   showCollapseButton,
   showSplitterButton,
   ...props }) {
@@ -517,6 +518,7 @@ function MuiPanelProvider({
       sections, setSections,
       status,
 
+      tooltipComponent,
 
       showContent,
       addZoneToSection, removeZoneFromSection,
