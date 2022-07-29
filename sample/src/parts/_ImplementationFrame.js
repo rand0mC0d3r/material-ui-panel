@@ -145,7 +145,11 @@ function ImplementationFrame({
       <Skeleton variant="rect" width={'100%'} height={300} />
     </MupPanel>
 
-    <MuiStatusBar style={{ height: '32px' }}/>
+    <MuiStatusBar style={{
+      // height: '32px',
+      // backgroundColor: '#41a0ff42',
+      // borderTop: '3px solid #41a0ff',
+    }}/>
 
     <MupContent>
       {/* <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
@@ -155,7 +159,7 @@ function ImplementationFrame({
         title="Random Wiki article"
         style={{
           width: '100%',
-          filter: 'opacity(0.75) grayscale(0.5)',
+          // filter: 'opacity(0.75) grayscale(0.5)',
           backgroundColor: '#FFF',
           height: '100%',
           border: '0px none'

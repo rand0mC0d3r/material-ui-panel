@@ -6,7 +6,7 @@ export default () => {
   const theme = useTheme()
 
   return <MupStatus {...{ id: 'avatarStatus' }}
-    style={{ borderRight: `1px solid ${theme.palette.divider}`, minWidth: '40px' }}
+    style={{ borderRight: `1px solid ${theme.palette.divider}`, minWidth: '48px' }}
   >
     <MupStatusChild mask image='https://picsum.photos/32/32' />
   </MupStatus>
