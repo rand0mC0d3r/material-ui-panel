@@ -75,7 +75,7 @@ function MuiPanelProvider({
     setStatus(status => [...status.filter(lo => lo.uniqueId !== id)])
   }
 
-  const handlePanelAnnouncement = ({ id, ref, disabled, children, handleOnClick, placement, notifications,
+  const handlePanelAnnouncement = ({ id, ref, extraButtons, disabled, children, handleOnClick, placement, notifications,
     subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
     setLayout(layout => [
       ...layout.filter(lo => lo.uniqueId !== id),
@@ -83,6 +83,7 @@ function MuiPanelProvider({
         uniqueId: id,
         asContent: false,
         asGroup: false,
+        extraButtons,
         handleOnClick,
         notifications: {
           count: 0,
@@ -495,7 +496,7 @@ function MuiPanelProvider({
   useEffect(() => {
     localStorage.setItem(
       localStorageKey,
-      JSON.stringify(layout.map(l => ({ ...l, children: undefined, icon: undefined }))    )
+      JSON.stringify(layout.map(l => ({ ...l, children: undefined, extraButtons: undefined, icon: undefined }))    )
     )
   }, [layout])
 

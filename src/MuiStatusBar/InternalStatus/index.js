@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
     gap: '4px',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '28px',
     backgroundColor: theme.palette.type === 'light'
       ? theme.palette.augmentColor({ main: theme.palette.divider }).dark
       : theme.palette.background.paper,

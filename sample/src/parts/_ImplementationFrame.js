@@ -50,11 +50,10 @@ function ImplementationFrame({
   return <MuiPanelProvider
     showSplitterButton={false}
     initialSide='left'
-    tooltipComponent={(tooltip, component) => <Tooltip title={tooltip}>{component}</Tooltip>}
+    tooltipComponent={(tooltip, component) => <Tooltip arrow title={tooltip}>{component}</Tooltip>}
     {...{ debugMode, markerColor, inverseMarkers, upperBar }}
     showCollapseButton={collapseMode}>
 
-    {/* status section */}
     <ToggleTheme {...{
       toggleUpperBar, upperBar,
       toggleDebugMode, debugMode,
@@ -146,9 +145,12 @@ function ImplementationFrame({
       <Skeleton variant="rect" width={'100%'} height={300} />
     </MupPanel>
 
-    <MuiStatusBar style={{ padding: '0px' }}/>
+    <MuiStatusBar style={{ height: '32px' }}/>
 
     <MupContent>
+      {/* <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <AspectRatioIcon style={{ fontSize: 40 }} color="action" />
+      </div> */}
       <iframe
         title="Random Wiki article"
         style={{
@@ -158,7 +160,7 @@ function ImplementationFrame({
           height: '100%',
           border: '0px none'
         }}
-        src={wikiUrl}
+        src={window.location.search.split('url=')[1] || wikiUrl}
       />
     </MupContent>
 

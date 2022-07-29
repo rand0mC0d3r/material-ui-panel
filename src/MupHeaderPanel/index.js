@@ -13,9 +13,17 @@ const fontSize = 20
 const useStyles = makeStyles(theme => ({
   collapseButton: {
     padding: '0px',
-    width: theme.spacing(2.5),
-    minWidth: theme.spacing(2.5),
-    lineHeight: '0px'
+    width: theme.spacing(3),
+    minWidth: theme.spacing(3),
+    lineHeight: '0px',
+    // border: '1px solid red'
+  },
+  defaultFunctions: {
+    border: `1px dotted ${theme.palette.divider}`,
+    borderRadius: '4px',
+    display: 'flex',
+    gap: theme.spacing(0.5),
+    padding: '0px',
   },
   header: {
     cursor: 'default',
@@ -32,15 +40,21 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MupHeaderPanel = withTheme(({
-  layoutObject: { uniqueId, side, iconInHeader, icon, asEmbedded, isCollapsed, title, subTitle, asGroup },
+  layoutObject: { uniqueId, side, iconInHeader, icon, extraButtons, asEmbedded, isCollapsed, title, subTitle, asGroup },
   layoutObject,
   theme,
 }) => {
   const classes = useStyles(theme)
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const { handleToggleCollapse } = useContext(DataProvider)
+  const { handleToggleCollapse, tooltipComponent } = useContext(DataProvider)
 
   const handleClick = (event) => { setAnchorEl(event.currentTarget) }
+
+  const wrapOrNotInTooltip = (tooltip, extras = {},  node) => {
+    return tooltipComponent && tooltip
+      ? <>{tooltipComponent(tooltip, cloneElement(node, extras))}</>
+      : cloneElement(node, extras)
+  }
 
   return <Box
     justifyContent="space-between"
@@ -91,31 +105,54 @@ const MupHeaderPanel = withTheme(({
       display="flex"
       alignItems="center"
       style={{
-        gap: theme.spacing(2),
+        gap: theme.spacing(1),
         height: '32px'
       }}
     >
-      {asGroup && <Tooltip arrow title="As group..." placement='bottom'>
-        <AmpStoriesIcon
-          style={{
-            fontSize: '16px',
-            color: theme.palette.background.default,
-            transform: 'rotateZ(90deg)',
-            background: theme.palette.divider,
-            borderRadius: '4px',
-            padding: '4px 2px',
-          }}
-        />
-      </Tooltip>}
-      <Tooltip title="More options for the panel" arrow>
-        <Button
-          className={classes.collapseButton}
-          size="small"
-          onClick={(e) => { e.preventDefault(); handleClick(e) }}
-        >
-          <MoreHorizIcon color="action" />
-        </Button>
-      </Tooltip>
+      {extraButtons && <>
+        {extraButtons.map(extraButton => <div
+          key={extraButton.key}
+          onClick={() => extraButton.onClick && extraButton.onClick()}
+          key={extraButton.key}>
+          {extraButton.node && <>
+            {wrapOrNotInTooltip(extraButton.tooltip, {}, extraButton.node)}
+          </>}
+          {extraButton.icon && <>
+            <Button
+              className={classes.collapseButton}
+              size="small">
+              {wrapOrNotInTooltip(extraButton.tooltip,
+                { color: 'action' },
+                extraButton.icon
+              )}
+            </Button>
+          </>}
+        </div>)}
+      </>}
+      <div className={classes.defaultFunctions}>
+        {asGroup && <Tooltip arrow title="As group..." placement='bottom'>
+          <AmpStoriesIcon
+            style={{
+              fontSize: '16px',
+              color: theme.palette.background.default,
+              transform: 'rotateZ(90deg)',
+              background: theme.palette.divider,
+              borderRadius: '4px',
+              padding: '4px 2px',
+              margin: '0px 4px',
+            }}
+          />
+        </Tooltip>}
+        <Tooltip title="More options for the panel" arrow>
+          <Button
+            className={classes.collapseButton}
+            size="small"
+            onClick={(e) => { e.preventDefault(); handleClick(e) }}
+          >
+            <MoreHorizIcon color="action" />
+          </Button>
+        </Tooltip>
+      </div>
     </Box>
   </Box>
 })

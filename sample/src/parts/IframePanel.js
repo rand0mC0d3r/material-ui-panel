@@ -17,7 +17,7 @@ const IframePanel = () => {
         height: '100%',
         border: '0px none'
       }}
-      src="https://meet.google.com/"
+      src="https://v4.mui.com/components/material-icons/#material-icons"
       allow="camera;microphone"
     />
   </MupPanel>

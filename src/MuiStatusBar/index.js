@@ -13,6 +13,6 @@ export default ({ style, className }) => {
   }, [])
 
   return documentElement
-    ? createPortal(<InternalStatus {...{ style, className }} />, documentElement)
+    ? createPortal(<InternalStatus {...{ style: { ...style, padding: '0px', margin: '0px' }, className }} />, documentElement)
     : null
 }

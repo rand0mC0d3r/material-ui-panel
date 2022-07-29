@@ -1,24 +1,40 @@
+import { Chip } from '@material-ui/core'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
+import CachedIcon from '@material-ui/icons/Cached'
 import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import MupPanel from '../components/MupPanel'
 
 const IframePanel = () => {
-  const [url, setUrl] = useState('https://material-ui.com/components/material-icons/')
+  const [url, setUrl] = useState('https://en.wikipedia.org/wiki/Special:Random')
+  const [timestamp, setTimestamp] = useState(0)
 
-  const handleChange = (event) => {
-    setUrl(event.target.value)
-  }
+  const callbackSetTimestamp = useCallback(() => {
+    setTimestamp(new Date().getTime())
+  }, [])
 
   return <MupPanel
     noPadding
+    extraButtons={[
+      {
+        key: 'play',
+        icon: <CachedIcon />,
+        onClick: () => callbackSetTimestamp(),
+        tooltip: 'Reload URL'
+      },
+      {
+        key: 'preview',
+        node: <Chip label="Preview" color="primary" size="small" />,
+        tooltip: 'Preview Panel'
+      },
+    ]}
     id="anotherIframePanel"
     title="AnotherIframePanel"
     subTitle="Sample sub-title text"
     icon={<LanguageOutlinedIcon />}
   >
-    <OutlinedInput fullWidth value={url} onChange={handleChange} />
-
+    <OutlinedInput style={{ borderRadius: '0px' }} fullWidth value={url}
+      onChange={event => setUrl(event.target.value)} />
     <iframe
       title="Random Wiki article"
       style={{
@@ -27,7 +43,7 @@ const IframePanel = () => {
         height: '95%',
         border: '0px none'
       }}
-      src={url}
+      src={`${url}${timestamp ? `#timestamp=${timestamp}` : ''}`}
     />
   </MupPanel>
 }

@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   default: {
     WebkitFontSmoothing: 'auto',
     height: '100%',
-    padding: '0px 8px',
+    padding: '0px 4px',
     display: 'flex',
     alignItems: 'center',
     gap: '16px',

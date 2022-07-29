@@ -5,7 +5,11 @@ import { createPortal } from 'react-dom'
 import DataProvider from '../MuiPanelStore'
 import MupHeaderPanel from '../MupHeaderPanel'
 
-const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledged, notifications, disabled, iconInHeader, noPadding, children }) => {
+const MupPanel = ({
+  id, title, hint, tooltip, icon, placement,
+  alertsAcknowledged, notifications,
+  extraButtons,
+  disabled, iconInHeader, noPadding, children }) => {
   const { layout, handlePanelAlerts, handlePanelAnnouncement } = useContext(DataProvider)
   const [side, setSide] = useState('left')
   const [isRegistered, setIsRegistered] = useState(false)
@@ -16,11 +20,11 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
       console.error('MupPanel: missing attr:id for panel with title+hint:', title, hint)
     } else {
       if (!isRegistered) {
-        handlePanelAnnouncement({ iconInHeader, placement, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
+        handlePanelAnnouncement({ iconInHeader, placement, extraButtons, disabled, id, subTitle: hint, side, title, tooltip, icon: icon || <TextureIcon /> })
         setIsRegistered(true)
       }
     }
-  }, [id, isRegistered, side, handlePanelAnnouncement, iconInHeader, placement, disabled, title, hint, tooltip, icon])
+  }, [id, isRegistered, side, handlePanelAnnouncement, extraButtons, iconInHeader, placement, disabled, title, hint, tooltip, icon])
 
   useEffect(() => {
     const findObject = layout.find(lo => lo.uniqueId === id)
@@ -51,7 +55,7 @@ const MupPanel = ({ id, title, hint, tooltip, icon, placement, alertsAcknowledge
     !!id ? createPortal(
       <div style={{
         order: layoutObject.parentId ? '' : '-1',
-        flex: !layoutObject.parentId ? `${layoutObject.isCollapsed ? '0' : '1'} 1 auto` : '0 0 auto',
+        flex: !layoutObject.parentId ? `${layoutObject.isCollapsed ? '0' : '1'} 1 auto` : '1 0 auto',
         display: 'flex',
         height: (layoutObject.parentId || layoutObject.isCollapsed) ? 'unset' :'100%',
         flexDirection: 'column'

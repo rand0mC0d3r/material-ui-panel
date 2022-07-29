@@ -72,7 +72,7 @@ const MupMenuOptions = ({ lo, anchorEl, setAnchorEl, side, underMenu }) => {
         {!lo.asEmbedded && !lo.asGroup && <Select fullWidth
           disabled={lo.asGroup || !layout.some(lo => lo.asGroup)}
           onChange={(event) => { handleSetAsEmbedded({ uniqueId: lo.uniqueId, parentId: event.target.value }) }}>
-          {layout.filter(lo => lo.asGroup).map(lo => <MenuItem value={lo.uniqueId}>
+          {layout.filter(lo => lo.asGroup).map(lo => <MenuItem key={lo.uniqueId} value={lo.uniqueId}>
             <Box display="flex"
               alignItems="center"
               style={{ gap: theme.spacing(14), alignItems: 'center' }}>

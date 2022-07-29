@@ -255,7 +255,7 @@ const MuiPanelManager = ({
                     ? leftPanelWidth
                     : rightPanelWidth)
                   : 'unset'),
-              height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? 'unset' : '100%'
+              height: layout.filter(l => l.side === side && l.isVisible).length > 1 ? '100%' : '100%'
             }}
           />
         </div>)}
@@ -272,7 +272,7 @@ const MuiPanelManager = ({
                 ? classes.menuCollapsed
                 : classes.menuOpen}`}
               >
-                {showCollapseButton && <MupMenuCollapseButton {...{ side }} />}
+                {/* {showCollapseButton && <MupMenuCollapseButton {...{ side }} />} */}
                 <div className={`${classes.scrollSide}`}>
                   {!settings.isCollapsed && <>
                     {layout
