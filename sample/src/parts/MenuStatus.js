@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { MenuItem, MenuList, Popover } from '@material-ui/core'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import { useState } from 'react'
 import MupStatus from '../components/MupStatus'
 import MupStatusChild from '../components/MupStatusChild'
+import MupStatusPanel from '../components/MupStatusPanel'
 
 export default () => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -12,7 +14,7 @@ export default () => {
   const onClose = () => setAnchorEl(null)
 
   return <>
-    <MupStatus
+    {/* <MupStatus
       hasToggled={() => { setIsToggled(!isToggled) }}
       id='statusSampleMenu'
       onClick={e => setAnchorEl(e.currentTarget)}
@@ -30,6 +32,21 @@ export default () => {
         <MenuItem onClick={() => { }}>My account</MenuItem>
         <MenuItem onClick={() => { }}>Logout</MenuItem>
       </MenuList>
-    </Popover>
+    </Popover> */}
+
+    <MupStatusPanel
+
+
+      id='statusSampleMenu'
+      onClick={e => setAnchorEl(e.currentTarget)}
+      tooltip="Open Sample menu..."
+      popover={<MenuList id="menu-list-grow" onKeyDown={() => { }}>
+        <MenuItem onClick={() => { }}>Profile</MenuItem>
+        <MenuItem onClick={() => { }}>My account</MenuItem>
+        <MenuItem onClick={() => { }}>Logout</MenuItem>
+      </MenuList>}
+    >
+      <MupStatusChild icon={<ListAltIcon />} text="Menu" />
+    </MupStatusPanel>
   </>
 }

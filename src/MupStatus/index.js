@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     gap: '16px',
     justifyContent: 'center',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    position: 'relative',
   },
   interactive: {
     cursor: 'pointer',
