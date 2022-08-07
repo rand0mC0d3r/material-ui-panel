@@ -1,5 +1,24 @@
 import { Box, SvgIcon, Typography } from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  box: {
+    gap: '4px',
+    color: theme.palette.action,
+  },
+  svg: {
+    fontSize: 20
+  },
+  typography: {
+    lineHeight: '0px',
+    whiteSpace: 'nowrap',
+    userSelect: 'none'
+  },
+  image: {
+    width: '20px',
+    height: '20px',
+  }
+}))
 
 const MupStatusChild = ({
   icon,
@@ -9,31 +28,25 @@ const MupStatusChild = ({
   mask,
 }) => {
   const theme = useTheme()
+  const classes = useStyles(theme)
 
-  return <Box
-    display="flex"
-    alignItems="center"
-    flexWrap="nowrap"
-    style={{ gap: '4px', color: theme.palette.action }}
-  >
-
-    {icon && <SvgIcon style={{ fontSize: 20 }} color='action'>{icon}</SvgIcon>}
-
+  return <Box display="flex" alignItems="center" flexWrap="nowrap"
+    className={classes.box}>
+    {icon && <SvgIcon className={classes.svg} color='action'>{icon}</SvgIcon>}
     {text && <Typography
       variant="subtitle2"
       color="textPrimary"
-      style={{ ...textStyle, lineHeight: '0px', whiteSpace: 'nowrap', userSelect: 'none' }}
+      className={classes.typography}
+      style={{ ...textStyle }}
     >
       {text}
     </Typography>}
 
     {image && <img
       alt="injected element"
-      style={{
-        width: '20px',
-        height: '20px',
-        borderRadius: mask ? '50%' : '0px',
-      }} src={image} />}
+      className={classes.image}
+      style={{ borderRadius: mask ? '50%' : '0px' }}
+      src={image} />}
   </Box>
 }
 
