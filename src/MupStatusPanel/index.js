@@ -31,7 +31,7 @@ const MupStatusPanel = ({
     <MupStatus {...{ id, tooltip, secondary }}
       onClick={e => setAnchorEl(e.currentTarget)}
       hasToggled={() => { setIsToggled(!isToggled) }}
-      style={{ ...style, minWidth: '32px' }}
+      style={{ ...style, minWidth: '24px' }}
     >
       {children}
     </MupStatus>

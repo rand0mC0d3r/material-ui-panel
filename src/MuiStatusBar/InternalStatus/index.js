@@ -63,10 +63,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     scrollSnapType: 'both mandatory',
 
-    gap: '0px 8px',
+    gap: '4px',
     flex: '1 1 auto',
     width: '0px',
-    minWidth: '100px',
+    minWidth: '80px',
 
     '&::-webkit-scrollbar': {
       display: 'none'

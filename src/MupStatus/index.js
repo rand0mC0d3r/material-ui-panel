@@ -130,7 +130,7 @@ const MupStatus = ({
     ])
   }
 
-  const generateComponent = () => {
+  const generateComponent = (statusObject) => {
     return <>
       <div
         id={id}
@@ -142,7 +142,7 @@ const MupStatus = ({
           ? onContextMenu ? onContextMenu(e) : null
         : e.preventDefault()}
         className={generateClasses()}
-        style={{ ...style }}
+        style={{ ...style, order: statusObject.index }}
       >
         {tooltipComponent !== undefined
         ? <>{tooltipComponent(tooltip, <span>{children}</span>)}</>
@@ -152,7 +152,7 @@ const MupStatus = ({
   }
 
   return <>{(statusObject !== null && !!id && elementFound) && <>
-    {createPortal(statusObject.visible ? generateComponent() : <></>, elementFound)}
+    {createPortal(statusObject.visible ? generateComponent(statusObject) : <></>, elementFound)}
   </>}</>
 }
 
