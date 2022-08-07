@@ -108,3 +108,4 @@ sample/src/components
 sample/build
 
 /build
+.npmrc
