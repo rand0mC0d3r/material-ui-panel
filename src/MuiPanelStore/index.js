@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { createContext, useEffect, useState } from 'react'
 import MuiPanelManager from '../MuiPanelManager'
 import { oppositeSide } from '../utils'
@@ -59,16 +60,22 @@ function MuiPanelProvider({
   // }, [])
 
 
-  const handleStatusAnnouncement = ({ id, secondary, tooltip }) => {
+  const handleStatusAnnouncement = ({ id, secondary, tooltip, children }) => {
     setStatus(status => [
       ...status.filter(lo => lo.uniqueId !== id),
       {
         uniqueId: id,
+        visible: true,
         secondary,
+        children,
         tooltip,
         type: 'user'
       }
     ])
+  }
+
+  const handleStatusVisibilityToggle = ({ id }) => {
+    setStatus(status => status.map(lo => (lo.uniqueId === id ? { ...lo, visible: !lo.visible } : lo )))
   }
 
   const handleStatusDestroy = ({ id }) => {
@@ -136,8 +143,8 @@ function MuiPanelProvider({
 
   const updateParentSummary = (layout) => {
     return layout.map(layoutObject =>
-			(layoutObject.parentId === null)
-				? {
+      (layoutObject.parentId === null)
+        ? {
 				  ...layoutObject,
 				  notifications: {
 				    ...layoutObject.notifications,
@@ -149,7 +156,7 @@ function MuiPanelProvider({
 				      return acc
 				    }, 0) + layoutObject.notifications.count,
 				  }
-				}
+        }
 				: layoutObject
     )
   }
@@ -527,6 +534,7 @@ function MuiPanelProvider({
       splitContent,
       splitContentNg,
 
+      handleStatusVisibilityToggle,
       toggleSectionDirection,
       chooseTypeForSection,
       setSectionUrl,

@@ -21,6 +21,7 @@ const popover = <div style={{ width: '350px', padding: '16px', margin: '16px' }}
 
 export default () => <MupStatusPanel
   id='statusPopoverMenu'
+  secondary
   tooltip="Popover Menu external ..."
   popover={popover}
 >

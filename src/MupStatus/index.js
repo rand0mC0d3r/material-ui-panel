@@ -87,8 +87,8 @@ const MupStatus = ({
   }, [secondary, statusObject])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    handleStatusAnnouncement({ id, secondary, tooltip })
-  }, [secondary, tooltip, handleStatusAnnouncement])
+    handleStatusAnnouncement({ id, secondary, tooltip, children })
+  }, [secondary, children, tooltip, handleStatusAnnouncement])
 
   const callbackHandleStatusDestroy = useCallback(() => {
     handleStatusDestroy({ id })
@@ -107,8 +107,9 @@ const MupStatus = ({
   }, [id, statusObject, status, callbackHandleStatusAnnouncement])
 
   useEffect(() => {
-    if (statusObject === null && status.some(item => item.uniqueId === id)) {
-      setStatusObject(status.find(item => item.uniqueId === id).uniqueId)
+    const foundObject = status.find(item => item.uniqueId === id)
+    if ((statusObject === null || statusObject?.visible !== foundObject?.visible ) && foundObject ) {
+      setStatusObject(foundObject)
     }
   }, [status, id, statusObject])
 
@@ -130,25 +131,29 @@ const MupStatus = ({
   }
 
   const generateComponent = () => {
-    return <div
-      id={id}
-      key={`MupStatus_${id}_wrapper`}
-      onClick={(e) => focusOnClick
+    return <>
+      <div
+        id={id}
+        key={`MupStatus_${id}_wrapper`}
+        onClick={(e) => focusOnClick
           ? handleSetVisible({ uniqueId: focusOnClick })
           : onClick ? callbackOnClick(e) : null}
-      onContextMenu={(e) => settings.allowRightClick
+        onContextMenu={(e) => settings.allowRightClick
           ? onContextMenu ? onContextMenu(e) : null
         : e.preventDefault()}
-      className={generateClasses()}
-      style={{ ...style }}
-    >
-      {tooltipComponent !== undefined
+        className={generateClasses()}
+        style={{ ...style }}
+      >
+        {tooltipComponent !== undefined
         ? <>{tooltipComponent(tooltip, <span>{children}</span>)}</>
         : children}
-    </div>
+      </div>
+    </>
   }
 
-  return <>{(statusObject !== null && !!id && elementFound) && createPortal(generateComponent(), elementFound)}</>
+  return <>{(statusObject !== null && !!id && elementFound) && <>
+    {createPortal(statusObject.visible ? generateComponent() : <></>, elementFound)}
+  </>}</>
 }
 
 MupStatus.defaultProps = {

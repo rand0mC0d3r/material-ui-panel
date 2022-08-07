@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   storeElement: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    gap: '8px',
     border: `1px solid ${theme.palette.divider}`,
     padding: '8px',
     color: theme.palette.text.secondary,
@@ -103,10 +107,9 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Layout') {
         return {
-          ...d, dataSource: layout.map(obj => <div className={classes.storeElement}><pre
-            key={`layout_${obj.uniqueId}`}
+          ...d, dataSource: layout.map(obj => <div key={`layout_${obj.uniqueId}`} className={classes.storeElement}><pre
             className={classes.dumpText}>
-            {JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)}
+            {/* {JSON.stringify({ ...obj, icon: null, ref: null, children: null }, null, 4)} */}
           </pre></div>)
         }
       }
@@ -135,11 +138,14 @@ const MupDebug = () => {
     setDumps(dumps => dumps.map(d => {
       if (d.title === 'Status') {
         return {
-          ...d, dataSource: status.map(obj => <div key={`settings_${obj.uniqueId}`} className={classes.storeElement}><pre
-            key={`settings_${obj.uniqueId}`}
-            className={classes.dumpText}>
-            {JSON.stringify({ ...obj }, null, 4)}
-          </pre></div>)
+          ...d, dataSource: status.map(obj => <div key={`settings_${obj.uniqueId}`} className={classes.storeElement}>
+            <pre
+              key={`settings_${obj.uniqueId}`}
+              className={classes.dumpText}>
+              {JSON.stringify({ ...obj, children: '-empty-' }, null, 4)}
+            </pre>
+            {obj.children}
+          </div>)
         }
       }
 
