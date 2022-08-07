@@ -24,7 +24,7 @@ export default () => {
 
   return <MupStatus {...{ highlight }}
     secondary
-    id='statusAlive'
+    id='statusAliveUpdating'
     tooltip={`Server connection bandwidth ${speed} KB/s`}
   >
     <MupStatusChild

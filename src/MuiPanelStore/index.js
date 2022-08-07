@@ -64,6 +64,7 @@ function MuiPanelProvider({
     setStatus(status => [
       ...status.filter(lo => lo.uniqueId !== id),
       {
+        index: status.length,
         uniqueId: id,
         visible: true,
         secondary,
