@@ -117,6 +117,7 @@ export default ({ style, className }) => {
     </div>}
 
     <Popover {...{ open, anchorEl, onClose }}
+      elevation={1}
       id={'toggle-status-popover'}
       anchorOrigin={{ vertical: settings.upperBar ? 'top' : 'bottom', horizontal: 'center' }}
       transformOrigin={{ vertical: !settings.upperBar ? 'bottom' : 'top', horizontal: 'center' }}

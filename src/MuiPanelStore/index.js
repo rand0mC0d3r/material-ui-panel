@@ -6,6 +6,7 @@ import MuiDebug from './MuiDebug'
 
 const localStorageKey = 'material-ui-panel.layout'
 const settingsStorageKey = 'material-ui-panel.settings'
+const statusStorageKey = 'material-ui-panel.status'
 
 const DataContext = createContext(null)
 
@@ -27,6 +28,24 @@ function MuiPanelProvider({
 
   const [layout, setLayout] = useState(props['layout'] || [])
   const [status, setStatus] = useState(props['status'] || [])
+  const [storedStatus, setStoredStatus] = useState([])
+
+  useEffect(() => {
+    const storedStatusLocal = localStorage.getItem(statusStorageKey)
+    if (storedStatusLocal) {
+      setStoredStatus(JSON.parse(storedStatusLocal))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (storedStatus.length > 0) {
+      setStatus(status => status.map(statusItem => {
+        const found = storedStatus.find(ss => ss.uniqueId === statusItem.uniqueId)
+
+        return found ? { ...statusItem, ...found } : statusItem
+      }))
+    }
+  }, [storedStatus])
 
   const [sections, setSections] = useState(props['sections'] || [
     {
@@ -59,8 +78,11 @@ function MuiPanelProvider({
   //   console.log('ffff')
   // }, [])
 
+  // const handleStatusPreserve = () => {
+  //   localStorage.setItem('material-ui-panel.status', JSON.stringify(status.map(s => ({ ...s, children: undefined }))))
+  // }
 
-  const handleStatusAnnouncement = ({ id, secondary, tooltip, children }) => {
+  const handleStatusAnnouncement = ({ id, secondary }) => {
     setStatus(status => [
       ...status.filter(lo => lo.uniqueId !== id),
       {
@@ -68,20 +90,23 @@ function MuiPanelProvider({
         uniqueId: id,
         visible: true,
         secondary,
-        children,
-        tooltip,
-        type: 'user'
       }
     ])
   }
 
+  const handleStatusUpdate = ({ id, children }) => {
+    setStatus(status => status.map(lo => lo.uniqueId !== id ? lo : { ...lo, children }))
+  }
+
   const handleStatusVisibilityToggle = ({ id }) => {
-    setStatus(status => status.map(lo => (lo.uniqueId === id ? { ...lo, visible: !lo.visible } : lo )))
+    setStatus(status => status.map(lo => (lo.uniqueId === id ? { ...lo, visible: !lo.visible } : lo)))
   }
 
   const handleStatusDestroy = ({ id }) => {
     setStatus(status => [...status.filter(lo => lo.uniqueId !== id)])
   }
+
+
 
   const handlePanelAnnouncement = ({ id, ref, extraButtons, disabled, children, handleOnClick, placement, notifications,
     subTitle, shortText, iconInHeader = true, title, tooltip, icon, showIcon = true, noPanel = false }) => {
@@ -519,6 +544,10 @@ function MuiPanelProvider({
     localStorage.setItem(settingsStorageKey, JSON.stringify(settings))
   }, [settings])
 
+  useEffect(() => {
+    localStorage.setItem(statusStorageKey, JSON.stringify(status.map(s => ({ ...s, children: undefined }))))
+  }, [status])
+
   return <DataContext.Provider
     id="provider"
     value={{
@@ -545,6 +574,7 @@ function MuiPanelProvider({
       handleUnSetAsEmbedded,
       toggleSettingIsCollapsed,
       handleSetAsGroup,
+      handleStatusUpdate,
       handleSetVisible,
       handlePanelAlerts,
       handleSetSide,

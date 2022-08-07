@@ -47,6 +47,19 @@ function ImplementationFrame({
 
   const toggleFullScreen = () => { }
 
+  const statusBlock = <>
+    <AvatarStatus />
+    <MenuStatus />
+    <ConfigStatus />
+    <AvatarsStatuses />
+    <GalleryStatus />
+    <SaveStatus />
+    <CastStatus />
+
+    <AliveStatus />
+    <DynamicInjectStatus />
+  </>
+
   return <MuiPanelProvider
     showSplitterButton={false}
     initialSide='left'
@@ -88,19 +101,7 @@ function ImplementationFrame({
         <ActButton /> */}
 
     {/* status section  */}
-    <AvatarStatus />
-    <MenuStatus />
-    <ConfigStatus />
-    <AvatarsStatuses />
-    <GalleryStatus />
-
-    <SaveStatus />
-    {/* <DynamicStatus /> */}
-
-    <CastStatus />
-
-    <AliveStatus />
-    <DynamicInjectStatus />
+    {statusBlock}
     {/* <MupStatus tooltip="Image with no text" id='fooImageTexrStatus' elements={[{ image: 'https://picsum.photos/32/32', mask: true, text: "User" }]}/> */}
 
     {/* panel section  */}

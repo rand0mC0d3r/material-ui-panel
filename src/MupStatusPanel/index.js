@@ -7,6 +7,7 @@ import MupStatus from '../MupStatus'
 const MupStatusPanel = ({
   id,
   secondary,
+  elevation,
   style,
   tooltip,
   children,
@@ -36,7 +37,7 @@ const MupStatusPanel = ({
       {children}
     </MupStatus>
 
-    <Popover {...{ open, anchorEl, onClose }}
+    <Popover {...{ open, anchorEl, onClose, elevation }}
       id={`${id}-status-popover`}
       anchorOrigin={{ vertical: isToggled ? 'top' : 'bottom', horizontal: statusObject?.secondary ? 'right' : 'left' }}
       transformOrigin={{ vertical: !isToggled ? 'bottom' : 'top', horizontal: statusObject?.secondary ? 'right' : 'left' }}
@@ -50,12 +51,14 @@ const MupStatusPanel = ({
 MupStatusPanel.defaultProps = {
   secondary: false,
   tooltip: '',
+  elevation: 1,
 }
 
 MupStatusPanel.propTypes = {
   id: PropTypes.string.isRequired,
   secondary: PropTypes.bool,
   style: PropTypes.any,
+  elevation: PropTypes.number,
   tooltip: PropTypes.string,
   children: PropTypes.any,
   popover: PropTypes.any,

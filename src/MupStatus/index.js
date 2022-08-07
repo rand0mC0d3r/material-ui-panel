@@ -1,7 +1,7 @@
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import DataProvider from '../MuiPanelStore'
 
@@ -63,7 +63,7 @@ const MupStatus = ({
   tooltip,
   children
 }) => {
-  const { status, settings, handleSetVisible, tooltipComponent, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
+  const { status, settings, handleSetVisible, tooltipComponent, handleStatusUpdate, handleStatusAnnouncement, handleStatusDestroy } = useContext(DataProvider)
   const [statusObject, setStatusObject] = useState(null)
   const [elementFound, setElementFound] = useState(null)
   const theme = useTheme()
@@ -87,8 +87,8 @@ const MupStatus = ({
   }, [secondary, statusObject])
 
   const callbackHandleStatusAnnouncement = useCallback((id) => {
-    handleStatusAnnouncement({ id, secondary, tooltip, children })
-  }, [secondary, children, tooltip, handleStatusAnnouncement])
+    handleStatusAnnouncement({ id, secondary, children })
+  }, [secondary, children, handleStatusAnnouncement])
 
   const callbackHandleStatusDestroy = useCallback(() => {
     handleStatusDestroy({ id })
@@ -135,9 +135,10 @@ const MupStatus = ({
       <div
         id={id}
         key={`MupStatus_${id}_wrapper`}
-        onClick={(e) => focusOnClick
-          ? handleSetVisible({ uniqueId: focusOnClick })
-          : onClick ? callbackOnClick(e) : null}
+        onClick={(e) => {
+          focusOnClick ? handleSetVisible({ uniqueId: focusOnClick }) : onClick ? callbackOnClick(e) : null
+          handleStatusUpdate({ id, children })
+        }}
         onContextMenu={(e) => settings.allowRightClick
           ? onContextMenu ? onContextMenu(e) : null
         : e.preventDefault()}

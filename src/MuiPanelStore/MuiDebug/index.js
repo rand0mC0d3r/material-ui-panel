@@ -139,12 +139,12 @@ const MupDebug = () => {
       if (d.title === 'Status') {
         return {
           ...d, dataSource: status.map(obj => <div key={`settings_${obj.uniqueId}`} className={classes.storeElement}>
+            <pre>children: excluded from dump</pre>
             <pre
               key={`settings_${obj.uniqueId}`}
               className={classes.dumpText}>
-              {JSON.stringify({ ...obj, children: '-empty-' }, null, 4)}
+              {JSON.stringify({ ...obj, children: undefined }, null, 2)}
             </pre>
-            {obj.children}
           </div>)
         }
       }
