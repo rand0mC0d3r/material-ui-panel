@@ -14,7 +14,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^2.1.2",
-    "npm-check-updates": "^11.8.5"
+    "npm-check-updates": "^16.7.4"
   },
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
